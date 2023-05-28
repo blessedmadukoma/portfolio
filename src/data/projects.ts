@@ -1,0 +1,51 @@
+const PROJECTS = [
+  {
+    title: "Portfolio",
+    description: "My personal portfolio",
+    live: "https://mblessed.tech",
+    github: "https://github.com/blessedmadukoma/porfolio",
+    imageURL: "",
+    technologies: ["NextJS", "TailwindCSS"],
+  },
+  {
+    title: "LAMS",
+    description: "Making your light management easier, faster and better",
+    live: "https://lams.netlify.app",
+    github: "https://github.com/blessedmadukoma/lams-vue",
+    imageURL: "",
+    technologies: ["VueJS", "Firebase"],
+  },
+  {
+    title: "TrackIT - Budget Tracker API",
+    description:
+      "Manage your finances and avoid excessive spending via TrackIT",
+    live: "https://trakkit.vercel.app",
+    github: "https://github.com/blessedmadukoma/trackit-client",
+    imageURL: "",
+    technologies: ["NextJS", "TailwindCSS", "Go", "PostgreSQL"],
+  },
+  {
+    title: "Manga Scraper",
+    description: "Scrape your favourite manga",
+    live: "",
+    github: "https://github.com/blessedmadukoma/manga-scraper",
+    imageURL: "",
+    technologies: ["Go"],
+  },
+  {
+    title: "Gotok Clone",
+    description: "A clone of the https://gotok.app website",
+    live: "https://gotok-clone.vercel.app",
+    github: "https://github.com/blessedmadukoma/gotok-clone",
+    imageURL: "",
+    technologies: ["NextJS", "TailwindCSS"],
+  },
+  {
+    title: "Linkvite Clone - Budget Tracker API",
+    description: "A clone of the https://linkvite.io website",
+    live: "https://trakkit.vercel.app",
+    github: "https://github.com/blessedmadukoma/trackit-client",
+    imageURL: "",
+    technologies: ["NextJS", "TailwindCSS"],
+  },
+];
