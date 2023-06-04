@@ -2,6 +2,7 @@
 
 import { NameIcon } from "@/icons/icons";
 import useWindowSize from "@rooks/use-window-size";
+import { LINKS } from "../data/profile_links";
 
 const Footer = () => {
   const weekday = [
@@ -21,6 +22,23 @@ const Footer = () => {
 
   let width: number = size?.innerWidth?.valueOf() || 0;
 
+  const links = LINKS;
+
+  // const filtered = links
+  //   .filter((link) => {
+  //     if (link.name == "memoji") {
+  //       return false;
+  //     }
+  //     return true;
+  //   })
+  //   .map((link) => {
+  //     return (
+  //       <span className="text-[#939196] text-sm md:text-base" key={id}>
+  //             {link.name}
+  //           </span>
+  //     )
+  //   });
+
   return (
     <div className="bg-footer mx-[20px] md:mx-14 max-w-full rounded-t-[50px] pb-12 pt-10">
       <div className="grid grid-cols-2 justify-between pl-8 px-[20px] md:px-[150px] m-auto w-full gap-10">
@@ -37,10 +55,25 @@ const Footer = () => {
 
         <div className="flex flex-col text-start space-y-6">
           <h2 className="font-semibold md:text-xl">Links</h2>
-          <span className="text-[#939196] text-sm md:text-base">Github</span>
-          <span className="text-[#939196] text-sm md:text-base">LinkedIn</span>
-          <span className="text-[#939196] text-sm md:text-base">Twitter</span>
-          <span className="text-[#939196] text-sm md:text-base">Hashnode</span>
+          {links
+            .filter((link) => {
+              if (link.name == "Memoji") {
+                return false;
+              }
+              return true;
+            })
+            .map((link, id) => {
+              return (
+                <a href={link.url} target="_blank">
+                  <span
+                    className="text-[#939196] text-sm md:text-base"
+                    key={id}
+                  >
+                    {link.name}
+                  </span>
+                </a>
+              );
+            })}
         </div>
       </div>
 
