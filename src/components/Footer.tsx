@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="mt-10 flex justify-between pl-8 px-[20px] md:px-[150px] text-end items-end">
+      <div className="mt-5 flex justify-between pl-8 px-[20px] md:px-[150px] text-end items-end">
         <div className="text-[#939196] text-xs md:text-base">
           @2023 Blessed.
         </div>
