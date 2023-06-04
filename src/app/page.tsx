@@ -4,78 +4,17 @@ import Main from "@/components/Main";
 
 export default function Home() {
   return (
-    <main className="bg-primary min-h-screen space-y-10">
-      {/* Header for the icons */}
-      <Header />
+    <main className="bg-primary min-h-screen">
+      <section className="items-center text-center">
+        {/* Header for the icons */}
+        <Header />
 
-      {/* Main content */}
-      <Main />
+        {/* Main content */}
+        <Main />
 
-      {/* Footer */}
-      <Footer />
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <p>Hi</p>
+        {/* Footer */}
+        <Footer />
+      </section>
     </main>
   );
 }
