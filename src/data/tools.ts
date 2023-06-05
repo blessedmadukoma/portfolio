@@ -2,32 +2,32 @@ export const TOOLS = [
   {
     name: "React",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996010/portfolio-images/icons/logo_ract_okeq3a.svg",
   },
   {
     name: "NextJS",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/1280px-Nextjs-logo.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996009/portfolio-images/icons/logo_next_m8h67m.svg",
   },
   {
     name: "TailwindCSS",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Tailwind_CSS_logo.svg/1280px-Tailwind_CSS_logo.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996010/portfolio-images/icons/logo_tailwind_cznw0z.svg",
   },
   {
     name: "Javascript",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/1280px-JavaScript-logo.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/jslogo_ldlcqj.svg",
   },
   {
     name: "Go",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1280px-Go_Logo_Blue.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996009/portfolio-images/icons/logo_go_w6kgro.svg",
   },
   {
     name: "Python",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1280px-Python-logo-notext.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996011/portfolio-images/icons/logos_python_v4xkxb.svg",
   },
   {
     name: "Typescript",
@@ -42,31 +42,31 @@ export const TOOLS = [
   {
     name: "MySQL",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Blue_Polo_Shirt_Icon.svg/1280px-Blue_Polo_Shirt_Icon.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996009/portfolio-images/icons/logo_mysql_di7mwv.svg",
   },
   {
     name: "Docker",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28container_engine%29_logo.svg/1280px-Docker_%28container_engine%29_logo.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/docker-icon_kfykje.svg",
   },
   {
     name: "Git",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/1280px-Git_icon.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/logo_git_qpfmlr.svg",
   },
   {
     name: "VS Code",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Visual_Studio_Code_1.18_icon.svg/1280px-Visual_Studio_Code_1.18_icon.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996010/portfolio-images/icons/logo_vscode_cmy0ix.svg",
   },
   {
     name: "Github",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/1280px-Octicons-mark-github.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/logo_github_tpt08t.svg",
   },
   {
     name: "Bitbucket",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Atlassian_Bitbucket_logo.svg/1280px-Atlassian_Bitbucket_logo.svg.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/logo_bitbucket_tq2qnj.svg",
   },
 ];
