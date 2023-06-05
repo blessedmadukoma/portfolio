@@ -1,4 +1,4 @@
-const BLOGS = [
+export const BLOGS = [
   {
     title: "Deploy a Go RESTful API to Koyeb: an alternative to Heroku",
     description: "Deploy a Go RESTful API to Koyeb: an alternative to Heroku",
