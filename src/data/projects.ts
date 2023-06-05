@@ -15,7 +15,7 @@ export const PROJECTS = [
     live: "https://lams.netlify.app",
     github: "https://github.com/blessedmadukoma/lams-vue",
     imageURL:
-      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685923818/portfolio-images/lams_hxtdrl.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685950263/portfolio-images/lams_jeti1y.png",
     alt: "lams",
     technologies: ["VueJS", "Firebase"],
   },
@@ -26,7 +26,7 @@ export const PROJECTS = [
     live: "https://trakkit.vercel.app",
     github: "https://github.com/blessedmadukoma/trackit-client",
     imageURL:
-      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685923818/portfolio-images/trackit_mqgwon.png",
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685950342/portfolio-images/trackit_k2jsre.png",
     alt: "trackit",
     technologies: ["NextJS", "TailwindCSS", "Go", "PostgreSQL"],
   },
@@ -35,7 +35,8 @@ export const PROJECTS = [
     description: "Scrape your favourite manga",
     live: "",
     github: "https://github.com/blessedmadukoma/manga-scraper",
-    imageURL: "",
+    imageURL:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685949695/portfolio-images/manga-scraper_uurcam.png",
     alt: "manga scraper",
     technologies: ["Go"],
   },

@@ -8,13 +8,13 @@ export const Projects = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {projects.map((project, id) => (
           <div
-            className="flex flex-col w-[340px] mx-auto bg-[#fff]/[0.07] px-5 py-4 rounded-[4px]"
+            className="flex flex-col w-[340px] mx-auto bg-[#fff]/[0.07] px-5 py-4 rounded-[5px]"
             key={id}
           >
             <div className="mt-4 rounded-[4px] text-lg tracking-wider font-medium mx-auto">
               <img
                 src={project.imageURL}
-                className="h-[170px] max-h-[170px] w-[300px]"
+                className="h-[170px] rounded-[5px] max-h-[170px] w-[300px]"
                 alt={project.alt}
               />
             </div>
@@ -40,7 +40,7 @@ export const Projects = () => {
                 href={`${project.live}`}
                 className={`${
                   project.live
-                    ? "visible hover:text-[white] hover:border-b"
+                    ? "visible hover:text-[#a7a4a5] hover:border-b"
                     : "hidden"
                 }`}
               >
