@@ -49,13 +49,10 @@ const Footer = () => {
             })
             .map((link, id) => {
               return (
-                <a href={link.url} target="_blank">
-                  <span
-                    className="text-[#939196] text-sm md:text-base"
-                    key={id}
-                  >
+                <a href={link.url} target="_blank" key={id}>
+                  <div className="text-[#939196] text-sm md:text-base">
                     {link.name}
-                  </span>
+                  </div>
                 </a>
               );
             })}
