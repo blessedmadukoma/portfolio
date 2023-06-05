@@ -24,21 +24,6 @@ const Footer = () => {
 
   const links = LINKS;
 
-  // const filtered = links
-  //   .filter((link) => {
-  //     if (link.name == "memoji") {
-  //       return false;
-  //     }
-  //     return true;
-  //   })
-  //   .map((link) => {
-  //     return (
-  //       <span className="text-[#939196] text-sm md:text-base" key={id}>
-  //             {link.name}
-  //           </span>
-  //     )
-  //   });
-
   return (
     <div className="bg-footer mx-[20px] md:mx-14 max-w-full rounded-t-[50px] pb-12 pt-10">
       <div className="grid grid-cols-2 justify-between pl-8 px-[20px] md:px-[150px] m-auto w-full gap-10">

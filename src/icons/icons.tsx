@@ -1,18 +1,33 @@
-// const LinkedInIcon = () => (
-
-// }
-
-// const GitHubIcon = () => (
-
-// }
-
-// const TwitterIcon = () => (
-
-// }
-
-// const LogoIcon = () => (
-
-// }
+const LinkIcon = () => {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11.0021 7.66653V11.6666C11.0021 12.0203 10.8616 12.3594 10.6116 12.6095C10.3615 12.8595 10.0224 13 9.66874 13H2.33531C1.98168 13 1.64253 12.8595 1.39248 12.6095C1.14243 12.3594 1.00195 12.0203 1.00195 11.6666V4.33312C1.00195 3.97949 1.14243 3.64034 1.39248 3.39029C1.64253 3.14023 1.98168 2.99976 2.33531 2.99976H6.33536"
+        stroke="#A7A4A5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M9.00195 1H13.002V5.00009"
+        stroke="#A7A4A5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M5.66797 8.3335L13.0014 1"
+        stroke="#A7A4A5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
 
 const LineIcon = () => {
   return (
@@ -177,4 +192,47 @@ const NameIcon = ({ width, height }: { width: string; height?: string }) => {
     </svg>
   );
 };
-export { LineIcon, PointedArrow, NameIcon };
+
+const ArrowDown = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="56"
+      height="56"
+      viewBox="0 0 24 24"
+    >
+      <g transform="rotate(-90 12 12)">
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        >
+          <path stroke-dasharray="20" stroke-dashoffset="20" d="M21 12H3.5">
+            <animate
+              fill="freeze"
+              attributeName="stroke-dashoffset"
+              dur="0.3s"
+              values="20;0"
+            />
+          </path>
+          <path
+            stroke-dasharray="12"
+            stroke-dashoffset="12"
+            d="M3 12L10 19M3 12L10 5"
+          >
+            <animate
+              fill="freeze"
+              attributeName="stroke-dashoffset"
+              begin="0.3s"
+              dur="0.2s"
+              values="12;0"
+            />
+          </path>
+        </g>
+      </g>
+    </svg>
+  );
+};
+export { LineIcon, PointedArrow, NameIcon, ArrowDown, LinkIcon };

@@ -1,8 +1,14 @@
-import { LineIcon, PointedArrow } from "@/icons/icons";
+import { ArrowDown, LineIcon, PointedArrow } from "@/icons/icons";
+import Navbar from "./Navbar";
+import { Projects } from "./Projects";
+import Tools from "./Tools";
+import Blog from "./Blog";
+import Contact from "./Contact";
 
 const Main = () => {
   return (
-    <div className="py-28 flex flex-col justify-center md:w-[768px] lg:w-[1280px] m-auto">
+    <div className="py-20 flex flex-col justify-center md:w-[768px] lg:w-[1280px] m-auto">
+      {/* Introduction */}
       <div className="mx-auto">
         <div>
           <h2 className="text-2xl md:text-5xl font-bold text-[#5651dd]">
@@ -18,7 +24,7 @@ const Main = () => {
         </div>
       </div>
 
-      <div className="my-36 text-sm md:text-2xl lg:text-2xl font-extralight w-[340px] md:w-[860px] lg:w-[1000px] m-auto">
+      <div className="my-16 text-sm md:text-2xl lg:text-2xl font-extralight w-[340px] md:w-[860px] lg:w-[1000px] m-auto">
         I am a software engineer with 3+ years experience, tasked with
         <span className="text-[#6965D8]"> demystifying </span> the amazing world
         of scalable, performant systems by designing and developing high-quality
@@ -41,6 +47,31 @@ const Main = () => {
           <PointedArrow color="white" />
         </div>
       </div>
+      {/* End of Introduciton */}
+
+      {/* Navbar */}
+      <Navbar />
+      <div className="mt-6 mb-22 space-y-4 mx-auto flex flex-col items-center">
+        <h2 className="text-xl tracking-wider font-extralight">Scroll down</h2>
+        <ArrowDown />
+      </div>
+      {/* End of Navbar */}
+
+      {/* Projects */}
+      <Projects />
+      {/* End of Projects */}
+
+      {/* Tools */}
+      <Tools />
+      {/* End of Tools */}
+
+      {/* Blog */}
+      <Blog />
+      {/* End of Blog */}
+
+      {/* Contact */}
+      <Contact />
+      {/* End of Contact */}
     </div>
   );
 };

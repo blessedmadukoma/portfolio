@@ -1,10 +1,12 @@
-const PROJECTS = [
+export const PROJECTS = [
   {
     title: "Portfolio",
-    description: "My personal portfolio",
+    description: "My personal portfolio website",
     live: "https://mblessed.tech",
     github: "https://github.com/blessedmadukoma/porfolio",
-    imageURL: "",
+    imageURL:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685924847/portfolio-images/portfolio_i48qea.png",
+    alt: "portfolio",
     technologies: ["NextJS", "TailwindCSS"],
   },
   {
@@ -12,7 +14,9 @@ const PROJECTS = [
     description: "Making your light management easier, faster and better",
     live: "https://lams.netlify.app",
     github: "https://github.com/blessedmadukoma/lams-vue",
-    imageURL: "",
+    imageURL:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685923818/portfolio-images/lams_hxtdrl.png",
+    alt: "lams",
     technologies: ["VueJS", "Firebase"],
   },
   {
@@ -21,7 +25,9 @@ const PROJECTS = [
       "Manage your finances and avoid excessive spending via TrackIT",
     live: "https://trakkit.vercel.app",
     github: "https://github.com/blessedmadukoma/trackit-client",
-    imageURL: "",
+    imageURL:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685923818/portfolio-images/trackit_mqgwon.png",
+    alt: "trackit",
     technologies: ["NextJS", "TailwindCSS", "Go", "PostgreSQL"],
   },
   {
@@ -30,6 +36,7 @@ const PROJECTS = [
     live: "",
     github: "https://github.com/blessedmadukoma/manga-scraper",
     imageURL: "",
+    alt: "manga scraper",
     technologies: ["Go"],
   },
   {
@@ -38,14 +45,16 @@ const PROJECTS = [
     live: "https://gotok-clone.vercel.app",
     github: "https://github.com/blessedmadukoma/gotok-clone",
     imageURL: "",
+    alt: "gotok clone",
     technologies: ["NextJS", "TailwindCSS"],
   },
   {
-    title: "Linkvite Clone - Budget Tracker API",
+    title: "Linkvite Clone",
     description: "A clone of the https://linkvite.io website",
-    live: "https://trakkit.vercel.app",
-    github: "https://github.com/blessedmadukoma/trackit-client",
+    live: "",
+    github: "https://github.com/blessedmadukoma/linkvite-clone",
     imageURL: "",
+    alt: "linkvite clone",
     technologies: ["NextJS", "TailwindCSS"],
   },
 ];
