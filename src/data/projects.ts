@@ -45,7 +45,8 @@ export const PROJECTS = [
     description: "A clone of the https://gotok.app website",
     live: "https://gotok-clone.vercel.app",
     github: "https://github.com/blessedmadukoma/gotok-clone",
-    imageURL: "",
+    imageURL:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685950718/portfolio-images/gotok-clone_mcluiy.png",
     alt: "gotok clone",
     technologies: ["NextJS", "TailwindCSS"],
   },

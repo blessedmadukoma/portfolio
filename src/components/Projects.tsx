@@ -5,7 +5,7 @@ export const Projects = () => {
   const projects = PROJECTS;
   return (
     <div className="py-24" id="projects">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {projects.map((project, id) => (
           <div
             className="flex flex-col w-[340px] mx-auto bg-[#fff]/[0.07] px-5 py-4 rounded-[5px]"

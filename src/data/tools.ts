@@ -1,4 +1,4 @@
-const TOOLS = [
+export const TOOLS = [
   {
     name: "React",
     image:

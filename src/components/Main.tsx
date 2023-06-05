@@ -24,7 +24,7 @@ const Main = () => {
         </div>
       </div>
 
-      <div className="my-16 text-sm md:text-2xl lg:text-2xl font-extralight w-[340px] md:w-[860px] lg:w-[1000px] m-auto">
+      <div className="my-16 text-sm md:text-2xl lg:text-2xl font-extralight w-[400px] md:w-[768px] lg:w-[1000px] mx-auto md:mx-auto lg:mx-auto">
         I am a software engineer with 3+ years experience, tasked with
         <span className="text-[#6965D8]"> demystifying </span> the amazing world
         of scalable, performant systems by designing and developing high-quality
