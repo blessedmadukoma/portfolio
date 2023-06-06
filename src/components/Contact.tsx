@@ -43,7 +43,82 @@ const Contact = () => {
             </a>
           </div>
         </section>
-        <div>2</div>
+
+        {/* Contact Form */}
+        <section>
+          <form
+            className="flex flex-col"
+            action="https://formspree.io/f/xnqoqjzq"
+            method="POST"
+          >
+            <div className="flex flex-col space-y-8">
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-lg">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="mt-2 border bg-[#0A092C] border-[#e6e6e6] rounded-[4px] p-4 font-medium text-sm md:text-base"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col">
+                <label htmlFor="email" className="text-lg">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="mt-2 border border-[#e6e6e6] rounded-[4px] p-4 font-medium bg-[#0A092C] text-sm md:text-base"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col">
+                <label htmlFor="subject" className="text-lg">
+                  Subject
+                </label>
+                <input
+                  type="subject"
+                  name="subject"
+                  id="subject"
+                  className="mt-2 border border-[#e6e6e6] rounded-[4px] p-4 font-medium bg-[#0A092C] text-sm md:text-base"
+                  placeholder="Enter your subject"
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col">
+                <label htmlFor="message" className="text-lg">
+                  Message
+                </label>
+                <textarea
+                  name="message"
+                  id="message"
+                  className="mt-2 bg-[#0A092C] border border-[#e6e6e6] rounded-[4px] p-4 font-medium text-sm md:text-base"
+                  placeholder="Enter your message"
+                  required
+                ></textarea>
+              </div>
+
+              <div className="flex flex-col">
+                <button
+                  type="submit"
+                  className="mt-2 border border-[#e6e6e6] rounded-[4px] p-3 font-medium text-sm md:text-base flex items-center justify-center bg-white"
+                >
+                  <span className="mr-2 text-black">Send Message</span>{" "}
+                  <PointedArrow color="black" />
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
       </div>
     </div>
   );
