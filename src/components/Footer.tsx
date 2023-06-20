@@ -1,6 +1,6 @@
 "use client";
 
-import { NameIcon } from "@/icons/icons";
+import { NameIcon, PointedArrow } from "@/icons/icons";
 import useWindowSize from "@rooks/use-window-size";
 import { LINKS } from "../data/profile_links";
 
@@ -29,13 +29,33 @@ const Footer = () => {
       <div className="grid grid-cols-2 justify-between pl-8 px-[20px] md:px-[150px] m-auto w-full gap-10">
         <div className="flex flex-col text-start space-y-6">
           <h2 className="font-semibold md:text-xl">Categories</h2>
-          <span className="text-[#939196] text-sm md:text-base">Home</span>
-          <span className="text-[#939196] text-sm md:text-base">Projects</span>
-          <span className="text-[#939196] text-sm md:text-base">Tools</span>
-          <span className="text-[#939196] text-sm md:text-base">Blog</span>
-          <span className="text-[#939196] text-sm md:text-base">
-            Contact Me
-          </span>
+          <a href="#">
+            <div className="text-[#939196] text-sm md:text-base flex items-center hover:underline hover:text-[#fafafa]">
+              <span className="mr-1">Home</span>
+              <PointedArrow color="#c5c5c5" />
+            </div>
+          </a>
+
+          <a href="#">
+            <div className="text-[#939196] text-sm md:text-base flex items-center hover:underline hover:text-[#fafafa]">
+              <span className="mr-1">Projects</span>
+              <PointedArrow color="#c5c5c5" />
+            </div>
+          </a>
+
+          <a href="#">
+            <div className="text-[#939196] text-sm md:text-base flex items-center hover:underline hover:text-[#fafafa]">
+              <span className="mr-1">Tools</span>
+              <PointedArrow color="#c5c5c5" />
+            </div>
+          </a>
+
+          <a href="#">
+            <div className="text-[#939196] text-sm md:text-base flex items-center hover:underline hover:text-[#fafafa]">
+              <span className="mr-1">Blog</span>
+              <PointedArrow color="#c5c5c5" />
+            </div>
+          </a>
         </div>
 
         <div className="flex flex-col text-start space-y-6">
@@ -50,8 +70,9 @@ const Footer = () => {
             .map((link, id) => {
               return (
                 <a href={link.url} target="_blank" key={id}>
-                  <div className="text-[#939196] text-sm md:text-base">
-                    {link.name}
+                  <div className="text-[#939196] text-sm md:text-base flex items-center hover:underline hover:text-[#fafafa]">
+                    <span className="mr-1">{link.name}</span>
+                    <PointedArrow color="#c5c5c5" />
                   </div>
                 </a>
               );
@@ -75,7 +96,7 @@ const Footer = () => {
             </div>
           </div>
           <span className="text-xs md:text-base">
-            Have a wonderful {day} 🚀
+            Have a wonderful <span className="text-white">{day}</span> 🚀
           </span>
         </div>
       </div>

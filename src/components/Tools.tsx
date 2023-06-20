@@ -13,9 +13,9 @@ const Tools = () => {
 
         <div className="mt-2">
           <span className="text-sm font-light mx-auto">
-            My primary stack includes Go, Svelte, Next.js and PostgreSQL. Some
-            of the languages, frameworks, libraries, applications and software
-            tools I use/used include:
+            My primary stack includes Go, Next.js and PostgreSQL. Some of the
+            languages, frameworks, libraries, applications and software tools I
+            use/used include:
           </span>
         </div>
 
