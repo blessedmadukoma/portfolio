@@ -53,9 +53,10 @@ export const PROJECTS = [
   {
     title: "Linkvite Clone",
     description: "A clone of the https://linkvite.io website",
-    live: "",
+    live: "https://linkvite-clone.vercel.app",
     github: "https://github.com/blessedmadukoma/linkvite-clone",
-    imageURL: "",
+    imageURL:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1687554926/portfolio-images/linkvite-clone_syc2eo.png",
     alt: "linkvite clone",
     technologies: ["NextJS", "TailwindCSS"],
   },
