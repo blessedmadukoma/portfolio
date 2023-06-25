@@ -36,16 +36,18 @@ const Main = () => {
           href="https://drive.google.com/file/d/14yXfFGJreY509NT031tIQZClXqt_JtRa/view?usp=sharing"
           target="_blank"
         >
-          <div className="bg-[#e6e6e6] rounded-[4px] p-4 text-gray-900 font-medium text-sm md:text-base flex items-center">
+          <div className="bg-[#e6e6e6] rounded-[4px] p-4 text-gray-900 font-medium text-sm md:text-base flex items-center hover:underline">
             <span className="mr-2">View My Resume</span>{" "}
             <PointedArrow color="black" />
           </div>
         </a>
 
-        <div className="border border-[#e6e6e6] rounded-[4px] p-4 text-white font-medium text-sm md:text-base flex items-center">
-          <span className="mr-2">Get In Touch</span>{" "}
-          <PointedArrow color="white" />
-        </div>
+        <a href="#">
+          <div className="border border-[#e6e6e6] rounded-[4px] p-4 text-white font-medium text-sm md:text-base flex items-center">
+            <span className="mr-2">Get In Touch</span>{" "}
+            <PointedArrow color="white" />
+          </div>
+        </a>
       </div>
       {/* End of Introduciton */}
 

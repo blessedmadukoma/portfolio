@@ -1,5 +1,6 @@
 import { LinkIcon } from "@/icons/icons";
 import { PROJECTS } from "../data/projects";
+import Image from "next/image";
 
 export const Projects = () => {
   const projects = PROJECTS;
@@ -12,11 +13,18 @@ export const Projects = () => {
             key={id}
           >
             <div className="mt-4 rounded-[4px] text-lg tracking-wider font-medium mx-auto">
-              <img
+              <Image
                 src={project.imageURL}
-                className="h-[170px] rounded-[5px] max-h-[170px] w-[300px]"
+                className="rounded-[5px] h-[170px]"
                 alt={project.alt}
+                width={300}
+                height={170}
               />
+              {/* <img
+                src={project.imageURL}
+                className="rounded-[5px] max-h-[170px] h-[170px]"
+                alt={project.alt}
+              /> */}
             </div>
             <div className="text-start mt-6 items-start">
               <h3 className="text-lg font-semibold">{project.title}</h3>
