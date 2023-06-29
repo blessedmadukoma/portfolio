@@ -44,19 +44,35 @@ export const Projects = () => {
                 </div>
               </a>
 
-              <a
-                href={`${project.live}`}
-                className={`${
-                  project.live
-                    ? "visible hover:text-[#a7a4a5] hover:border-b"
-                    : "hidden"
-                }`}
-              >
-                <div className="flex items-center">
-                  <span className="mr-1">Live</span>
-                  <LinkIcon />
-                </div>
-              </a>
+              {project.live && !project.apiDoc ? (
+                <a
+                  href={`${project.live}`}
+                  className={`${
+                    project.live
+                      ? "visible hover:text-[#a7a4a5] hover:border-b"
+                      : "hidden"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <span className="mr-1">Live</span>
+                    <LinkIcon />
+                  </div>
+                </a>
+              ) : (
+                <a
+                  href={`${project.apiDoc}`}
+                  className={`${
+                    project.apiDoc
+                      ? "visible hover:text-[#a7a4a5] hover:border-b"
+                      : "hidden"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <span className="mr-1">API Doc</span>
+                    <LinkIcon />
+                  </div>
+                </a>
+              )}
             </div>
 
             {/* tools used */}
