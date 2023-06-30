@@ -49,7 +49,7 @@ const Tools = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-4 pb-2">
+          <div className="lg:flex grid grid-cols-2 md:grid-cols-3 gap-6 lg:space-x-24 flex-wrap pt-4 pb-2">
             {OTHER_TOOLS.map((tool, id) => (
               <div key={id} className="flex items-center text-center">
                 <img
