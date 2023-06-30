@@ -1,3 +1,5 @@
+import { NodeIcon } from "@/icons/logos";
+
 export const TOOLS = [
   {
     name: "React",
@@ -68,5 +70,38 @@ export const TOOLS = [
     name: "Bitbucket",
     image:
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/logo_bitbucket_tq2qnj.svg",
+  },
+];
+
+export const OTHER_TOOLS = [
+  {
+    name: "NodeJS",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1688022741/portfolio-images/icons/nodejs-icon_prfnyy.svg",
+  },
+  {
+    name: "ExpressJS",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1688022741/portfolio-images/icons/expressjs-icon_ddjpgu.svg",
+  },
+  {
+    name: "PHP",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1688022741/portfolio-images/icons/php-icon_z3tw82.svg",
+  },
+  {
+    name: "Laravel",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1688022741/portfolio-images/icons/laravel-icon_mdwpno.svg",
+  },
+  {
+    name: "Svelte",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1688022741/portfolio-images/icons/devicon_svelte_zijbow.svg",
+  },
+  {
+    name: "MongoDB",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1688022741/portfolio-images/icons/logos_mongodb-icon_mxddbt.svg",
   },
 ];

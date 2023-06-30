@@ -68,7 +68,7 @@ export const Projects = () => {
                   }`}
                 >
                   <div className="flex items-center">
-                    <span className="mr-1">API Doc</span>
+                    <span className="mr-1">Doc</span>
                     <LinkIcon />
                   </div>
                 </a>
