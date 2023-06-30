@@ -10,7 +10,7 @@ const Blog = () => {
       <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {blogs.map((blog, id) => (
           <a key={id} href={blog.link} target="_blank">
-            <div className="text-start bg-[#18173B] p-4 rounded-xl h-[240px] mx-auto">
+            <div className="text-start bg-[#18173B] p-4 rounded-xl hover:border h-[240px] mx-auto">
               <div className="text-base font-semibold md:text-xl mb-4 h-2/4">
                 {blog.title}
               </div>
