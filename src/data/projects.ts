@@ -46,25 +46,26 @@ export const PROJECTS = [
     technologies: ["Go"],
   },
   {
-    title: "Gotok Clone",
-    description: "A clone of the https://gotok.app website",
-    live: "https://gotok-clone.vercel.app",
+    title: "Todo Application",
+    description:
+      "Keep track of your todos by adding, updating, deleting and checking it off the list",
+    live: "https://todo-appvue.vercel.app/",
     apiDoc: "",
-    github: "https://github.com/blessedmadukoma/gotok-clone",
+    github: "https://github.com/blessedmadukoma/vue-todo",
     imageURL:
-      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685950718/portfolio-images/gotok-clone_mcluiy.png",
-    alt: "gotok clone",
-    technologies: ["NextJS", "TailwindCSS"],
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1689718353/portfolio-images/todo-vue-app_sx5kfk.png",
+    alt: "Todo app",
+    technologies: ["VueJS"],
   },
-  {
-    title: "Linkvite Clone",
-    description: "A clone of the https://linkvite.io website",
-    live: "https://linkvite-clone.vercel.app",
-    apiDoc: "",
-    github: "https://github.com/blessedmadukoma/linkvite-clone",
-    imageURL:
-      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1687554926/portfolio-images/linkvite-clone_syc2eo.png",
-    alt: "linkvite clone",
-    technologies: ["NextJS", "TailwindCSS"],
-  },
+  // {
+  //   title: "Linkvite Clone",
+  //   description: "A clone of the https://linkvite.io website",
+  //   live: "https://linkvite-clone.vercel.app",
+  //   apiDoc: "",
+  //   github: "https://github.com/blessedmadukoma/linkvite-clone",
+  //   imageURL:
+  //     "https://res.cloudinary.com/dqjowwy5k/image/upload/v1687554926/portfolio-images/linkvite-clone_syc2eo.png",
+  //   alt: "linkvite clone",
+  //   technologies: ["NextJS", "TailwindCSS"],
+  // },
 ];
