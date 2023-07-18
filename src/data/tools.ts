@@ -2,6 +2,31 @@ import { NodeIcon } from "@/icons/logos";
 
 export const TOOLS = [
   {
+    name: "Go",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996009/portfolio-images/icons/logo_go_w6kgro.svg",
+  },
+  {
+    name: "Python",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996011/portfolio-images/icons/logos_python_v4xkxb.svg",
+  },
+  {
+    name: "Javascript",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/jslogo_ldlcqj.svg",
+  },
+  {
+    name: "Typescript",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1280px-Typescript_logo_2020.svg.png",
+  },
+  {
+    name: "VueJS",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1689718701/portfolio-images/icons/vue-logo_b4lpou.svg",
+  },
+  {
     name: "React",
     image:
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996010/portfolio-images/icons/logo_ract_okeq3a.svg",
@@ -15,26 +40,6 @@ export const TOOLS = [
     name: "TailwindCSS",
     image:
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996010/portfolio-images/icons/logo_tailwind_cznw0z.svg",
-  },
-  {
-    name: "Javascript",
-    image:
-      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/jslogo_ldlcqj.svg",
-  },
-  {
-    name: "Go",
-    image:
-      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996009/portfolio-images/icons/logo_go_w6kgro.svg",
-  },
-  {
-    name: "Python",
-    image:
-      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996011/portfolio-images/icons/logos_python_v4xkxb.svg",
-  },
-  {
-    name: "Typescript",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1280px-Typescript_logo_2020.svg.png",
   },
   {
     name: "PostgreSQL",
