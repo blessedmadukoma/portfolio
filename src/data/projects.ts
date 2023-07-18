@@ -47,8 +47,7 @@ export const PROJECTS = [
   },
   {
     title: "Todo Application",
-    description:
-      "Keep track of your todos by adding, updating, deleting and checking it off the list",
+    description: "Keep track of your todos list, drag and drop your todo.",
     live: "https://todo-appvue.vercel.app/",
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/vue-todo",
