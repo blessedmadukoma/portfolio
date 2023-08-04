@@ -80,14 +80,14 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="mt-5 flex justify-between pl-8 px-[20px] md:px-[150px] text-end items-end">
-        <div className="text-[#939196] text-xs md:text-base">
+      <div className="mt-5 md:flex md:justify-between md:pl-8 px-[20px] md:px-[150px] text-end items-end">
+        <div className="hidden md:block text-[#939196] text-xs md:text-base">
           @2023 Blessed.
         </div>
         <div className="text-[#939196] text-center flex flex-col items-center">
           <div className="w-40 md:w-56 relative">
             <img src="./icons/memoji.png" alt="" />
-            <div className="absolute -top-1 right-[14px] md:top-7 md:right-12 animate-spin-slow">
+            <div className="absolute -top-1 right-[14px] md:top-7 md:right-[30px] animate-spin-slow">
               {width < 768 ? (
                 <NameIcon width="130" />
               ) : (
