@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { TOOLS, OTHER_TOOLS } from "@/data/tools";
 import { ArrowRight } from "@/icons/icons";
 
@@ -24,16 +25,17 @@ const Tools = () => {
           <div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 mb-6">
               {tools.map((tool, id) => (
-                <div key={id} className="flex items-center text-center">
-                  <img
-                    src={`${tool.image}`}
-                    alt={tool.name}
-                    className="w-5 h-5"
-                  />
-                  <span className="text-sm font-extralight ml-1 tracking-wider">
+                <a
+                  key={id}
+                  target="_blank"
+                  className="flex flex-row items-center m-4 space-x-2 grayscale hover:grayscale-0"
+                  href="https://typescriptlang.org"
+                >
+                  <img src={tool.image} alt={tool.name} className="w-5" />
+                  <span className="hover:from-gray-500 hover:to-gray-500 after:hover:from-gray-400 after:hover:to-gray-500 relative whitespace-nowrap  bg-gradient-to-r from-gray-500 to-gray-500 bg-clip-text text-gray-200 text-sm tracking-wider font-extralight decoration-green-500 decoration-2 transition-all after:absolute after:-bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:opacity-80 after:transition-transform after:duration-500 after:ease-spring hover:after:origin-bottom-left hover:after:scale-x-100 after:origin-right after:scale-x-0">
                     {tool.name}
                   </span>
-                </div>
+                </a>
               ))}
             </div>
           </div>
@@ -51,16 +53,17 @@ const Tools = () => {
 
           <div className="lg:flex grid grid-cols-2 md:grid-cols-3 gap-6 lg:space-x-24 flex-wrap pt-4 pb-2">
             {OTHER_TOOLS.map((tool, id) => (
-              <div key={id} className="flex items-center text-center">
-                <img
-                  src={`${tool.image}`}
-                  // alt={tool.name}
-                  className="w-5 h-5"
-                />
-                <span className="text-sm font-extralight ml-1 tracking-wider">
+              <a
+                key={id}
+                target="_blank"
+                className="flex flex-row items-center m-4 space-x-2 grayscale hover:grayscale-0"
+                href="https://typescriptlang.org"
+              >
+                <img src={tool.image} alt={tool.name} className="w-[18px]" />
+                <span className="hover:from-gray-500 hover:to-gray-500 after:hover:from-gray-400 after:hover:to-gray-500 relative whitespace-nowrap bg-gradient-to-r from-gray-500 to-gray-500 bg-clip-text text-gray-200 text-sm tracking-wider font-extralight decoration-green-500 decoration-2 transition-all after:absolute after:-bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:opacity-80 after:transition-transform after:duration-500 after:ease-spring hover:after:origin-bottom-left hover:after:scale-x-100 after:origin-right after:scale-x-0">
                   {tool.name}
                 </span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
