@@ -21,6 +21,7 @@ const Main = () => {
         <div className="flex items-center justify-end">
           <LineIcon />
           <span className="ml-2 md:text-xl">Backend Engineer</span>
+          {/* <span className="ml-2 md:text-xl font-light">Product Engineer</span> */}
         </div>
       </div>
 

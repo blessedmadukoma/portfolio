@@ -36,6 +36,7 @@ export const Projects = () => {
             <div className="flex tracking-wide text-sm mb text-start space-x-6 py-6 text-white">
               <a
                 href={`${project.github}`}
+                target="_blank"
                 className="hover:text-[#a7a4a5] hover:border-b"
               >
                 <div className="flex items-center">
@@ -47,6 +48,7 @@ export const Projects = () => {
               {project.live && !project.apiDoc ? (
                 <a
                   href={`${project.live}`}
+                  target="_blank"
                   className={`${
                     project.live
                       ? "visible hover:text-[#a7a4a5] hover:border-b"

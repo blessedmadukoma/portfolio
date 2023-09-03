@@ -19,7 +19,7 @@ export const PROJECTS = [
     imageURL:
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685950263/portfolio-images/lams_jeti1y.png",
     alt: "lams",
-    technologies: ["VueJS", "Firebase"],
+    technologies: ["Vue", "Firebase"],
   },
   {
     title: "TrackIT - Budget Tracker",
@@ -32,6 +32,29 @@ export const PROJECTS = [
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685950342/portfolio-images/trackit_k2jsre.png",
     alt: "trackit",
     technologies: ["NextJS", "TailwindCSS", "Go", "PostgreSQL"],
+  },
+  {
+    title: "BoxPaddy",
+    description: "BoxPaddy: Swift, Secure Delivery of your goods to Your Door.",
+    live: "https://boxpaddy.vercel.app",
+    apiDoc: "",
+    github: "https://github.com/blessedmadukoma/boxpaddy",
+    imageURL:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1693708873/portfolio-images/boxpaddy_pedwum.png",
+    alt: "BoxPaddy",
+    technologies: ["Vue", "TailwindCSS"],
+  },
+  {
+    title: "Ridaar",
+    description: "Ridaar: Simplified Ride Booking and Tracking.",
+    live: "https://ridaar.vercel.app",
+    apiDoc: "",
+    // github: "https://github.com/blessedmadukoma/ridaar",
+    github: "https://github.com/blessedmadukoma/ride-hail-app",
+    imageURL:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1693709776/portfolio-images/ridaar_fw6efz.png",
+    alt: "manga scraper",
+    technologies: ["Vue", "TailwindCSS", "Laravel"],
   },
   {
     title: "Manga Scraper",
@@ -54,17 +77,6 @@ export const PROJECTS = [
     imageURL:
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1689718353/portfolio-images/todo-vue-app_sx5kfk.png",
     alt: "Todo app",
-    technologies: ["VueJS"],
+    technologies: ["Vue"],
   },
-  // {
-  //   title: "Linkvite Clone",
-  //   description: "A clone of the https://linkvite.io website",
-  //   live: "https://linkvite-clone.vercel.app",
-  //   apiDoc: "",
-  //   github: "https://github.com/blessedmadukoma/linkvite-clone",
-  //   imageURL:
-  //     "https://res.cloudinary.com/dqjowwy5k/image/upload/v1687554926/portfolio-images/linkvite-clone_syc2eo.png",
-  //   alt: "linkvite clone",
-  //   technologies: ["NextJS", "TailwindCSS"],
-  // },
 ];
