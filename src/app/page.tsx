@@ -5,7 +5,7 @@ import Main from "@/components/Main";
 export default function Home() {
   return (
     <main className="bg-primary min-h-screen">
-      <section className="items-center text-center max-w-[1280px] m-auto">
+      <section className="items-center text-center max-w-[1280px] m-auto scroll-smooth">
         {/* Header for the icons */}
         <Header />
 

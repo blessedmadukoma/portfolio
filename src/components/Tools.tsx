@@ -6,7 +6,7 @@ const Tools = () => {
   const tools = TOOLS;
 
   return (
-    <div className="md:my-24 tracking-wide">
+    <div className="md:my-24 tracking-wide" id="tools">
       <div className="text-start mx-5 md:mx-4 lg:mx-8 mb-8 text-3xl font-semibold">
         Tools
       </div>

@@ -3,7 +3,7 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="text-start mx-6 md:mx-10">
+    <div className="text-start mx-6 md:mx-10" id="contact">
       <h2 className="text-3xl font-semibold md:text-4xl">Contact Me</h2>
       <div className="grid gap-10 grid-cols-1 md:grid-cols-2 bg-[#18173B] rounded-2xl my-6 p-4 md:p-8">
         <section className="hidden md:block text-end mr-10">
