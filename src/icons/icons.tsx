@@ -209,22 +209,22 @@ const ArrowDown = () => {
           strokeLinejoin="round"
           stroke-width="2"
         >
-          <path stroke-dasharray="20" stroke-dashoffset="20" d="M21 12H3.5">
+          <path stroke-dasharray="20" strokeDashoffset="20" d="M21 12H3.5">
             <animate
               fill="freeze"
-              attributeName="stroke-dashoffset"
+              attributeName="strokeDashoffset"
               dur="0.3s"
               values="20;0"
             />
           </path>
           <path
             stroke-dasharray="12"
-            stroke-dashoffset="12"
+            strokeDashoffset="12"
             d="M3 12L10 19M3 12L10 5"
           >
             <animate
               fill="freeze"
-              attributeName="stroke-dashoffset"
+              attributeName="strokeDashoffset"
               begin="0.3s"
               dur="0.2s"
               values="12;0"

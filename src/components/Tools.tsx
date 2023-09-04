@@ -6,8 +6,8 @@ const Tools = () => {
   const tools = TOOLS;
 
   return (
-    <div className="md:my-24 tracking-wide" id="tools">
-      <div className="text-start mx-5 md:mx-4 lg:mx-8 mb-8 text-3xl font-semibold">
+    <div className="md:my-24 tracking-wide">
+      <div className="text-start mx-5 md:mx-4 lg:mx-8 mb-4 text-3xl font-semibold pt-24">
         Tools
       </div>
       <div className="rounded-2xl mx-5 md:mx-4 lg:mx-8 bg-[#18173B] text-start">

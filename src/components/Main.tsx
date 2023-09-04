@@ -61,18 +61,22 @@ const Main = () => {
       {/* End of Navbar */}
 
       {/* Projects */}
+      <div id="projects" className="mt-40"></div>
       <Projects />
       {/* End of Projects */}
 
       {/* Tools */}
+      <div id="tools" className="mt-40"></div>
       <Tools />
       {/* End of Tools */}
 
       {/* Blog */}
+      <div id="blog" className="mt-40"></div>
       <Blog />
       {/* End of Blog */}
 
       {/* Contact */}
+      <div id="contact" className="mt-40 md:mt-20"></div>
       <Contact />
       {/* End of Contact */}
     </div>

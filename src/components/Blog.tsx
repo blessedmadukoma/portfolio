@@ -6,7 +6,7 @@ const Blog = () => {
 
   return (
     <div className="my-10 md:my-24 mx-4 md:mx-8" id="blog">
-      <div className="text-start mb-4 text-3xl font-semibold">Blogs</div>
+      <div className="text-start pt-16 mb-4 text-3xl font-semibold">Blogs</div>
       <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {blogs.map((blog, id) => (
           <a key={id} href={blog.link} target="_blank">
