@@ -212,7 +212,7 @@ const ArrowDown = () => {
           <path stroke-dasharray="20" strokeDashoffset="20" d="M21 12H3.5">
             <animate
               fill="freeze"
-              attributeName="strokeDashoffset"
+              attributeName="stroke-dashoffset"
               dur="0.3s"
               values="20;0"
             />
@@ -224,7 +224,7 @@ const ArrowDown = () => {
           >
             <animate
               fill="freeze"
-              attributeName="strokeDashoffset"
+              attributeName="stroke-dashoffset"
               begin="0.3s"
               dur="0.2s"
               values="12;0"
