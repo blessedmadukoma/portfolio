@@ -1,19 +1,21 @@
 export const BLOGS = [
   {
     title: "Deploy a Go RESTful API to Koyeb: an alternative to Heroku",
-    description: "Deploy a Go RESTful API to Koyeb: an alternative to Heroku",
+    description:
+      "Streamline Deployment: Go RESTful API on Koyeb, Your Heroku Alternative",
     link: "https://mblessed.hashnode.dev/deploy-go-api-to-koyeb",
     views: "5000",
   },
   {
     title: "How I deploy my Golang API to Heroku",
-    description: "How I deploy my Golang API to Heroku",
+    description: "From Code to Cloud: Deploying Golang APIs on Heroku",
     link: "https://mblessed.hashnode.dev/how-i-deploy-my-golang-api-to-heroku",
     views: "5000",
   },
   {
     title: "Serving NextJS with Go",
-    description: "",
+    description:
+      "A simple way to connect a static Next.JS frontend and Go backend",
     link: "https://mblessed.hashnode.dev/serving-nextjs-with-go",
     views: "5000",
   },

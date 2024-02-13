@@ -1,9 +1,21 @@
+"use client";
+
 import { ArrowDown, LineIcon, PointedArrow } from "@/icons/icons";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import Blog from "./Blog";
+import Contact from "./Contact";
 import Navbar from "./Navbar";
 import { Projects } from "./Projects";
 import Tools from "./Tools";
-import Blog from "./Blog";
-import Contact from "./Contact";
+
+const client = new ApolloClient({
+  uri: "https://gql.hashnode.com",
+  // uri: "https://mblessed.hashnode.dev",
+  cache: new InMemoryCache(),
+  headers: {
+    Authorization: process.env.NEXT_PUBLIC_API_HASHNODE_TOKEN!,
+  },
+});
 
 const Main = () => {
   return (
@@ -71,8 +83,10 @@ const Main = () => {
       {/* End of Tools */}
 
       {/* Blog */}
-      <div id="blog" className="mt-40"></div>
-      <Blog />
+      <ApolloProvider client={client}>
+        <div id="blog" className="mt-40"></div>
+        <Blog />
+      </ApolloProvider>
       {/* End of Blog */}
 
       {/* Contact */}

@@ -207,9 +207,9 @@ const ArrowDown = () => {
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          stroke-width="2"
+          strokeWidth="2"
         >
-          <path stroke-dasharray="20" strokeDashoffset="20" d="M21 12H3.5">
+          <path strokeDasharray="20" strokeDashoffset="20" d="M21 12H3.5">
             <animate
               fill="freeze"
               attributeName="stroke-dashoffset"
@@ -218,7 +218,7 @@ const ArrowDown = () => {
             />
           </path>
           <path
-            stroke-dasharray="12"
+            strokeDasharray="12"
             strokeDashoffset="12"
             d="M3 12L10 19M3 12L10 5"
           >
@@ -254,4 +254,4 @@ const ArrowRight = () => {
     </div>
   );
 };
-export { LineIcon, PointedArrow, NameIcon, ArrowDown, LinkIcon, ArrowRight };
+export { ArrowDown, ArrowRight, LineIcon, LinkIcon, NameIcon, PointedArrow };
