@@ -46,7 +46,7 @@ const Main = () => {
 
       <div className="flex justify-evenly">
         <a
-          href="https://drive.google.com/file/d/14yXfFGJreY509NT031tIQZClXqt_JtRa/view?usp=sharing"
+          href="https://docs.google.com/document/d/1hgto3nreypCnwZ6UxRhf6naTybX7daMA1kq1ZizQ2zY"
           target="_blank"
         >
           <div className="bg-[#e6e6e6] rounded-[4px] p-4 text-gray-900 font-medium text-sm md:text-base flex items-center hover:underline">

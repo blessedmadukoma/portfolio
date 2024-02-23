@@ -2,7 +2,6 @@
 
 import { NameIcon, PointedArrow } from "@/icons/icons";
 import useWindowSize from "@rooks/use-window-size";
-import Image from "next/image";
 import { LINKS } from "../data/profile_links";
 
 const Footer = () => {
@@ -87,7 +86,7 @@ const Footer = () => {
         </div>
         <div className="text-[#939196] text-center flex flex-col items-center">
           <div className="w-40 md:w-56 relative">
-            <Image src="./icons/memoji.png" alt="Memoji" />
+            <img src="./icons/memoji.png" alt="Memoji" />
             <div className="absolute -top-1 right-[14px] md:top-7 md:right-[3rem] lg:right-[3rem] animate-spin-slow">
               {width < 768 ? (
                 <NameIcon width="130" />
