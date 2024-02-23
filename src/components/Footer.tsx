@@ -36,21 +36,21 @@ const Footer = () => {
             </div>
           </a>
 
-          <a href="#">
+          <a href="#projects">
             <div className="text-[#939196] text-sm md:text-base flex items-center hover:underline hover:text-[#fafafa]">
               <span className="mr-1">Projects</span>
               <PointedArrow color="#c5c5c5" />
             </div>
           </a>
 
-          <a href="#">
+          <a href="#tools">
             <div className="text-[#939196] text-sm md:text-base flex items-center hover:underline hover:text-[#fafafa]">
               <span className="mr-1">Tools</span>
               <PointedArrow color="#c5c5c5" />
             </div>
           </a>
 
-          <a href="#">
+          <a href="#blog">
             <div className="text-[#939196] text-sm md:text-base flex items-center hover:underline hover:text-[#fafafa]">
               <span className="mr-1">Blog</span>
               <PointedArrow color="#c5c5c5" />
