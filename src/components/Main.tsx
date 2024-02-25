@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, LineIcon, PointedArrow } from "@/icons/icons";
+import { LineIcon, PointedArrow } from "@/icons/icons";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Blog from "./Blog";
 import Contact from "./Contact";
@@ -19,7 +19,7 @@ const client = new ApolloClient({
 
 const Main = () => {
   return (
-    <div className="py-20 flex flex-col justify-center md:w-[768px] lg:w-[1280px] m-auto">
+    <div className="py-20 flex flex-col justify-center md:w-[768px] lg:w-[1100px] m-auto">
       {/* Introduction */}
       <div className="mx-auto">
         <div>
@@ -55,7 +55,7 @@ const Main = () => {
           </div>
         </a>
 
-        <a href="#">
+        <a href="#contact">
           <div className="border border-[#e6e6e6] rounded-[4px] p-4 text-white font-medium text-sm md:text-base flex items-center">
             <span className="mr-2">Get In Touch</span>{" "}
             <PointedArrow color="white" />
@@ -67,8 +67,9 @@ const Main = () => {
       {/* Navbar */}
       <Navbar />
       <div className="mt-6 mb-22 space-y-4 mx-auto flex flex-col items-center">
-        <h2 className="text-xl tracking-wider font-extralight">Scroll down</h2>
-        <ArrowDown />
+        {/* <h2 className="text-xl tracking-wider font-extralight">Scroll down</h2> */}
+        {/* <ArrowDown /> */}
+        <p className="text-7xl text-center animate-bounce">↓</p>
       </div>
       {/* End of Navbar */}
 

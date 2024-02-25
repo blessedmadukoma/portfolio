@@ -12,7 +12,7 @@ const Navbar = () => {
   const active = "text-white border-b-2 border-[#A7A4A5]";
 
   return (
-    <nav className="mt-24 py-8 sticky top-0 md:top-[64px] z-0 md:z-0 backdrop-blur-sm border-[#292844] border-y-[0.8px]">
+    <nav className="w-full mt-24 py-8 sticky top-0 md:top-[64px] z-0 md:z-0 backdrop-blur-sm border-[#292844] border-y-[0.8px]">
       <div className="flex justify-evenly text-[#d1d1d1] text-sm md:text-base">
         <a
           href="/"

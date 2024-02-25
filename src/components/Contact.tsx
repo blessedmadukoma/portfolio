@@ -1,5 +1,4 @@
 import { LineIcon, PointedArrow } from "@/icons/icons";
-import React from "react";
 
 const Contact = () => {
   return (
@@ -35,10 +34,10 @@ const Contact = () => {
 
           <div className="w-[200px] text-center mt-20">
             <a
-              href="https://drive.google.com/file/d/14yXfFGJreY509NT031tIQZClXqt_JtRa/view?usp=sharing"
+              href="https://docs.google.com/document/d/1hgto3nreypCnwZ6UxRhf6naTybX7daMA1kq1ZizQ2zY"
               target="_blank"
             >
-              <div className="border border-[#e6e6e6] rounded-[4px] p-4 font-medium text-sm md:text-base flex items-center">
+              <div className="border border-[#e6e6e6] rounded-[4px] p-4 font-medium text-sm md:text-base flex items-center justify-center hover:bg-gray-400 hover:animate-pulse hover:text-white">
                 <span className="mr-2">View My Resume</span>{" "}
                 <PointedArrow color="white" />
               </div>
