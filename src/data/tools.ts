@@ -1,5 +1,3 @@
-import { NodeIcon } from "@/icons/logos";
-
 export const TOOLS = [
   {
     name: "Go",
@@ -29,9 +27,20 @@ export const TOOLS = [
   },
   {
     name: "VueJS",
-    URL: "https://vuejs.org/",
+    URL: "https://vuejs.org",
     image:
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1689718701/portfolio-images/icons/vue-logo_b4lpou.svg",
+  },
+  {
+    name: "Nuxt",
+    URL: "https://nuxt.com",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1713428802/portfolio-images/nuxt_ubxyan.png",
+  },
+  {
+    name: "NestJS",
+    URL: "https://nestjs.org/",
+    image: "https://docs.nestjs.com/assets/logo-small.svg",
   },
   {
     name: "React",

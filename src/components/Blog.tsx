@@ -77,7 +77,7 @@ const Blog = () => {
   return (
     <div className="my-10 md:my-24 mx-4 md:mx-8" id="blog">
       <div className="text-start pt-16 mb-4 text-3xl font-semibold">Blogs</div>
-      <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {publications &&
           publications.posts.edges.map((post: PostEdge) => (
             <a
@@ -95,8 +95,8 @@ const Blog = () => {
               </div>
             </div> */}
 
-              <div className="text-start bg-[#18173B] p-4 py-8 rounded-xl h-[290px] mx-auto">
-                <div className="text-base font-semibold md:text-xl mb-4 h-2/4">
+              <div className="text-start bg-[#18173B] p-4 pt-4 pb-10 rounded-xl h-[250px] mx-auto hover:border hover:border-white">
+                <div className="text-base font-semibold mb-4 h-2/4">
                   {post.node.title}
                 </div>
 
@@ -105,7 +105,7 @@ const Blog = () => {
                   {post.node.subtitle}
                 </div>
 
-                <div className="text-sm text-[#FFFFFF]/[0.6] h-1/4">
+                <div className="text-sm text-[#FFFFFF]/[0.6] h-1/4 pb-4">
                   {post.node.views} views
                 </div>
               </div>

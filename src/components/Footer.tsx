@@ -17,6 +17,7 @@ const Footer = () => {
 
   const date = new Date();
   let day = weekday[date.getDay()];
+  let year = date.getFullYear();
 
   const size = useWindowSize();
 
@@ -82,7 +83,7 @@ const Footer = () => {
 
       <div className="mt-5 md:flex md:justify-between md:pl-8 px-[20px] md:px-[150px] text-end items-end">
         <div className="hidden md:block text-[#939196] text-xs md:text-base">
-          @2023 Blessed.
+          &copy;{year} - BM.
         </div>
         <div className="text-[#939196] text-center flex flex-col items-center">
           <div className="w-40 md:w-56 relative">
