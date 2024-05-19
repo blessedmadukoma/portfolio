@@ -56,6 +56,13 @@ query FetchAllPosts($host: String!) {
 // }
 // `);
 
+function truncateText(text: any, maxLength: number) {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + "...";
+  }
+  return text;
+}
+
 const Blog = () => {
   const blogs = BLOGS;
 
@@ -85,27 +92,16 @@ const Blog = () => {
               href={`https://mblessed.hashnode.dev/${post.node.slug}`}
               target="_blank"
             >
-              {/* <div className="text-start bg-[#18173B] p-4 rounded-xl hover:border h-[240px] mx-auto">
-              <div className="text-base font-semibold md:text-xl mb-4 h-2/4">
-                {blog.title}
-              </div>
-
-              <div className="font-extralight md:font-light mb-10 text-sm h-1/4">
-                {blog.description}
-              </div>
-            </div> */}
-
-              <div className="text-start bg-[#18173B] p-4 pt-4 pb-10 rounded-xl h-[250px] mx-auto hover:border hover:border-white">
-                <div className="text-base font-semibold mb-4 h-2/4">
-                  {post.node.title}
+              <div className="text-start flex flex-col justify-between bg-[#18173B] p-4 pt-4 pb-10 rounded-xl mx-auto hover:border hover:border-white h-[260px]">
+                <div className="text-base font-semibold mb-4 h-3/6">
+                  {truncateText(post.node.title, 50)}
                 </div>
 
-                <div className="font-extralight md:font-light mb-10 text-sm h-1/4">
-                  {/* {blog.description} */}
-                  {post.node.subtitle}
+                <div className="font-extralight md:font-light mb-10 text-sm h-2/6">
+                  {truncateText(post.node.subtitle, 65)}
                 </div>
 
-                <div className="text-sm text-[#FFFFFF]/[0.6] h-1/4 pb-4">
+                <div className="text-end text-sm text-[#FFFFFF]/[0.6] h-1/6">
                   {post.node.views} views
                 </div>
               </div>
