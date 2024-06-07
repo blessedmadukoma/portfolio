@@ -88,7 +88,7 @@ const Footer = () => {
         <div className="text-[#939196] text-center flex flex-col items-center">
           <div className="w-40 md:w-56 relative">
             <img src="./icons/memoji.png" alt="Memoji" />
-            <div className="absolute -top-1 right-[14px] md:top-7 md:right-[3rem] lg:right-[3rem] animate-spin-slow">
+            <div className="absolute -top-1 right-[14px] md:top-7 md:right-[2rem] lg:right-[3rem] animate-spin-slow">
               {width < 768 ? (
                 <NameIcon width="130" />
               ) : (
