@@ -32,21 +32,21 @@ const Main = () => {
         </div>
         <div className="flex items-center justify-end">
           <LineIcon />
-          <span className="ml-2 md:text-xl">Backend Engineer</span>
+          <span className="ml-2 md:text-xl">Software Engineer</span>
           {/* <span className="ml-2 md:text-xl font-light">Product Engineer</span> */}
         </div>
       </div>
 
-      <div className="my-16 text-sm md:text-2xl lg:text-2xl font-extralight w-[340px] md:w-[768px] lg:w-[1000px] mx-auto md:mx-auto">
+      <div className="my-16 text-sm md:text-xl tracking-wide font-extralight w-[340px] md:w-[768px] lg:w-[1000px] mx-auto md:mx-auto">
         I am a software engineer with 3+ years experience, tasked with
         <span className="text-[#6965D8]"> demystifying </span> the amazing world
         of scalable, performant systems by designing and developing high-quality
-        backend services.
+        services.
       </div>
 
       <div className="flex justify-evenly">
         <a
-          href="https://docs.google.com/document/d/1hgto3nreypCnwZ6UxRhf6naTybX7daMA1kq1ZizQ2zY"
+          href="https://docs.google.com/document/d/151mUem2Jq3V_028rhx_ICpoDixSKmP_mkMTUZhzesWM/view"
           target="_blank"
         >
           <div className="bg-[#e6e6e6] rounded-[4px] p-4 text-gray-900 font-medium text-sm md:text-base flex items-center hover:underline">

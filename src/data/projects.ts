@@ -1,10 +1,33 @@
 export const PROJECTS = [
   {
-    title: "Portfolio",
-    description: "My personal portfolio website",
-    live: "https://mblessed.tech",
+    title: "Retail Orders ETL Pipeline",
+    description:
+      "Retail Orders ETL Pipeline and Analysis - A Data Engineering Project.",
+    live: "",
     apiDoc: "",
-    github: "https://github.com/blessedmadukoma/porfolio",
+    github: "https://github.com/blessedmadukoma/retail-orders-pipeline",
+    imageURL: "/architecture.png",
+    alt: "retail-orders-pipeline",
+    technologies: ["Python", "PostgreSQL", "Airflow"],
+  },
+  {
+    title: "ThreeThirtyOne Consulting",
+    description:
+      "A consulting firm that empowers clients to navigate challenges and create success through collaboration, and measurable outcomes.",
+    live: "https://threethirtyone-consulting.netlify.app/",
+    apiDoc: "",
+    github: "",
+    imageURL: "/three-thirty-one.png",
+    alt: "threethirtyone",
+    technologies: ["VueJS", "TailwindCSS"],
+  },
+  {
+    title: "Portfolio",
+    description: "My personal portfolio website.",
+    // live: "https://mblessed.tech",
+    live: "https://mblessed.vercel.app",
+    apiDoc: "",
+    github: "https://github.com/blessedmadukoma/portfolio",
     imageURL:
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685924847/portfolio-images/portfolio_i48qea.png",
     alt: "portfolio",
@@ -12,7 +35,7 @@ export const PROJECTS = [
   },
   {
     title: "LAMS",
-    description: "Making your light management easier, faster and better",
+    description: "Making your light management easier, faster and better.",
     live: "https://lams.netlify.app",
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/lams-vue",
@@ -24,7 +47,7 @@ export const PROJECTS = [
   {
     title: "TrackIT - Budget Tracker",
     description:
-      "Manage your finances and avoid excessive spending via TrackIT",
+      "Manage your finances and avoid excessive spending via TrackIT.",
     live: "https://trakkit.vercel.app",
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/trackit-client",

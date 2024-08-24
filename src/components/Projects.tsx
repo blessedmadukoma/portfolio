@@ -1,6 +1,6 @@
 import { LinkIcon } from "@/icons/icons";
-import { PROJECTS } from "../data/projects";
 import Image from "next/image";
+import { PROJECTS } from "../data/projects";
 
 export const Projects = () => {
   const projects = PROJECTS;
@@ -27,17 +27,21 @@ export const Projects = () => {
               /> */}
             </div>
             <div className="text-start mt-6 items-start">
-              <h3 className="text-lg font-semibold">{project.title}</h3>
-              <p className="py-2 mt-4 text-base font-light text-[#a7a4a5] h-[50px]">
+              <h3 className="text-lg ">{project.title}</h3>
+              <p className="py-2 mt-4 text-sm tracking-wide font-light text-[#a7a4a5] h-[80px]">
                 {project.description}
               </p>
             </div>
 
-            <div className="flex tracking-wide text-sm mb text-start space-x-6 py-6 text-white">
+            <div className="flex tracking-wide text-sm mb text-start py-6 text-white">
               <a
                 href={`${project.github}`}
                 target="_blank"
-                className="hover:text-[#a7a4a5] hover:border-b"
+                className={`${
+                  project.github
+                    ? "visible hover:text-[#a7a4a5] hover:border-b mr-6"
+                    : "hidden"
+                }`}
               >
                 <div className="flex items-center">
                   <span className="mr-1">Github</span>

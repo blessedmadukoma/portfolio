@@ -34,7 +34,7 @@ const Contact = () => {
 
           <div className="w-[200px] text-center mt-20">
             <a
-              href="https://docs.google.com/document/d/1hgto3nreypCnwZ6UxRhf6naTybX7daMA1kq1ZizQ2zY"
+              href="https://docs.google.com/document/d/151mUem2Jq3V_028rhx_ICpoDixSKmP_mkMTUZhzesWM/view"
               target="_blank"
             >
               <div className="border border-[#e6e6e6] rounded-[4px] p-4 font-medium text-sm md:text-base flex items-center justify-center hover:bg-gray-400 hover:animate-pulse hover:text-white">
