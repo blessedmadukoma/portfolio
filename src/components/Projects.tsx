@@ -3,6 +3,13 @@ import Image from "next/image";
 import { PROJECTS } from "../data/projects";
 
 export const Projects = () => {
+  function truncateText(text: any, maxLength: number) {
+    if (text?.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  }
+
   const projects = PROJECTS;
   return (
     <div className="py-24">
@@ -14,7 +21,7 @@ export const Projects = () => {
           >
             <div className="mt-4 rounded-[4px] text-lg tracking-wider font-medium mx-auto">
               <Image
-                src={project.imageURL}
+                src={project.imageURL || "/default-image.png"}
                 className="rounded-[5px] h-[170px]"
                 alt={project.alt}
                 width={300}
@@ -27,9 +34,9 @@ export const Projects = () => {
               /> */}
             </div>
             <div className="text-start mt-6 items-start">
-              <h3 className="text-lg ">{project.title}</h3>
+              <h3 className="text-lg md:h-[35px]">{project.title}</h3>
               <p className="py-2 mt-4 text-sm tracking-wide font-light text-[#a7a4a5] h-[80px]">
-                {project.description}
+                {truncateText(project.description, 150)}
               </p>
             </div>
 

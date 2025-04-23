@@ -37,7 +37,7 @@ const Main = () => {
         </div>
       </div>
 
-      <div className="my-16 text-sm md:text-xl tracking-wide font-extralight w-[340px] md:w-[768px] lg:w-[1000px] mx-auto md:mx-auto">
+      {/* <div className="my-16 text-sm md:text-xl tracking-wide font-extralight w-[340px] md:w-[768px] lg:w-[1000px] mx-auto md:mx-auto">
         I am a <span className="text-[#6965D8]">data-driven engineer</span> with
         3+ years of excellent software engineering experience transforming
         complex data into user-friendly solutions that{" "}
@@ -45,6 +45,18 @@ const Main = () => {
         various industries — having delivered and maintained over a number
         projects for several companies, demonstrating a commitment to
         collaboration and tailored solutions.
+      </div> */}
+      <div className="my-16 text-sm md:text-xl tracking-wide font-extralight w-[340px] md:w-[768px] lg:w-[1000px] mx-auto md:mx-auto">
+        <br />A <span className="text-[#6965D8]">product engineer</span> with 3+
+        years of software engineering, data science and machine learning
+        experience building enterprise scalable systems, predictive models and
+        statistical solutions that{" "}
+        <span className="text-[#6965D8]">improve operational efficiency</span>.
+        Having a strong foundation in software engineering, I specialize in
+        delivering reliable and efficient solutions, applying data analysis and
+        machine learning solutions using Python and cloud services. Demonstrated
+        expertise in transforming complex problems into actionable business
+        insights across international development projects.
       </div>
 
       <div className="flex justify-evenly">
