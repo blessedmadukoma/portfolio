@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+body {
+  font-family: Menlo, monospace;
+  letter-spacing: -0.03em;
+  width: 100%;
+  max-width: 700px;
+  padding: 0px 20px 0px 20px;
+  margin: 0 auto;
+  /* height: 100vh; */
+}
