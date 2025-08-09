@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import type { Component } from "vue";
-  import { defineEmits, ref, watch } from "vue";
 
   const activeTabKey = ref<string | null>(
     Object.keys(NavBarComponents)[0] ?? null

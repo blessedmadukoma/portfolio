@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <h2>Projects page</h2>
-  </div>
+  <section class="space-y-3">
+    <h2>Why I build:</h2>
+  </section>
 </template>
