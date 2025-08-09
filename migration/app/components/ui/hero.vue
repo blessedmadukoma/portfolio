@@ -9,7 +9,7 @@
 <template>
   <section>
     <h1
-      class="my-6 text-lg font-medium tracking-tight flex items-baseline justify-between"
+      class="my-4 text-lg font-medium tracking-tight flex items-baseline justify-between"
     >
       <span class="">Hi👋🏿, I'm Blessed</span>
 

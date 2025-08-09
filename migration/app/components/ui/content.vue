@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <section class="space-y-3">
+  <section class="space-y-1">
     <ui-navbar @update:activeTab="setActiveTab" />
 
     <section class="flex-grow overflow-auto">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import type { Component } from "vue";
+  import { NavBarComponents } from "~/pkg/enums";
 
   const activeTabKey = ref<string | null>(
     Object.keys(NavBarComponents)[0] ?? null
