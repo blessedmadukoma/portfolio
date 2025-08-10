@@ -62,7 +62,7 @@
           {{ project.description }}
         </p>
 
-        <p class="text-sm text-gray-500 dark:text-gray-300">
+        <p class="text-xs text-gray-600 dark:text-gray-300">
           <span v-for="(tech, idx) in project.technologies" :key="tech">
             <template
               v-if="

@@ -1,9 +1,17 @@
 <script setup>
+  import { watch } from "vue";
+
   const colorMode = useColorMode();
 
   const toggleTheme = () => {
     colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
   };
+
+  watch(
+    () => colorMode.value,
+    (newVal, oldVal) => {},
+    { deep: true }
+  );
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   const colorMode = useColorMode();
-  watch(colorMode, () => {}, { immediate: true });
+  watch(colorMode, () => {}, { immediate: true, deep: true });
 
   defineProps<{
     width: string;
