@@ -36,7 +36,7 @@ export const WORK_EXPERIENCE = [
     link: "https://upanzinetwork.org",
   },
   {
-    company: "PLATNOVA",
+    company: "Platnova",
     position: "Golang Backend Engineer (Contract)",
     startDate: "Mar 2024",
     endDate: "Aug 2024",
@@ -48,7 +48,7 @@ export const WORK_EXPERIENCE = [
     link: "https://platnova.com",
   },
   {
-    company: "21ST CENTURY TECHNOLOGIES",
+    company: "21ST Century Technologies",
     position: "Software Engineer",
     startDate: "Dec 2022",
     endDate: "Nov 2023",
@@ -57,7 +57,7 @@ export const WORK_EXPERIENCE = [
     location: "Lagos, Nigeria",
     // imageURL: "/images/companies/21st-century.png",
     imageURL: "",
-    link: "https://21stcentury.com.ng",
+    link: "https://21ctl.com",
   },
 ];
 
