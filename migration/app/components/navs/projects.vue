@@ -27,9 +27,31 @@
     >
       <img
         :src="project.imageURL"
+        v-if="project.imageURL"
         alt="Project Image"
-        class="w-20 h-1w-20 rounded-md"
+        class="w-20 h-20 rounded-md"
       />
+
+      <div v-else>
+        <svg
+          class="w-20 h-20 rounded-md bg-gray-200"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 80 80"
+          fill="none"
+        >
+          <rect width="80" height="80" rx="12" fill="#E5E7EB" />
+          <text
+            x="50%"
+            y="50%"
+            text-anchor="middle"
+            dy=".3em"
+            font-size="14"
+            fill="#9CA3AF"
+          >
+            No Image
+          </text>
+        </svg>
+      </div>
       <div class="px-2 space-y-2">
         <div class="flex justify-between items-center">
           <h3 class="text-[15px] font-semibold">

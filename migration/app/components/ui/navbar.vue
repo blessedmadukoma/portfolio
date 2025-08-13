@@ -29,7 +29,7 @@
 <template>
   <section>
     <nav class="text-[15px]">
-      <ul class="flex space-x-7">
+      <ul class="flex space-x-10">
         <li
           v-for="(component, key) in NavBarComponents"
           :key="key"

@@ -7,8 +7,7 @@ export const WORK_EXPERIENCE = [
     description:
       "Architected Rwanda's first infrastructure intelligence platform integrating real estate and transportation data streams. Developed Vue.js dashboard with 12+ tailored trend analysis for infrastructure sectors.",
     location: "Kigali, Rwanda",
-    // imageURL: "/images/companies/mininfra.png",
-    imageURL: "",
+    imageURL: "/logos/imgs/mininfra.png",
     link: "https://www.mininfra.gov.rw",
   },
   {
@@ -19,8 +18,7 @@ export const WORK_EXPERIENCE = [
     description:
       "Performed code review for team members across ATS recruitment platform. Built email notification system and responsive pages for core recruitment interface serving 100+ job seekers.",
     location: "Kigali, Rwanda",
-    // imageURL: "/images/companies/huzahr.png",
-    imageURL: "",
+    imageURL: "/logos/svgs/huza.svg",
     link: "https://www.huzahr.com",
   },
   {
@@ -31,8 +29,7 @@ export const WORK_EXPERIENCE = [
     description:
       "Migrated African datasets hosting platform to Tailwind CSS, reducing bundle size by 30%. Optimized platform performance using Redux, reducing load time by 40%.",
     location: "Kigali, Rwanda",
-    // imageURL: "/images/companies/upanzi.png",
-    imageURL: "",
+    imageURL: "/logos/imgs/cylab.png",
     link: "https://upanzinetwork.org",
   },
   {
@@ -43,8 +40,7 @@ export const WORK_EXPERIENCE = [
     description:
       "Revamped transaction receipt layout improving customer satisfaction by 30%. Implemented CRON job for vault payment settlements, reducing processing time by 20%.",
     location: "Remote",
-    // imageURL: "/images/companies/platnova.png",
-    imageURL: "",
+    imageURL: "/logos/imgs/platnova.png",
     link: "https://platnova.com",
   },
   {
@@ -55,8 +51,8 @@ export const WORK_EXPERIENCE = [
     description:
       "Implemented CI/CD pipelines improving deployment by 70%. Engineered ML pipelines ensuring 99.99% uptime across Tier III and IV data centers.",
     location: "Lagos, Nigeria",
-    // imageURL: "/images/companies/21st-century.png",
-    imageURL: "",
+    imageURL:
+      "https://res.cloudinary.com/dqsggbqmf/image/upload/v1675251272/21ctl/21st_century_logo_FULL_2_babx2s.png",
     link: "https://21ctl.com",
   },
 ];
@@ -72,7 +68,7 @@ export const EDUCATION = [
     description:
       "Specialization in Software Engineering, Big Data and Applied Machine Learning. Thesis: 'Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies: A Smart Sensing and Multi-Objective Optimization Approach'",
     location: "Kigali, Rwanda",
-    imageURL: "/assets/svgs/cmu.svg",
+    imageURL: "/logos/svgs/cmu.svg",
     thesis:
       "Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies",
     link: "https://www.cmu.edu",
@@ -86,7 +82,7 @@ export const EDUCATION = [
     description:
       "Studied software engineering principles, algorithms, and data structures. Developed strong foundation in programming, system design, and project management.",
     location: "Ogun, Nigeria",
-    imageURL: "/assets/svgs/babcock.svg",
+    imageURL: "/logos/svgs/babcock.svg",
     thesis: "LAMS: Light Automation Management System for smart homes",
     link: "https://babcock.edu.ng",
   },
@@ -99,8 +95,7 @@ export const AWARDS = [
     date: "2024",
     description:
       "Leading academic innovation initiatives and research committee activities at CMU Africa.",
-    // imageURL: "/images/awards/cmu-leadership.png",
-    imageURL: "",
+    imageURL: "/logos/svgs/cmu.svg",
   },
   {
     title: "Executive President",

@@ -54,7 +54,7 @@ export const PROJECTS = [
     live: "https://threethirtyOne-consulting.netlify.app/",
     apiDoc: "",
     github: "",
-    imageURL: "/three-thirty-one.png",
+    imageURL: "/logos/imgs/threethirtyone.png",
     alt: "threethirtyone",
     technologies: ["VueJS", "TailwindCSS"],
   },
