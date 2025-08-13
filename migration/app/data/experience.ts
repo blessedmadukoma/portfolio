@@ -89,21 +89,21 @@ export const EDUCATION = [
 ];
 
 export const AWARDS = [
-  {
-    title: "Chairman, Academic Innovation Sub-Committee",
-    organization: "Carnegie Mellon University Africa",
-    date: "2024",
-    description:
-      "Leading academic innovation initiatives and research committee activities at CMU Africa.",
-    imageURL: "/logos/svgs/cmu.svg",
-  },
-  {
-    title: "Executive President",
-    organization: "Babcock University Computer Club",
-    date: "2022",
-    description:
-      "Led the computer club activities and fostered tech community at Babcock University.",
-    // imageURL: "/images/awards/babcock-leadership.png",
-    imageURL: "",
-  },
+  // {
+  //   title: "Chairman, Academic Innovation Sub-Committee",
+  //   organization: "Carnegie Mellon University Africa",
+  //   date: "2024",
+  //   description:
+  //     "Leading academic innovation initiatives and research committee activities at CMU Africa.",
+  //   imageURL: "/logos/svgs/cmu.svg",
+  // },
+  // {
+  //   title: "Executive President",
+  //   organization: "Babcock University Computer Club",
+  //   date: "2022",
+  //   description:
+  //     "Led the computer club activities and fostered tech community at Babcock University.",
+  //   // imageURL: "/images/awards/babcock-leadership.png",
+  //   imageURL: "",
+  // },
 ];

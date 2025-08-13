@@ -53,33 +53,7 @@
           class="flex flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer"
         >
           <div class="px-2 flex space-x-4">
-            <img
-              v-if="experience.imageURL"
-              :src="experience.imageURL"
-              alt="Experience Image"
-              class="w-16 h-16 rounded-md"
-            />
-
-            <div v-else>
-              <svg
-                class="w-20 h-20 rounded-md bg-gray-200"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 80 80"
-                fill="none"
-              >
-                <rect width="80" height="80" rx="12" fill="#E5E7EB" />
-                <text
-                  x="50%"
-                  y="50%"
-                  text-anchor="middle"
-                  dy=".3em"
-                  font-size="14"
-                  fill="#9CA3AF"
-                >
-                  No Image
-                </text>
-              </svg>
-            </div>
+            <ui-img :img-url="experience.imageURL" />
 
             <div class="space-y-1">
               <h3 class="font-semibold">
