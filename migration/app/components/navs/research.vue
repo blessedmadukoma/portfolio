@@ -1,6 +1,6 @@
 <template>
   <section
-    class="flex flex-col items-center justify-center min-h-96 py-20 bg-white dark:bg-gray-900 transition-colors duration-500"
+    class="flex flex-col items-center justify-center min-h-96 py-20 transition-colors duration-500"
   >
     <div class="rounded-xl px-8 py-10 max-w-xl text-center">
       <svg
