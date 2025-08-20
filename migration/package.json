@@ -14,10 +14,12 @@
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "nuxt": "^4.0.1",
+    "nuxt-apollo": "^0.2.1",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@nuxtjs/apollo": "^5.0.0-alpha.15",
     "tailwindcss": "^3.4.15"
   }
 }

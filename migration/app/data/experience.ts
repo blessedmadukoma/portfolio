@@ -1,26 +1,26 @@
 export const WORK_EXPERIENCE = [
-  {
-    company: "Infrastructure Ministry (MININFRA)",
-    position: "Product Engineer (Contract)",
-    startDate: "May 2025",
-    endDate: null,
-    description:
-      "Architected Rwanda's first infrastructure intelligence platform integrating real estate and transportation data streams. Developed Vue.js dashboard with 12+ tailored trend analysis for infrastructure sectors.",
-    location: "Kigali, Rwanda",
-    imageURL: "/logos/imgs/mininfra.png",
-    link: "https://www.mininfra.gov.rw",
-  },
-  {
-    company: "HuzaHR",
-    position: "Software Engineer",
-    startDate: "Jun 2025",
-    endDate: null,
-    description:
-      "Performed code review for team members across ATS recruitment platform. Built email notification system and responsive pages for core recruitment interface serving 100+ job seekers.",
-    location: "Kigali, Rwanda",
-    imageURL: "/logos/svgs/huza.svg",
-    link: "https://www.huzahr.com",
-  },
+  // {
+  //   company: "Infrastructure Ministry (MININFRA)",
+  //   position: "Product Engineer (Contract)",
+  //   startDate: "May 2025",
+  //   endDate: null,
+  //   description:
+  //     "Architected Rwanda's first infrastructure intelligence platform integrating real estate and transportation data streams. Developed Vue.js dashboard with 12+ tailored trend analysis for infrastructure sectors.",
+  //   location: "Kigali, Rwanda",
+  //   imageURL: "/logos/imgs/mininfra.png",
+  //   link: "https://www.mininfra.gov.rw",
+  // },
+  // {
+  //   company: "HuzaHR",
+  //   position: "Software Engineer",
+  //   startDate: "Jun 2025",
+  //   endDate: null,
+  //   description:
+  //     "Performed code review for team members across ATS recruitment platform. Built email notification system and responsive pages for core recruitment interface serving 100+ job seekers.",
+  //   location: "Kigali, Rwanda",
+  //   imageURL: "/logos/svgs/huza.svg",
+  //   link: "https://www.huzahr.com",
+  // },
   {
     company: "The UPANZI Network/Cy-LAB",
     position: "Graduate Research Assistant",
@@ -58,21 +58,21 @@ export const WORK_EXPERIENCE = [
 ];
 
 export const EDUCATION = [
-  {
-    institution: "Carnegie Mellon University",
-    degree: "MSc, Information Technology",
-    grade: "",
-    startDate: "Jul 2024",
-    // endDate: "May 2026",
-    endDate: "",
-    description:
-      "Specialization in Software Engineering, Big Data and Applied Machine Learning. Thesis: 'Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies: A Smart Sensing and Multi-Objective Optimization Approach'",
-    location: "Kigali, Rwanda",
-    imageURL: "/logos/svgs/cmu.svg",
-    thesis:
-      "Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies",
-    link: "https://www.cmu.edu",
-  },
+  // {
+  //   institution: "Carnegie Mellon University",
+  //   degree: "MSc, Information Technology",
+  //   grade: "",
+  //   startDate: "Jul 2024",
+  //   // endDate: "May 2026",
+  //   endDate: "",
+  //   description:
+  //     "Specialization in Software Engineering, Big Data and Applied Machine Learning. Thesis: 'Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies: A Smart Sensing and Multi-Objective Optimization Approach'",
+  //   location: "Kigali, Rwanda",
+  //   imageURL: "/logos/svgs/cmu.svg",
+  //   thesis:
+  //     "Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies",
+  //   link: "https://www.cmu.edu",
+  // },
   {
     institution: "Babcock University",
     degree: "BSc, Software Engineering",

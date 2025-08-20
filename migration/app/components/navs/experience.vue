@@ -230,21 +230,3 @@
     </section>
   </section>
 </template>
-
-<style scoped>
-  .expand-enter-active,
-  .expand-leave-active {
-    transition: max-height 0.12s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s;
-    overflow: hidden;
-  }
-  .expand-enter-from,
-  .expand-leave-to {
-    max-height: 0;
-    opacity: 0;
-  }
-  .expand-enter-to,
-  .expand-leave-from {
-    max-height: 500px;
-    opacity: 1;
-  }
-</style>

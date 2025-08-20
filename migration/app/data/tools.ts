@@ -76,6 +76,11 @@ export const TOOLS = [
     // image: "https://cdn.simpleicons.org/mysql",
   },
   {
+    name: "Redis",
+    URL: "https://redis.io/",
+    image: "https://cdn.simpleicons.org/redis",
+  },
+  {
     name: "Docker",
     URL: "https://www.docker.com/",
     image: "https://cdn.simpleicons.org/docker",
