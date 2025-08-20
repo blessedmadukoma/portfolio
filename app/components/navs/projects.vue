@@ -7,7 +7,7 @@
 </script>
 <template>
   <section class="space-y-3 mt-4">
-    <h2 class="text-sm tracking-wide">
+    <!-- <h2 class="text-sm tracking-wide">
       <span class="font-bold">Why I build: </span>
       <span
         >I build because... For more projects, visit my
@@ -18,7 +18,7 @@
           >GitHub</a
         ></span
       >
-    </h2>
+    </h2> -->
 
     <div
       v-for="(project, id) in projects"

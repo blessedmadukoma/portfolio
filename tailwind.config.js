@@ -1,20 +1,30 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+// tailwind.config.js
+const config = {
+  darkMode: "class",
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.{js,vue,ts}",
+    "./pages/**/*.{js,vue,ts}",
+    "./plugins/**/*.{js,ts}",
+    "./app.{js,vue,ts}",
+    "./error.{js,vue,ts}",
+    "./app/**/*.{js,vue,ts}",
   ],
   theme: {
     extend: {
       colors: {
-        primary: "#0A092C",
-        footer: "#0e0c43",
-      },
-      animation: {
-        "spin-slow": "spin 18s linear infinite",
+        "primary-blue": "#0A092C",
+        secondary: "#64748b",
+        accent: "#f59e42",
+        background: "#f8fafc",
+        foreground: "#0f172a",
+        muted: "#e2e8f0",
+        white: "#ffffff",
+        black: "#000000",
       },
     },
   },
   plugins: [],
 };
+
+export default config;

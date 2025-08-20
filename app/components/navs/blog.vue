@@ -78,8 +78,12 @@
 <template>
   <section class="space-y-3 mt-2">
     <section class="space-y-2">
-      <h2 class="text-sm tracking-wide flex justify-between items-center">
-        <p class="font-bold text-lg">BLOG POSTS</p>
+      <h2 class="text-sm tracking-wide flex justify-between items-start">
+        <p class="w-2/3">
+          <!-- <span class="font-bold">Why I write: </span>
+          <span>I write because... </span> -->
+        </p>
+
         <a
           class="underline"
           target="_blank"

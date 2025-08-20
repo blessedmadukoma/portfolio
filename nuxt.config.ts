@@ -11,13 +11,8 @@ export default defineNuxtConfig({
       "@nuxtjs/apollo",
       {
         clients: {
-          default: {
-            httpEndpoint: "https://gql.hashnode.com",
-            // httpEndpoint: "https://spacex-production.up.railway.app",
-            credentials: "same-origin",
-            proxyCookies: true,
-          },
           httpLinkOptions: {
+            httpEndpoint: "https://gql.hashnode.com",
             headers: {
               Authorization: process.env.NEXT_PUBLIC_API_HASHNODE_TOKEN,
             },
