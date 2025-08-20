@@ -14,7 +14,7 @@ export default defineNuxtConfig({
           httpLinkOptions: {
             httpEndpoint: "https://gql.hashnode.com",
             headers: {
-              Authorization: process.env.NEXT_PUBLIC_API_HASHNODE_TOKEN,
+              Authorization: process.env.NUXT_PUBLIC_API_HASHNODE_TOKEN,
             },
           },
         },
