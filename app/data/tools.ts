@@ -162,7 +162,7 @@ export const TOOLS = [
   {
     name: "scikit-learn",
     URL: "https://scikit-learn.org/",
-    image: "https://cdn.simpleicons.org/scikit-learn",
+    image: "https://cdn.simpleicons.org/scikitlearn",
   },
   {
     name: "Plotly",

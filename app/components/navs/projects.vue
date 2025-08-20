@@ -67,7 +67,10 @@
               "
             >
               <img
-                :src="tools.find((t) => t.name === tech)?.image"
+                :src="
+                  tools.find((t) => t.name.toLowerCase() === tech.toLowerCase())
+                    ?.image
+                "
                 alt="Tool Image"
                 class="inline-block w-4 h-4"
               />
