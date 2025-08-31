@@ -37,7 +37,7 @@
   };
 </script>
 <template>
-  <section class="space-y-3 mt-2">
+  <section class="space-y-6 mt-2">
     <section class="space-y-2">
       <h2 class="text-sm tracking-wide flex justify-between items-center">
         <p class="font-bold text-lg">WORK EXPERIENCE</p>
@@ -100,13 +100,28 @@
             {{ experience.endDate ? experience.endDate : "Present" }}
           </p>
         </div>
+
         <!-- Dropdown -->
         <Transition name="expand">
           <div
             v-if="openWorkDropdown === id"
-            class="w-full my-2 bg-gray-100 dark:bg-gray-800 rounded p-3 col-span-2"
+            class="w-full my-2 dark:bg-gray-800 rounded px-3 pb-3 col-span-2"
           >
-            Simple dropdown text for {{ experience.company }}
+            <div class="space-y-2">
+              <ul
+                class="list-disc list-inside space-y-2 tracking-wide leading-loose"
+              >
+                <!-- <p class="text-sm text-gray-600 dark:text-gray-300">
+                  Job Responsibilities:
+                </p> -->
+                <li
+                  v-for="(role, idx) in experience.workRoles"
+                  :key="idx"
+                  class="text-sm text-gray-600 dark:text-gray-300"
+                  v-html="role"
+                ></li>
+              </ul>
+            </div>
           </div>
         </Transition>
       </div>
@@ -221,9 +236,9 @@
         <Transition name="expand">
           <div
             v-if="openEducationDropdown === id"
-            class="w-full my-2 bg-gray-100 dark:bg-gray-800 rounded p-3 col-span-2"
+            class="w-full my-2 dark:bg-gray-800 rounded p-3 col-span-2 tracking-wide"
           >
-            Simple dropdown text for {{ education.description }}
+            {{ education.description }}
           </div>
         </Transition>
       </div>

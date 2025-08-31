@@ -9,18 +9,28 @@ export const WORK_EXPERIENCE = [
   //   location: "Kigali, Rwanda",
   //   imageURL: "/logos/imgs/mininfra.png",
   //   link: "https://www.mininfra.gov.rw",
+  //   workRoles: [
+  //     "Architected Rwanda's first <a href='https://www.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>infrastructure intelligence platform</a> integrating real estate and transportation data streams through Debezium CDC and Kafka event streaming, with scalable architecture designed for additional ministry data sources.",
+  //     "Developed Vue.js dashboard with 12+ tailored trend analysis for each infrastructure sector (transportation, and real estate), consolidating cross-ministry data to attract foreign investment.",
+  //     "Contributed to technical decision-making across 3 development phases, documenting architectural choices and design rationale through documentation pieces and authoring 2+ technical blogs",
+  //   ],
   // },
-  // {
-  //   company: "HuzaHR",
-  //   position: "Software Engineer",
-  //   startDate: "Jun 2025",
-  //   endDate: null,
-  //   description:
-  //     "Performed code review for team members across ATS recruitment platform. Built email notification system and responsive pages for core recruitment interface serving 100+ job seekers.",
-  //   location: "Kigali, Rwanda",
-  //   imageURL: "/logos/svgs/huza.svg",
-  //   link: "https://www.huzahr.com",
-  // },
+  {
+    company: "HuzaHR",
+    position: "Software Engineer (Internship)",
+    startDate: "Jun 2025",
+    endDate: "Sep 2025",
+    description:
+      "Fulfilled a required 3-month internship for my MSc. coursework: performed code review for team members across ATS recruitment platform. Built email notification system and responsive pages for core recruitment interface serving 100+ job seekers.",
+    location: "Kigali, Rwanda",
+    imageURL: "/logos/svgs/huza.svg",
+    link: "https://www.huzahr.com",
+    workRoles: [
+      "Fulfilled a required 3-month internship for my MSc. coursework: Performed code review for 2 team members across the <a href='https://dev.jobs.huzahr.com/' target='_blank' style='text-decoration: underline; color: #60a5fa;'>ATS recruitment platform</a>, reviewing 5+ pull requests and establishing coding standards for job seeker and recruiter workflow systems.",
+      "Built an email notification system handling 2+ email templates for the recruitment workflow, handling candidate communications, recruiter alerts, and internal notifications with 99% delivery tracking.",
+      "Built responsive pages, core recruitment interface in NextJS and backend services in NodeJS for the ATS system, establishing foundation to onboard 100+ job seekers and 10+ recruiters in Rwanda's market.",
+    ],
+  },
   {
     company: "The UPANZI Network/Cy-LAB",
     position: "Graduate Research Assistant",
@@ -31,6 +41,11 @@ export const WORK_EXPERIENCE = [
     location: "Kigali, Rwanda",
     imageURL: "/logos/imgs/cylab.png",
     link: "https://upanzinetwork.org",
+    workRoles: [
+      "Migrated African <a href='https://data.upanzi.net/' target='_blank' style='text-decoration: underline; color: #60a5fa;'>datasets hosting platform</a> to Tailwind CSS, reducing bundle size by 30%, improving customization, increasing development speed by 25%, and ensuring data privacy standards while maintaining sensitive datasets.",
+      "Optimized platform performance using Redux, reducing load time by 40%, minimizing database queries and improving user experience.",
+      "Collaborated with cross-functional teams using Agile Scrum methodologies (e.g., weekly standups) and Git-based version control systems, fostering a 15% increase in team productivity and ensuring timely project delivery.",
+    ],
   },
   {
     company: "Platnova",
@@ -42,6 +57,11 @@ export const WORK_EXPERIENCE = [
     location: "Remote",
     imageURL: "/logos/imgs/platnova.png",
     link: "https://platnova.com",
+    workRoles: [
+      "Revamped the transaction receipt layout using Tailwind CSS, improving customization and enhancing clarity of transaction details, which led to a 30% increase in customer satisfaction and a 15% reduction in support inquiries.",
+      "Accelerated operational efficiency, and optimized cash flow management for vault payment settlements by implementing CRON job, resulting in a 20% reduction in payment processing time and increasing transaction processing speed by 40%.",
+      "Executed and launched a <a href='https://platnova.com/lifestyle' target='_blank' style='text-decoration: underline; color: #60a5fa;'>lifestyle-stays</a> package, driving customer engagement and increasing revenue by 15%.",
+    ],
   },
   {
     company: "21ST Century Technologies",
@@ -54,6 +74,11 @@ export const WORK_EXPERIENCE = [
     imageURL:
       "https://res.cloudinary.com/dqsggbqmf/image/upload/v1675251272/21ctl/21st_century_logo_FULL_2_babx2s.png",
     link: "https://21ctl.com",
+    workRoles: [
+      "Implemented Continuous Integration and Continuous Deployment (CI/CD) pipelines to improve software deployment by 70%, reducing release times by 40% and achieving faster resolution times by 10%, saving costs by 40%.",
+      "Engineered data and machine learning pipelines, ensuring 99.99% uptime by orchestrating DNS service restoration across Tier III and IV data centers, reducing downtime by swiftly implementing failover protocols, and enhancing system reliability. ",
+      "Delivered a detailed report system integrating data visualization dashboards and communication feedback loops between teams and managers, improving management decision-making and customer satisfaction by 45%.",
+    ],
   },
 ];
 

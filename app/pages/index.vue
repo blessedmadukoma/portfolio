@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen flex flex-col overflow-hidden py-2 space-y-8">
+  <section class="max-h-screen flex flex-col overflow-hidden py-2 space-y-8">
     <section class="space-y-2">
       <ui-hero />
       <ui-socials />

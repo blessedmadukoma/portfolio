@@ -11,7 +11,9 @@
 
 <template>
   <section class="h-screen flex flex-col">
-    <section class="flex-shrink-0 border-b pb-1">
+    <section
+      class="flex-shrink-0 sticky top-0 bg-white dark:bg-gray-800 z-10 border-b pb-1 backdrop-blur-lg"
+    >
       <div class="overflow-x-auto overflow-y-hidden whitespace-nowrap">
         <ui-navbar @update:activeTab="setActiveTab" />
       </div>

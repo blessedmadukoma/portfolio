@@ -21,14 +21,12 @@
       }
     }
   `;
-
   function truncateText(text: string, maxLength: number) {
     if (text && text.length > maxLength) {
       return text.substring(0, maxLength) + "...";
     }
     return text;
   }
-
   function formatDate(dateString: string) {
     if (!dateString) return "";
     const date = new Date(dateString);
@@ -38,9 +36,7 @@
       day: "numeric",
     });
   }
-
   const variables = { host: "mblessed.hashnode.dev" };
-
   interface PostNode {
     id: string;
     title: string;
@@ -51,7 +47,6 @@
     views: number;
     brief: string;
   }
-
   interface PostsData {
     publication?: {
       posts?: {
@@ -60,21 +55,15 @@
     };
   }
 
-  const { data, pending, error } = await useAsyncQuery<PostsData>(
-    query,
-    variables
-  );
+  const { data, pending, error } = useAsyncQuery<PostsData>(query, variables);
 
   const posts = computed(() => data.value?.publication?.posts?.edges || []);
 
-  // Dropdown state management
   const openPostDropdown = ref<number | null>(null);
-
   const togglePostDropdown = (id: number) => {
     openPostDropdown.value = openPostDropdown.value === id ? null : id;
   };
 </script>
-
 <template>
   <section class="space-y-3 mt-2">
     <section class="space-y-2">
@@ -83,7 +72,6 @@
           <!-- <span class="font-bold">Why I write: </span>
           <span>I write because... </span> -->
         </p>
-
         <a
           class="underline"
           target="_blank"
@@ -92,15 +80,35 @@
           View All Posts ({{ data?.publication?.posts?.edges.length || 0 }})
         </a>
       </h2>
-
-      <div v-if="pending" class="text-center py-8">
+      <div
+        v-if="pending"
+        class="text-center py-8 flex flex-col items-center justify-center"
+      >
+        <svg
+          class="animate-spin h-6 w-6 text-blue-500 mb-2"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
         <p class="text-gray-500 dark:text-gray-400">Loading posts...</p>
       </div>
-
       <div v-else-if="error" class="text-center py-8">
         <p class="text-red-500">Error loading posts: {{ error.message }}</p>
       </div>
-
       <div v-else>
         <div
           v-for="(post, id) in posts"
@@ -140,7 +148,6 @@
                   </svg>
                 </div>
               </div>
-
               <div class="space-y-1 flex-1">
                 <h3 class="font-semibold">
                   <p
@@ -195,7 +202,6 @@
               </p>
             </div>
           </div>
-
           <!-- Dropdown -->
           <Transition name="expand">
             <div
