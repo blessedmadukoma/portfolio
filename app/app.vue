@@ -1,4 +1,10 @@
+<script setup lang="ts">
+  import { Analytics } from "@vercel/analytics/nuxt";
+</script>
+
 <template>
+  <Analytics />
+
   <div>
     <main
       class="bg-white dark:bg-primary-blue text-gray-900 dark:text-gray-100 theme-transition"
