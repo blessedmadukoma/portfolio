@@ -1,20 +1,35 @@
 export const WORK_EXPERIENCE = [
-  // {
-  //   company: "Infrastructure Ministry (MININFRA)",
-  //   position: "Product Engineer (Contract)",
-  //   startDate: "May 2025",
-  //   endDate: null,
-  //   description:
-  //     "Architected Rwanda's first infrastructure intelligence platform integrating real estate and transportation data streams. Developed Vue.js dashboard with 12+ tailored trend analysis for infrastructure sectors.",
-  //   location: "Kigali, Rwanda",
-  //   imageURL: "/logos/imgs/mininfra.png",
-  //   link: "https://www.mininfra.gov.rw",
-  //   workRoles: [
-  //     "Architected Rwanda's first <a href='https://www.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>infrastructure intelligence platform</a> integrating real estate and transportation data streams through Debezium CDC and Kafka event streaming, with scalable architecture designed for additional ministry data sources.",
-  //     "Developed Vue.js dashboard with 12+ tailored trend analysis for each infrastructure sector (transportation, and real estate), consolidating cross-ministry data to attract foreign investment.",
-  //     "Contributed to technical decision-making across 3 development phases, documenting architectural choices and design rationale through documentation pieces and authoring 2+ technical blogs",
-  //   ],
-  // },
+  {
+    company: "CMU-Africa: Languages and Spatial Technologies Laboratory",
+    position: "Graduate Research Assistant",
+    startDate: "Sep 2025",
+    endDate: null,
+    description:
+      "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
+    location: "Kigali, Rwanda",
+    imageURL: "/logos/svgs/cmu.svg",
+    // link: "https://www.mininfra.gov.rw",
+    workRoles: [
+      "Developing anomaly detection framework for athletics performance analysis under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, implementing statistical and ensemble methods to identify performance patterns indicative of potential doping violations.",
+      "Conducting systematic literature review of AI applications in anti-doping, identifying research gaps and unexplored methodologies for next-generation detection systems.",
+    ],
+  },
+  {
+    company: "Infrastructure Ministry (MININFRA)",
+    position: "Product Engineer (Contract)",
+    startDate: "May 2025",
+    endDate: "Sep 2025",
+    description:
+      "Architected Rwanda's first infrastructure intelligence platform with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a> integrating real estate and transportation data streams. Developed Vue.js dashboard with 12+ tailored trend analysis for infrastructure sectors.",
+    location: "Kigali, Rwanda",
+    imageURL: "/logos/imgs/mininfra.png",
+    link: "https://www.mininfra.gov.rw",
+    workRoles: [
+      "Architected Rwanda's first <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>infrastructure intelligence platform</a> with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a> integrating real estate data stream through, with scalable architecture designed for additional ministry data sources.",
+      "Developed <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>dashboard</a> with 12+ tailored trend analysis for each infrastructure sector (transportation, and real estate), consolidating cross-ministry data to attract foreign investment.",
+      "Contributed to technical decision-making across 3 development phases, documenting architectural choices and design rationale through documentation pieces and authoring a <a href='#' target='_blank' style='text-decoration: underline; color: #60a5fa;'>technical blog</a>.",
+    ],
+  },
   {
     company: "HuzaHR",
     position: "Software Engineer (Internship)",
@@ -83,21 +98,21 @@ export const WORK_EXPERIENCE = [
 ];
 
 export const EDUCATION = [
-  // {
-  //   institution: "Carnegie Mellon University",
-  //   degree: "MSc, Information Technology",
-  //   grade: "",
-  //   startDate: "Jul 2024",
-  //   // endDate: "May 2026",
-  //   endDate: "",
-  //   description:
-  //     "Specialization in Software Engineering, Big Data and Applied Machine Learning. Thesis: 'Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies: A Smart Sensing and Multi-Objective Optimization Approach'",
-  //   location: "Kigali, Rwanda",
-  //   imageURL: "/logos/svgs/cmu.svg",
-  //   thesis:
-  //     "Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies",
-  //   link: "https://www.cmu.edu",
-  // },
+  {
+    institution: "Carnegie Mellon University",
+    degree: "MSc, Information Technology",
+    grade: "",
+    startDate: "Jul 2024",
+    // endDate: "May 2026",
+    endDate: "",
+    description:
+      "Specialization in Software Engineering, Big Data and Applied Machine Learning. Thesis: 'Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies: A Smart Sensing and Multi-Objective Optimization Approach'",
+    location: "Kigali, Rwanda",
+    imageURL: "/logos/svgs/cmu.svg",
+    thesis:
+      "Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies",
+    link: "https://www.cmu.edu",
+  },
   {
     institution: "Babcock University",
     degree: "BSc, Software Engineering",
