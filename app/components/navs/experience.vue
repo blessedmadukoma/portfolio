@@ -236,9 +236,13 @@
         <Transition name="expand">
           <div
             v-if="openEducationDropdown === id"
-            class="w-full my-2 dark:bg-gray-800 rounded p-3 col-span-2 tracking-wide"
+            class="w-full my-2 rounded p-3 col-span-2 tracking-wide text-sm text-gray-600 dark:text-gray-300"
           >
-            {{ education.description }}
+            <span>{{ education.description }}</span>
+            <span v-if="education.thesis" class="block mt-2">
+              <strong>Thesis: </strong>
+              <span v-html="education.thesis"></span>
+            </span>
           </div>
         </Transition>
       </div>

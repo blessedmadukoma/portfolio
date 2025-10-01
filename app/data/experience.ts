@@ -105,12 +105,14 @@ export const EDUCATION = [
     startDate: "Jul 2024",
     // endDate: "May 2026",
     endDate: "",
+    // description:
+    //   "Specialization in Software Engineering, Big Data and Applied Machine Learning. Thesis: 'Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies: A Smart Sensing and Multi-Objective Optimization Approach'",
     description:
-      "Specialization in Software Engineering, Big Data and Applied Machine Learning. Thesis: 'Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies: A Smart Sensing and Multi-Objective Optimization Approach'",
+      "Specialization in Software Engineering, Big Data and Applied Machine Learning.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/cmu.svg",
-    thesis:
-      "Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies",
+    // thesis:
+    //   "Dynamic Risk-Aware Routing for Urban Transportation During Health Emergencies",
     link: "https://www.cmu.edu",
   },
   {
@@ -123,7 +125,8 @@ export const EDUCATION = [
       "Studied software engineering principles, algorithms, and data structures. Developed strong foundation in programming, system design, and project management.",
     location: "Ogun, Nigeria",
     imageURL: "/logos/svgs/babcock.svg",
-    thesis: "LAMS: Light Automation Management System for smart homes",
+    thesis:
+      "Light Automation Management System (<a href='#' target='_blank' style='text-decoration: underline; color: #60a5fa;'>LAMS</a>) for smart homes.",
     link: "https://babcock.edu.ng",
   },
 ];
