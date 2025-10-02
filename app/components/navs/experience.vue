@@ -52,7 +52,7 @@
         <div
           class="flex flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer"
         >
-          <div class="px-2 flex space-x-4">
+          <div class="pr-2 flex space-x-4">
             <ui-img :img-url="experience.imageURL" />
 
             <div class="space-y-1">
@@ -141,7 +141,7 @@
         @click="toggleAwardDropdown(id)"
       >
         <div class="flex flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer">
-          <div class="px-2 flex space-x-4">
+          <div class="pr-2 flex space-x-4">
             <img :src="award.imageURL" alt="Award Image" class="w-16 h-16 rounded-md" />
             <div class="space-y-2">
               <h3 class="font-semibold">{{ award.title }}</h3>
@@ -177,7 +177,7 @@
         <div
           class="flex flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer"
         >
-          <div class="px-2 flex space-x-4">
+          <div class="pr-2 flex space-x-4">
             <img
               :src="education.imageURL"
               alt="Project Image"

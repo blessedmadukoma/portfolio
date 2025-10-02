@@ -36,7 +36,9 @@
       </button>
     </h1>
 
-    <p class="text-sm text-gray-700 dark:text-gray-400">
+    <p
+      class="text-sm tracking-wide text-gray-700 dark:text-gray-400 leading-relaxed"
+    >
       A product engineer with 3+ years building enterprise scalable systems,
       predictive models and statistical solutions that improve operational
       efficiency. Currently building

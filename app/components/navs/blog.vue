@@ -65,7 +65,7 @@
   };
 </script>
 <template>
-  <section class="space-y-3 mt-2">
+  <section class="space-y-3 mt-2 mr-2">
     <section class="space-y-2">
       <h2 class="text-sm tracking-wide flex justify-between items-start">
         <p class="w-2/3">
@@ -73,7 +73,7 @@
           <span>I write because... </span> -->
         </p>
         <a
-          class="underline"
+          class="underline py-2"
           target="_blank"
           href="https://mblessed.hashnode.dev"
         >
@@ -149,7 +149,7 @@
                 </div>
               </div>
               <div class="space-y-1 flex-1">
-                <h3 class="font-semibold">
+                <h3 class="font-semibold text-md">
                   <p
                     class="group-hover:underline text-gray-600 dark:text-gray-300 group-hover:text-gray-600 dark:group-hover:text-gray-100 hover:text-gray-600 dark:hover:text-gray-100 flex justify-normal items-center space-x-2"
                   >
@@ -157,7 +157,7 @@
                       :href="`https://mblessed.hashnode.dev/${post.node.slug}`"
                       target="_blank"
                       rel="noopener"
-                      class="line-clamp-2"
+                      class="line-clamp-1"
                       @click.stop
                     >
                       {{ post.node.title }}
@@ -192,7 +192,7 @@
                   }}</span>
                 </p>
                 <p class="block text-xs text-gray-400 dark:text-gray-500">
-                  {{ post.node.views }} views
+                  {{ post.node.views.toLocaleString() }} reads
                 </p>
               </div>
             </div>

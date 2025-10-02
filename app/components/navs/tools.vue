@@ -1,16 +1,16 @@
 <template>
   <section class="space-y-6 mt-2">
     <!-- Languages Section -->
-    <section class="space-y-3">
-      <h2 class="font-bold text-lg">Languages</h2>
-      <div class="flex flex-wrap gap-4">
+    <section class="space-y-1">
+      <h2 class="font-bold">Languages</h2>
+      <div class="flex flex-wrap gap-2">
         <a
           v-for="tool in languageTools"
           :key="tool.name"
           :href="tool.URL"
           target="_blank"
           rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+          class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
         >
           <img
             :src="tool.image"
@@ -28,16 +28,16 @@
     </section>
 
     <!-- Frameworks & Libraries Section -->
-    <section class="space-y-3">
-      <h2 class="font-bold text-lg">Frameworks & Libraries</h2>
-      <div class="flex flex-wrap gap-4">
+    <section class="space-y-1">
+      <h2 class="font-bold">Frameworks & Libraries</h2>
+      <div class="flex flex-wrap gap-2">
         <a
           v-for="tool in frameworkTools"
           :key="tool.name"
           :href="tool.URL"
           target="_blank"
           rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+          class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
         >
           <img
             :src="tool.image"
@@ -55,9 +55,9 @@
     </section>
 
     <!-- Cloud & Infrastructure Section -->
-    <section class="space-y-3">
-      <h2 class="font-bold text-lg">Cloud & Infrastructure</h2>
-      <div class="flex flex-wrap gap-4">
+    <section class="space-y-1">
+      <h2 class="font-bold">Cloud & Infrastructure</h2>
+      <div class="flex flex-wrap gap-2">
         <a
           v-for="tool in cloudTools"
           :key="tool.name"
@@ -82,9 +82,9 @@
     </section>
 
     <!-- Databases Section -->
-    <section class="space-y-3">
-      <h2 class="font-bold text-lg">Databases</h2>
-      <div class="flex flex-wrap gap-4">
+    <section class="space-y-1">
+      <h2 class="font-bold">Databases</h2>
+      <div class="flex flex-wrap gap-2">
         <a
           v-for="tool in databaseTools"
           :key="tool.name"
@@ -109,9 +109,9 @@
     </section>
 
     <!-- Data Science & ML Section -->
-    <section class="space-y-3">
-      <h2 class="font-bold text-lg">Data Science & ML</h2>
-      <div class="flex flex-wrap gap-4">
+    <section class="space-y-1">
+      <h2 class="font-bold">Data Science & ML</h2>
+      <div class="flex flex-wrap gap-2">
         <a
           v-for="tool in dataTools"
           :key="tool.name"
@@ -136,9 +136,9 @@
     </section>
 
     <!-- Development Tools Section -->
-    <section class="space-y-3">
-      <h2 class="font-bold text-lg">Development Tools</h2>
-      <div class="flex flex-wrap gap-4">
+    <section class="space-y-1">
+      <h2 class="font-bold">Development Tools</h2>
+      <div class="flex flex-wrap gap-2">
         <a
           v-for="tool in devTools"
           :key="tool.name"
