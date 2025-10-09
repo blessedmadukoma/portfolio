@@ -68,10 +68,43 @@
   <section class="space-y-3 mt-2 mr-2">
     <section class="space-y-2">
       <h2 class="text-sm tracking-wide flex justify-between items-start">
-        <p class="w-2/3">
-          <!-- <span class="font-bold">Why I write: </span>
-          <span>I write because... </span> -->
+        <p class="w-2/3 py-2">
+          <span>
+            I write about software engineering, academia, AI, and startups.
+            <span class="relative inline-block font-bold">
+              <svg
+                class="rough-annotation"
+                viewBox="0 0 48 29"
+                style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  overflow: visible;
+                  pointer-events: none;
+                  width: 100%;
+                  height: 100%;
+                "
+              >
+                <path
+                  d="M2 12 Q10 10, 18 12 T34 11 T42 13"
+                  fill="none"
+                  stroke="#F2D5C4"
+                  stroke-width="30"
+                  stroke-linecap="round"
+                  style="
+                    stroke-dashoffset: 50px;
+                    stroke-dasharray: 50px;
+                    animation: 800ms ease-out forwards rough-notation-dash;
+                  "
+                ></path>
+              </svg>
+              <span style="position: relative; z-index: 1">Why:</span>
+            </span>
+            to deeply understand what I'm learning and make it easier for others
+            on the same path.
+          </span>
         </p>
+
         <a
           class="underline py-2"
           target="_blank"
@@ -259,3 +292,27 @@
     </section>
   </section>
 </template>
+
+<!-- <style>
+  @keyframes highlight {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  @keyframes rough-notation-dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style> -->
+<style>
+  @keyframes rough-notation-dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
