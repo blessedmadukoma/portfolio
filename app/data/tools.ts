@@ -169,6 +169,11 @@ export const TOOLS = [
     URL: "https://plotly.com/",
     image: "https://cdn.simpleicons.org/plotly",
   },
+  {
+    name: "Flask",
+    URL: "https://flask.palletsprojects.com/",
+    image: "https://cdn.simpleicons.org/flask",
+  }
   // {
   //   name: "VS Code",
   //   URL: "https://code.visualstudio.com/",

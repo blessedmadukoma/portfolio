@@ -10,7 +10,7 @@ export const WORK_EXPERIENCE = [
     imageURL: "/logos/svgs/cmu.svg",
     // link: "https://www.mininfra.gov.rw",
     workRoles: [
-      "Developing anomaly detection framework for athletics performance analysis under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, implementing statistical and ensemble methods to identify performance patterns indicative of potential doping violations.",
+      "Developing anomaly detection <a href='https://sports-anomaly-detection-research.onrender.com/' target='_blank' style='text-decoration: underline; color: #60a5fa;'>framework</a> for athletics performance analysis under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, implementing statistical and ensemble methods to identify performance patterns indicative of potential doping violations.",
       "Conducting systematic literature review of AI applications in anti-doping, identifying research gaps and unexplored methodologies for next-generation detection systems.",
     ],
   },

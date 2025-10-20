@@ -37,11 +37,14 @@
   };
 </script>
 <template>
-  <section class="space-y-6 mt-2">
+  <section class="space-y-6 mt-2 pr-4">
     <section class="space-y-2">
-      <h2 class="text-sm tracking-wide flex justify-between items-center">
+      <h2 class="text-sm py-1 tracking-wide flex justify-between items-center">
         <p class="font-bold text-lg">WORK EXPERIENCE</p>
-        <a class="underline" target="_blank" href="#">View My Resume</a>
+        <div class="space-x-4">
+          <a class="underline" target="_blank" href="#">Industry CV</a>
+          <a class="underline" target="_blank" href="#">Academic CV</a>
+        </div>
       </h2>
       <div
         v-for="(experience, id) in workExperience"

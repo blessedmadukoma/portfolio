@@ -1,5 +1,24 @@
 export const PROJECTS = [
   {
+    title: "Athletics Performance Outlier Detection",
+    briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
+    description:
+      "A research framework comparing statistical, machine learning, and temporal methods for detecting anomalous athletic performances across track and field events. The system evaluates the accuracy of each approach using large-scale historical performance data from elite and sub-elite athletes.",
+    live: "https://sports-anomaly-detection-research.onrender.com/",
+    apiDoc: "",
+    github: "",
+    alt: "athletics-performance-outlier-detection",
+    technologies: [
+      "Python",
+      "Flask",
+      "PostgreSQL",
+      "XGBoost",
+      "Docker",
+      "BeautifulSoup",
+      "Matplotlib",
+    ],
+  },
+  {
     title: "Telco Customer Churn Analysis",
     briefText: "Customer Churn Analysis",
     description:
