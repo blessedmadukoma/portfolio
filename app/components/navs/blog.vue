@@ -70,7 +70,7 @@
       <h2 class="text-sm tracking-wide flex justify-between items-start">
         <p class="w-2/3 py-2">
           <span>
-            I write about software engineering, academia, AI, and startups.
+            I write about software, data, ML & AI systems, academia, and startups.
             <span class="relative inline-block font-bold">
               <svg
                 class="rough-annotation"
