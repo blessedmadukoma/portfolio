@@ -41,7 +41,7 @@
     <p
       class="text-sm tracking-wide text-gray-700 dark:text-gray-400 leading-relaxed"
     >
-      <span>
+      <!-- <span>
         I'm a product engineer with 3+ years building enterprise-scale systems,
         predictive models, and statistical solutions that improve operational
         efficiency. Currently building
@@ -52,6 +52,26 @@
           >Sedge</a
         >
         and BudgetSmart.
+      </span> -->
+      <span>
+        Product engineer focused on intelligent data systems — combining
+        distributed systems, ML, and statistical modeling to solve high-stakes
+        analytical problems. I work across Go (systems) and Python (modeling);
+        my current work focuses on sports performance
+        <a
+          class="underline text-blue-900 dark:text-blue-100 hover:text-blue-600 dark:hover:text-blue-400"
+          href="https://athletics-performance.mblessed.space"
+          target="_blank"
+        >
+          anomaly detection</a
+        >
+        (research) and
+        <a
+          href="https://sedge.app"
+          target="_blank"
+          class="underline text-blue-900 dark:text-blue-100 hover:text-blue-600 dark:hover:text-blue-400"
+          >Sedge</a
+        >, a data intelligence platform.
       </span>
       <br />
       <span>
