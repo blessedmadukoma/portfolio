@@ -42,8 +42,9 @@
       <h2 class="text-sm py-1 tracking-wide flex justify-between items-center">
         <p class="font-bold text-lg">WORK EXPERIENCE</p>
         <div class="space-x-4">
-          <a class="underline" target="_blank" href="#">Industry CV</a>
-          <a class="underline" target="_blank" href="#">Academic CV</a>
+          <!-- <a class="underline" target="_blank" href="#">Industry CV</a> -->
+          <!-- <a class="underline" target="_blank" href="#">Academic CV</a> -->
+          <a class="underline" target="_blank" href="/docs/Madukoma Blessed Resume.pdf">CV/Resume</a>
         </div>
       </h2>
       <div

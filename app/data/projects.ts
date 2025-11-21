@@ -3,8 +3,8 @@ export const PROJECTS = [
     title: "Athletics Performance Outlier Detection",
     briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
     description:
-      "A research framework comparing statistical, machine learning, and temporal methods for detecting anomalous athletic performances across track and field events. The system evaluates the accuracy of each approach using large-scale historical performance data from elite and sub-elite athletes.",
-    live: "https://sports-anomaly-detection-research.onrender.com/",
+      "Research framework comparing statistical, ML, and temporal methods to detect anomalous athletic performances across track & field events (between 2010 and 2025). The system evaluates the accuracy of each approach using large-scale historical performance data from elite and sub-elite athletes.",
+    live: "https://athletics-performance.mblessed.space",
     apiDoc: "",
     github: "",
     alt: "athletics-performance-outlier-detection",
@@ -12,12 +12,30 @@ export const PROJECTS = [
       "Python",
       "Flask",
       "PostgreSQL",
-      "XGBoost",
       "Docker",
-      "BeautifulSoup",
-      "Matplotlib",
+      "HTMX",
+      "Ansible",
     ],
   },
+  // {
+  //   title: "BudgetSmart",
+  //   briefText: "Personal Finance Management App",
+  //   description:
+  //     "A full-stack web application that helps users (myself) manage their personal finances by tracking income, expenses, and savings goals. Features include budget planning, expense categorization, and financial reporting.",
+  //   live: "",
+  //   apiDoc: "",
+  //   github: "",
+  //   alt: "athletics-performance-outlier-detection",
+  //   technologies: [
+  //     "Python",
+  //     "Flask",
+  //     "PostgreSQL",
+  //     "Docker",
+  //     "BeautifulSoup",
+  //     "BeautifulSoup",
+  //     "Ansible",
+  //   ],
+  // },
   {
     title: "Telco Customer Churn Analysis",
     briefText: "Customer Churn Analysis",
@@ -52,7 +70,7 @@ export const PROJECTS = [
     imageURL:
       "https://res.cloudinary.com/dqjowwy5k/image/upload/v1745412129/portfolio-images/gdp-aviation-trends.png",
     alt: "gdp-aviation-trends",
-    technologies: ["Python", "Pandas", "Matplotlib"],
+    technologies: ["Python", "Pandas"],
   },
   {
     title: "Go-ZeptoMail",
@@ -63,7 +81,7 @@ export const PROJECTS = [
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/go-zeptomail",
     alt: "go-zeptomail",
-    technologies: ["Go", "Email API"],
+    technologies: ["Go"],
   },
   {
     title: "ThreeThirtyOne Consulting",

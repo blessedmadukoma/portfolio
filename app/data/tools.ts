@@ -173,7 +173,22 @@ export const TOOLS = [
     name: "Flask",
     URL: "https://flask.palletsprojects.com/",
     image: "https://cdn.simpleicons.org/flask",
-  }
+  },
+  {
+    name: "XGBoost",
+    URL: "https://xgboost.ai/",
+    image: "https://cdn.simpleicons.org/xgboost",
+  },
+  {
+    name: "HTMX",
+    URL: "https://htmx.org/",
+    image: "https://cdn.simpleicons.org/htmx",
+  },
+  {
+    name: "Ansible",
+    URL: "https://www.ansible.com/",
+    image: "https://cdn.simpleicons.org/ansible",
+  },
   // {
   //   name: "VS Code",
   //   URL: "https://code.visualstudio.com/",

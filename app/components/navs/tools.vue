@@ -189,7 +189,7 @@
         "NestJS",
         "TailwindCSS",
         "ExpressJS",
-        "Laravel",
+        // "Laravel",
         // "Svelte",
       ].includes(tool.name)
     )
@@ -197,7 +197,7 @@
 
   const cloudTools = computed(() =>
     uniqueTools.filter((tool) =>
-      ["Docker", "Firebase", "GitHub Actions"].includes(tool.name)
+      ["Docker", "Firebase", "GitHub Actions", "Ansible"].includes(tool.name)
     )
   );
 
@@ -209,7 +209,7 @@
 
   const dataTools = computed(() =>
     uniqueTools.filter((tool) =>
-      ["Airflow", "Pandas", "Streamlit", "scikit-learn", "Plotly"].includes(
+      ["Airflow", "Pandas", "scikit-learn", "Plotly"].includes(
         tool.name
       )
     )
