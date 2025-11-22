@@ -19,7 +19,7 @@ export const RESEARCH_PAPERS: ResearchPaper[] = [
     authors: ["Blessed Madukoma"],
     status: "in-progress",
     abstract:
-      "Analyzing athlete performance patterns using statistical methods and machine learning to identify anomalous performances that deviate from expected norms. This research explores techniques for detecting performance outliers in sports data, helping coaches and analysts identify exceptional performances, potential injuries, or unusual patterns in athletic performance metrics.",
+      "Analyzing athlete performance patterns using statistical methods and machine learning to identify anomalous performances that deviate from expected norms. This research explores techniques for detecting performance outliers in sports data, helping coaches and analysts identify exceptional performances, potential injuries, or unusual patterns in athletic performance metrics. View here for more <a href='https://athletics-performance.mblessed.space' target='_blank' rel='noopener noreferrer'>details</a>.",
     tags: ["Machine Learning", "Sports Analytics", "Outlier Detection", "Performance Analysis"],
   },
   {
