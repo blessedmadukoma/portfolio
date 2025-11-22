@@ -64,9 +64,10 @@
           <p v-if="paper.date">{{ paper.date }}</p>
         </div>
 
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          {{ paper.abstract }}
-        </p>
+        <p
+          class="text-sm text-gray-600 dark:text-gray-400"
+          v-html="paper.abstract"
+        ></p>
 
         <div class="flex flex-wrap gap-1.5">
           <span
