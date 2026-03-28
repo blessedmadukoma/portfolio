@@ -55,14 +55,14 @@ const day = weekday[date.getDay()];
 			</div>
 
 			<!-- Right: memoji + spinning name -->
-			<div class="flex flex-col items-center mr-4 overflow-hidden h-20">
-				<div class="relative h-20 w-20">
+			<div class="flex items-end mr-4 pb-1">
+				<div class="relative w-20 h-20">
 					<img
 						src="../../assets/imgs/memoji.png"
 						alt="Memoji"
 						class="w-20 h-20 rounded-full border-2 border-zinc-200 dark:border-zinc-700"
 					/>
-					<div class="absolute -top-14 -left-5 animate-spin-slow">
+					<div class="absolute -top-[42px] -left-3.5 animate-spin-slow">
 						<icons-name width="110" />
 					</div>
 				</div>

@@ -1,221 +1,219 @@
 <template>
-  <section class="space-y-6 mt-2">
-    <!-- Languages Section -->
-    <section class="space-y-1">
-      <h2 class="font-bold">Languages</h2>
-      <div class="flex flex-wrap gap-2">
-        <a
-          v-for="tool in languageTools"
-          :key="tool.name"
-          :href="tool.URL"
-          target="_blank"
-          rel="noopener"
-          class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
-        >
-          <img
-            :src="tool.image"
-            :alt="tool.name"
-            class="w-5 h-5 object-contain"
-            loading="lazy"
-          />
-          <span
-            class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
-          >
-            {{ tool.name }}
-          </span>
-        </a>
-      </div>
-    </section>
+	<section class="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+		<!-- Languages Section -->
+		<section class="space-y-1">
+			<h2 class="font-bold">Languages</h2>
+			<div class="flex flex-wrap gap-2">
+				<a
+					v-for="tool in languageTools"
+					:key="tool.name"
+					:href="tool.URL"
+					target="_blank"
+					rel="noopener"
+					class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+				>
+					<img
+						:src="tool.image"
+						:alt="tool.name"
+						class="w-5 h-5 object-contain"
+						loading="lazy"
+					/>
+					<span
+						class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+					>
+						{{ tool.name }}
+					</span>
+				</a>
+			</div>
+		</section>
 
-    <!-- Frameworks & Libraries Section -->
-    <section class="space-y-1">
-      <h2 class="font-bold">Frameworks & Libraries</h2>
-      <div class="flex flex-wrap gap-2">
-        <a
-          v-for="tool in frameworkTools"
-          :key="tool.name"
-          :href="tool.URL"
-          target="_blank"
-          rel="noopener"
-          class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
-        >
-          <img
-            :src="tool.image"
-            :alt="tool.name"
-            class="w-5 h-5 object-contain"
-            loading="lazy"
-          />
-          <span
-            class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
-          >
-            {{ tool.name }}
-          </span>
-        </a>
-      </div>
-    </section>
+		<!-- Frameworks & Libraries Section -->
+		<section class="space-y-1">
+			<h2 class="font-bold">Frameworks & Libraries</h2>
+			<div class="flex flex-wrap gap-2">
+				<a
+					v-for="tool in frameworkTools"
+					:key="tool.name"
+					:href="tool.URL"
+					target="_blank"
+					rel="noopener"
+					class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+				>
+					<img
+						:src="tool.image"
+						:alt="tool.name"
+						class="w-5 h-5 object-contain"
+						loading="lazy"
+					/>
+					<span
+						class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+					>
+						{{ tool.name }}
+					</span>
+				</a>
+			</div>
+		</section>
 
-    <!-- Cloud & Infrastructure Section -->
-    <section class="space-y-1">
-      <h2 class="font-bold">Cloud & Infrastructure</h2>
-      <div class="flex flex-wrap gap-2">
-        <a
-          v-for="tool in cloudTools"
-          :key="tool.name"
-          :href="tool.URL"
-          target="_blank"
-          rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
-        >
-          <img
-            :src="tool.image"
-            :alt="tool.name"
-            class="w-5 h-5 object-contain"
-            loading="lazy"
-          />
-          <span
-            class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
-          >
-            {{ tool.name }}
-          </span>
-        </a>
-      </div>
-    </section>
+		<!-- Cloud & Infrastructure Section -->
+		<section class="space-y-1">
+			<h2 class="font-bold">Cloud & Infrastructure</h2>
+			<div class="flex flex-wrap gap-2">
+				<a
+					v-for="tool in cloudTools"
+					:key="tool.name"
+					:href="tool.URL"
+					target="_blank"
+					rel="noopener"
+					class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+				>
+					<img
+						:src="tool.image"
+						:alt="tool.name"
+						class="w-5 h-5 object-contain"
+						loading="lazy"
+					/>
+					<span
+						class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+					>
+						{{ tool.name }}
+					</span>
+				</a>
+			</div>
+		</section>
 
-    <!-- Databases Section -->
-    <section class="space-y-1">
-      <h2 class="font-bold">Databases</h2>
-      <div class="flex flex-wrap gap-2">
-        <a
-          v-for="tool in databaseTools"
-          :key="tool.name"
-          :href="tool.URL"
-          target="_blank"
-          rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
-        >
-          <img
-            :src="tool.image"
-            :alt="tool.name"
-            class="w-5 h-5 object-contain"
-            loading="lazy"
-          />
-          <span
-            class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
-          >
-            {{ tool.name }}
-          </span>
-        </a>
-      </div>
-    </section>
+		<!-- Databases Section -->
+		<section class="space-y-1">
+			<h2 class="font-bold">Databases</h2>
+			<div class="flex flex-wrap gap-2">
+				<a
+					v-for="tool in databaseTools"
+					:key="tool.name"
+					:href="tool.URL"
+					target="_blank"
+					rel="noopener"
+					class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+				>
+					<img
+						:src="tool.image"
+						:alt="tool.name"
+						class="w-5 h-5 object-contain"
+						loading="lazy"
+					/>
+					<span
+						class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+					>
+						{{ tool.name }}
+					</span>
+				</a>
+			</div>
+		</section>
 
-    <!-- Data Science & ML Section -->
-    <section class="space-y-1">
-      <h2 class="font-bold">Data Science & ML</h2>
-      <div class="flex flex-wrap gap-2">
-        <a
-          v-for="tool in dataTools"
-          :key="tool.name"
-          :href="tool.URL"
-          target="_blank"
-          rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
-        >
-          <img
-            :src="tool.image"
-            :alt="tool.name"
-            class="w-5 h-5 object-contain"
-            loading="lazy"
-          />
-          <span
-            class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
-          >
-            {{ tool.name }}
-          </span>
-        </a>
-      </div>
-    </section>
+		<!-- Data Science & ML Section -->
+		<section class="space-y-1">
+			<h2 class="font-bold">Data Science & ML</h2>
+			<div class="flex flex-wrap gap-2">
+				<a
+					v-for="tool in dataTools"
+					:key="tool.name"
+					:href="tool.URL"
+					target="_blank"
+					rel="noopener"
+					class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+				>
+					<img
+						:src="tool.image"
+						:alt="tool.name"
+						class="w-5 h-5 object-contain"
+						loading="lazy"
+					/>
+					<span
+						class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+					>
+						{{ tool.name }}
+					</span>
+				</a>
+			</div>
+		</section>
 
-    <!-- Development Tools Section -->
-    <section class="space-y-1">
-      <h2 class="font-bold">Development Tools</h2>
-      <div class="flex flex-wrap gap-2">
-        <a
-          v-for="tool in devTools"
-          :key="tool.name"
-          :href="tool.URL"
-          target="_blank"
-          rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
-        >
-          <img
-            :src="tool.image"
-            :alt="tool.name"
-            class="w-5 h-5 object-contain"
-            loading="lazy"
-          />
-          <span
-            class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
-          >
-            {{ tool.name }}
-          </span>
-        </a>
-      </div>
-    </section>
-  </section>
+		<!-- Development Tools Section -->
+		<section class="space-y-1">
+			<h2 class="font-bold">Development Tools</h2>
+			<div class="flex flex-wrap gap-2">
+				<a
+					v-for="tool in devTools"
+					:key="tool.name"
+					:href="tool.URL"
+					target="_blank"
+					rel="noopener"
+					class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+				>
+					<img
+						:src="tool.image"
+						:alt="tool.name"
+						class="w-5 h-5 object-contain"
+						loading="lazy"
+					/>
+					<span
+						class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+					>
+						{{ tool.name }}
+					</span>
+				</a>
+			</div>
+		</section>
+	</section>
 </template>
 
 <script lang="ts" setup>
-  import { TOOLS } from "~/data/tools";
+import { TOOLS } from "~/data/tools";
 
-  // Remove duplicates by name
-  const uniqueTools = TOOLS.filter(
-    (tool, index, self) => index === self.findIndex((t) => t.name === tool.name)
-  );
+// Remove duplicates by name
+const uniqueTools = TOOLS.filter(
+	(tool, index, self) => index === self.findIndex((t) => t.name === tool.name),
+);
 
-  // Categorize tools
-  const languageTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["Go", "Python", "Javascript", "Typescript", "PHP"].includes(tool.name)
-    )
-  );
+// Categorize tools
+const languageTools = computed(() =>
+	uniqueTools.filter((tool) =>
+		["Go", "Python", "Javascript", "Typescript", "PHP"].includes(tool.name),
+	),
+);
 
-  const frameworkTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      [
-        "VueJS",
-        "Nuxt",
-        "React",
-        "NextJS",
-        "NestJS",
-        "TailwindCSS",
-        "ExpressJS",
-        // "Laravel",
-        // "Svelte",
-      ].includes(tool.name)
-    )
-  );
+const frameworkTools = computed(() =>
+	uniqueTools.filter((tool) =>
+		[
+			"VueJS",
+			"Nuxt",
+			"React",
+			"NextJS",
+			"NestJS",
+			"TailwindCSS",
+			"ExpressJS",
+			// "Laravel",
+			// "Svelte",
+		].includes(tool.name),
+	),
+);
 
-  const cloudTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["Docker", "Firebase", "GitHub Actions", "Ansible"].includes(tool.name)
-    )
-  );
+const cloudTools = computed(() =>
+	uniqueTools.filter((tool) =>
+		["Docker", "Firebase", "GitHub Actions", "Ansible"].includes(tool.name),
+	),
+);
 
-  const databaseTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["PostgreSQL", "MySQL", "MongoDB", "Redis"].includes(tool.name)
-    )
-  );
+const databaseTools = computed(() =>
+	uniqueTools.filter((tool) =>
+		["PostgreSQL", "MySQL", "MongoDB", "Redis"].includes(tool.name),
+	),
+);
 
-  const dataTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["Airflow", "Pandas", "scikit-learn", "Plotly"].includes(
-        tool.name
-      )
-    )
-  );
+const dataTools = computed(() =>
+	uniqueTools.filter((tool) =>
+		["Airflow", "Pandas", "scikit-learn", "Plotly"].includes(tool.name),
+	),
+);
 
-  const devTools = computed(() =>
-    uniqueTools.filter((tool) => ["Git", "NodeJS"].includes(tool.name))
-  );
+const devTools = computed(() =>
+	uniqueTools.filter((tool) => ["Git", "NodeJS"].includes(tool.name)),
+);
 </script>
