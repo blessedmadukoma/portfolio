@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 body {
-  font-family: Menlo, monospace;
-  letter-spacing: -0.03em;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @keyframes spin-slow {
