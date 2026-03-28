@@ -10,6 +10,7 @@ const weekday = [
 ];
 const date = new Date();
 const day = weekday[date.getDay()];
+const year = date.getFullYear();
 </script>
 
 <template>
@@ -25,7 +26,7 @@ const day = weekday[date.getDay()];
 					rel="noopener noreferrer"
 					class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
 				>
-					mblessed.space
+					mblessed.space &copy; {{ year }}
 				</a>
 				<p>
 					Have a wonderful
