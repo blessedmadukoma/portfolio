@@ -1,89 +1,80 @@
 <script lang="ts" setup>
-  import { PROJECTS } from "~/data/projects";
-  import { TOOLS } from "~/data/tools";
+import { PROJECTS } from "~/data/projects";
+import { TOOLS } from "~/data/tools";
 
-  const projects = ref(PROJECTS);
-  const tools = ref(TOOLS);
+const projects = ref(PROJECTS);
+const tools = ref(TOOLS);
+
+type Tool = (typeof TOOLS)[number];
+
+const findTool = (tech: string) =>
+	tools.value.find((t: Tool) => t.name.toLowerCase() === tech.toLowerCase());
 </script>
+
 <template>
-  <section class="space-y-3 mt-4">
-    <!-- <h2 class="text-sm tracking-wide">
-      <span class="font-bold">Why I build: </span>
-      <span
-        >I build because... For more projects, visit my
-        <a
-          class="underline"
-          target="_blank"
-          href="https://github.com/blessemadukoma"
-          >GitHub</a
-        ></span
-      >
-    </h2> -->
+	<section class="mt-4">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			<div
+				v-for="(project, id) in projects"
+				:key="id"
+				class="group p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:shadow-lg hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 ease-out"
+			>
+				<!-- Title + links -->
+				<div class="flex items-start justify-between mb-2">
+					<h3
+						class="text-sm font-medium text-zinc-900 dark:text-zinc-100 leading-snug"
+					>
+						{{ project.title }}
+					</h3>
+					<div
+						class="flex flex-row gap-2 text-xs text-zinc-500 dark:text-zinc-400 flex-shrink-0 ml-3"
+					>
+						<a
+							v-if="project.github"
+							:href="project.github"
+							target="_blank"
+							rel="noopener"
+							class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+						>
+							GitHub
+						</a>
+						<a
+							v-if="project.live"
+							:href="project.live"
+							target="_blank"
+							rel="noopener"
+							class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+						>
+							Live
+						</a>
+					</div>
+				</div>
 
-    <div
-      v-for="(project, id) in projects"
-      :key="id"
-      class="space-y-1 flex items-start space-x-3 py-2 rounded-lg"
-    >
-      <ui-img :img-url="project.imageURL" />
+				<!-- Description -->
+				<p
+					class="text-sm text-zinc-500 dark:text-zinc-400 mb-4 leading-relaxed"
+				>
+					{{ project.description }}
+				</p>
 
-      <div class="px-2 space-y-2">
-        <div class="flex justify-between items-center">
-          <h3 class="text-[15px] font-semibold">
-            {{ project.title }}
-          </h3>
-
-          <p class="text-xs text-gray-500 dark:text-gray-400 space-x-2">
-            <span v-if="project.github">
-              <a
-                :href="project.github"
-                target="_blank"
-                rel="noopener"
-                class="underline hover:text-gray-600 dark:hover:text-gray-300"
-                >GitHub</a
-              >
-            </span>
-            <span v-if="project.live">
-              <a
-                :href="project.live"
-                target="_blank"
-                rel="noopener"
-                class="underline hover:text-gray-600 dark:hover:text-gray-300"
-                >Live</a
-              >
-            </span>
-          </p>
-        </div>
-
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          {{ project.description }}
-        </p>
-
-        <p class="text-xs text-gray-600 dark:text-gray-300">
-          <span v-for="(tech, idx) in project.technologies" :key="tech">
-            <template
-              v-if="
-                tools.find((t) => t.name.toLowerCase() === tech.toLowerCase())
-              "
-            >
-              <img
-                :src="
-                  tools.find((t) => t.name.toLowerCase() === tech.toLowerCase())
-                    ?.image
-                "
-                alt="Tool Image"
-                class="inline-block w-4 h-4"
-              />
-              {{ tech }}
-            </template>
-            <template v-else>
-              {{ tech }}
-            </template>
-            <span v-if="idx < project.technologies.length - 1">, </span>
-          </span>
-        </p>
-      </div>
-    </div>
-  </section>
+				<!-- Tech tags -->
+				<div class="flex flex-wrap gap-2">
+					<span
+						v-for="tech in project.technologies"
+						:key="tech"
+						class="inline-flex items-center gap-1 text-xs text-zinc-400 dark:text-zinc-500"
+					>
+						<img
+							v-if="findTool(tech)"
+							:src="findTool(tech)?.image"
+							:alt="tech"
+							class="w-3 h-3 object-contain"
+							loading="lazy"
+						/>
+						{{ tech }}
+					</span>
+				</div>
+			</div>
+		</div>
+	</section>
 </template>
-Projects

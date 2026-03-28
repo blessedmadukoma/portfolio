@@ -28,18 +28,23 @@
 
 <template>
   <section>
-    <nav class="text-[15px]">
-      <ul class="flex space-x-10">
+    <nav aria-label="Portfolio sections">
+      <ul
+        class="inline-flex h-10 w-full lg:w-fit items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-1 gap-1"
+        role="tablist"
+      >
         <li
           v-for="(component, key) in NavBarComponents"
           :key="key"
           @click="setActiveTab(key, component)"
           :class="[
-            'capitalize cursor-pointer transition-colors duration-200',
+            'px-3 py-1 text-sm rounded-md capitalize cursor-pointer transition-all duration-300 ease-out',
             activeTabKey === String(key)
-              ? 'text-black dark:text-white font-semibold'
-              : 'text-gray-500 hover:text-gray-500 dark:hover:text-gray-300',
+              ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm font-medium'
+              : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100',
           ]"
+          role="tab"
+          :aria-selected="activeTabKey === String(key)"
         >
           {{ key }}
         </li>

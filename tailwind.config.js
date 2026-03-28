@@ -13,14 +13,11 @@ const config = {
   theme: {
     extend: {
       colors: {
-        "primary-blue": "#0A092C",
-        secondary: "#64748b",
-        accent: "#f59e42",
-        background: "#f8fafc",
-        foreground: "#0f172a",
-        muted: "#e2e8f0",
         white: "#ffffff",
         black: "#000000",
+      },
+      fontFamily: {
+        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
       },
     },
   },
