@@ -67,39 +67,6 @@
       </span>
     </p>
 
-    <!-- <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-      <span>
-        Product engineer focused on intelligent data systems: combining data
-        systems, ML, and statistical modeling to solve high-stakes analytical
-        problems. I work across Go (systems) and Python (modeling); my current
-        work focuses on sports performance
-        <a
-          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
-          href="https://athletics-performance.mblessed.space"
-          target="_blank"
-        >
-          anomaly detection</a
-        >
-        (research) and
-        <a
-          href="https://sedge.app"
-          target="_blank"
-          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
-          >Sedge</a
-        >, a data intelligence platform.
-      </span>
-      <br />
-      <span>
-        Interested in my research philosophy?
-        <button
-          @click="showModal = true"
-          class="ml-1 underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
-        >
-          View my research statement
-        </button>
-      </span>
-    </p> -->
-
     <ui-research-statement v-if="showModal" @close="showModal = false" />
   </section>
 </template>
