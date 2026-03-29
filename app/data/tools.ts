@@ -175,6 +175,16 @@ export const TOOLS = [
     image: "https://cdn.simpleicons.org/flask",
   },
   {
+    name: "FastAPI",
+    URL: "https://fastapi.tiangolo.com/",
+    image: "https://cdn.simpleicons.org/fastapi",
+  },
+  {
+    name: "DuckDB",
+    URL: "https://duckdb.org/",
+    image: "https://cdn.simpleicons.org/duckdb",
+  },
+  {
     name: "XGBoost",
     URL: "https://xgboost.ai/",
     image: "https://cdn.simpleicons.org/xgboost",
