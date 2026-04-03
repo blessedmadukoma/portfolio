@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-const colorMode = useColorMode();
-watch(colorMode, () => {}, { immediate: true });
-
 defineProps<{
 	width: string;
 }>();
@@ -11,7 +8,7 @@ defineProps<{
 	<div>
 		<!-- DARK MODE - Larger SVG -->
 		<svg
-			v-if="colorMode.value === 'dark'"
+			class="hidden dark:block"
 			:width="width"
 			:height="width"
 			viewBox="0 0 164 164"
@@ -143,7 +140,7 @@ defineProps<{
 
 		<!-- LIGHT MODE - Smaller SVG -->
 		<svg
-			v-else
+			class="dark:hidden"
 			:width="width"
 			:height="width"
 			viewBox="0 0 70 70"

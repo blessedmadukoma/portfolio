@@ -85,7 +85,7 @@ onBeforeUnmount(() => {
 						class="w-10 h-10 md:w-20 md:h-20 rounded-full border-2 border-zinc-200 dark:border-zinc-700"
 					/>
 					<div
-						class="absolute -top-[61px] -left-2.5 md:-top-[15px] md:-left-[15px] animate-spin-slow"
+						class="absolute -top-2.5 -left-2.5 md:-top-[15px] md:-left-[15px] animate-spin-slow"
 					>
 						<icons-name :width="String(iconWidth)" />
 					</div>

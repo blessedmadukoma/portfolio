@@ -56,54 +56,57 @@ const toggleEducationDropdown = (id: number) => {
 				@click="toggleWorkDropdown(id)"
 			>
 				<div
-					class="flex flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer"
+					class="flex items-start space-x-3 py-2 tracking-wide group cursor-pointer"
 				>
-					<div class="pr-2 flex space-x-4">
+					<div class="pr-2 flex space-x-4 flex-1">
 						<ui-img :img-url="experience.imageURL" />
 
-						<div class="space-y-1">
-							<h3 class="font-semibold">
-								<p
-									class="group-hover:underline text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
-								>
-									<a
-										:href="experience.link"
-										target="_blank"
-										rel="noopener"
-										@click.stop
+						<div class="space-y-1 flex-1">
+							<div class="flex justify-between items-center">
+								<h3 class="font-semibold text-sm md:text-base">
+									<p
+										class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
 									>
-										{{ experience.company }}
-									</a>
-									<span
-										class="transition-transform duration-200 group-hover:rotate-90"
-									>
-										<svg
-											class="inline w-4 h-4 text-zinc-400"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											viewBox="0 0 16 16"
+										{{ experience.position }}
+										<span
+											class="transition-transform duration-200 group-hover:rotate-90"
 										>
-											<path
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												d="M6 4l4 4-4 4"
-											/>
-										</svg>
-									</span>
+											<svg
+												class="inline w-4 h-4 text-zinc-400"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												viewBox="0 0 16 16"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													d="M6 4l4 4-4 4"
+												/>
+											</svg>
+										</span>
+									</p>
+								</h3>
+								<p
+									class="text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap"
+								>
+									{{ experience.startDate }} —
+									{{ experience.endDate ? experience.endDate : "Present" }}
 								</p>
-							</h3>
-							<p class="block text-sm text-zinc-500 dark:text-zinc-400">
-								{{ experience.position }}
+							</div>
+							<p class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300">
+								<a
+									:href="experience.link"
+									target="_blank"
+									rel="noopener"
+									class="group-hover:underline group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
+									@click.stop
+								>
+									{{ experience.company }}
+								</a>
 							</p>
 						</div>
 					</div>
-					<p
-						class="block text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap"
-					>
-						{{ experience.startDate }} —
-						{{ experience.endDate ? experience.endDate : "Present" }}
-					</p>
 				</div>
 
 				<Transition name="expand">
@@ -170,7 +173,7 @@ const toggleEducationDropdown = (id: number) => {
 							class="w-16 h-16 rounded-md object-contain"
 						/>
 						<div class="space-y-2">
-							<h3 class="font-semibold">
+							<h3 class="font-semibold text-sm md:text-base">
 								<p
 									class="group-hover:underline text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
 								>
@@ -201,7 +204,7 @@ const toggleEducationDropdown = (id: number) => {
 									</span>
 								</p>
 							</h3>
-							<p class="block text-sm text-zinc-500 dark:text-zinc-400">
+							<p class="block text-xs md:text-sm text-zinc-500 dark:text-zinc-400">
 								<span>{{ education.degree }}</span>
 								<span v-if="education.grade">
 									<span class="text-zinc-400 mx-1">•</span>

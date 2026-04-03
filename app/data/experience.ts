@@ -55,7 +55,7 @@ export const WORK_EXPERIENCE = [
       "Migrated African datasets hosting platform to Tailwind CSS, reducing bundle size by 30%. Optimized platform performance using Redux, reducing load time by 40%.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/imgs/cylab.png",
-    link: "https://upanzinetwork.org",
+    link: "https://cylab-africa.github.io/",
     workRoles: [
       "Migrated African <a href='https://data.upanzi.net/' target='_blank' style='text-decoration: underline; color: #60a5fa;'>datasets hosting platform</a> to Tailwind CSS, reducing bundle size by 30%, improving customization, increasing development speed by 25%, and ensuring data privacy standards while maintaining sensitive datasets.",
       "Optimized platform performance using Redux, reducing load time by 40%, minimizing database queries and improving user experience.",

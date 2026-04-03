@@ -162,9 +162,9 @@
           @click="togglePostDropdown(id)"
         >
           <div
-            class="flex flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer"
+            class="flex items-start space-x-3 py-2 tracking-wide group cursor-pointer"
           >
-            <div class="px-2 flex space-x-4">
+            <div class="px-2 flex space-x-4 flex-1 min-w-0">
               <div
                 class="w-16 h-16 rounded-md overflow-hidden bg-zinc-100 dark:bg-zinc-800 flex-shrink-0"
               >
@@ -194,39 +194,46 @@
                 </div>
               </div>
 
-              <div class="space-y-1 flex-1">
-                <h3 class="font-medium text-sm">
-                  <span
-                    class="group-hover:underline text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
-                  >
-                    <a
-                      :href="`https://mblessed.hashnode.dev/${post.node.slug}`"
-                      target="_blank"
-                      rel="noopener"
-                      class="line-clamp-1"
-                      @click.stop
-                    >
-                      {{ post.node.title }}
-                    </a>
+              <div class="space-y-1 flex-1 min-w-0">
+                <div class="flex justify-between items-start gap-2">
+                  <h3 class="font-medium text-sm min-w-0 flex-1">
                     <span
-                      class="transition-transform duration-200 group-hover:rotate-90 flex-shrink-0"
+                      class="group-hover:underline text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
                     >
-                      <svg
-                        class="inline w-4 h-4 text-zinc-400"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        viewBox="0 0 16 16"
+                      <a
+                        :href="`https://mblessed.hashnode.dev/${post.node.slug}`"
+                        target="_blank"
+                        rel="noopener"
+                        class="line-clamp-1"
+                        @click.stop
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M6 4l4 4-4 4"
-                        />
-                      </svg>
+                        {{ post.node.title }}
+                      </a>
+                      <span
+                        class="transition-transform duration-200 group-hover:rotate-90 flex-shrink-0"
+                      >
+                        <svg
+                          class="inline w-4 h-4 text-zinc-400"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 4l4 4-4 4"
+                          />
+                        </svg>
+                      </span>
                     </span>
-                  </span>
-                </h3>
+                  </h3>
+                  <p
+                    class="hidden md:block text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap flex-shrink-0"
+                  >
+                    {{ formatDate(post.node.publishedAt) }}
+                  </p>
+                </div>
                 <p
                   class="block text-sm text-zinc-500 dark:text-zinc-400 line-clamp-1"
                 >
@@ -237,16 +244,15 @@
                     truncateText(post.node.brief, 80)
                   }}</span>
                 </p>
-                <p class="block text-xs text-zinc-400 dark:text-zinc-500">
-                  {{ post.node.views.toLocaleString() }} reads
-                </p>
+                <div class="flex justify-between items-center">
+                  <p class="text-xs text-zinc-400 dark:text-zinc-500">
+                    {{ post.node.views.toLocaleString() }} reads
+                  </p>
+                  <p class="md:hidden text-xs text-zinc-500 dark:text-zinc-400">
+                    {{ formatDate(post.node.publishedAt) }}
+                  </p>
+                </div>
               </div>
-            </div>
-
-            <div class="text-right flex-shrink-0">
-              <p class="block text-xs text-zinc-500 dark:text-zinc-400">
-                {{ formatDate(post.node.publishedAt) }}
-              </p>
             </div>
           </div>
 
