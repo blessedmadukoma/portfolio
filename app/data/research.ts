@@ -15,11 +15,19 @@ export interface ResearchPaper {
 
 export const RESEARCH_PAPERS: ResearchPaper[] = [
   {
-    title: "Performance Outlier Detection in Sports",
-    authors: ["Blessed Madukoma"],
-    status: "in-progress",
+    title:
+      "Performance Anomaly Detection in Athletics: A Benchmarking System with Visual Analytics",
+    authors: ["Blessed Madukoma", "Prasenjit Mitra"],
+    status: "published",
+    // venue: "IEEE SDS 2026 (Poster)",
+    conference: "IEEE Swiss Conference on Data Science and AI (SDS2026)",
+    location: "Zurich, Switzerland",
+    date: "May 06-07 2026",
+    year: 2026,
     abstract:
       "Analyzing athlete performance patterns using statistical methods and machine learning to identify anomalous performances that deviate from expected norms. This research explores techniques for detecting performance outliers in sports data, helping coaches and analysts identify exceptional performances, potential injuries, or unusual patterns in athletic performance metrics. View <a href='https://athletics-performance.mblessed.space' target='_blank' rel='noopener noreferrer' style='text-decoration: underline; color: #60a5fa;'>here</a> for the project website.",
+    pdfUrl: "https://arxiv.org/pdf/2604.21953",
+    arxivUrl: "https://arxiv.org/abs/2604.21953",
     tags: [
       "Machine Learning",
       "Sports Analytics",
@@ -32,8 +40,9 @@ export const RESEARCH_PAPERS: ResearchPaper[] = [
       "Unmasking COVID-19 Vulnerability in Nigeria: Mapping Risks Beyond Urban Hotspots",
     authors: ["Sheila Wafula", "Blessed Madukoma"],
     status: "published",
-    venue: "Women in Machine Learning Workshop @ NeurIPS 2025",
-    conference: "NeurIPS 2025 WiML Workshop",
+    // venue: "Women in Machine Learning Workshop @ NeurIPS 2025",
+    conference: "Women in Machine Learning Workshop @ NeurIPS 2025",
+    // conference: "NeurIPS 2025 WiML Workshop",
     location: "San Diego, California, United States",
     date: "Dec 01 2025",
     year: 2025,

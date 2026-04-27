@@ -21,7 +21,9 @@
     >
       <!-- Title + status badge -->
       <div class="flex justify-between items-start gap-3">
-        <h3 class="text-sm font-medium text-zinc-900 dark:text-zinc-100 flex-1 leading-snug">
+        <h3
+          class="text-sm font-medium text-zinc-900 dark:text-zinc-100 flex-1 leading-snug"
+        >
           {{ paper.title }}
           <span v-if="paper.arxivUrl">
             [<a
@@ -49,21 +51,35 @@
       </div>
 
       <!-- Authors -->
-      <p class="text-xs text-zinc-500 dark:text-zinc-400 italic">
-        {{ paper.authors.join(", ") }}
+      <p class="text-xs text-zinc-500 dark:text-zinc-400 italic !mt-1">
+        <template v-for="(author, idx) in paper.authors" :key="idx">
+          <strong
+            v-if="author === 'Blessed Madukoma'"
+            class="font-semibold text-zinc-700 dark:text-zinc-300"
+            >*{{ author }}</strong
+          >
+          <span v-else>{{ author }}</span>
+          <span v-if="idx < paper.authors.length - 1">, </span>
+        </template>
       </p>
 
       <!-- Venue (published only) -->
-      <div v-if="paper.status === 'published'" class="text-xs text-zinc-500 dark:text-zinc-400">
+      <div
+        v-if="paper.status === 'published'"
+        class="text-xs text-zinc-500 dark:text-zinc-400"
+      >
         <p>
-          <span class="font-medium">{{ paper.venue }}</span>
+          <span class="font-medium">{{ paper.conference }}</span>
           <span v-if="paper.location"> · {{ paper.location }}</span>
+          <span v-if="paper.date"> · {{ paper.date }}.</span>
         </p>
-        <p v-if="paper.date">{{ paper.date }}</p>
       </div>
 
       <!-- Abstract -->
-      <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed" v-html="paper.abstract"></p>
+      <p
+        class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
+        v-html="paper.abstract"
+      ></p>
 
       <!-- Tags -->
       <div class="flex flex-wrap gap-1.5">
@@ -77,12 +93,12 @@
       </div>
 
       <!-- PDF link -->
-      <div v-if="paper.pdfUrl" class="text-xs">
+      <div v-if="paper.pdfUrl">
         <a
           :href="paper.pdfUrl"
           target="_blank"
           rel="noopener"
-          class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:underline transition-colors"
+          class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
         >
           View Paper →
         </a>

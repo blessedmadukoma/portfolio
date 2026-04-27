@@ -245,9 +245,9 @@
                   }}</span>
                 </p>
                 <div class="flex justify-between items-center">
-                  <!-- <p class="text-xs text-zinc-400 dark:text-zinc-500">
+                  <p class="text-xs text-zinc-400 dark:text-zinc-500">
                     {{ post.node.views.toLocaleString() }} reads
-                  </p> -->
+                  </p>
                   <p class="md:hidden text-xs text-zinc-500 dark:text-zinc-400">
                     {{ formatDate(post.node.publishedAt) }}
                   </p>
