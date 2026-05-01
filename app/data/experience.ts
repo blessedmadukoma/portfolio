@@ -15,7 +15,7 @@ export const WORK_EXPERIENCE = [
     ],
   },
   {
-    company: "Infrastructure Ministry (MININFRA)",
+    company: "Rwanda's Ministry of Infrastructure (MININFRA)",
     position: "Product Engineer (Contract)",
     startDate: "May 2025",
     endDate: "Sep 2025",
@@ -91,7 +91,7 @@ export const WORK_EXPERIENCE = [
     link: "https://21ctl.com",
     workRoles: [
       "Implemented Continuous Integration and Continuous Deployment (CI/CD) pipelines to improve software deployment by 70%, reducing release times by 40% and achieving faster resolution times by 10%, saving costs by 40%.",
-      "Engineered data and machine learning pipelines, ensuring 99.99% uptime by orchestrating DNS service restoration across Tier III and IV data centers, reducing downtime by swiftly implementing failover protocols, and enhancing system reliability. ",
+      "Engineered data pipelines, ensuring 99.99% uptime by orchestrating DNS service restoration across Tier III and IV data centers, reducing downtime by swiftly implementing failover protocols, and enhancing system reliability. ",
       "Delivered a detailed report system integrating data visualization dashboards and communication feedback loops between teams and managers, improving management decision-making and customer satisfaction by 45%.",
     ],
   },
