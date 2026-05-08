@@ -34,27 +34,25 @@
     <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
       <span>
         Systems-focused software engineer
-        <b>building reliable and observable data systems</b>. I work across Go
-        (systems) and Python (modeling), designing pipelines and infrastructure
-        that make complex data measurable, trustworthy, and operational in
-        production environments. My current work focuses on athletics
-        performance
+        <b>building reliable, observable data systems</b>. I work across Go and
+        Python, designing infrastructure and pipelines that make complex data
+        measurable, trustworthy, and operational in production. Current work
+        includes athletics performance
         <a
           class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
           href="https://athletics-performance.mblessed.space"
           target="_blank"
+          >anomaly detection</a
         >
-          anomaly detection</a
-        >
-        (research) and
+        research and
         <a
           href="https://sedge.app"
           target="_blank"
           class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
           >Sedge</a
-        >
-        (data-intelligence platform) for building observable data products.
+        >, a data-intelligence platform for observable data products.
       </span>
+
       <br />
       <span>
         Interested in how systems behave after deployment?

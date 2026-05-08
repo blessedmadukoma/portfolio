@@ -24,8 +24,10 @@ export const RESEARCH_PAPERS: ResearchPaper[] = [
     location: "Zurich, Switzerland",
     date: "May 06-07 2026",
     year: 2026,
+    // abstract:
+    //   "Analyzing athlete performance patterns using statistical methods and machine learning to identify anomalous performances that deviate from expected norms. This research explores techniques for detecting performance outliers in sports data, helping coaches and analysts identify exceptional performances, or unusual patterns in athletic performance metrics. View <a href='https://athletics-performance.mblessed.space' target='_blank' rel='noopener noreferrer' style='text-decoration: underline; color: #60a5fa;'>here</a> for the project website.",
     abstract:
-      "Analyzing athlete performance patterns using statistical methods and machine learning to identify anomalous performances that deviate from expected norms. This research explores techniques for detecting performance outliers in sports data, helping coaches and analysts identify exceptional performances, potential injuries, or unusual patterns in athletic performance metrics. View <a href='https://athletics-performance.mblessed.space' target='_blank' rel='noopener noreferrer' style='text-decoration: underline; color: #60a5fa;'>here</a> for the project website.",
+      "Research on detecting anomalous athletic performances using statistical and machine learning methods to identify deviations from expected patterns in sports data. The work received an <b>Honorable Mention Full Paper Award</b> and explores techniques for identifying exceptional performances, and unusual athlete trends. View <a href='https://athletics-performance.mblessed.space' target='_blank' rel='noopener noreferrer' style='text-decoration: underline; color: #60a5fa;'>here</a> for the project website.",
     pdfUrl: "https://arxiv.org/pdf/2604.21953",
     arxivUrl: "https://arxiv.org/abs/2604.21953",
     tags: [

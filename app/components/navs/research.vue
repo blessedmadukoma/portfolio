@@ -51,7 +51,7 @@
       </div>
 
       <!-- Authors -->
-      <p class="text-xs text-zinc-500 dark:text-zinc-400 italic !mt-1">
+      <p class="text-xs text-zinc-500 dark:text-zinc-400 italic !mt-0.5">
         <template v-for="(author, idx) in paper.authors" :key="idx">
           <strong
             v-if="author === 'Blessed Madukoma'"
@@ -66,7 +66,7 @@
       <!-- Venue (published only) -->
       <div
         v-if="paper.status === 'published'"
-        class="text-xs text-zinc-500 dark:text-zinc-400"
+        class="text-xs text-zinc-500 dark:text-zinc-400 !mt-2"
       >
         <p>
           <span class="font-medium">{{ paper.conference }}</span>
@@ -77,7 +77,7 @@
 
       <!-- Abstract -->
       <p
-        class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
+        class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed !mt-1"
         v-html="paper.abstract"
       ></p>
 

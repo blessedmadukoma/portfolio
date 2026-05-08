@@ -3,7 +3,7 @@ export const PROJECTS = [
     title: "Athletics Performance Outlier Detection",
     briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
     description:
-      "Research framework comparing statistical, ML, and temporal methods to detect anomalous athletic performances across track & field events (between 2010 and 2025). The system evaluates the accuracy of each approach using large-scale historical performance data from elite and sub-elite athletes.",
+      "Research framework comparing statistical, ML, and temporal methods for detecting anomalous athletic performances across track events (2010 to 2025). Each approach is evaluated using large-scale historical data from elite and sub-elite athletes.",
     live: "https://athletics-performance.mblessed.space",
     apiDoc: "",
     github: "",
