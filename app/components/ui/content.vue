@@ -12,7 +12,7 @@
     <div
       class="sticky top-0 z-10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm pb-1 border-b border-zinc-200 dark:border-zinc-700"
     >
-      <div class="overflow-x-auto overflow-y-hidden whitespace-nowrap">
+      <div class="overflow-x-auto">
         <ui-navbar @update:activeTab="setActiveTab" />
       </div>
     </div>
