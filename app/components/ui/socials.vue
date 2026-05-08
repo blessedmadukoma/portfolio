@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-5">
+  <div class="flex items-center gap-x-2">
     <a
       href="mailto:blessedmadukoma@gmail.com"
       target="_blank"
@@ -25,6 +25,15 @@
       aria-label="LinkedIn profile"
     >
       <icons-linkedin />
+    </a>
+    <a
+      href="https://mblessed.hashnode.dev/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+      aria-label="Hashnode profile"
+    >
+      <icons-writing />
     </a>
   </div>
 </template>
