@@ -1,6 +1,6 @@
 <template>
-  <section class="flex flex-col h-full py-2 space-y-8">
-    <section class="space-y-3 flex-shrink-0">
+  <section class="flex flex-col h-full py-2 space-y-4">
+    <section class="space-y-1 flex-shrink-0">
       <ui-hero />
       <ui-socials />
     </section>
@@ -15,7 +15,9 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
+  useBlogPosts();
+
   useHead({
     title: "Blessed Madukoma | Portfolio",
     meta: [
