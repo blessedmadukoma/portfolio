@@ -5,7 +5,7 @@
       <ui-socials />
     </section>
 
-    <section class="flex-1 overflow-y-auto">
+    <section class="flex-1 flex flex-col min-h-0">
       <ui-content />
     </section>
 

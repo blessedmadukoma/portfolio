@@ -1,19 +1,85 @@
 <template>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    class="lucide lucide-github h-5 w-5"
+  <a
+    href="https://github.com/blessedmadukoma"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="github-link flex items-center gap-[6px] hover:text-[#111] transition-colors rounded-lg px-2.5 py-1.5 -ml-2.5 hover:bg-black/[0.04] text-[12.5px] font-medium text-[#6b6661]"
   >
-    <path
-      d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
-    ></path>
-    <path d="M9 18c-4.51 2-5-2-7-2"></path>
-  </svg>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="cursor-pointer text-current pointer-events-none"
+      style="overflow: visible"
+      aria-hidden="true"
+    >
+      <g class="github-icon" style="transform-origin: center">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2
+             c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2
+             a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3
+             a12.3 12.3 0 0 0 -6.2 0
+             c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3
+             a4.2 4.2 0 0 0 -.1 3.2
+             a4.6 4.6 0 0 0 -1.3 3.2
+             c0 4.6 2.7 5.7 5.5 6
+             c-.6 .6 -.6 1.2 -.5 2v3.5"
+        />
+      </g>
+    </svg>
+    Github
+  </a>
 </template>
+
+<script setup>
+  // No script logic needed — animation is purely CSS-driven.
+</script>
+
+<style scoped>
+  /*
+ * Original (Framer Motion):
+ *   onHoverStart → animate(".github-icon", {
+ *     scale:  [1, 1.1, 1],
+ *     rotate: [0, -10, 10, 0]
+ *   }, { duration: .5, ease: "easeInOut" })
+ *
+ *   onHoverEnd  → animate(".github-icon", { scale: 1, rotate: 0 }, { duration: .2 })
+ *
+ * CSS replication:
+ *   A single @keyframes encodes both the scale bounce and the head-shake
+ *   rotate sequence at the same time-percentages.
+ *   duration: 0.5s / ease-in-out matches {duration:.5, ease:"easeInOut"}.
+ *   overflow:visible on the <svg> prevents the rotated icon from being clipped.
+ */
+  .github-link:hover .github-icon {
+    animation: gh-wiggle 0.5s ease-in-out forwards;
+    transform-origin: center;
+  }
+
+  @keyframes gh-wiggle {
+    /*
+   * scale  keyframes: 1 → 1.1 → 1  (peak at ~50 %)
+   * rotate keyframes: 0 → -10 → 10 → 0  (three equal thirds)
+   * Both are layered into a single transform per frame.
+   */
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    33% {
+      transform: scale(1.1) rotate(-10deg);
+    }
+    66% {
+      transform: scale(1) rotate(10deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+</style>

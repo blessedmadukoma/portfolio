@@ -8,16 +8,16 @@
 </script>
 
 <template>
-  <section class="flex flex-col gap-4">
+  <section class="flex flex-col h-full">
     <div
-      class="sticky top-0 z-10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm pb-1 border-b border-zinc-200 dark:border-zinc-700"
+      class="flex-shrink-0 z-10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm pb-1 border-b border-zinc-200 dark:border-zinc-700"
     >
       <div class="overflow-x-auto">
         <ui-navbar @update:activeTab="setActiveTab" />
       </div>
     </div>
 
-    <div>
+    <div class="flex-1 overflow-y-auto pt-4">
       <component :is="activeTab" v-if="activeTab" />
       <navs-projects v-else />
     </div>

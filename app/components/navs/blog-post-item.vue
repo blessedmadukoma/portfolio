@@ -34,7 +34,7 @@
     :href="`https://mblessed.hashnode.dev/${post.slug}`"
     target="_blank"
     rel="noopener noreferrer"
-    class="relative overflow-hidden rounded-xl border transition-all duration-300 mb-2 last:mb-0 group block"
+    class="relative overflow-hidden rounded-xl border transition-[border-color,box-shadow] duration-300 mb-2 last:mb-0 group block"
     :class="[THEMES[type].border, THEMES[type].hoverBorder, THEMES[type].hoverShadow]"
   >
     <!-- Watermark -->
