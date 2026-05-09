@@ -13,7 +13,7 @@
 </script>
 
 <template>
-  <section class="space-y-4 mt-4">
+  <section class="space-y-4 mt-0">
     <div
       v-for="(paper, id) in sortedPapers"
       :key="id"
