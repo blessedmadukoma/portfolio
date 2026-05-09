@@ -3,7 +3,7 @@
     href="https://github.com/blessedmadukoma"
     target="_blank"
     rel="noopener noreferrer"
-    class="github-link flex items-center gap-[6px] hover:text-[#111] transition-colors rounded-lg px-2.5 py-1.5 -ml-2.5 hover:bg-black/[0.04] text-[12.5px] font-medium text-[#6b6661]"
+    class="github-link flex items-center gap-[6px] hover:text-[#111] dark:hover:text-zinc-100 transition-colors rounded-lg px-2.5 py-1.5 -ml-2.5 hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-[12.5px] font-medium text-[#6b6661] dark:text-zinc-400"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
