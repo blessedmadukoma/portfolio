@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="flex-1 overflow-y-auto pt-4">
+    <div class="flex-1 overflow-y-auto pt-2">
       <component :is="activeTab" v-if="activeTab" />
       <navs-projects v-else />
     </div>
