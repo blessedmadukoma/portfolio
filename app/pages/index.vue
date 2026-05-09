@@ -1,6 +1,6 @@
 <template>
   <section class="flex flex-col h-full py-2 space-y-4">
-    <section class="space-y-1 flex-shrink-0">
+    <section class="space-y-2 flex-shrink-0">
       <ui-hero />
       <ui-socials />
     </section>
