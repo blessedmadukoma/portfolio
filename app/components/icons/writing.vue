@@ -55,7 +55,7 @@
       <!-- anchor-point circle -->
       <circle class="pen-dot" cx="11" cy="11" r="2" />
     </svg>
-    Medium
+    Hashnode
   </a>
 </template>
 
