@@ -16,18 +16,21 @@ export interface PostNode {
   tags: Array<{ name: string; slug: string; id?: string }>;
 }
 
-interface PostsData {
-  publication?: {
-    posts?: {
-      edges: { node: PostNode }[];
+interface GraphQLResponse {
+  data?: {
+    publication?: {
+      posts?: {
+        edges: { node: PostNode }[];
+      };
     };
   };
+  errors?: any[];
 }
 
-const BLOG_QUERY = gql`
+const BLOG_QUERY = `
   query FetchAllPosts($host: String!) {
     publication(host: $host) {
-      posts(first: 0) {
+      posts(first: 10) {
         edges {
           node {
             id
@@ -63,13 +66,34 @@ export function formatDate(dateString: string): string {
 }
 
 export function useBlogPosts() {
-  const { data, pending, error } = useAsyncQuery<PostsData>({
-    key: "blog-posts",
-    query: BLOG_QUERY,
-    variables: BLOG_VARIABLES,
-  });
+  const { data, pending, error } = useAsyncData(
+    "blog-posts",
+    async () => {
+      let response: GraphQLResponse;
+      try {
+        response = await $fetch<GraphQLResponse>("https://gql.hashnode.com", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: { query: BLOG_QUERY, variables: BLOG_VARIABLES },
+        });
+      } catch {
+        throw new Error("Posts are temporarily unavailable. Check back soon.");
+      }
 
-  const posts = computed(() => data.value?.publication?.posts?.edges ?? []);
+      if (response.errors?.length) {
+        throw new Error("Failed to load posts. Please try again later.");
+      }
 
-  return { posts, pending, error, data };
+      return response;
+    },
+    {
+      default: () => ({ data: { publication: { posts: { edges: [] } } } }),
+    },
+  );
+
+  const posts = computed(
+    () => data.value?.data?.publication?.posts?.edges ?? [],
+  );
+
+  return { posts, pending, error };
 }
