@@ -27,19 +27,21 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@vercel/analytics",
 
-    [
-      "@nuxtjs/apollo",
-      {
-        clients: {
-          httpLinkOptions: {
-            httpEndpoint: "https://gql.hashnode.com",
-            headers: {
-              Authorization: import.meta.env.NUXT_PUBLIC_API_HASHNODE_TOKEN,
-            },
-          },
-        },
-      },
-    ],
+    // [
+    //   "@nuxtjs/apollo",
+    //   {
+    //     clients: {
+    //       default: {
+    //         httpEndpoint: "https://gql.hashnode.com",
+    //         httpLinkOptions: {
+    //           headers: {
+    //             Authorization: process.env.NUXT_PUBLIC_API_HASHNODE_TOKEN ?? "",
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // ],
   ],
   ssr: true,
   colorMode: {

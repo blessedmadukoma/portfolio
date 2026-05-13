@@ -84,8 +84,17 @@
       </div>
 
       <!-- Error -->
-      <div v-else-if="error" class="text-center py-8">
-        <p class="text-red-500">Error loading posts: {{ error.message }}</p>
+      <div v-else-if="error" class="py-6 text-center space-y-2">
+        <p class="text-sm text-zinc-500 dark:text-zinc-400">
+          {{ error.message }}
+        </p>
+        <a
+          href="https://mblessed.hashnode.dev"
+          target="_blank"
+          class="text-xs underline text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors"
+        >
+          View posts on Hashnode →
+        </a>
       </div>
 
       <!-- Posts list -->

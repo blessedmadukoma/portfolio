@@ -19,7 +19,7 @@
   useBlogPosts();
 
   useHead({
-    title: "Blessed Madukoma | Portfolio",
+    title: "BM | Portfolio",
     meta: [
       {
         name: "description",
