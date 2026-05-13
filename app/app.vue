@@ -1,10 +1,10 @@
 <script setup lang="ts">
-  import Analytics from "@vercel/analytics/nuxt";
+  // import { Analytics } from "@vercel/analytics/nuxt/runtime";
 </script>
 
 <template>
   <div>
-    <Analytics />
+    <!-- <Analytics mode="production" /> -->
     <!-- <main
       class="bg-white dark:bg-primary-blue text-gray-900 dark:text-gray-100 theme-transition"
       style="padding-top: 0; padding-bottom: 0"
