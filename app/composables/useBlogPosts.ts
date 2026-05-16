@@ -71,11 +71,14 @@ export function useBlogPosts() {
     async () => {
       let response: GraphQLResponse;
       try {
-        response = await $fetch<GraphQLResponse>("https://gql.hashnode.com", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: { query: BLOG_QUERY, variables: BLOG_VARIABLES },
-        });
+        response = await $fetch<GraphQLResponse>(
+          "https://gql-beta.hashnode.com",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: { query: BLOG_QUERY, variables: BLOG_VARIABLES },
+          },
+        );
       } catch {
         throw new Error("Posts are temporarily unavailable. Check back soon.");
       }
