@@ -5,8 +5,8 @@
   const activeTabKey = ref<string | null>(
     Object.keys(NavBarComponents)[0] ?? null
   );
-  const activeTab = ref<Component | null>(
-    NavBarComponents[activeTabKey.value!] ?? null
+  const activeTab = shallowRef<Component | null>(
+    activeTabKey.value ? markRaw(NavBarComponents[activeTabKey.value]) : null
   );
 
   const emit = defineEmits<{
@@ -14,16 +14,10 @@
   }>();
 
   const setActiveTab = (key: string | number, tab: Component) => {
-    activeTab.value = tab;
+    activeTab.value = markRaw(tab);
     activeTabKey.value = String(key);
-    emit("update:activeTab", tab);
+    emit("update:activeTab", markRaw(tab));
   };
-
-  watch(activeTab, (newTab) => {
-    if (newTab !== null) {
-      emit("update:activeTab", newTab);
-    }
-  });
 </script>
 
 <template>

@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="imgUrl"
-      class="w-12 h-12 rounded-md overflow-hidden outline outline-gray-600 dark:bg-gray-100 flex items-center justify-center p-0.5"
+      class="w-16 h-16 md:w-12 md:h-12 rounded-md overflow-hidden outline outline-gray-200 dark:bg-gray-100 flex items-center justify-center p-0.5"
     >
       <img
         :src="imgUrl"
@@ -13,7 +13,7 @@
 
     <div v-else>
       <svg
-        class="w-12 h-12 rounded-md bg-gray-100 object-contain"
+        class="w-16 h-16 md:w-12 md:h-12 rounded-md bg-gray-100 object-contain"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 80 80"
         fill="none"

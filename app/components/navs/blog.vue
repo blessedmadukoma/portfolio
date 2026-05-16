@@ -51,7 +51,7 @@
           target="_blank"
           href="https://mblessed.hashnode.dev"
         >
-          View All Posts ({{ data?.publication?.posts?.edges.length || 0 }})
+          View All Posts ({{ data?.data?.publication?.posts?.edges.length || 0 }})
         </a>
       </h2>
 
