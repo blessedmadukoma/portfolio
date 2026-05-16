@@ -3,7 +3,7 @@ export const PROJECTS = [
     title: "Athletics Performance Outlier Detection",
     briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
     description:
-      "Research framework comparing statistical, ML, and temporal methods for detecting anomalous athletic performances across track events (2010 to 2025). Each approach is evaluated using large-scale historical data from elite and sub-elite athletes.",
+      "Detecting anomalous athletic performances across 1.5M+ track & field records (2010 – 2025) using statistical, ML, and temporal modeling.",
     live: "https://athletics-performance.mblessed.space",
     apiDoc: "",
     github: "",
@@ -42,7 +42,7 @@ export const PROJECTS = [
     title: "Telco Customer Churn Analysis",
     briefText: "Customer Churn Analysis",
     description:
-      "ML-powered customer retention tool delivering 15 actionable strategies with 26.92% churn reduction predictions for telecom companies.",
+      "ML-powered customer retention platform delivering actionable churn reduction strategies for telecom companies.",
     live: "",
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/telco-customer-analysis-readme",
@@ -53,7 +53,7 @@ export const PROJECTS = [
     title: "CoreSentiment",
     briefText: "Stock Market Analysis Tool",
     description:
-      "Stock prediction platform analyzing Wikipedia pageview sentiment for tech companies with automated ETL workflows and real-time dashboards.",
+      "Stock prediction platform analyzing Wikipedia pageview sentiment for major tech companies with automated ETL workflows and real-time dashboards.",
     live: "",
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/CDE-airflow-capstone-project",
@@ -64,7 +64,7 @@ export const PROJECTS = [
     title: "GDP & Aviation Trends",
     briefText: "Economic Growth & Air Transport Development Analysis",
     description:
-      "Economic analysis framework processing four decades of World Bank data, explaining 75.8% variance in U.S. aviation growth patterns.",
+      "Economic analysis framework processing four decades of World Bank data to model U.S. aviation growth patterns.",
     live: "",
     apiDoc: "",
     github:
@@ -78,7 +78,7 @@ export const PROJECTS = [
     title: "Go-ZeptoMail",
     briefText: "Zeptomail Golang Package",
     description:
-      "Native Golang SDK for ZeptoMail's transactional email API with type-safe implementations for Go developers.",
+      "Native Golang SDK for ZeptoMail’s transactional email API with type-safe developer integrations.",
     live: "",
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/go-zeptomail",
@@ -89,7 +89,7 @@ export const PROJECTS = [
     title: "ThreeThirtyOne Consulting",
     briefText: "Consulting Firm Website",
     description:
-      "Modern consulting platform connecting clients with strategic solutions, featuring collaborative project management and outcome tracking.",
+      "Modern consulting platform connecting clients with strategic solutions through collaborative project management and outcome tracking.",
     live: "https://threethirtyOne-consulting.netlify.app/",
     apiDoc: "",
     github: "",

@@ -80,8 +80,8 @@ export function useBlogPosts() {
         throw new Error("Posts are temporarily unavailable. Check back soon.");
       }
 
-      if (response.errors?.length) {
-        throw new Error("Failed to load posts. Please try again later.");
+      if (response.errors?.length || !response?.data?.publication) {
+        throw new Error("Posts are temporarily unavailable. Check back soon.");
       }
 
       return response;
@@ -95,5 +95,5 @@ export function useBlogPosts() {
     () => data.value?.data?.publication?.posts?.edges ?? [],
   );
 
-  return { posts, pending, error };
+  return { posts, pending, error, data };
 }

@@ -62,40 +62,26 @@
           <div class="pr-2 pl-1 flex space-x-4 flex-1">
             <ui-img :alt="experience.company" :img-url="experience.imageURL" />
 
-            <div class="space-y-1 flex-1">
-              <div class="flex justify-between items-center">
+            <div class="space-y-1 md:space-y-0 flex-1">
+              <div class="md:flex justify-between items-center">
                 <h3 class="font-semibold text-sm md:text-base">
                   <p
                     class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
                   >
                     {{ experience.position }}
-                    <span
-                      class="transition-transform duration-200 group-hover:rotate-90"
-                    >
-                      <svg
-                        class="inline w-4 h-4 text-zinc-400"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M6 4l4 4-4 4"
-                        />
-                      </svg>
-                    </span>
+                    <IconsArrow />
                   </p>
                 </h3>
                 <p
-                  class="text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap"
+                  class="text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap italic"
                 >
                   {{ experience.startDate }} —
                   {{ experience.endDate ? experience.endDate : "Present" }}
                 </p>
               </div>
-              <p class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300">
+              <p
+                class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 !mt-0"
+              >
                 <a
                   :href="experience.link"
                   target="_blank"
@@ -132,7 +118,7 @@
 
     <!-- Education -->
     <section class="space-y-3 mt-4">
-      <h2 class="flex justify-between items-center">
+      <h2 class="md:flex justify-between items-center">
         <p
           class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
         >
@@ -147,79 +133,57 @@
         @click="toggleEducationDropdown(id)"
       >
         <div
-          class="flex pl-1 flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer"
+          class="flex items-start space-x-3 py-2 tracking-wide group cursor-pointer"
         >
-          <div class="pr-2 flex space-x-4">
+          <div class="pr-2 pl-1 flex space-x-4 flex-1">
             <ui-img
               :alt="education.institution"
               :img-url="education.imageURL"
             />
-            <!-- <img
-              :src="education.imageURL"
-              alt="Institution logo"
-              class="w-14 h-14 rounded-md object-contain"
-            /> -->
-            <div class="space-y-2">
-              <h3 class="font-semibold text-sm md:text-base">
+            <div class="space-y-1 md:space-y-0 flex-1">
+              <div class="md:flex justify-between items-center">
+                <h3 class="font-semibold text-sm md:text-base">
+                  <p
+                    class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
+                  >
+                    <a
+                      :href="education.link"
+                      target="_blank"
+                      rel="noopener"
+                      @click.stop
+                    >{{ education.institution }}</a>
+                    <IconsArrow />
+                  </p>
+                </h3>
                 <p
-                  class="group-hover:underline text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
+                  class="text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap italic"
                 >
-                  <a
-                    :href="education.link"
-                    target="_blank"
-                    rel="noopener"
-                    @click.stop
-                  >
-                    {{ education.institution }}
-                  </a>
-                  <span
-                    class="transition-transform duration-200 group-hover:rotate-90"
-                  >
-                    <svg
-                      class="inline w-4 h-4 text-zinc-400"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 4l4 4-4 4"
-                      />
-                    </svg>
-                  </span>
+                  {{ education.startDate }} —
+                  {{ education.endDate ? education.endDate : "Present" }}
                 </p>
-              </h3>
-              <p
-                class="block text-xs md:text-sm text-zinc-500 dark:text-zinc-400"
-              >
-                <span>{{ education.degree }}</span>
-                <span v-if="education.grade">
-                  <span class="text-zinc-400 mx-1">•</span>
-                  {{ education.grade }}
-                </span>
+              </div>
+              <p class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 !mt-0">
+                {{ education.degree }}
+                <span v-if="education.grade" class="text-zinc-400">· {{ education.grade }}</span>
               </p>
             </div>
           </div>
-          <p
-            class="block text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap"
-          >
-            {{ education.startDate }} —
-            {{ education.endDate ? education.endDate : "Present" }}
-          </p>
         </div>
 
         <Transition name="expand">
           <div
             v-if="openEducationDropdown === id"
-            class="w-full my-2 rounded-md p-3 tracking-wide text-sm text-zinc-600 dark:text-zinc-300"
+            class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
           >
-            <span>{{ education.description }}</span>
-            <span v-if="education.thesis" class="block mt-2">
-              <strong>Thesis: </strong>
-              <span v-html="education.thesis"></span>
-            </span>
+            <ul class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3">
+              <li class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300">
+                {{ education.description }}
+              </li>
+              <li v-if="education.thesis" class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300">
+                <strong>Thesis: </strong>
+                <span v-html="education.thesis"></span>
+              </li>
+            </ul>
           </div>
         </Transition>
       </div>
@@ -227,7 +191,7 @@
 
     <!-- Awards -->
     <!-- <section v-if="awards.length" class="space-y-3 mt-4">
-      <h2 class="flex justify-between items-center">
+      <h2 class="md:flex justify-between items-center">
         <p
           class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
         >
@@ -263,23 +227,7 @@
                   >
                     {{ award.institution }}
                   </a>
-                  <span
-                    class="transition-transform duration-200 group-hover:rotate-90"
-                  >
-                    <svg
-                      class="inline w-4 h-4 text-zinc-400"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 4l4 4-4 4"
-                      />
-                    </svg>
-                  </span>
+                  <IconsArrow />
                 </p>
               </h3>
               <p

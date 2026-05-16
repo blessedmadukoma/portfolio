@@ -32,12 +32,35 @@
     </h1>
 
     <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-      <span>
+      <!-- <span>
         Systems-focused software engineer
         <b>building reliable, observable data systems</b>. I work across Go and
         Python, designing infrastructure and pipelines that make complex data
         measurable, trustworthy, and operational in production. Current work
         includes athletics performance
+        <a
+          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
+          href="https://athletics-performance.mblessed.space"
+          target="_blank"
+          >anomaly detection</a
+        >
+        research and
+        <a
+          href="https://sedge.app"
+          target="_blank"
+          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
+          >Sedge</a
+        >, a data-intelligence platform for observable data products.
+      </span> -->
+      <span>
+        Systems-focused software engineer
+        <b
+          >building reliable, observable data systems, analytics infrastructure,
+          and ML-driven products</b
+        >
+        with Go and Python.
+        <br />
+        Current work includes athletics performance
         <a
           class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
           href="https://athletics-performance.mblessed.space"
