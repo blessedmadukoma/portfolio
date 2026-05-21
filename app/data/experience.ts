@@ -19,14 +19,18 @@ export const WORK_EXPERIENCE = [
     position: "Graduate Research Assistant",
     startDate: "Sep 2025",
     endDate: "May 2026",
+    // description:
+    //   "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
     description:
-      "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
+      "Built and published a production-grade anomaly detection system over 1.5M+ athletics performances, benchmarking 14 detection methods against real-world anti-doping sanctions data - accepted at IEEE SDS 2026 and published on ArXiv.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/cmu.svg",
     // link: "https://www.mininfra.gov.rw",
     workRoles: [
-      "Developing anomaly detection <a href='https://athletics-performance.mblessed.space' target='_blank' style='text-decoration: underline; color: #60a5fa;'>framework</a> for athletics performance analysis under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, implementing statistical and ensemble methods to identify performance patterns indicative of potential doping violations.",
-      "Conducting systematic literature review of AI applications in anti-doping, identifying research gaps and unexplored methodologies for next-generation detection systems.",
+      "Built an anomaly detection <a href='https://athletics-performance.mblessed.space' target='_blank' style='text-decoration: underline; color: #60a5fa;'>platform & dashboard</a> (FastAPI, PostgreSQL, Redis) over 1.5M+ athletics performances (19k+ events, 2010-2025) under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, featuring fuzzy athlete search across 214k+ athletes, career timelines, elite filtering, and end-to-end audit trails for anti-doping prioritisation. <a href='https://arxiv.org/abs/2604.21953' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Published at IEEE SDS 2026</a>.",
+      "Implemented 14 competing detection methods (statistical, ML, and Bayesian) with explainable consensus flagging, and ensemble methods, requiring 2+ method agreement before flagging, validated against publicly confirmed Athletics Integrity Unit sanctions data.",
+      "Developed a sports analytics policy briefing for Rwanda’s Ministry of Sports (MINISPORTS), identifying gaps in national talent identification and proposing a 10-year data roadmap aligned with Vision 2050.",
+      "Co-authored (with lead author Joel Maison) research on player archetypes and movement patterns in the Basketball Africa League using possession-adjusted K-means clustering. Accepted at the African Data Science Conference (ADSC 2026, Johannesburg) with Prof. Ronald Yurko (CMU Pittsburgh).",
     ],
   },
   {
