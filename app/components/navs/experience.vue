@@ -151,7 +151,8 @@
                       target="_blank"
                       rel="noopener"
                       @click.stop
-                    >{{ education.institution }}</a>
+                      >{{ education.institution }}</a
+                    >
                     <IconsArrow />
                   </p>
                 </h3>
@@ -162,9 +163,13 @@
                   {{ education.endDate ? education.endDate : "Present" }}
                 </p>
               </div>
-              <p class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 !mt-0">
+              <p
+                class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 !mt-0"
+              >
                 {{ education.degree }}
-                <span v-if="education.grade" class="text-zinc-400">· {{ education.grade }}</span>
+                <span v-if="education.grade" class="text-zinc-400"
+                  >· {{ education.grade }}</span
+                >
               </p>
             </div>
           </div>
@@ -175,13 +180,22 @@
             v-if="openEducationDropdown === id"
             class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
           >
-            <ul class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3">
-              <li class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300">
-                {{ education.description }}
-              </li>
-              <li v-if="education.thesis" class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300">
+            <ul
+              class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3"
+            >
+              <div
+                v-if="education.thesis"
+                class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+              >
                 <strong>Thesis: </strong>
                 <span v-html="education.thesis"></span>
+              </div>
+              <li
+                v-for="(item, index) in education.description"
+                :key="index"
+                class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+              >
+                {{ item }}
               </li>
             </ul>
           </div>
