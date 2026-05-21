@@ -1,9 +1,24 @@
 export const WORK_EXPERIENCE = [
+  // {
+  //   company: "CMU-Africa: Languages and Spatial Technologies Laboratory",
+  //   position: "Graduate Research Associate",
+  //   startDate: "June 2026",
+  //   endDate: null,
+  //   description:
+  //     "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
+  //   location: "Kigali, Rwanda",
+  //   imageURL: "/logos/svgs/cmu.svg",
+  //   // link: "https://www.mininfra.gov.rw",
+  //   workRoles: [
+  //     "Developing anomaly detection <a href='https://athletics-performance.mblessed.space' target='_blank' style='text-decoration: underline; color: #60a5fa;'>framework</a> for athletics performance analysis under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, implementing statistical and ensemble methods to identify performance patterns indicative of potential doping violations.",
+  //     "Conducting systematic literature review of AI applications in anti-doping, identifying research gaps and unexplored methodologies for next-generation detection systems.",
+  //   ],
+  // },
   {
     company: "CMU-Africa: Languages and Spatial Technologies Laboratory",
     position: "Graduate Research Assistant",
     startDate: "Sep 2025",
-    endDate: null,
+    endDate: "May 2026",
     description:
       "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
     location: "Kigali, Rwanda",
@@ -101,29 +116,50 @@ export const EDUCATION = [
   {
     institution: "Carnegie Mellon University",
     degree: "MSc, Information Technology",
-    grade: "",
-    startDate: "Jul 2024",
+    grade: "3.93/4.0 GPA",
+    startDate: "Aug 2024",
     endDate: "May 2026",
-    description:
-      "Specialization in Software Engineering, Big Data and Applied Machine Learning.",
+    description: [
+      "Completed a 2-year MSc program specializing in Software Engineering, Big Data, and Applied Machine Learning at CMU Africa's campus in Rwanda.",
+      "Notable courses: Machine Learning in Production (MLiP), Engineering Data-Intensive Scalable Systems (EDISS), Data Structures & Algorithms (DSA), Programming for Data Analytics (PDA), Data, Inference, and Applied Machine Learning (DIAML).",
+      "Served as Chairman of the Academic Innovation Sub-Committee within the student Research Committee, contributing to academic and research initiatives across the cohort.",
+      "Conducted graduate research under Prof. Prasenjit Mitra, building a production-grade anomaly detection system over 1.5M+ athletics performances — published at IEEE SDS 2026 and on ArXiv.",
+    ],
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/cmu.svg",
     thesis:
-      "Performance Anomaly Detection in Athletics: A Benchmarking System with Visual Analytics",
-    link: "https://www.cmu.edu",
+      "Performance Anomaly Detection in Athletics: A Benchmarking System with Visual Analytics (<a href='https://athletics-performance.mblessed.space' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Demo</a>, <a href='https://arxiv.org/abs/2604.21953' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Paper</a>).",
+    link: "https://www.africa.engineering.cmu.edu",
   },
   {
     institution: "Babcock University",
     degree: "BSc, Software Engineering",
-    grade: "First Class",
+    grade: "First Class Honors (Top 4%)",
     startDate: "Jul 2018",
     endDate: "Jun 2022",
-    description:
-      "Studied software engineering principles, algorithms, and data structures. Developed strong foundation in programming, system design, and project management.",
+    description: [
+      "Completed a 4-year Software Engineering program focused on software design, algorithms, systems engineering, cloud computing, and artificial intelligence.",
+      "Served as Student Body President of the Babcock University Computer Club (BUCC), contributed to peer tutoring initiatives, and participated in the university volleyball team as team setter.",
+      "Gained practical industry experience through a compulsory 6-month internship and built a strong foundation in backend engineering, system architecture, and collaborative software development.",
+    ],
     location: "Ogun, Nigeria",
     imageURL: "/logos/svgs/babcock.svg",
     thesis:
-      "Light Automation Management System (<a href='https://lams.netlify.app' target='_blank' style='text-decoration: underline; color: #60a5fa;'>LAMS</a>) for smart homes.",
+      "Designed and developed the Light Automation Management System (<a href='https://lams.netlify.app' target='_blank' style='text-decoration: underline; color: #60a5fa;'>LAMS</a>), a smart home automation platform focused on centralized light control and monitoring.",
+    coursework: [
+      "Software Engineering",
+      "Data Structures & Algorithms",
+      "Operating Systems",
+      "Cloud Computing Technologies",
+      "Artificial Intelligence",
+      "Object-Oriented Programming",
+      "Software Quality Testing",
+    ],
+    activities: [
+      "Student Body President, Babcock University Computer Club (BUCC)",
+      "Tutorial Team",
+      "School Volleyball Team",
+    ],
     link: "https://babcock.edu.ng",
   },
 ];
