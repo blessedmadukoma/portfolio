@@ -1,13 +1,21 @@
 <script setup lang="ts">
-  import type { PostNode, PostType } from "~/composables/useBlogPosts";
+  import type { NormalizedPost, PostType } from "~/composables/useBlogPosts";
   import { formatDate } from "~/composables/useBlogPosts";
 
-  defineProps<{ post: PostNode; type: PostType }>();
+  defineProps<{ post: NormalizedPost }>();
+
+  const NuxtLink = resolveComponent("NuxtLink");
 
   const THEMES: Record<
     PostType,
     { border: string; hoverBorder: string; hoverShadow: string; label: string }
   > = {
+    native: {
+      border: "border-[#e0d9f0] dark:border-[#3a3050]",
+      hoverBorder: "hover:border-[#c9bfe8]",
+      hoverShadow: "hover:shadow-[0_4px_16px_rgba(120,90,180,0.08)]",
+      label: "Obsidian",
+    },
     hashnode: {
       border: "border-[#dce8dd] dark:border-[#3a5240]",
       hoverBorder: "hover:border-[#bed4bf]",
@@ -30,16 +38,29 @@
 </script>
 
 <template>
-  <a
-    :href="`https://mblessed.hashnode.dev/${post.slug}`"
-    target="_blank"
-    rel="noopener noreferrer"
+  <component
+    :is="post.isExternal ? 'a' : NuxtLink"
+    v-bind="
+      post.isExternal
+        ? { href: post.href, target: '_blank', rel: 'noopener noreferrer' }
+        : { to: post.href }
+    "
     class="relative overflow-hidden rounded-xl border transition-[border-color,box-shadow] duration-300 mb-2 last:mb-0 group block"
-    :class="[THEMES[type].border, THEMES[type].hoverBorder, THEMES[type].hoverShadow]"
+    :class="[
+      THEMES[post.type].border,
+      THEMES[post.type].hoverBorder,
+      THEMES[post.type].hoverShadow,
+    ]"
   >
     <!-- Watermark -->
+    <icons-obsidian
+      v-if="post.type === 'native'"
+      :width="64"
+      :height="64"
+      class="absolute -right-3 -bottom-3 text-black/[0.04] dark:text-white/[0.04] pointer-events-none"
+    />
     <svg
-      v-if="type === 'hashnode'"
+      v-else-if="post.type === 'hashnode'"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
@@ -58,7 +79,7 @@
       <path d="M16 10v6" />
     </svg>
     <svg
-      v-else-if="type === 'x-article'"
+      v-else-if="post.type === 'x-article'"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -73,18 +94,36 @@
       <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
     </svg>
     <div
-      v-else-if="type === 'medium'"
+      v-else-if="post.type === 'medium'"
       class="absolute -right-1 -bottom-4 text-[72px] font-serif text-black/[0.04] dark:text-white/[0.04] leading-none select-none pointer-events-none"
       aria-hidden="true"
     >
       M
     </div>
 
-    <!-- External-link hover button -->
+    <!-- Hover button: internal arrow for native, external arrow for others -->
     <div
       class="absolute right-3 top-3 z-10 w-7 h-7 rounded-full border border-zinc-200 dark:border-zinc-600 bg-white/90 dark:bg-zinc-800/90 flex items-center justify-center opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
     >
       <svg
+        v-if="!post.isExternal"
+        xmlns="http://www.w3.org/2000/svg"
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-zinc-600 dark:text-zinc-300"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </svg>
+      <svg
+        v-else
         xmlns="http://www.w3.org/2000/svg"
         width="13"
         height="13"
@@ -102,20 +141,31 @@
       </svg>
     </div>
 
-    <!-- Main row -->
     <div class="flex items-start space-x-3 px-3 pt-3 pb-3">
       <!-- Thumbnail -->
       <div
-        class="w-14 h-14 rounded-md overflow-hidden bg-zinc-100 dark:bg-zinc-800 flex-shrink-0 mt-0.5"
+        class="w-14 h-14 rounded-md overflow-hidden flex-shrink-0 mt-0.5"
+        :class="
+          post.type === 'native'
+            ? 'bg-purple-50 dark:bg-purple-900/20'
+            : 'bg-zinc-100 dark:bg-zinc-800'
+        "
       >
         <img
-          v-if="post.coverImage?.url"
-          :src="post.coverImage.url"
+          v-if="post.image"
+          :src="post.image"
           :alt="post.title"
           class="w-full h-full object-cover"
         />
         <div v-else class="w-full h-full flex items-center justify-center">
+          <icons-obsidian
+            v-if="post.type === 'native'"
+            :width="20"
+            :height="20"
+            class="text-purple-400 dark:text-purple-500"
+          />
           <svg
+            v-else
             class="w-5 h-5 text-zinc-400"
             fill="none"
             stroke="currentColor"
@@ -137,8 +187,9 @@
         <div
           class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500 mb-1"
         >
+          <icons-obsidian v-if="post.type === 'native'" />
           <svg
-            v-if="type === 'hashnode'"
+            v-else-if="post.type === 'hashnode'"
             xmlns="http://www.w3.org/2000/svg"
             width="11"
             height="11"
@@ -158,7 +209,7 @@
             <path d="M16 10v6" />
           </svg>
           <svg
-            v-else-if="type === 'x-article'"
+            v-else-if="post.type === 'x-article'"
             viewBox="0 0 24 24"
             width="11"
             height="11"
@@ -174,7 +225,7 @@
             <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
           </svg>
           <svg
-            v-else-if="type === 'medium'"
+            v-else-if="post.type === 'medium'"
             xmlns="http://www.w3.org/2000/svg"
             width="11"
             height="11"
@@ -191,7 +242,7 @@
               d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
             />
           </svg>
-          {{ THEMES[type].label }}
+          {{ THEMES[post.type].label }}
         </div>
 
         <!-- Title + date -->
@@ -204,15 +255,25 @@
             </span>
           </h3>
           <p
+            v-if="post.date"
             class="hidden md:block text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap flex-shrink-0"
           >
-            {{ formatDate(post.publishedAt) }}
+            {{ formatDate(post.date) }}
           </p>
         </div>
+
+        <!-- Description (native posts) -->
+        <p
+          v-if="post.description"
+          class="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-1"
+        >
+          {{ post.description }}
+        </p>
 
         <!-- Read-time + views + tags -->
         <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
           <span
+            v-if="post.readTimeInMinutes"
             class="flex items-center gap-1 px-2 py-[2px] rounded-full text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-white/70 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700"
           >
             <icons-book />
@@ -220,6 +281,7 @@
           </span>
 
           <span
+            v-if="post.views != null"
             class="px-2 py-[2px] rounded-full text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-white/70 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700"
           >
             {{ post.views.toLocaleString() }} reads
@@ -227,19 +289,22 @@
 
           <span
             v-for="(tag, i) in post.tags.slice(0, 3)"
-            :key="tag.slug"
+            :key="tag"
             class="px-2 py-[2px] border border-zinc-200 dark:border-zinc-700 rounded-full text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-white/80 dark:bg-zinc-800/80"
             :class="i === 2 ? 'hidden md:inline-flex' : ''"
           >
-            #{{ tag.name }}
+            #{{ tag }}
           </span>
 
           <!-- Mobile date -->
-          <p class="md:hidden text-[11px] text-zinc-400 dark:text-zinc-500 ml-auto">
-            {{ formatDate(post.publishedAt) }}
+          <p
+            v-if="post.date"
+            class="md:hidden text-[11px] text-zinc-400 dark:text-zinc-500 ml-auto"
+          >
+            {{ formatDate(post.date) }}
           </p>
         </div>
       </div>
     </div>
-  </a>
+  </component>
 </template>

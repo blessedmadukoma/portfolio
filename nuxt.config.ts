@@ -26,23 +26,20 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
     "@vercel/analytics",
-
-    // [
-    //   "@nuxtjs/apollo",
-    //   {
-    //     clients: {
-    //       default: {
-    //         httpEndpoint: "https://gql.hashnode.com",
-    //         httpLinkOptions: {
-    //           headers: {
-    //             Authorization: process.env.NUXT_PUBLIC_API_HASHNODE_TOKEN ?? "",
-    //           },
-    //         },
-    //       },
-    //     },
-    //   },
-    // ],
+    "@nuxt/content",
   ],
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          theme: {
+            default: "vitesse-light", // light mode
+            dark: "vitesse-dark", // dark mode (.dark class from color-mode)
+          },
+        },
+      },
+    },
+  },
   ssr: true,
   colorMode: {
     classSuffix: "",
@@ -53,6 +50,13 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: ["@vue/devtools-core", "@vue/devtools-kit", "graphql-tag"],
+    },
+  },
+  nitro: {
+    storage: {
+      views: process.env.VERCEL
+        ? { driver: "vercel-kv" } // Vercel KV in production
+        : { driver: "fs", base: "./.data/views" }, // local dev
     },
   },
 });
