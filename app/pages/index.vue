@@ -16,7 +16,8 @@
 </template>
 
 <script setup lang="ts">
-  useBlogPosts();
+  definePageMeta({ layout: "home" });
+  // useBlogPosts();
 
   useHead({
     title: "BM | Portfolio",
