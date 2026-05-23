@@ -54,9 +54,12 @@ export default defineNuxtConfig({
   },
   nitro: {
     storage: {
-      views: process.env.VERCEL
-        ? { driver: "vercel-kv" } // Vercel KV in production
-        : { driver: "fs", base: "./.data/views" }, // local dev
+      views:
+        process.env.VERCEL && process.env.KV_REST_API_URL
+          ? { driver: "vercel-kv" }
+          : process.env.VERCEL
+            ? { driver: "memory" } // KV not connected yet — views won't persist but won't crash
+            : { driver: "fs", base: "./.data/views" },
     },
   },
 });
