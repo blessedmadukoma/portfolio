@@ -17,6 +17,7 @@
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/kv": "^3.0.0",
     "better-sqlite3": "^12.10.0",
     "graphql": "^16.14.0",
     "nuxt": "^4.0.1",
