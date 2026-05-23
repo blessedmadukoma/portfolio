@@ -1,9 +1,4 @@
-// export type PostType = "hashnode" | "native" | "x-article" | "medium";
-export type PostType = "hashnode" | "x-article" | "medium";
-
-export function getPostType(_post: PostNode): PostType {
-  return "hashnode";
-}
+export type PostType = "hashnode" | "native" | "x-article" | "medium";
 
 export interface PostNode {
   id: string;
@@ -14,6 +9,32 @@ export interface PostNode {
   views: number;
   readTimeInMinutes: number;
   tags: Array<{ name: string; slug: string; id?: string }>;
+}
+
+export interface NativePost {
+  stem: string;
+  title: string;
+  description?: string;
+  date?: string;
+  slug?: string;
+  tags?: string[];
+  image?: string;
+  readingTime?: number;
+}
+
+export interface NormalizedPost {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  date: string;
+  image?: string;
+  tags: string[];
+  type: PostType;
+  href: string;
+  isExternal: boolean;
+  readTimeInMinutes?: number;
+  views?: number;
 }
 
 interface GraphQLResponse {
@@ -65,6 +86,51 @@ export function formatDate(dateString: string): string {
   });
 }
 
+export function normalizeHashnodePost(post: PostNode): NormalizedPost {
+  return {
+    id: post.id,
+    title: post.title,
+    slug: post.slug,
+    date: post.publishedAt,
+    image: post.coverImage?.url,
+    tags: post.tags.map((t) => t.name),
+    type: "hashnode",
+    href: `https://mblessed.hashnode.dev/${post.slug}`,
+    isExternal: true,
+    readTimeInMinutes: post.readTimeInMinutes,
+    views: post.views,
+  };
+}
+
+function obsidianImageToProxy(src?: string) {
+  if (!src) return undefined;
+  if (/^https?:\/\//.test(src)) return src;
+  if (src.startsWith("/api/blog-image")) return src;
+  // Strip leading slash or "./"
+  const clean = src.replace(/^\//, "").replace(/^\.\//, "");
+  const repoPath = clean.startsWith("images/") ? clean : `images/${clean}`;
+  return `/api/blog-image?path=${encodeURIComponent(`Blogs - Published/${repoPath}`)}`;
+}
+
+export function normalizeObsidianPost(post: NativePost): NormalizedPost {
+  // stem may be "Blogs - Published/post-title"; extract only the filename part
+  const stemFile = post.stem.split("/").pop() ?? post.stem;
+  const identifier = post.slug ?? stemFile;
+  return {
+    id: post.stem,
+    title: post.title,
+    slug: identifier,
+    description: post.description,
+    date: post.date ?? "",
+    image: obsidianImageToProxy(post.image),
+    tags: post.tags ?? [],
+    type: "native",
+    href: `/blog/${encodeURIComponent(identifier)}`,
+    isExternal: false,
+    readTimeInMinutes: post.readingTime,
+  };
+}
+
 export function useBlogPosts() {
   const { data, pending, error } = useAsyncData(
     "blog-posts",
@@ -72,7 +138,7 @@ export function useBlogPosts() {
       let response: GraphQLResponse;
       try {
         response = await $fetch<GraphQLResponse>(
-          "https://gql-beta.hashnode.com",
+          process.env.NUXT_PUBLIC_API_HASHNODE_URL ?? "",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -80,11 +146,15 @@ export function useBlogPosts() {
           },
         );
       } catch {
-        throw new Error("Posts are temporarily unavailable. Check back soon.");
+        throw new Error(
+          "Hashnode posts are temporarily unavailable. Check back soon.",
+        );
       }
 
       if (response.errors?.length || !response?.data?.publication) {
-        throw new Error("Posts are temporarily unavailable. Check back soon.");
+        throw new Error(
+          "Hashnode posts are temporarily unavailable. Check back soon.",
+        );
       }
 
       return response;
@@ -99,4 +169,10 @@ export function useBlogPosts() {
   );
 
   return { posts, pending, error, data };
+}
+
+export function useNativePosts() {
+  return useAsyncData("obsidian-posts", () =>
+    queryCollection("blog").order("date", "DESC").all(),
+  );
 }

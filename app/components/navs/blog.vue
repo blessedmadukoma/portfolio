@@ -1,7 +1,25 @@
 <script lang="ts" setup>
-  import { getPostType } from "~/composables/useBlogPosts";
+  import {
+    normalizeHashnodePost,
+    normalizeObsidianPost,
+    useBlogPosts,
+    useNativePosts,
+  } from "~/composables/useBlogPosts";
 
   const { posts, pending, error, data } = useBlogPosts();
+  const { data: nativePosts } = await useNativePosts();
+  // Non-blocking: view counts populate reactively after posts render
+  const { data: viewCounts } = useFetch<Record<string, number>>("/api/views");
+
+  const normalizedObsidian = computed(() =>
+    (nativePosts.value ?? []).map((post) => {
+      const normalized = normalizeObsidianPost(post);
+      return { ...normalized, views: viewCounts.value?.[normalized.slug] };
+    }),
+  );
+  const normalizedHashnode = computed(() =>
+    posts.value.map((e) => normalizeHashnodePost(e.node)),
+  );
 </script>
 
 <template>
@@ -51,11 +69,20 @@
           target="_blank"
           href="https://mblessed.hashnode.dev"
         >
-          View All Posts ({{ data?.data?.publication?.posts?.edges.length || 0 }})
+          View All Posts ({{
+            data?.data?.publication?.posts?.edges.length || 0
+          }})
         </a>
       </h2>
 
-      <!-- Loading -->
+      <!-- Obsidian/native posts -->
+      <NavsBlogPostItem
+        v-for="post in normalizedObsidian"
+        :key="post.id"
+        :post="post"
+      />
+
+      <!-- Hashnode: loading -->
       <div
         v-if="pending"
         class="text-center py-8 flex flex-col items-center justify-center"
@@ -80,10 +107,12 @@
             d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
           />
         </svg>
-        <p class="text-zinc-500 dark:text-zinc-400">Loading posts...</p>
+        <p class="text-zinc-500 dark:text-zinc-400">
+          Loading Hashnode posts...
+        </p>
       </div>
 
-      <!-- Error -->
+      <!-- Hashnode: error -->
       <div v-else-if="error" class="py-6 text-center space-y-2">
         <p class="text-sm text-zinc-500 dark:text-zinc-400">
           {{ error.message }}
@@ -93,19 +122,18 @@
           target="_blank"
           class="text-xs underline text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors"
         >
-          View posts on Hashnode →
+          View Hashnode posts →
         </a>
       </div>
 
-      <!-- Posts list -->
-      <div v-else>
+      <!-- Hashnode posts -->
+      <template v-else>
         <NavsBlogPostItem
-          v-for="edge in posts"
-          :key="edge.node.id"
-          :post="edge.node"
-          :type="getPostType(edge.node)"
+          v-for="post in normalizedHashnode"
+          :key="post.id"
+          :post="post"
         />
-      </div>
+      </template>
     </section>
   </section>
 </template>
