@@ -169,21 +169,22 @@ export const EDUCATION = [
 ];
 
 export const AWARDS = [
+  {
+    title: "Honorable Mention - Best Full Paper Award",
+    organization: "IEEE SDS 2026",
+    date: "May 2026",
+    description:
+      "Awarded Honorable Paper at the IEEE Smart Data Science (SDS) 2026 conference for research on performance anomaly detection in athletics — benchmarking 14 detection methods over 1.5M+ performances validated against real-world anti-doping sanctions data.",
+    imageURL: "/logos/imgs/sds2026-logo.jpg",
+    certificateURL: "/images/awards/sds2026-certificate.jpg",
+    link: "https://arxiv.org/abs/2604.21953",
+  },
   // {
   //   title: "Chairman, Academic Innovation Sub-Committee",
   //   organization: "Carnegie Mellon University Africa",
   //   date: "2024",
   //   description:
-  //     "Leading academic innovation initiatives and research committee activities at CMU Africa.",
+  //     "Led academic innovation initiatives and research committee activities at CMU Africa, contributing to cohort-wide academic and research programs.",
   //   imageURL: "/logos/svgs/cmu.svg",
-  // },
-  // {
-  //   title: "Executive President",
-  //   organization: "Babcock University Computer Club",
-  //   date: "2022",
-  //   description:
-  //     "Led the computer club activities and fostered tech community at Babcock University.",
-  //   // imageURL: "/images/awards/babcock-leadership.png",
-  //   imageURL: "",
   // },
 ];
