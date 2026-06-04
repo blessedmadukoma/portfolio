@@ -22,12 +22,22 @@
 
   const openWorkDropdown = ref<number | null>(null);
   const openEducationDropdown = ref<number | null>(null);
+  const openAwardDropdown = ref<number | null>(null);
+  const certificateModal = ref<string | null>(null);
+
   const toggleWorkDropdown = (id: number) => {
     openWorkDropdown.value = openWorkDropdown.value === id ? null : id;
   };
   const toggleEducationDropdown = (id: number) => {
     openEducationDropdown.value =
       openEducationDropdown.value === id ? null : id;
+  };
+  const toggleAwardDropdown = (id: number) => {
+    openAwardDropdown.value = openAwardDropdown.value === id ? null : id;
+  };
+  const openCertificate = (url: string, event: MouseEvent) => {
+    event.stopPropagation();
+    certificateModal.value = url;
   };
 </script>
 
@@ -86,7 +96,7 @@
                   :href="experience.link"
                   target="_blank"
                   rel="noopener"
-                  class="group-hover:underline group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
+                  class="underline md:no-underline md:group-hover:underline group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
                   @click.stop
                 >
                   {{ experience.company }}
@@ -204,7 +214,7 @@
     </section>
 
     <!-- Awards -->
-    <!-- <section v-if="awards.length" class="space-y-3 mt-4">
+    <section v-if="awards.length" class="space-y-3 mt-4">
       <h2 class="md:flex justify-between items-center">
         <p
           class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
@@ -223,59 +233,83 @@
           class="flex flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer"
         >
           <div class="pl-1 pr-2 flex space-x-4">
-            <img
-              :src="award.imageURL"
-              alt="Institution logo"
-              class="w-16 h-16 rounded-md object-contain"
-            />
-            <div class="space-y-2">
+            <ui-img :alt="award.organization" :img-url="award.imageURL" />
+            <div class="space-y-1 md:space-y-0">
               <h3 class="font-semibold text-sm md:text-base">
                 <p
-                  class="group-hover:underline text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
+                  class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
                 >
-                  <a
-                    :href="award.link"
-                    target="_blank"
-                    rel="noopener"
-                    @click.stop
-                  >
-                    {{ award.institution }}
-                  </a>
+                  {{ award.title }}
                   <IconsArrow />
                 </p>
               </h3>
-              <p
-                class="block text-xs md:text-sm text-zinc-500 dark:text-zinc-400"
-              >
-                <span>{{ award.degree }}</span>
-                <span v-if="award.grade">
-                  <span class="text-zinc-400 mx-1">•</span>
-                  {{ award.grade }}
-                </span>
+              <p class="text-xs md:text-sm text-zinc-500 dark:text-zinc-400">
+                {{ award.organization }}
               </p>
             </div>
           </div>
           <p
-            class="block text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap"
+            class="block text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap italic"
           >
-            {{ award.startDate }} —
-            {{ award.endDate ? award.endDate : "Present" }}
+            {{ award.date }}
           </p>
         </div>
 
         <Transition name="expand">
           <div
-            v-if="openEducationDropdown === id"
-            class="w-full my-2 rounded-md p-3 tracking-wide text-sm text-zinc-600 dark:text-zinc-300"
+            v-if="openAwardDropdown === id"
+            class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
           >
-            <span>{{ award.description }}</span>
-            <span v-if="award.thesis" class="block mt-2">
-              <strong>Thesis: </strong>
-              <span v-html="award.thesis"></span>
-            </span>
+            <p class="text-sm text-zinc-600 dark:text-zinc-300 py-3">
+              {{ award.description }}
+            </p>
+            <div class="flex items-center gap-3">
+              <a
+                v-if="award.link"
+                :href="award.link"
+                target="_blank"
+                rel="noopener"
+                class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                @click.stop
+              >
+                View paper →
+              </a>
+              <button
+                v-if="award.certificateURL"
+                class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                @click="openCertificate(award.certificateURL, $event)"
+              >
+                View certificate →
+              </button>
+            </div>
           </div>
         </Transition>
       </div>
-    </section> -->
+    </section>
   </section>
+
+  <!-- Certificate modal -->
+  <Teleport to="body">
+    <Transition name="fade">
+      <div
+        v-if="certificateModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+        @click="certificateModal = null"
+      >
+        <div class="relative max-w-3xl w-full" @click.stop>
+          <button
+            class="absolute -top-8 right-0 text-white/80 hover:text-white text-sm"
+            @click="certificateModal = null"
+          >
+            Close ✕
+          </button>
+          <img
+            :src="certificateModal"
+            alt="Certificate"
+            class="w-full rounded-lg shadow-2xl"
+          />
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
