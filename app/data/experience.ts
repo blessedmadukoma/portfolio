@@ -171,10 +171,10 @@ export const EDUCATION = [
 export const AWARDS = [
   {
     title: "Honorable Mention - Best Full Paper Award",
-    organization: "IEEE SDS 2026",
+    organization: "IEEE Swiss Conference on Data Science and AI (SDS2026)",
     date: "May 2026",
     description:
-      "Awarded Honorable Paper at the IEEE Smart Data Science (SDS) 2026 conference for research on performance anomaly detection in athletics — benchmarking 14 detection methods over 1.5M+ performances validated against real-world anti-doping sanctions data.",
+      "Awarded Honorable Paper at the IEEE Swiss Conference on Data Science and AI (SDS) 2026 conference for research on performance anomaly detection in athletics — benchmarking 14 detection methods over 1.5M+ performances validated against real-world anti-doping sanctions data.",
     imageURL: "/logos/imgs/sds2026-logo.jpg",
     certificateURL: "/images/awards/sds2026-certificate.jpg",
     link: "https://arxiv.org/abs/2604.21953",
