@@ -102,7 +102,7 @@ export function normalizeHashnodePost(post: PostNode): NormalizedPost {
   };
 }
 
-function obsidianImageToProxy(src?: string) {
+export function obsidianImageToProxy(src?: string) {
   if (!src) return undefined;
   if (/^https?:\/\//.test(src)) return src;
   if (src.startsWith("/api/blog-image")) return src;
