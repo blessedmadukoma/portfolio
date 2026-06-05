@@ -4,5 +4,6 @@
     <icons-github />
     <icons-linkedin />
     <icons-writing />
+    <icons-scholar />
   </div>
 </template>
