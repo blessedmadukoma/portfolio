@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { formatDate } from "~/composables/useBlogPosts";
+  import { formatDate, obsidianImageToProxy } from "~/composables/useBlogPosts";
 
   const route = useRoute();
   const slug = route.params.slug as string;
@@ -71,6 +71,14 @@
           <span v-if="views">{{ views }} {{ views === 1 ? 'view' : 'views' }}</span>
         </div>
       </div>
+
+      <!-- Cover image -->
+      <img
+        v-if="post?.image"
+        :src="obsidianImageToProxy(post.image as string)"
+        :alt="post.title"
+        class="w-full rounded-lg object-cover max-h-80"
+      />
 
       <!-- Post content -->
       <article
