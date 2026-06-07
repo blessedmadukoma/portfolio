@@ -1,3 +1,55 @@
+<script lang="ts" setup>
+  import { TOOLS } from "~/data/tools";
+
+  // Remove duplicates by name
+  const uniqueTools = TOOLS.filter(
+    (tool, index, self) =>
+      index === self.findIndex((t) => t.name === tool.name),
+  );
+
+  // Categorize tools
+  const languageTools = computed(() =>
+    uniqueTools.filter((tool) =>
+      ["Go", "Python", "Javascript", "Typescript"].includes(tool.name),
+    ),
+  );
+
+  const frameworkTools = computed(() =>
+    uniqueTools.filter((tool) =>
+      [
+        "VueJS",
+        "Nuxt",
+        // "NextJS",
+        // "NestJS",
+        "TailwindCSS",
+        // "ExpressJS",
+      ].includes(tool.name),
+    ),
+  );
+
+  const cloudTools = computed(() =>
+    uniqueTools.filter((tool) =>
+      ["Docker", "GitHub Actions", "Ansible"].includes(tool.name),
+    ),
+  );
+
+  const databaseTools = computed(() =>
+    uniqueTools.filter((tool) => ["PostgreSQL", "Redis"].includes(tool.name)),
+  );
+
+  const dataTools = computed(() =>
+    uniqueTools.filter((tool) =>
+      ["Pandas", "scikit-learn", "Plotly"].includes(tool.name),
+    ),
+  );
+
+  const devTools = computed(() =>
+    uniqueTools.filter((tool) =>
+      ["Git", "NodeJS", "GitHub"].includes(tool.name),
+    ),
+  );
+</script>
+
 <template>
   <section class="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <!-- Languages Section -->
@@ -64,7 +116,7 @@
           :href="tool.URL"
           target="_blank"
           rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+          class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
         >
           <img
             :src="tool.image"
@@ -91,7 +143,7 @@
           :href="tool.URL"
           target="_blank"
           rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+          class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
         >
           <img
             :src="tool.image"
@@ -118,7 +170,7 @@
           :href="tool.URL"
           target="_blank"
           rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+          class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
         >
           <img
             :src="tool.image"
@@ -145,7 +197,7 @@
           :href="tool.URL"
           target="_blank"
           rel="noopener"
-          class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+          class="flex items-center space-x-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
         >
           <img
             :src="tool.image"
@@ -163,57 +215,3 @@
     </section>
   </section>
 </template>
-
-<script lang="ts" setup>
-  import { TOOLS } from "~/data/tools";
-
-  // Remove duplicates by name
-  const uniqueTools = TOOLS.filter(
-    (tool, index, self) =>
-      index === self.findIndex((t) => t.name === tool.name),
-  );
-
-  // Categorize tools
-  const languageTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["Go", "Python", "Javascript", "Typescript"].includes(tool.name),
-    ),
-  );
-
-  const frameworkTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      [
-        "VueJS",
-        "Nuxt",
-        // "NextJS",
-        "NestJS",
-        "TailwindCSS",
-        // "ExpressJS",
-      ].includes(tool.name),
-    ),
-  );
-
-  const cloudTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["Docker", "GitHub Actions", "Ansible"].includes(tool.name),
-    ),
-  );
-
-  const databaseTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["PostgreSQL", "MySQL", "Redis"].includes(tool.name),
-    ),
-  );
-
-  const dataTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["Pandas", "scikit-learn", "Plotly"].includes(tool.name),
-    ),
-  );
-
-  const devTools = computed(() =>
-    uniqueTools.filter((tool) =>
-      ["Git", "NodeJS", "GitHub"].includes(tool.name),
-    ),
-  );
-</script>
