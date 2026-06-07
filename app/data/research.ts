@@ -50,7 +50,7 @@ export const RESEARCH_PAPERS: ResearchPaper[] = [
     year: 2025,
     abstract:
       "This study investigates COVID-19 vulnerability across Nigeria, moving beyond traditional urban-focused analyses to map risks in diverse geographic contexts. The research identifies key socioeconomic and health infrastructure factors that contribute to vulnerability patterns, providing insights for targeted public health interventions across both urban and rural areas.",
-    pdfUrl: "https://openreview.net/pdf?id=TzOB9D4q3l",
+    pdfUrl: "https://neurips.cc/virtual/2025/loc/san-diego/133847",
     arxivUrl: "https://arxiv.org/abs/2509.05398",
     tags: [
       "Public Health",
