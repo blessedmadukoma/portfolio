@@ -19,7 +19,7 @@
 
     <div class="flex-1 overflow-y-auto pt-2">
       <component :is="activeTab" v-if="activeTab" />
-      <navs-projects v-else />
+      <navs-blog v-else />
     </div>
   </section>
 </template>

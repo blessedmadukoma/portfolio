@@ -20,7 +20,7 @@
   // useBlogPosts();
 
   useHead({
-    title: "BM | Portfolio",
+    title: "Blessed M.",
     meta: [
       {
         name: "description",
@@ -30,7 +30,7 @@
       {
         name: "keywords",
         content:
-          "Blessed Madukoma, portfolio, Software Engineer, AI Engineer, projects, contact",
+          "Blessed Madukoma, portfolio, Software Engineer, Research Engineer, projects, contact",
       },
       { name: "author", content: "Blessed Madukoma" },
       { property: "og:title", content: "Blessed Madukoma | Portfolio" },

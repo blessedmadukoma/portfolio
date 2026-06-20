@@ -11,9 +11,9 @@ type NavBarComponentMap = {
 };
 
 export const NavBarComponents: NavBarComponentMap = {
-  projects: Projects,
+  thoughts: Blog,
   experience: Experience,
   research: Research,
-  blog: Blog,
+  projects: Projects,
   tools: Tools,
 };

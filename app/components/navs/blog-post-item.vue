@@ -263,12 +263,12 @@
         </div>
 
         <!-- Description (native posts) -->
-        <p
+        <!-- <p
           v-if="post.description"
           class="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-1"
         >
           {{ post.description }}
-        </p>
+        </p> -->
 
         <!-- Read-time + views + tags -->
         <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
@@ -277,7 +277,7 @@
             class="flex items-center gap-1 px-2 py-[2px] rounded-full text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-white/70 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700"
           >
             <icons-book />
-            {{ post.readTimeInMinutes }} min read
+            {{ post.readTimeInMinutes }} minutes read
           </span>
 
           <span
