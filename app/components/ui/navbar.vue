@@ -3,10 +3,12 @@
   import { NavBarComponents } from "~/pkg/enums";
 
   const activeTabKey = ref<string | null>(
-    Object.keys(NavBarComponents)[0] ?? null
+    Object.keys(NavBarComponents)[0] ?? null,
   );
   const activeTab = shallowRef<Component | null>(
-    activeTabKey.value ? markRaw(NavBarComponents[activeTabKey.value]) : null
+    activeTabKey.value
+      ? markRaw(NavBarComponents[activeTabKey.value] as Component)
+      : null,
   );
 
   const emit = defineEmits<{
@@ -24,7 +26,7 @@
   <section>
     <nav aria-label="Portfolio sections">
       <ul
-        class="inline-flex h-10 w-full lg:w-fit items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-1 gap-1"
+        class="inline-flex h-10 w-fit rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-1 gap-1"
         role="tablist"
       >
         <li

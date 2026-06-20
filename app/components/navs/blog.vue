@@ -64,7 +64,7 @@
           on the same path.
         </span>
 
-        <a
+        <!-- <a
           class="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline transition-colors py-2"
           target="_blank"
           href="https://mblessed.hashnode.dev"
@@ -72,7 +72,7 @@
           View All Posts ({{
             data?.data?.publication?.posts?.edges.length || 0
           }})
-        </a>
+        </a> -->
       </h2>
 
       <!-- Obsidian/native posts -->

@@ -5,32 +5,25 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: "Missing path" });
   }
 
-  const repoUrl = process.env.OBSIDIAN_VAULT_REPO_URL ?? "";
-  const patMatch = repoUrl.match(/https?:\/\/([^@]+)@/);
-  const pat = patMatch?.[1] ?? "";
+  const token = process.env.GITLAB_TOKEN ?? "";
+  const projectId = process.env.GITLAB_PROJECT_ID ?? "";
 
-  if (!pat) {
-    throw createError({ statusCode: 500, statusMessage: "GitHub token not configured" });
+  if (!token || !projectId) {
+    throw createError({ statusCode: 500, statusMessage: "GitLab token not configured" });
   }
 
-  // Use the GitHub Contents API with Accept: application/vnd.github.v3.raw
-  // This returns raw binary content and works correctly with private repos.
-  // raw.githubusercontent.com only works unauthenticated for public repos.
-  const encodedPath = path.split("/").map(encodeURIComponent).join("/");
-  const apiUrl = `https://api.github.com/repos/blessedmadukoma/obsidian-vault/contents/${encodedPath}?ref=main`;
+  const encodedPath = encodeURIComponent(path);
+  const apiUrl = `https://gitlab.com/api/v4/projects/${projectId}/repository/files/${encodedPath}/raw?ref=main`;
 
   let response: Response;
   try {
     response = await fetch(apiUrl, {
       headers: {
-        Authorization: `Bearer ${pat}`,
-        Accept: "application/vnd.github.v3.raw",
-        "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "portfolio-image-proxy",
+        "PRIVATE-TOKEN": token,
       },
     });
   } catch {
-    throw createError({ statusCode: 502, statusMessage: "Failed to reach GitHub API" });
+    throw createError({ statusCode: 502, statusMessage: "Failed to reach GitLab API" });
   }
 
   if (!response.ok) {

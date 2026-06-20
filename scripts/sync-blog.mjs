@@ -1,6 +1,6 @@
 /**
  * Fetches only the blog posts from the private Obsidian vault via the
- * GitHub Contents API (no full git clone). Run before `nuxt dev` / `nuxt build`.
+ * GitLab Repository API (no full git clone). Run before `nuxt dev` / `nuxt build`.
  */
 
 import { mkdir, writeFile, rm, readFile } from "node:fs/promises";
@@ -31,39 +31,74 @@ async function loadEnv() {
 
 await loadEnv();
 
-const REPO_URL = process.env.OBSIDIAN_VAULT_REPO_URL ?? "";
-const patMatch = REPO_URL.match(/https?:\/\/([^@]+)@/);
-const TOKEN = patMatch?.[1] ?? "";
-const OWNER = "blessedmadukoma";
-const REPO = "obsidian-vault";
+const TOKEN = process.env.GITLAB_TOKEN ?? "";
+const PROJECT_ID = process.env.GITLAB_PROJECT_ID ?? "";
 const BRANCH = "main";
 const SOURCE_PATH = "Blogs - Published";
+const GITLAB_API = `https://gitlab.com/api/v4/projects/${PROJECT_ID}/repository`;
 
-if (!TOKEN) {
-  console.error("❌  No GitHub token found in OBSIDIAN_VAULT_REPO_URL");
+if (!TOKEN || !PROJECT_ID) {
+  console.error("❌  GITLAB_TOKEN and GITLAB_PROJECT_ID must be set");
   process.exit(1);
 }
 
-// ── GitHub API helpers ────────────────────────────────────────────────────────
+// ── GitLab API helpers ────────────────────────────────────────────────────────
 const HEADERS = {
-  Authorization: `Bearer ${TOKEN}`,
-  Accept: "application/vnd.github+json",
-  "X-GitHub-Api-Version": "2022-11-28",
+  "PRIVATE-TOKEN": TOKEN,
   "User-Agent": "nuxt-blog-sync",
 };
 
-function encodePath(p) {
-  return p.split("/").map(encodeURIComponent).join("/");
-}
+const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|tiff?)$/i;
 
-async function githubRequest(path) {
-  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodePath(path)}?ref=${BRANCH}`;
+async function listDirectory(path) {
+  const url = `${GITLAB_API}/tree?path=${encodeURIComponent(path)}&ref=${BRANCH}&per_page=100`;
   const res = await fetch(url, { headers: HEADERS });
   if (!res.ok) {
     const body = await res.text();
-    throw new Error(`GitHub API ${res.status} for "${path}": ${body}`);
+    throw new Error(`GitLab API ${res.status} for "${path}": ${body}`);
   }
   return res.json();
+}
+
+async function getRawFile(path) {
+  const encodedPath = encodeURIComponent(path);
+  const url = `${GITLAB_API}/files/${encodedPath}/raw?ref=${BRANCH}`;
+  const res = await fetch(url, { headers: HEADERS });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`GitLab API ${res.status} for "${path}": ${body}`);
+  }
+  return res.text();
+}
+
+// Build a filename → full repo path index from the git tree.
+// Obsidian wiki-links store only the bare filename; the tree API lets us
+// resolve "cover.png" → "Blogs - Published/images/obsidian-blog/cover.png".
+async function buildImageIndex() {
+  const index = new Map();
+  const prefix = `${SOURCE_PATH}/images/`;
+  let page = 1;
+
+  while (true) {
+    const url = `${GITLAB_API}/tree?recursive=true&ref=${BRANCH}&per_page=100&page=${page}`;
+    const res = await fetch(url, { headers: HEADERS });
+    if (!res.ok) {
+      console.warn("⚠️  Could not fetch git tree — bare image filenames may not resolve correctly");
+      return index;
+    }
+    const items = await res.json();
+    for (const item of items) {
+      if (item.type === "blob" && item.path.startsWith(prefix) && IMAGE_EXT.test(item.path)) {
+        const filename = item.path.split("/").pop();
+        if (!index.has(filename)) index.set(filename, item.path);
+      }
+    }
+    const nextPage = res.headers.get("X-Next-Page");
+    if (!nextPage) break;
+    page = parseInt(nextPage, 10);
+  }
+
+  return index;
 }
 
 /**
@@ -75,7 +110,6 @@ async function githubRequest(path) {
  *   ![[image.png|527]]      → ![](image.png)
  *   ![[image.png|alt|527]]  → ![alt](image.png)
  */
-const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|tiff?)$/i;
 
 // Estimate reading time (minutes) from the post body (post-frontmatter text).
 // Strips code blocks, images, and markdown syntax before counting words at 200 wpm.
@@ -97,28 +131,6 @@ function injectReadingTime(markdown) {
   if (closeIdx === -1) return markdown;
   const minutes = estimateReadingTime(markdown.slice(closeIdx + 4));
   return `${markdown.slice(0, closeIdx)}\nreadingTime: ${minutes}${markdown.slice(closeIdx)}`;
-}
-
-// Build a filename → full repo path index from the git tree.
-// Obsidian wiki-links store only the bare filename; the tree API lets us
-// resolve "cover.png" → "Blogs - Published/images/obsidian-blog/cover.png".
-async function buildImageIndex() {
-  const url = `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`;
-  const res = await fetch(url, { headers: HEADERS });
-  if (!res.ok) {
-    console.warn("⚠️  Could not fetch git tree — bare image filenames may not resolve correctly");
-    return new Map();
-  }
-  const { tree } = await res.json();
-  const index = new Map();
-  const prefix = `${SOURCE_PATH}/images/`;
-  for (const item of tree) {
-    if (item.type === "blob" && item.path.startsWith(prefix) && IMAGE_EXT.test(item.path)) {
-      const filename = item.path.split("/").pop();
-      if (!index.has(filename)) index.set(filename, item.path); // first match wins
-    }
-  }
-  return index;
 }
 
 // Step 1: convert Obsidian ![[file.png|width]] embeds to standard markdown
@@ -157,33 +169,23 @@ function rewriteImageUrls(markdown, imageIndex) {
   });
 }
 
-async function downloadMarkdown(githubPath, localPath, imageIndex) {
-  const meta = await githubRequest(githubPath);
-
-  let raw;
-  if (meta.size > 1_000_000) {
-    const r = await fetch(meta.download_url, { headers: { Authorization: `Bearer ${TOKEN}` } });
-    if (!r.ok) throw new Error(`Failed to download ${githubPath}`);
-    raw = await r.text();
-  } else {
-    raw = Buffer.from(meta.content.replace(/\n/g, ""), "base64").toString("utf8");
-  }
-
+async function downloadMarkdown(gitlabPath, localPath, imageIndex) {
+  const raw = await getRawFile(gitlabPath);
   const transformed = injectReadingTime(rewriteImageUrls(transformObsidianImages(raw.trimStart()), imageIndex));
   await mkdir(dirname(localPath), { recursive: true });
   await writeFile(localPath, transformed, "utf8");
 }
 
 // ── sync ─────────────────────────────────────────────────────────────────────
-console.log("🔄  Syncing blog posts from GitHub Contents API…");
+console.log("🔄  Syncing blog posts from GitLab Repository API…");
 
 const [items, imageIndex] = await Promise.all([
-  githubRequest(SOURCE_PATH),
+  listDirectory(SOURCE_PATH),
   buildImageIndex(),
 ]);
 
 if (!Array.isArray(items)) {
-  console.error("❌  Expected a directory listing from GitHub, got a single file.");
+  console.error("❌  Expected a directory listing from GitLab, got unexpected response.");
   process.exit(1);
 }
 
@@ -192,7 +194,8 @@ console.log(`  📷  Indexed ${imageIndex.size} image(s)`);
 await rm(OUT_DIR, { recursive: true, force: true });
 await mkdir(OUT_DIR, { recursive: true });
 
-const mdFiles = items.filter((i) => i.type === "file" && i.name.endsWith(".md"));
+// GitLab uses "blob" for files (GitHub used "file")
+const mdFiles = items.filter((i) => i.type === "blob" && i.name.endsWith(".md"));
 
 await Promise.all(
   mdFiles.map(async (item) => {
