@@ -277,7 +277,7 @@
             class="flex items-center gap-1 px-2 py-[2px] rounded-full text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-white/70 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700"
           >
             <icons-book />
-            {{ post.readTimeInMinutes }} minutes read
+            {{ post.readTimeInMinutes }} minutes
           </span>
 
           <span
