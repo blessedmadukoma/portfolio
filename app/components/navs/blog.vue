@@ -25,12 +25,12 @@
 <template>
   <section class="space-y-3 mr-6">
     <section class="space-y-2">
-      <h2 class="flex justify-between items-start">
+      <h2 class="flex justify-between items-center">
         <span
-          class="hidden md:block w-10/12 py-2 text-sm text-zinc-600 dark:text-zinc-400"
+          class="hidden md:block py-2 text-sm text-zinc-600 dark:text-zinc-400"
         >
-          I write about software, data, ML &amp; AI systems, academia, and
-          startups.
+          I write about software engineering, production AI systems, research,
+          and startups.
           <span class="relative inline-block font-bold">
             <svg
               class="rough-annotation"
@@ -60,8 +60,7 @@
             </svg>
             <span style="position: relative; z-index: 1">Why:</span>
           </span>
-          to deeply understand what I'm learning and make it easier for others
-          on the same path.
+          Writing helps me learn deeply and share what I discover.
         </span>
 
         <!-- <a
