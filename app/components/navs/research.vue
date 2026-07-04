@@ -44,7 +44,7 @@
         </span>
         <span
           v-else
-          class="flex-shrink-0 px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 whitespace-nowrap"
+          class="flex-shrink-0 px-2 py-0.5 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 whitespace-nowrap"
         >
           Published
         </span>
@@ -66,7 +66,7 @@
       <!-- Venue (published only) -->
       <div
         v-if="paper.status === 'published'"
-        class="text-xs text-zinc-500 dark:text-zinc-400 !mt-2"
+        class="text-xs text-zinc-500 dark:text-zinc-400 !mt-1"
       >
         <p>
           <span class="font-medium">{{ paper.conference }}</span>
@@ -77,12 +77,12 @@
 
       <!-- Abstract -->
       <p
-        class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed !mt-1"
+        class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed !mt-0.5"
         v-html="paper.abstract"
       ></p>
 
       <!-- Tags -->
-      <div class="flex flex-wrap gap-1.5">
+      <div class="flex flex-wrap gap-1.5 !mt-1">
         <span
           v-for="tag in paper.tags"
           :key="tag"

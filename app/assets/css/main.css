@@ -8,6 +8,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Smooth theme transitions — applied globally so all elements change in sync */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
 @keyframes spin-slow {
   from {
     transform: rotate(0deg);
@@ -19,12 +29,6 @@ body {
 
 .animate-spin-slow {
   animation: spin-slow 18s linear infinite;
-}
-
-.theme-transition {
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
 }
 
 .fade-enter-active,

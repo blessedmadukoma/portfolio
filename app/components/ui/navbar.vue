@@ -34,7 +34,7 @@
           :key="key"
           @click="setActiveTab(key, component)"
           :class="[
-            'px-3 py-1 text-sm rounded-md capitalize cursor-pointer transition-all duration-300 ease-out',
+            'px-3 py-1 text-sm rounded-md capitalize cursor-pointer transition-[background-color,color,box-shadow] duration-200 ease-out',
             activeTabKey === String(key)
               ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm font-medium'
               : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100',
