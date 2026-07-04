@@ -43,6 +43,7 @@ export default defineNuxtConfig({
   ssr: true,
   colorMode: {
     classSuffix: "",
+    preference: "system",
   },
   analytics: {
     mode: "production", // or 'auto'

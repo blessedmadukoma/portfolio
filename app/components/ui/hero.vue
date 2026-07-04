@@ -1,12 +1,7 @@
 <script setup lang="ts">
   const colorMode = useColorMode();
 
-  const isDark = computed(() => {
-    if (import.meta.client) {
-      return colorMode.value === "dark";
-    }
-    return true; // Default to dark on server to match client initial render
-  });
+  const isDark = computed(() => colorMode.value === "dark");
 
   const toggleTheme = () => {
     colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
@@ -32,58 +27,37 @@
     </h1>
 
     <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-      <!-- <span>
-        Systems-focused software engineer
-        <b>building reliable, observable data systems</b>. I work across Go and
-        Python, designing infrastructure and pipelines that make complex data
-        measurable, trustworthy, and operational in production. Current work
-        includes athletics performance
-        <a
-          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
-          href="https://athletics-performance.mblessed.space"
-          target="_blank"
-          >anomaly detection</a
-        >
-        research and
-        <a
-          href="https://sedge.app"
-          target="_blank"
-          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
-          >Sedge</a
-        >, a data-intelligence platform for observable data products.
-      </span> -->
       <span>
-        Systems-focused software engineer
-        <b
-          >building reliable, observable data systems, analytics infrastructure,
-          and ML-driven products</b
-        >
-        with Go and Python.
+        Systems-focused researcher and software engineer building
+        <strong
+          >production AI systems, data systems, and analytics
+          infrastructure</strong
+        >.
+        <!-- with Go and Python. -->
         <br />
-        Current work includes athletics performance
+        My current work includes
         <a
           class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
           href="https://athletics-performance.mblessed.space"
           target="_blank"
-          >anomaly detection</a
         >
+          athletics performance anomaly detection
+        </a>
         research and
         <a
           href="https://sedge.app"
           target="_blank"
           class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
           >Sedge</a
-        >, a data-intelligence platform for observable data products.
+        >, a platform for building reliable, data-driven applications.
       </span>
-
-      <br />
-      <span>
-        Interested in how systems behave after deployment?
+      <span class="block mt-2">
+        Curious about my research direction?
         <button
           @click="showModal = true"
           class="ml-1 underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
         >
-          View my research statement
+          Read my research statement
         </button>
       </span>
     </p>

@@ -9,7 +9,7 @@
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-sun h-4 w-4 text-zinc-100 transition-all"
+    class="lucide lucide-sun h-4 w-4 text-zinc-600 dark:text-zinc-300 transition-all"
   >
     <circle cx="12" cy="12" r="4"></circle>
     <path d="M12 2v2"></path>

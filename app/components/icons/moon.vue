@@ -9,7 +9,7 @@
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-moon h-4 w-4 text-zinc-900 transition-all"
+    class="lucide lucide-moon h-4 w-4 text-zinc-600 dark:text-zinc-300 transition-all"
   >
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
   </svg>
