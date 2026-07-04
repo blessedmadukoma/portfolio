@@ -74,8 +74,8 @@
                     rel="noopener noreferrer"
                     class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                   >
-                    Carnegie Mellon University Africa
-                  </a> </strong
+                    Carnegie Mellon University</a
+                  ></strong
                 >. Working on large-scale analytical systems has shaped my
                 broader research interests toward
                 <strong>software engineering for production AI systems</strong>,
