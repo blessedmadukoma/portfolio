@@ -51,8 +51,8 @@
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                 >
-                  current research
-                </a>
+                  current research</a
+                >
                 investigates
                 <strong>
                   performance anomaly detection in large-scale athletics data
