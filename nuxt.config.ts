@@ -37,6 +37,10 @@ export default defineNuxtConfig({
             dark: "vitesse-dark", // dark mode (.dark class from color-mode)
           },
         },
+        toc: {
+          depth: 3,
+          searchDepth: 3,
+        },
       },
     },
   },
