@@ -18,22 +18,39 @@
   const flatten = (links: TocLink[]): TocLink[] =>
     links.flatMap((link) => [link, ...(link.children ? flatten(link.children) : [])]);
 
+  // How close to the top of the viewport a heading must be to count as "reached".
+  const TOP_OFFSET = 100;
+
   onMounted(() => {
     const headings = flatten(props.links)
-      .map((link) => document.getElementById(link.id))
-      .filter((el): el is HTMLElement => el !== null);
+      .map((link) => ({ id: link.id, el: document.getElementById(link.id) }))
+      .filter((h): h is { id: string; el: HTMLElement } => h.el !== null);
 
     if (!headings.length) return;
 
-    observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
-        if (visible) activeId.value = visible.target.id;
-      },
-      { rootMargin: "-96px 0px -70% 0px", threshold: 0 },
-    );
+    // Recompute from scratch each time instead of trusting which single entry
+    // fired: the active section is the last heading (in document order) that
+    // has scrolled past TOP_OFFSET, or none if we're still above the first one.
+    const updateActive = () => {
+      let current: string | null = null;
+      for (const heading of headings) {
+        if (heading.el.getBoundingClientRect().top <= TOP_OFFSET) {
+          current = heading.id;
+        } else {
+          break;
+        }
+      }
+      activeId.value = current;
+    };
 
-    headings.forEach((heading) => observer!.observe(heading));
+    updateActive();
+
+    observer = new IntersectionObserver(updateActive, {
+      rootMargin: `-${TOP_OFFSET}px 0px -100% 0px`,
+      threshold: 0,
+    });
+
+    headings.forEach((heading) => observer!.observe(heading.el));
   });
 
   onBeforeUnmount(() => observer?.disconnect());
@@ -43,7 +60,7 @@
   <nav
     v-if="links.length"
     aria-label="Table of contents"
-    class="hidden md:block sticky top-8 self-start max-h-[calc(100vh-4rem)] overflow-y-auto pr-2"
+    class="max-h-[calc(100vh-10rem)] overflow-y-auto pr-2"
   >
     <p
       class="text-xs font-bold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500 mb-2"
