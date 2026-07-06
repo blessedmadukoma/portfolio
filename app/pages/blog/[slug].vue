@@ -30,13 +30,38 @@
   <section class="min-h-screen py-8">
     <div class="max-w-5xl mx-auto w-full px-4 py-6">
       <div class="md:grid md:grid-cols-[200px_1fr] md:gap-10">
-        <ui-table-of-contents :links="post?.body?.toc?.links ?? []" />
-
-        <div class="max-w-2xl space-y-6">
-          <!-- Back link -->
+        <!-- Sidebar: Back link + TOC, stays visible while the article scrolls -->
+        <div class="hidden md:flex md:flex-col md:gap-6 md:sticky md:top-14 md:self-start">
           <NuxtLink
             to="/"
             class="inline-flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M19 12H5" />
+              <path d="m12 5-7 7 7 7" />
+            </svg>
+            Back
+          </NuxtLink>
+
+          <ui-table-of-contents :links="post?.body?.toc?.links ?? []" />
+        </div>
+
+        <div class="max-w-2xl space-y-6">
+          <!-- Back link (mobile only; desktop uses the sidebar copy above) -->
+          <NuxtLink
+            to="/"
+            class="md:hidden inline-flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
