@@ -19,7 +19,7 @@
   }
 
   const { views, recordView } = usePostViews(slug);
-  onMounted(recordView);
+  onNuxtReady(recordView);
 
   useHead({
     title: post.value ? `${post.value.title} | BM` : "Post | BM",
@@ -94,10 +94,10 @@
             </h1>
             <div class="flex items-center gap-1.5 text-sm text-zinc-500 dark:text-zinc-400">
               <span v-if="post.date">{{ formatDate(post.date as string) }}</span>
-              <span v-if="post.date && (post.readingTime || views)">·</span>
+              <span v-if="post.date && (post.readingTime || views != null)">·</span>
               <span v-if="post.readingTime">{{ post.readingTime }} min read</span>
-              <span v-if="post.readingTime && views">·</span>
-              <span v-if="views">{{ views }} {{ views === 1 ? 'view' : 'views' }}</span>
+              <span v-if="post.readingTime && views != null">·</span>
+              <span v-if="views != null">{{ views }} {{ views === 1 ? 'view' : 'views' }}</span>
             </div>
           </div>
 

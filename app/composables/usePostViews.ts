@@ -1,6 +1,6 @@
 export function usePostViews(slug: string) {
   const { data, refresh } = useFetch<{ views: number }>(`/api/views/${slug}`);
-  const views = computed(() => data.value?.views ?? 0);
+  const views = computed(() => data.value?.views ?? null);
 
   async function recordView() {
     // sessionStorage persists through refreshes in the same tab but resets
