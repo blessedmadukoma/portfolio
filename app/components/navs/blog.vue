@@ -7,7 +7,11 @@
   } from "~/composables/useBlogPosts";
 
   // const { posts, pending, error, data } = useBlogPosts();
-  const { data: nativePosts } = await useNativePosts();
+  // Not awaited: Nuxt still resolves this before finishing the SSR render
+  // (see normalizedObsidian's `?? []` below), but not awaiting here avoids
+  // making this component an async-setup component, which sidesteps a
+  // documented Vue/Nuxt hydration fragility with nested Suspense boundaries.
+  const { data: nativePosts } = useNativePosts();
   // Non-blocking: view counts populate reactively after posts render
   const { data: viewCounts } = useFetch<Record<string, number>>("/api/views");
 
