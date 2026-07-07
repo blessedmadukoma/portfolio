@@ -281,10 +281,9 @@
           </span>
 
           <span
-            v-if="post.views != null"
             class="px-2 py-[2px] rounded-full text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-white/70 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700"
           >
-            {{ post.views.toLocaleString() }} reads
+            {{ (post.views ?? 0).toLocaleString() }} reads
           </span>
 
           <span

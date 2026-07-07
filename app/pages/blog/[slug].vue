@@ -94,10 +94,10 @@
             </h1>
             <div class="flex items-center gap-1.5 text-sm text-zinc-500 dark:text-zinc-400">
               <span v-if="post.date">{{ formatDate(post.date as string) }}</span>
-              <span v-if="post.date && (post.readingTime || views != null)">·</span>
+              <span v-if="post.date">·</span>
               <span v-if="post.readingTime">{{ post.readingTime }} min read</span>
-              <span v-if="post.readingTime && views != null">·</span>
-              <span v-if="views != null">{{ views }} {{ views === 1 ? 'view' : 'views' }}</span>
+              <span v-if="post.readingTime">·</span>
+              <span>{{ views ?? 0 }} {{ (views ?? 0) === 1 ? 'view' : 'views' }}</span>
             </div>
           </div>
 
