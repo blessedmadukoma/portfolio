@@ -1,6 +1,10 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+  // Temporary: unminify the production error stack trace so we can pinpoint
+  // the still-unresolved hydration crash instead of guessing from minified
+  // function names. Safe to remove once the crash is diagnosed and fixed.
+  sourcemap: { client: true },
   css: ["~/assets/css/main.css"],
   app: {
     head: {
