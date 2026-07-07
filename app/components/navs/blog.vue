@@ -1,12 +1,12 @@
 <script lang="ts" setup>
   import {
-    normalizeHashnodePost,
+    // normalizeHashnodePost,
     normalizeObsidianPost,
-    useBlogPosts,
+    // useBlogPosts,
     useNativePosts,
   } from "~/composables/useBlogPosts";
 
-  const { posts, pending, error, data } = useBlogPosts();
+  // const { posts, pending, error, data } = useBlogPosts();
   const { data: nativePosts } = await useNativePosts();
   // Non-blocking: view counts populate reactively after posts render
   const { data: viewCounts } = useFetch<Record<string, number>>("/api/views");
@@ -17,9 +17,9 @@
       return { ...normalized, views: viewCounts.value?.[normalized.slug] };
     }),
   );
-  const normalizedHashnode = computed(() =>
-    posts.value.map((e) => normalizeHashnodePost(e.node)),
-  );
+  // const normalizedHashnode = computed(() =>
+  //   posts.value.map((e) => normalizeHashnodePost(e.node)),
+  // );
 </script>
 
 <template>
@@ -81,7 +81,9 @@
         :post="post"
       />
 
-      <!-- Hashnode: loading -->
+      <!--
+      Hashnode loader disabled — see commented-out script above.
+
       <div
         v-if="pending"
         class="text-center py-8 flex flex-col items-center justify-center"
@@ -111,7 +113,6 @@
         </p>
       </div>
 
-      <!-- Hashnode: error -->
       <div v-else-if="error" class="py-6 text-center space-y-2">
         <p class="text-sm text-zinc-500 dark:text-zinc-400">
           {{ error.message }}
@@ -125,7 +126,6 @@
         </a>
       </div>
 
-      <!-- Hashnode posts -->
       <template v-else>
         <NavsBlogPostItem
           v-for="post in normalizedHashnode"
@@ -133,6 +133,7 @@
           :post="post"
         />
       </template>
+      -->
     </section>
   </section>
 </template>
