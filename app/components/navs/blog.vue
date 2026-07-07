@@ -1,12 +1,12 @@
 <script lang="ts" setup>
   import {
-    // normalizeHashnodePost,
+    normalizeHashnodePost,
     normalizeObsidianPost,
-    // useBlogPosts,
+    useBlogPosts,
     useNativePosts,
   } from "~/composables/useBlogPosts";
 
-  // const { posts, pending, error, data } = useBlogPosts();
+  const { posts, pending, error, data } = useBlogPosts();
   // Not awaited: Nuxt still resolves this before finishing the SSR render
   // (see normalizedObsidian's `?? []` below), but not awaiting here avoids
   // making this component an async-setup component, which sidesteps a
@@ -21,9 +21,9 @@
       return { ...normalized, views: viewCounts.value?.[normalized.slug] };
     }),
   );
-  // const normalizedHashnode = computed(() =>
-  //   posts.value.map((e) => normalizeHashnodePost(e.node)),
-  // );
+  const normalizedHashnode = computed(() =>
+    posts.value.map((e) => normalizeHashnodePost(e.node)),
+  );
 </script>
 
 <template>
@@ -67,7 +67,7 @@
           Writing helps me learn deeply and share what I discover.
         </span>
 
-        <!-- <a
+        <a
           class="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline transition-colors py-2"
           target="_blank"
           href="https://mblessed.hashnode.dev"
@@ -75,7 +75,7 @@
           View All Posts ({{
             data?.data?.publication?.posts?.edges.length || 0
           }})
-        </a> -->
+        </a>
       </h2>
 
       <!-- Obsidian/native posts -->
@@ -84,9 +84,6 @@
         :key="post.id"
         :post="post"
       />
-
-      <!--
-      Hashnode loader disabled — see commented-out script above.
 
       <div
         v-if="pending"
@@ -137,7 +134,6 @@
           :post="post"
         />
       </template>
-      -->
     </section>
   </section>
 </template>

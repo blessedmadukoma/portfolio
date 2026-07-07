@@ -138,7 +138,7 @@ export function useBlogPosts() {
       let response: GraphQLResponse;
       try {
         response = await $fetch<GraphQLResponse>(
-          process.env.NUXT_PUBLIC_API_HASHNODE_URL ?? "",
+          useRuntimeConfig().public.apiHashnodeUrl,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

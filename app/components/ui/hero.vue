@@ -21,8 +21,8 @@
         class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-500 transition-colors duration-200 cursor-pointer"
         :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
       >
-        <icons-sun v-if="isDark" />
-        <icons-moon v-else />
+        <icons-sun class="hidden dark:block" />
+        <icons-moon class="block dark:hidden" />
       </button>
     </h1>
 

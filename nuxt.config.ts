@@ -49,6 +49,11 @@ export default defineNuxtConfig({
     },
   },
   ssr: true,
+  runtimeConfig: {
+    public: {
+      apiHashnodeUrl: "",
+    },
+  },
   colorMode: {
     classSuffix: "",
     preference: "system",

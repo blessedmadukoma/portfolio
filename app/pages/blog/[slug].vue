@@ -1,10 +1,30 @@
 <script setup lang="ts">
   import { formatDate, obsidianImageToProxy } from "~/composables/useBlogPosts";
 
+  definePageMeta({
+    validate: async (route) => {
+      const slug = route.params.slug as string;
+      const bySlug = await queryCollection("blog")
+        .where("slug", "=", slug)
+        .first();
+      if (bySlug) return true;
+      const byStem = await queryCollection("blog")
+        .where("stem", "LIKE", `%/${slug}`)
+        .first();
+      if (byStem) return true;
+      return { statusCode: 404, statusMessage: "Post not found" };
+    },
+  });
+
   const route = useRoute();
   const slug = route.params.slug as string;
 
-  const { data: post } = await useAsyncData(`blog-${slug}`, async () => {
+  // Not awaited: Vue's SSR renderer still resolves this via onServerPrefetch
+  // before calling this component's render function (same pattern as
+  // navs/blog.vue), keeping this component's setup() synchronous and
+  // avoiding the async-setup-component + implicit <Suspense> hydration
+  // fragility. Existence is already guaranteed by `validate` above.
+  const { data: post } = useAsyncData(`blog-${slug}`, async () => {
     const bySlug = await queryCollection("blog")
       .where("slug", "=", slug)
       .first();
@@ -14,15 +34,11 @@
       .first();
   });
 
-  if (!post.value) {
-    throw createError({ statusCode: 404, statusMessage: "Post not found" });
-  }
-
   const { views, recordView } = usePostViews(slug);
   onNuxtReady(recordView);
 
   useHead({
-    title: post.value ? `${post.value.title} | BM` : "Post | BM",
+    title: () => (post.value ? `${post.value.title} | BM` : "Post | BM"),
   });
 </script>
 
