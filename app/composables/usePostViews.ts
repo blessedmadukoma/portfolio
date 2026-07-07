@@ -1,5 +1,5 @@
 export function usePostViews(slug: string) {
-  const { data, refresh } = useFetch<{ views: number }>(`/api/views/${slug}`);
+  const { data } = useFetch<{ views: number }>(`/api/views/${slug}`);
   const views = computed(() => data.value?.views ?? null);
 
   async function recordView() {
@@ -8,8 +8,9 @@ export function usePostViews(slug: string) {
     const key = `viewed:${slug}`;
     if (sessionStorage.getItem(key)) return;
     sessionStorage.setItem(key, "1");
-    await $fetch(`/api/views/${slug}`, { method: "POST" });
-    await refresh();
+    data.value = await $fetch<{ views: number }>(`/api/views/${slug}`, {
+      method: "POST",
+    });
   }
 
   return { views, recordView };
