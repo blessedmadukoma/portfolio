@@ -158,6 +158,9 @@ function rewriteImageUrls(markdown, imageIndex) {
     if (!clean.includes("/")) {
       // Bare filename — resolve via the git tree index
       fullPath = imageIndex.get(clean) ?? `${SOURCE_PATH}/images/${clean}`;
+    } else if (clean.startsWith(`${SOURCE_PATH}/`)) {
+      // Obsidian sometimes emits the full vault-relative path — already correct
+      fullPath = clean;
     } else {
       // Has a subfolder — root under SOURCE_PATH/images/ if not already there
       fullPath = clean.startsWith("images/")
