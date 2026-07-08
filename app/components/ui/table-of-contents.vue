@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { onBeforeUnmount, onMounted, ref } from "vue";
+  import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
   interface TocLink {
     id: string;
@@ -13,7 +13,8 @@
   }>();
 
   const activeId = ref<string | null>(null);
-  let observer: IntersectionObserver | null = null;
+  const navRef = ref<HTMLElement | null>(null);
+  let onScroll: (() => void) | null = null;
 
   const flatten = (links: TocLink[]): TocLink[] =>
     links.flatMap((link) => [link, ...(link.children ? flatten(link.children) : [])]);
@@ -45,20 +46,39 @@
 
     updateActive();
 
-    observer = new IntersectionObserver(updateActive, {
-      rootMargin: `-${TOP_OFFSET}px 0px -100% 0px`,
-      threshold: 0,
-    });
-
-    headings.forEach((heading) => observer!.observe(heading.el));
+    // Drive active-heading detection off real scroll position, throttled to
+    // at most once per animation frame — IntersectionObserver's batched
+    // callback scheduling lagged noticeably behind fast scrolling.
+    let ticking = false;
+    onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateActive();
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
   });
 
-  onBeforeUnmount(() => observer?.disconnect());
+  onBeforeUnmount(() => {
+    if (onScroll) window.removeEventListener("scroll", onScroll);
+  });
+
+  // Keep the active link visible inside the TOC's own scroll container as
+  // the reader scrolls the article.
+  watch(activeId, async (id) => {
+    if (!id || !navRef.value) return;
+    await nextTick();
+    const link = navRef.value.querySelector<HTMLAnchorElement>(`a[href="#${CSS.escape(id)}"]`);
+    link?.scrollIntoView({ block: "nearest", behavior: "auto" });
+  });
 </script>
 
 <template>
   <nav
     v-if="links.length"
+    ref="navRef"
     aria-label="Table of contents"
     class="max-h-[calc(100vh-10rem)] overflow-y-auto pr-2"
   >
