@@ -92,7 +92,7 @@
 
             <p class="text-zinc-800 dark:text-zinc-300 mb-2">
               My long-term research lies at the intersection of
-              <strong>software engineering and production AI.</strong>
+              <strong>software engineering and production AI (SE4AI).</strong>
               Rather than developing larger or more capable models, I'm
               interested in how AI-enabled software can be continuously
               evaluated and engineered to remain reliable as models, prompts,
