@@ -20,6 +20,7 @@ export interface NativePost {
   tags?: string[];
   image?: string;
   readingTime?: number;
+  draft?: boolean;
 }
 
 export interface NormalizedPost {
@@ -172,7 +173,8 @@ export function useBlogPosts() {
 }
 
 export function useNativePosts() {
-  return useAsyncData("obsidian-posts", () =>
-    queryCollection("blog").order("date", "DESC").all(),
-  );
+  return useAsyncData("obsidian-posts", async () => {
+    const posts = await queryCollection("blog").order("date", "DESC").all();
+    return posts.filter((post) => !post.draft);
+  });
 }

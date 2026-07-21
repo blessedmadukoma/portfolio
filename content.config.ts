@@ -11,6 +11,7 @@ export default defineContentConfig({
         tags: z.array(z.string()).optional(),
         image: z.string().optional(),
         readingTime: z.number().optional(),
+        draft: z.boolean().optional().default(false),
       }),
     }),
   },
