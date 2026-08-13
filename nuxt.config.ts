@@ -49,11 +49,6 @@ export default defineNuxtConfig({
     },
   },
   ssr: true,
-  runtimeConfig: {
-    public: {
-      apiHashnodeUrl: "",
-    },
-  },
   colorMode: {
     classSuffix: "",
     preference: "system",
@@ -68,12 +63,9 @@ export default defineNuxtConfig({
   },
   nitro: {
     storage: {
-      views:
-        process.env.VERCEL && process.env.KV_REST_API_URL
-          ? { driver: "vercel-kv" }
-          : process.env.VERCEL
-            ? { driver: "memory" } // KV not connected yet — views won't persist but won't crash
-            : { driver: "fs", base: "./.data/views" },
+      // Production view counts use Vercel KV directly for atomic updates.
+      // This filesystem mount supports local development without KV.
+      views: { driver: "fs", base: "./.data/views" },
     },
   },
 });

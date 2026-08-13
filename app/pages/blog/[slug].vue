@@ -35,7 +35,13 @@
   });
 
   const { views, recordView } = usePostViews(slug);
-  onNuxtReady(recordView);
+  let viewTimer: ReturnType<typeof setTimeout> | undefined;
+  onNuxtReady(() => {
+    viewTimer = window.setTimeout(recordView, 5_000);
+  });
+  onBeforeUnmount(() => {
+    if (viewTimer) window.clearTimeout(viewTimer);
+  });
 
   useHead({
     title: () => (post.value ? `${post.value.title} | BM` : "Post | BM"),

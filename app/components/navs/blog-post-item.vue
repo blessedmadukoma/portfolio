@@ -16,12 +16,6 @@
       hoverShadow: "hover:shadow-[0_4px_16px_rgba(120,90,180,0.08)]",
       label: "Obsidian",
     },
-    hashnode: {
-      border: "border-[#dce8dd] dark:border-[#3a5240]",
-      hoverBorder: "hover:border-[#bed4bf]",
-      hoverShadow: "hover:shadow-[0_4px_16px_rgba(82,117,91,0.08)]",
-      label: "Hashnode",
-    },
     "x-article": {
       border: "border-[#e8e4de] dark:border-zinc-700",
       hoverBorder: "hover:border-[#d8d2cb]",
@@ -59,25 +53,6 @@
       :height="64"
       class="absolute -right-3 -bottom-3 text-black/[0.04] dark:text-white/[0.04] pointer-events-none"
     />
-    <svg
-      v-else-if="post.type === 'hashnode'"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="absolute -right-3 -bottom-3 h-16 w-16 text-black/[0.04] dark:text-white/[0.04] pointer-events-none"
-      aria-hidden="true"
-    >
-      <path
-        d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"
-      />
-      <path d="M8 10v4" />
-      <path d="M12 10v2" />
-      <path d="M16 10v6" />
-    </svg>
     <svg
       v-else-if="post.type === 'x-article'"
       viewBox="0 0 24 24"
@@ -188,26 +163,6 @@
           class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500 mb-1"
         >
           <icons-obsidian v-if="post.type === 'native'" />
-          <svg
-            v-else-if="post.type === 'hashnode'"
-            xmlns="http://www.w3.org/2000/svg"
-            width="11"
-            height="11"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path
-              d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"
-            />
-            <path d="M8 10v4" />
-            <path d="M12 10v2" />
-            <path d="M16 10v6" />
-          </svg>
           <svg
             v-else-if="post.type === 'x-article'"
             viewBox="0 0 24 24"

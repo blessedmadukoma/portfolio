@@ -1,14 +1,15 @@
-import { useStorage } from "#imports";
+export default defineEventHandler(async (event) => {
+  setResponseHeader(event, "Cache-Control", "private, no-store, max-age=0");
 
-export default defineEventHandler(async () => {
-  const storage = useStorage("views");
-  const keys = await storage.getKeys();
-  const result: Record<string, number> = {};
-  await Promise.all(
-    keys.map(async (key) => {
-      const slug = key.replace("view:", "");
-      result[slug] = (await storage.getItem<number>(key)) ?? 0;
+  const [posts, localViews] = await Promise.all([
+    queryCollection(event, "blog").select("stem", "slug", "views").all(),
+    getAllLocalViewCounts(),
+  ]);
+
+  return Object.fromEntries(
+    posts.map((post) => {
+      const slug = postSlug(post);
+      return [slug, baselineViews(post) + (localViews[slug] ?? 0)];
     }),
   );
-  return result;
 });

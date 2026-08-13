@@ -17,7 +17,6 @@
 
 <script setup lang="ts">
   definePageMeta({ layout: "home" });
-  // useBlogPosts();
 
   useHead({
     title: "Blessed M.",

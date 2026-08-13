@@ -11,6 +11,10 @@ export default defineContentConfig({
         tags: z.array(z.string()).optional(),
         image: z.string().optional(),
         readingTime: z.number().optional(),
+        views: z.number().int().nonnegative().optional(),
+        // Historical import metadata. Hashnode is not queried at runtime.
+        source: z.literal("hashnode").optional(),
+        hashnodeId: z.string().optional(),
         draft: z.boolean().optional().default(false),
       }),
     }),

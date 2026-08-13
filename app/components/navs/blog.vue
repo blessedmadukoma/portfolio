@@ -1,12 +1,6 @@
 <script lang="ts" setup>
-  import {
-    normalizeHashnodePost,
-    normalizeObsidianPost,
-    useBlogPosts,
-    useNativePosts,
-  } from "~/composables/useBlogPosts";
+  import { normalizeObsidianPost, useNativePosts } from "~/composables/useBlogPosts";
 
-  const { posts, pending, error, data } = useBlogPosts();
   // Not awaited: Nuxt still resolves this before finishing the SSR render
   // (see normalizedObsidian's `?? []` below), but not awaiting here avoids
   // making this component an async-setup component, which sidesteps a
@@ -21,13 +15,10 @@
       return { ...normalized, views: viewCounts.value?.[normalized.slug] };
     }),
   );
-  const normalizedHashnode = computed(() =>
-    posts.value.map((e) => normalizeHashnodePost(e.node)),
-  );
 </script>
 
 <template>
-  <section class="space-y-3 mr-6">
+  <section id="writing" class="space-y-3 mr-6">
     <section class="space-y-2">
       <h2 class="flex justify-between items-center">
         <span
@@ -67,73 +58,20 @@
           Writing helps me learn deeply and share what I discover.
         </span>
 
-        <a
+        <NuxtLink
+          to="/blog"
           class="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline transition-colors py-2"
-          target="_blank"
-          href="https://mblessed.hashnode.dev"
         >
-          View All Posts ({{
-            data?.data?.publication?.posts?.edges.length || 0
-          }})
-        </a>
+          All Posts ({{ normalizedObsidian.length }})
+        </NuxtLink>
       </h2>
 
-      <!-- Obsidian/native posts -->
+      <!-- Hashnode is decommissioned; every post is served from Obsidian. -->
       <NavsBlogPostItem
         v-for="post in normalizedObsidian"
         :key="post.id"
         :post="post"
       />
-
-      <div
-        v-if="pending"
-        class="text-center py-8 flex flex-col items-center justify-center"
-      >
-        <svg
-          class="animate-spin h-6 w-6 text-zinc-500 mb-2"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            class="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            stroke-width="4"
-          />
-          <path
-            class="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-          />
-        </svg>
-        <p class="text-zinc-500 dark:text-zinc-400">
-          Loading Hashnode posts...
-        </p>
-      </div>
-
-      <div v-else-if="error" class="py-6 text-center space-y-2">
-        <p class="text-sm text-zinc-500 dark:text-zinc-400">
-          {{ error.message }}
-        </p>
-        <a
-          href="https://mblessed.hashnode.dev"
-          target="_blank"
-          class="text-xs underline text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors"
-        >
-          View Hashnode posts →
-        </a>
-      </div>
-
-      <template v-else>
-        <NavsBlogPostItem
-          v-for="post in normalizedHashnode"
-          :key="post.id"
-          :post="post"
-        />
-      </template>
     </section>
   </section>
 </template>

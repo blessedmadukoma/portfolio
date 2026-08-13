@@ -2919,15 +2919,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@upstash/redis@npm:^1.34.0, @upstash/redis@npm:^1.38.0":
-  version: 1.38.0
-  resolution: "@upstash/redis@npm:1.38.0"
-  dependencies:
-    uncrypto: "npm:^0.1.3"
-  checksum: 10c0/02ebad2f2cfe089b6ede9ab818e679840a2006e56ad440c36fdf11f04ce23b024e14cc11dd812816de9ad6dea83c5cfabe3a9f2d81f7aa8e8f464746baf586f3
-  languageName: node
-  linkType: hard
-
 "@vercel/analytics@npm:^2.0.1":
   version: 2.0.1
   resolution: "@vercel/analytics@npm:2.0.1"
@@ -2958,15 +2949,6 @@ __metadata:
     vue-router:
       optional: true
   checksum: 10c0/c788c03d0f072f6f2be52d3f6f4f0680d2343f0d8765a759a044204223b14a6e14b285d0c5d5d05c0b66d4419746c5b245656ebdc48398328d85d96f1ede982b
-  languageName: node
-  linkType: hard
-
-"@vercel/kv@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@vercel/kv@npm:3.0.0"
-  dependencies:
-    "@upstash/redis": "npm:^1.34.0"
-  checksum: 10c0/55c0e197967c21161ba7bbee02be821975d8e900f2ca3946c9bfaefa1cb5ce94f9ce04aef07aca027c8c39a5ab2e9a2b54edc5c6b617c994d2a8fddfd9d55dc8
   languageName: node
   linkType: hard
 
@@ -3740,11 +3722,8 @@ __metadata:
     "@nuxtjs/tailwindcss": "npm:^6.12.1"
     "@tailwindcss/typography": "npm:^0.5.19"
     "@types/node": "npm:^25.5.0"
-    "@upstash/redis": "npm:^1.38.0"
     "@vercel/analytics": "npm:^2.0.1"
-    "@vercel/kv": "npm:^3.0.0"
     better-sqlite3: "npm:^12.10.0"
-    graphql: "npm:^16.14.0"
     mermaid: "npm:^11.4.0"
     nuxt: "npm:^4.0.1"
     tailwindcss: "npm:^3.4.15"
@@ -6160,13 +6139,6 @@ __metadata:
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: 10c0/386d011a553e02bc594ac2ca0bd6d9e4c22d7fa8cfbfc448a6d148c59ea881b092db9dbe3547ae4b88e55f1b01f7c4a2ecc53b310c042793e63aa44cf6c257f2
-  languageName: node
-  linkType: hard
-
-"graphql@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "graphql@npm:16.14.0"
-  checksum: 10c0/baaa368fcfeb7bf2cdf94b9f31bf916e97eaa9e7e82148a7046f31cbd49b760b38190f22393b024cbdd9ca0f4f46287515de0136b6a0cc164074b36ad7b50618
   languageName: node
   linkType: hard
 
@@ -11622,11 +11594,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A^5.9.3#optional!builtin<compat/typescript>":
   version: 5.9.3
-  resolution: "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=cef18b"
+  resolution: "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/6f7e53bf0d9702350deeb6f35e08b69cbc8b958c33e0ec77bdc0ad6a6c8e280f3959dcbfde6f5b0848bece57810696489deaaa53d75de3578ff255d168c1efbd
+  checksum: 10c0/ad09fdf7a756814dce65bc60c1657b40d44451346858eea230e10f2e95a289d9183b6e32e5c11e95acc0ccc214b4f36289dcad4bf1886b0adb84d711d336a430
   languageName: node
   linkType: hard
 
