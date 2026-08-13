@@ -1,8 +1,6 @@
 <template>
-  <a
-    href="https://mblessed.hashnode.dev/"
-    target="_blank"
-    rel="noopener noreferrer"
+  <NuxtLink
+    to="/blog"
     class="medium-link flex items-center gap-[6px] hover:text-[#111] dark:hover:text-zinc-100 transition-colors rounded-lg px-2.5 py-1.5 -ml-2.5 hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-[12.5px] font-medium text-[#6b6661] dark:text-zinc-400"
   >
     <svg
@@ -55,8 +53,8 @@
       <!-- anchor-point circle -->
       <circle class="pen-dot" cx="11" cy="11" r="2" />
     </svg>
-    Hashnode
-  </a>
+    Writing
+  </NuxtLink>
 </template>
 
 <script setup>

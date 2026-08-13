@@ -3,7 +3,7 @@
  * GitLab Repository API (no full git clone). Run before `nuxt dev` / `nuxt build`.
  */
 
-import { mkdir, writeFile, rm, readFile } from "node:fs/promises";
+import { mkdir, writeFile, rm, readFile, readdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -129,8 +129,10 @@ function injectReadingTime(markdown) {
   if (!markdown.startsWith("---")) return markdown;
   const closeIdx = markdown.indexOf("\n---", 3);
   if (closeIdx === -1) return markdown;
+  const frontmatter = markdown.slice(0, closeIdx);
+  if (/^readingTime\s*:/m.test(frontmatter)) return markdown;
   const minutes = estimateReadingTime(markdown.slice(closeIdx + 4));
-  return `${markdown.slice(0, closeIdx)}\nreadingTime: ${minutes}${markdown.slice(closeIdx)}`;
+  return `${frontmatter}\nreadingTime: ${minutes}${markdown.slice(closeIdx)}`;
 }
 
 // Step 1: convert Obsidian ![[file.png|width]] embeds to standard markdown
@@ -172,11 +174,11 @@ function rewriteImageUrls(markdown, imageIndex) {
   });
 }
 
-async function downloadMarkdown(gitlabPath, localPath, imageIndex) {
+async function renderMarkdown(gitlabPath, imageIndex) {
   const raw = await getRawFile(gitlabPath);
-  const transformed = injectReadingTime(rewriteImageUrls(transformObsidianImages(raw.trimStart()), imageIndex));
-  await mkdir(dirname(localPath), { recursive: true });
-  await writeFile(localPath, transformed, "utf8");
+  return injectReadingTime(
+    rewriteImageUrls(transformObsidianImages(raw.trimStart()), imageIndex),
+  );
 }
 
 // ── sync ─────────────────────────────────────────────────────────────────────
@@ -194,18 +196,36 @@ if (!Array.isArray(items)) {
 
 console.log(`  📷  Indexed ${imageIndex.size} image(s)`);
 
-await rm(OUT_DIR, { recursive: true, force: true });
 await mkdir(OUT_DIR, { recursive: true });
 
 // GitLab uses "blob" for files (GitHub used "file")
 const mdFiles = items.filter((i) => i.type === "blob" && i.name.endsWith(".md"));
 
+const remoteNames = new Set(mdFiles.map((item) => item.name));
+const existingNames = (await readdir(OUT_DIR, { withFileTypes: true }))
+  .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+  .map((entry) => entry.name);
+
 await Promise.all(
   mdFiles.map(async (item) => {
     const localPath = join(OUT_DIR, item.name);
-    await downloadMarkdown(item.path, localPath, imageIndex);
+    const transformed = await renderMarkdown(item.path, imageIndex);
+    const current = await readFile(localPath, "utf8").catch(() => null);
+    if (current === transformed) {
+      console.log(`  =  ${item.name}`);
+      return;
+    }
+    await writeFile(localPath, transformed, "utf8");
     console.log(`  ✓  ${item.name}`);
   })
+);
+
+const staleNames = existingNames.filter((name) => !remoteNames.has(name));
+await Promise.all(
+  staleNames.map(async (name) => {
+    await rm(join(OUT_DIR, name), { force: true });
+    console.log(`  −  ${name}`);
+  }),
 );
 
 console.log(`✅  Synced ${mdFiles.length} blog post(s) to content/blog/`);
