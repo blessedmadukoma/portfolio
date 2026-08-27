@@ -15,6 +15,25 @@
       return { ...normalized, views: viewCounts.value?.[normalized.slug] };
     }),
   );
+  const recentWriting = computed(() => normalizedObsidian.value.slice(0, 3));
+
+  const collections = [
+    {
+      title: "Research and experiments",
+      description: "Research questions, empirical studies, and negative results.",
+      to: "/blog?tag=Research",
+    },
+    {
+      title: "Agent systems",
+      description: "Tool use, execution boundaries, and reliable automation.",
+      to: "/blog?tag=ai-agents",
+    },
+    {
+      title: "Software and data systems",
+      description: "Engineering practice, infrastructure, and data work.",
+      to: "/blog?tag=data-engineering",
+    },
+  ];
 </script>
 
 <template>
@@ -24,8 +43,8 @@
         <span
           class="hidden md:block py-2 text-sm text-zinc-600 dark:text-zinc-400"
         >
-          I write about software engineering, production AI systems, research,
-          and startups.
+          Selected writing on research, agent systems, software engineering,
+          and data systems.
           <span class="relative inline-block font-bold">
             <svg
               class="rough-annotation"
@@ -55,7 +74,7 @@
             </svg>
             <span style="position: relative; z-index: 1">Why:</span>
           </span>
-          Writing helps me learn deeply and share what I discover.
+          Browse by topic or open the complete archive.
         </span>
 
         <NuxtLink
@@ -66,9 +85,27 @@
         </NuxtLink>
       </h2>
 
-      <!-- Hashnode is decommissioned; every post is served from Obsidian. -->
+      <div class="grid gap-2 md:grid-cols-3">
+        <NuxtLink
+          v-for="collection in collections"
+          :key="collection.title"
+          :to="collection.to"
+          class="rounded-lg border border-zinc-200 p-3 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
+        >
+          <h3 class="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+            {{ collection.title }}
+          </h3>
+          <p class="mt-1 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+            {{ collection.description }}
+          </p>
+        </NuxtLink>
+      </div>
+
+      <h3 class="pt-2 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        Recent writing
+      </h3>
       <NavsBlogPostItem
-        v-for="post in normalizedObsidian"
+        v-for="post in recentWriting"
         :key="post.id"
         :post="post"
       />

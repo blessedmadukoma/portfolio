@@ -13,7 +13,7 @@ export interface NativePost {
   source?: "hashnode";
   hashnodeId?: string;
   draft?: boolean;
-  type?: "essay" | "experiment" | "learning-log" | "research-note";
+  type?: "engineering-note" | "essay" | "experiment" | "learning-log" | "research-note";
   series?: string;
   part?: number;
   status?: "draft" | "published" | "archived";
