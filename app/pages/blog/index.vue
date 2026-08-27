@@ -27,6 +27,9 @@
       ? (value as ThoughtCategory)
       : "";
   });
+  const activeCategoryDetails = computed(() =>
+    activeCategory.value ? THOUGHT_CATEGORIES[activeCategory.value] : null,
+  );
   const categoryCounts = computed(() =>
     Object.fromEntries(
       categories.map(([category]) => [
@@ -86,9 +89,23 @@
         </NuxtLink>
 
         <div class="flex items-center justify-between gap-4">
-          <h1 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-            Thoughts
-          </h1>
+          <div>
+            <p
+              v-if="activeCategoryDetails"
+              class="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400"
+            >
+              Thoughts
+            </p>
+            <h1 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+              {{ activeCategoryDetails?.label ?? "Thoughts" }}
+            </h1>
+            <p
+              v-if="activeCategoryDetails"
+              class="mt-1 text-xs text-zinc-500 dark:text-zinc-400"
+            >
+              {{ activeCategoryDetails.description }}
+            </p>
+          </div>
 
           <span class="text-xs text-zinc-500 dark:text-zinc-400">
             {{ posts.length }} of {{ allPosts.length }} published
