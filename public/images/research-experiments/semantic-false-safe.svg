@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460" role="img" aria-labelledby="title desc">
+  <title id="title">False-safe decisions after changing the semantic extractor</title>
+  <desc id="desc">Bar chart comparing zero false-safe decisions from Qwen2.5 7B with five out of 112, or 4.46 percent, from Qwen2.5 3B. An error bar shows the 95 percent exact interval of 1.47 to 10.11 percent for the smaller model.</desc>
+  <rect width="900" height="460" fill="#ffffff"/>
+  <text x="70" y="42" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#18181b">A smaller extractor produced false-safe decisions</text>
+  <text x="70" y="70" font-family="Arial, sans-serif" font-size="15" fill="#52525b">False-safe verdicts among 112 unsafe cases where a binding error could change the result</text>
+  <line x1="100" y1="365" x2="840" y2="365" stroke="#a1a1aa"/><line x1="100" y1="100" x2="100" y2="365" stroke="#a1a1aa"/>
+  <g stroke="#e4e4e7"><line x1="100" y1="300" x2="840" y2="300"/><line x1="100" y1="235" x2="840" y2="235"/><line x1="100" y1="170" x2="840" y2="170"/><line x1="100" y1="105" x2="840" y2="105"/></g>
+  <g font-family="Arial, sans-serif" font-size="13" fill="#52525b"><text x="67" y="370">0%</text><text x="60" y="305">3%</text><text x="60" y="240">6%</text><text x="60" y="175">9%</text><text x="52" y="110">12%</text></g>
+  <rect x="260" y="361" width="150" height="4" fill="#a1a1aa"/><rect x="560" y="268" width="150" height="97" fill="#dc2626"/>
+  <line x1="635" y1="146" x2="635" y2="333" stroke="#18181b" stroke-width="2"/><line x1="620" y1="146" x2="650" y2="146" stroke="#18181b" stroke-width="2"/><line x1="620" y1="333" x2="650" y2="333" stroke="#18181b" stroke-width="2"/>
+  <g font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#18181b" text-anchor="middle"><text x="335" y="345">0.00%</text><text x="635" y="255">4.46%</text></g>
+  <g font-family="Arial, sans-serif" font-size="14" fill="#27272a" text-anchor="middle"><text x="335" y="395">Qwen2.5 7B</text><text x="335" y="415">baseline</text><text x="635" y="395">Qwen2.5 3B</text><text x="635" y="415">replacement</text></g>
+  <text x="660" y="155" font-family="Arial, sans-serif" font-size="13" fill="#52525b">95% exact interval: 1.47%–10.11%</text>
+</svg>
