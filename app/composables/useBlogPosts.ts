@@ -1,5 +1,14 @@
 export type PostType = "native" | "x-article" | "medium";
 export type ThoughtCategory = "research" | "engineering" | "building";
+export type ContentType = NonNullable<NativePost["type"]>;
+
+export const CONTENT_TYPE_LABELS: Record<ContentType, string> = {
+  "engineering-note": "Engineering note",
+  essay: "Essay",
+  experiment: "Research experiment",
+  "learning-log": "Learning record",
+  "research-note": "Research note",
+};
 
 export const THOUGHT_CATEGORIES: Record<
   ThoughtCategory,
@@ -109,9 +118,27 @@ const BUILDING_TAGS = new Set([
   "startup",
 ]);
 
+const TAG_ALIASES: Record<string, string> = {
+  go: "golang",
+  html: "html5",
+  "knowledge-management": "knowledge-management",
+  knowledgemanagement: "knowledge-management",
+  "production-ai-systems": "production-ai-systems",
+  "software-engineering-for-ai": "software-engineering-for-ai",
+};
+
+export function normalizeTag(tag: string): string {
+  const canonical = tag
+    .trim()
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, "-")
+    .toLowerCase();
+  return TAG_ALIASES[canonical] ?? canonical;
+}
+
 export function classifyThought(post: NativePost): ThoughtCategory {
   if (post.category) return post.category;
-  const tags = post.tags?.map((tag) => tag.toLowerCase()) ?? [];
+  const tags = post.tags?.map(normalizeTag) ?? [];
   if (tags.some((tag) => RESEARCH_TAGS.has(tag))) return "research";
   if (tags.some((tag) => BUILDING_TAGS.has(tag))) return "building";
   return "engineering";
@@ -128,7 +155,7 @@ export function normalizeObsidianPost(post: NativePost): NormalizedPost {
     description: post.description,
     date: post.date ?? "",
     image: obsidianImageToProxy(post.image),
-    tags: post.tags ?? [],
+    tags: [...new Set((post.tags ?? []).map(normalizeTag))],
     // Hashnode is decommissioned. Imported posts now render from Obsidian like
     // every other native post; `source` only preserves migration metadata.
     type: "native",
