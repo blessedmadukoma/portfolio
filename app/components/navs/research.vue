@@ -3,6 +3,7 @@
 
   const papers = ref(RESEARCH_PAPERS);
   const projects = ref(RESEARCH_PROJECTS);
+  const activeSection = ref<"projects" | "publications">("projects");
 
   const sortedPapers = computed(() => {
     return [...papers.value].sort((a, b) => {
@@ -16,6 +17,24 @@
 <template>
   <section class="space-y-4 mt-0">
     <section class="space-y-3">
+      <div class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-900/50">
+        <button
+          class="rounded-md px-3 py-1.5 text-xs transition-colors"
+          :class="activeSection === 'projects' ? 'bg-white font-medium text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'"
+          @click="activeSection = 'projects'"
+        >
+          Projects ({{ projects.length }})
+        </button>
+        <button
+          class="rounded-md px-3 py-1.5 text-xs transition-colors"
+          :class="activeSection === 'publications' ? 'bg-white font-medium text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'"
+          @click="activeSection = 'publications'"
+        >
+          Publications ({{ papers.length }})
+        </button>
+      </div>
+
+      <template v-if="activeSection === 'projects'">
       <div>
         <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           Research projects
@@ -54,11 +73,18 @@
           </span>
         </div>
       </div>
+      </template>
     </section>
 
-    <h2 class="pt-3 text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-      Publications
-    </h2>
+    <template v-if="activeSection === 'publications'">
+      <div>
+        <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+          Publications
+        </h2>
+        <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+          Peer-reviewed work and formal research outputs.
+        </p>
+      </div>
     <div
       v-for="(paper, id) in sortedPapers"
       :key="id"
@@ -149,5 +175,6 @@
         </a>
       </div>
     </div>
+    </template>
   </section>
 </template>
