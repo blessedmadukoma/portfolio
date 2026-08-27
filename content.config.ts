@@ -13,6 +13,7 @@ export default defineContentConfig({
         readingTime: z.number().optional(),
         views: z.number().int().nonnegative().optional(),
         type: z.enum(["engineering-note", "essay", "experiment", "learning-log", "research-note"]).optional(),
+        category: z.enum(["research", "engineering", "building"]).optional(),
         series: z.string().optional(),
         part: z.number().int().positive().optional(),
         status: z.enum(["draft", "published", "archived"]).optional(),

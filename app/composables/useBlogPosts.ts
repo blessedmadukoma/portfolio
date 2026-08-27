@@ -1,4 +1,23 @@
 export type PostType = "native" | "x-article" | "medium";
+export type ThoughtCategory = "research" | "engineering" | "building";
+
+export const THOUGHT_CATEGORIES: Record<
+  ThoughtCategory,
+  { label: string; description: string }
+> = {
+  research: {
+    label: "Research",
+    description: "Research questions, experiments, agent systems, and evidence.",
+  },
+  engineering: {
+    label: "Engineering",
+    description: "Software, infrastructure, data systems, and implementation work.",
+  },
+  building: {
+    label: "Building",
+    description: "Projects, career, learning systems, and working practice.",
+  },
+};
 
 export interface NativePost {
   stem: string;
@@ -14,6 +33,7 @@ export interface NativePost {
   hashnodeId?: string;
   draft?: boolean;
   type?: "engineering-note" | "essay" | "experiment" | "learning-log" | "research-note";
+  category?: ThoughtCategory;
   series?: string;
   part?: number;
   status?: "draft" | "published" | "archived";
@@ -37,6 +57,7 @@ export interface NormalizedPost {
   contentType?: NativePost["type"];
   series?: string;
   part?: number;
+  category: ThoughtCategory;
 }
 
 export function formatDate(dateString: string): string {
@@ -57,6 +78,43 @@ export function obsidianImageToProxy(src?: string) {
   const clean = src.replace(/^\//, "").replace(/^\.\//, "");
   const repoPath = clean.startsWith("images/") ? clean : `images/${clean}`;
   return `/api/blog-image?path=${encodeURIComponent(`Blogs - Published/${repoPath}`)}`;
+}
+
+const RESEARCH_TAGS = new Set([
+  "ai-agents",
+  "ai-coding-agents",
+  "continuous-evaluation",
+  "distribution-shift",
+  "interference",
+  "llm-serving",
+  "nondeterminism",
+  "null-result",
+  "production-ai-systems",
+  "research",
+  "silent-regressions",
+  "software-engineering-for-ai",
+  "sports-research",
+  "statistical-testing",
+  "systems",
+  "vllm",
+]);
+
+const BUILDING_TAGS = new Set([
+  "buildingandlearning",
+  "career",
+  "motivation",
+  "productivity",
+  "research-method",
+  "roadmap",
+  "startup",
+]);
+
+export function classifyThought(post: NativePost): ThoughtCategory {
+  if (post.category) return post.category;
+  const tags = post.tags?.map((tag) => tag.toLowerCase()) ?? [];
+  if (tags.some((tag) => RESEARCH_TAGS.has(tag))) return "research";
+  if (tags.some((tag) => BUILDING_TAGS.has(tag))) return "building";
+  return "engineering";
 }
 
 export function normalizeObsidianPost(post: NativePost): NormalizedPost {
@@ -81,6 +139,7 @@ export function normalizeObsidianPost(post: NativePost): NormalizedPost {
     contentType: post.type,
     series: post.series,
     part: post.part,
+    category: classifyThought(post),
   };
 }
 

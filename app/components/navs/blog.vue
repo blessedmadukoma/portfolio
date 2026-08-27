@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-  import { normalizeObsidianPost, useNativePosts } from "~/composables/useBlogPosts";
+  import {
+    THOUGHT_CATEGORIES,
+    type ThoughtCategory,
+    normalizeObsidianPost,
+    useNativePosts,
+  } from "~/composables/useBlogPosts";
 
   // Not awaited: Nuxt still resolves this before finishing the SSR render
   // (see normalizedObsidian's `?? []` below), but not awaiting here avoids
@@ -17,23 +22,12 @@
   );
   const recentWriting = computed(() => normalizedObsidian.value.slice(0, 3));
 
-  const collections = [
-    {
-      title: "Research and experiments",
-      description: "Research questions, empirical studies, and negative results.",
-      to: "/blog?tag=Research",
-    },
-    {
-      title: "Agent systems",
-      description: "Tool use, execution boundaries, and reliable automation.",
-      to: "/blog?tag=ai-agents",
-    },
-    {
-      title: "Software and data systems",
-      description: "Engineering practice, infrastructure, and data work.",
-      to: "/blog?tag=data-engineering",
-    },
-  ];
+  const collections = (Object.entries(THOUGHT_CATEGORIES) as Array<
+    [ThoughtCategory, (typeof THOUGHT_CATEGORIES)[ThoughtCategory]]
+  >).map(([category, details]) => ({
+    ...details,
+    to: `/blog?category=${category}`,
+  }));
 </script>
 
 <template>
