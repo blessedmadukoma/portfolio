@@ -52,6 +52,7 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
     preference: "system",
+    fallback: "light",
   },
   analytics: {
     mode: "production", // or 'auto'
