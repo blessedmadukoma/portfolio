@@ -88,6 +88,13 @@ body {
   text-decoration: none;
 }
 
+/* Tailwind Typography adds decorative backticks around inline code. Function
+   and field names should remain visually distinct without looking quoted. */
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none !important;
+}
+
 /* Shiki dual-theme: apply the correct token colors based on color mode class.
    Nuxt Content outputs colors as CSS variables in inline styles but does not
    inject the selectors that activate them — we do it here. */
