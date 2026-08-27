@@ -113,11 +113,6 @@
               need to safely and reliably automate real work?
             </blockquote>
 
-            <p class="text-zinc-800 dark:text-zinc-300 mt-4">
-              I am using a football tactical-analysis agent as a concrete
-              workload for studying tool use, execution state, evidence, and
-              failure. It is not yet a research result.
-            </p>
           </div>
         </div>
       </div>

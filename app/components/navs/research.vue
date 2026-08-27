@@ -3,7 +3,7 @@
 
   const papers = ref(RESEARCH_PAPERS);
   const projects = ref(RESEARCH_PROJECTS);
-  const activeSection = ref<"projects" | "publications">("projects");
+  const activeSection = ref<"projects" | "publications">("publications");
 
   const sortedPapers = computed(() => {
     return [...papers.value].sort((a, b) => {
@@ -72,6 +72,12 @@
             {{ tag }}
           </span>
         </div>
+        <NuxtLink
+          :to="project.href"
+          class="inline-flex text-xs font-medium text-zinc-700 underline underline-offset-4 transition-colors hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white"
+        >
+          Read the research record →
+        </NuxtLink>
       </div>
       </template>
     </section>

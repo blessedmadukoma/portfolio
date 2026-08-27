@@ -19,6 +19,7 @@ export interface ResearchProject {
   summary: string;
   finding: string;
   tags: string[];
+  href: string;
 }
 
 export const RESEARCH_PROJECTS: ResearchProject[] = [
@@ -30,6 +31,7 @@ export const RESEARCH_PROJECTS: ResearchProject[] = [
     finding:
       "Repeated traces reduced observed exposure misses, but the proposed frequency-based selector added too little value to support a new method claim.",
     tags: ["AI agents", "Regression testing", "Negative result", "tau2-bench"],
+    href: "/blog/can-old-agent-traces-guide-regression-testing",
   },
   {
     title: "Semantic Monitoring Under Component Evolution",
@@ -39,6 +41,7 @@ export const RESEARCH_PROJECTS: ResearchProject[] = [
     finding:
       "Model downsizing produced false-safe decisions despite schema-valid outputs; the pilot establishes a failure mode, not a general monitoring solution.",
     tags: ["AI systems", "Monitoring", "Component evolution", "Negative result"],
+    href: "/blog/can-safety-checker-trust-changed-ai-extractor",
   },
 ];
 

@@ -25,6 +25,7 @@
   const collections = (Object.entries(THOUGHT_CATEGORIES) as Array<
     [ThoughtCategory, (typeof THOUGHT_CATEGORIES)[ThoughtCategory]]
   >).map(([category, details]) => ({
+    category,
     ...details,
     to: `/blog?category=${category}`,
   }));
@@ -82,12 +83,12 @@
       <div class="grid gap-2 md:grid-cols-3">
         <NuxtLink
           v-for="collection in collections"
-          :key="collection.title"
+          :key="collection.category"
           :to="collection.to"
           class="rounded-lg border border-zinc-200 p-3 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
         >
           <h3 class="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-            {{ collection.title }}
+            {{ collection.label }}
           </h3>
           <p class="mt-1 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
             {{ collection.description }}
