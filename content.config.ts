@@ -12,6 +12,12 @@ export default defineContentConfig({
         image: z.string().optional(),
         readingTime: z.number().optional(),
         views: z.number().int().nonnegative().optional(),
+        type: z.enum(["essay", "experiment", "learning-log", "research-note"]).optional(),
+        series: z.string().optional(),
+        part: z.number().int().positive().optional(),
+        status: z.enum(["draft", "published", "archived"]).optional(),
+        featured: z.boolean().optional(),
+        portfolio: z.boolean().optional(),
         // Historical import metadata. Hashnode is not queried at runtime.
         source: z.literal("hashnode").optional(),
         hashnodeId: z.string().optional(),

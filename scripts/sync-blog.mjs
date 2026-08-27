@@ -60,6 +60,36 @@ async function listDirectory(path) {
   return res.json();
 }
 
+async function listMarkdownFiles(path = SOURCE_PATH) {
+  const items = await listDirectory(path);
+  const nested = await Promise.all(
+    items
+      .filter((item) => item.type === "tree")
+      .map((item) => listMarkdownFiles(item.path)),
+  );
+
+  return [
+    ...items.filter((item) => item.type === "blob" && item.name.endsWith(".md")),
+    ...nested.flat(),
+  ];
+}
+
+async function listLocalMarkdownFiles(path = OUT_DIR, prefix = "") {
+  const entries = await readdir(path, { withFileTypes: true }).catch(() => []);
+  const nested = await Promise.all(
+    entries
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => listLocalMarkdownFiles(join(path, entry.name), join(prefix, entry.name))),
+  );
+
+  return [
+    ...entries
+      .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+      .map((entry) => join(prefix, entry.name)),
+    ...nested.flat(),
+  ];
+}
+
 async function getRawFile(path) {
   const encodedPath = encodeURIComponent(path);
   const url = `${GITLAB_API}/files/${encodedPath}/raw?ref=${BRANCH}`;
@@ -184,47 +214,40 @@ async function renderMarkdown(gitlabPath, imageIndex) {
 // ── sync ─────────────────────────────────────────────────────────────────────
 console.log("🔄  Syncing blog posts from GitLab Repository API…");
 
-const [items, imageIndex] = await Promise.all([
-  listDirectory(SOURCE_PATH),
+const [mdFiles, imageIndex] = await Promise.all([
+  listMarkdownFiles(),
   buildImageIndex(),
 ]);
-
-if (!Array.isArray(items)) {
-  console.error("❌  Expected a directory listing from GitLab, got unexpected response.");
-  process.exit(1);
-}
 
 console.log(`  📷  Indexed ${imageIndex.size} image(s)`);
 
 await mkdir(OUT_DIR, { recursive: true });
-
-// GitLab uses "blob" for files (GitHub used "file")
-const mdFiles = items.filter((i) => i.type === "blob" && i.name.endsWith(".md"));
-
-const remoteNames = new Set(mdFiles.map((item) => item.name));
-const existingNames = (await readdir(OUT_DIR, { withFileTypes: true }))
-  .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
-  .map((entry) => entry.name);
+const remoteNames = new Set(
+  mdFiles.map((item) => item.path.slice(`${SOURCE_PATH}/`.length)),
+);
+const existingNames = await listLocalMarkdownFiles();
 
 await Promise.all(
   mdFiles.map(async (item) => {
-    const localPath = join(OUT_DIR, item.name);
+    const relativePath = item.path.slice(`${SOURCE_PATH}/`.length);
+    const localPath = join(OUT_DIR, relativePath);
     const transformed = await renderMarkdown(item.path, imageIndex);
     const current = await readFile(localPath, "utf8").catch(() => null);
     if (current === transformed) {
-      console.log(`  =  ${item.name}`);
+      console.log(`  =  ${relativePath}`);
       return;
     }
+    await mkdir(dirname(localPath), { recursive: true });
     await writeFile(localPath, transformed, "utf8");
-    console.log(`  ✓  ${item.name}`);
+    console.log(`  ✓  ${relativePath}`);
   })
 );
 
 const staleNames = existingNames.filter((name) => !remoteNames.has(name));
 await Promise.all(
-  staleNames.map(async (name) => {
-    await rm(join(OUT_DIR, name), { force: true });
-    console.log(`  −  ${name}`);
+  staleNames.map(async (relativePath) => {
+    await rm(join(OUT_DIR, relativePath), { force: true });
+    console.log(`  −  ${relativePath}`);
   }),
 );
 

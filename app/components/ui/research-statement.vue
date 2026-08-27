@@ -93,12 +93,12 @@
             <p class="text-zinc-800 dark:text-zinc-300 mb-2">
               My long-term research lies at the intersection of
               <strong>software engineering and production AI (SE4AI).</strong>
-              Rather than developing larger or more capable models, I'm
-              interested in how AI-enabled software can be continuously
-              evaluated and engineered to remain reliable as models, prompts,
-              tools, data, and operating environments evolve. My goal is to
-              understand how production AI systems should be evaluated,
-              monitored, and maintained throughout their operational lifecycle.
+              I study how AI-enabled software can be evaluated and engineered
+              to remain reliable as models, prompts, tools, data, and operating
+              environments evolve. I am now extending that work to stateful,
+              tool-using agents: systems that must gather evidence, act through
+              software tools, and recover safely when execution does not go to
+              plan.
             </p>
 
             <p
@@ -110,9 +110,27 @@
             <blockquote
               class="border-l-4 border-indigo-400 pl-4 mt-2 text-zinc-800 dark:text-zinc-100 italic"
             >
-              How do we engineer production AI systems that remain reliable as
-              they continuously evolve?
+              What systems and infrastructure do stateful, tool-using AI agents
+              need to safely and reliably automate real work?
             </blockquote>
+
+            <p class="text-zinc-800 dark:text-zinc-300 mt-4">
+              I am building a football tactical-analysis agent as a concrete
+              learning workload. It is not yet a research result. It gives me a
+              system in which to inspect tool use, execution state, evidence,
+              and failure. This direction aligns with the work of Columbia
+              University's
+              <a
+                href="https://daplab.cs.columbia.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+              >
+                Data, Agents, and Processes Lab
+              </a>,
+              which studies the infrastructure, evaluation, safety, and control
+              needed for trustworthy agent automation.
+            </p>
           </div>
         </div>
       </div>

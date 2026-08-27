@@ -13,6 +13,12 @@ export interface NativePost {
   source?: "hashnode";
   hashnodeId?: string;
   draft?: boolean;
+  type?: "essay" | "experiment" | "learning-log" | "research-note";
+  series?: string;
+  part?: number;
+  status?: "draft" | "published" | "archived";
+  featured?: boolean;
+  portfolio?: boolean;
 }
 
 export interface NormalizedPost {
@@ -28,6 +34,9 @@ export interface NormalizedPost {
   isExternal: boolean;
   readTimeInMinutes?: number;
   views?: number;
+  contentType?: NativePost["type"];
+  series?: string;
+  part?: number;
 }
 
 export function formatDate(dateString: string): string {
@@ -69,12 +78,15 @@ export function normalizeObsidianPost(post: NativePost): NormalizedPost {
     isExternal: false,
     readTimeInMinutes: post.readingTime,
     views: post.views,
+    contentType: post.type,
+    series: post.series,
+    part: post.part,
   };
 }
 
 export function useNativePosts() {
   return useAsyncData("obsidian-posts", async () => {
     const posts = await queryCollection("blog").order("date", "DESC").all();
-    return posts.filter((post) => !post.draft);
+    return posts.filter((post) => !post.draft && post.status !== "archived");
   });
 }
