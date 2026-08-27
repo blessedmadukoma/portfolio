@@ -13,6 +13,35 @@ export interface ResearchPaper {
   tags: string[];
 }
 
+export interface ResearchProject {
+  title: string;
+  status: string;
+  summary: string;
+  finding: string;
+  tags: string[];
+}
+
+export const RESEARCH_PROJECTS: ResearchProject[] = [
+  {
+    title: "Historical Trace Coverage for Regression Selection in Stochastic Tool-Using Agents",
+    status: "Completed empirical pilot",
+    summary:
+      "I tested whether historical execution traces can safely identify agent tasks that need rerunning after a tool implementation changes.",
+    finding:
+      "Repeated traces reduced observed exposure misses, but the proposed frequency-based selector added too little value to support a new method claim.",
+    tags: ["AI agents", "Regression testing", "Negative result", "tau2-bench"],
+  },
+  {
+    title: "Semantic Monitoring Under Component Evolution",
+    status: "Completed controlled pilot",
+    summary:
+      "I tested whether a deterministic safety monitor remains trustworthy when its upstream semantic extractor changes.",
+    finding:
+      "Model downsizing produced false-safe decisions despite schema-valid outputs; the pilot establishes a failure mode, not a general monitoring solution.",
+    tags: ["AI systems", "Monitoring", "Component evolution", "Negative result"],
+  },
+];
+
 export const RESEARCH_PAPERS: ResearchPaper[] = [
   {
     title:

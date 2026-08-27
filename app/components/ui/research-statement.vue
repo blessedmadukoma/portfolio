@@ -95,10 +95,9 @@
               <strong>software engineering and production AI (SE4AI).</strong>
               I study how AI-enabled software can be evaluated and engineered
               to remain reliable as models, prompts, tools, data, and operating
-              environments evolve. I am now extending that work to stateful,
-              tool-using agents: systems that must gather evidence, act through
-              software tools, and recover safely when execution does not go to
-              plan.
+              environments evolve. I am extending that work to stateful,
+              tool-using agents, with a focus on how execution state, evidence,
+              and recovery affect dependable automation.
             </p>
 
             <p
@@ -115,21 +114,9 @@
             </blockquote>
 
             <p class="text-zinc-800 dark:text-zinc-300 mt-4">
-              I am building a football tactical-analysis agent as a concrete
-              learning workload. It is not yet a research result. It gives me a
-              system in which to inspect tool use, execution state, evidence,
-              and failure. This direction aligns with the work of Columbia
-              University's
-              <a
-                href="https://daplab.cs.columbia.edu/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-              >
-                Data, Agents, and Processes Lab
-              </a>,
-              which studies the infrastructure, evaluation, safety, and control
-              needed for trustworthy agent automation.
+              I am using a football tactical-analysis agent as a concrete
+              workload for studying tool use, execution state, evidence, and
+              failure. It is not yet a research result.
             </p>
           </div>
         </div>
