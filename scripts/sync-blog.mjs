@@ -34,7 +34,12 @@ await loadEnv();
 const TOKEN = process.env.GITLAB_TOKEN ?? "";
 const PROJECT_ID = process.env.GITLAB_PROJECT_ID ?? "";
 const BRANCH = "main";
-const SOURCE_PATH = "Blogs - Published";
+const BLOG_SOURCE_PATH = "Blogs - Published";
+const PORTFOLIO_RESEARCH_FILES = [
+  "Research/08. AI Agent Systems Research/01. Completed Experiments/01-historical-trace-coverage-for-agent-regression-selection.md",
+  "Research/08. AI Agent Systems Research/01. Completed Experiments/02-semantic-monitoring-under-component-evolution.md",
+  "Research/08. AI Agent Systems Research/02. Current Projects/Football Tactical Analysis Agent/01. learning-what-an-agent-is.md",
+];
 const GITLAB_API = `https://gitlab.com/api/v4/projects/${PROJECT_ID}/repository`;
 
 if (!TOKEN || !PROJECT_ID) {
@@ -60,7 +65,7 @@ async function listDirectory(path) {
   return res.json();
 }
 
-async function listMarkdownFiles(path = SOURCE_PATH) {
+async function listMarkdownFiles(path = BLOG_SOURCE_PATH) {
   const items = await listDirectory(path);
   const nested = await Promise.all(
     items
@@ -106,7 +111,7 @@ async function getRawFile(path) {
 // resolve "cover.png" → "Blogs - Published/images/obsidian-blog/cover.png".
 async function buildImageIndex() {
   const index = new Map();
-  const prefix = `${SOURCE_PATH}/images/`;
+  const prefix = `${BLOG_SOURCE_PATH}/images/`;
   let page = 1;
 
   while (true) {
@@ -189,15 +194,15 @@ function rewriteImageUrls(markdown, imageIndex) {
     let fullPath;
     if (!clean.includes("/")) {
       // Bare filename — resolve via the git tree index
-      fullPath = imageIndex.get(clean) ?? `${SOURCE_PATH}/images/${clean}`;
-    } else if (clean.startsWith(`${SOURCE_PATH}/`)) {
+      fullPath = imageIndex.get(clean) ?? `${BLOG_SOURCE_PATH}/images/${clean}`;
+    } else if (clean.startsWith(`${BLOG_SOURCE_PATH}/`)) {
       // Obsidian sometimes emits the full vault-relative path — already correct
       fullPath = clean;
     } else {
       // Has a subfolder — root under SOURCE_PATH/images/ if not already there
       fullPath = clean.startsWith("images/")
-        ? `${SOURCE_PATH}/${clean}`
-        : `${SOURCE_PATH}/images/${clean}`;
+        ? `${BLOG_SOURCE_PATH}/${clean}`
+        : `${BLOG_SOURCE_PATH}/images/${clean}`;
     }
 
     return `![${alt}](/api/blog-image?path=${encodeURIComponent(fullPath)})`;
@@ -214,22 +219,35 @@ async function renderMarkdown(gitlabPath, imageIndex) {
 // ── sync ─────────────────────────────────────────────────────────────────────
 console.log("🔄  Syncing blog posts from GitLab Repository API…");
 
-const [mdFiles, imageIndex] = await Promise.all([
+const [publishedFiles, imageIndex] = await Promise.all([
   listMarkdownFiles(),
   buildImageIndex(),
 ]);
+const mdFiles = [
+  ...publishedFiles,
+  ...PORTFOLIO_RESEARCH_FILES.map((path) => ({
+    type: "blob",
+    path,
+    name: path.split("/").pop(),
+  })),
+];
 
 console.log(`  📷  Indexed ${imageIndex.size} image(s)`);
 
 await mkdir(OUT_DIR, { recursive: true });
-const remoteNames = new Set(
-  mdFiles.map((item) => item.path.slice(`${SOURCE_PATH}/`.length)),
-);
+function outputPathFor(gitlabPath) {
+  if (gitlabPath.startsWith(`${BLOG_SOURCE_PATH}/`)) {
+    return gitlabPath.slice(`${BLOG_SOURCE_PATH}/`.length);
+  }
+  return join("research", gitlabPath.split("/").pop());
+}
+
+const remoteNames = new Set(mdFiles.map((item) => outputPathFor(item.path)));
 const existingNames = await listLocalMarkdownFiles();
 
 await Promise.all(
   mdFiles.map(async (item) => {
-    const relativePath = item.path.slice(`${SOURCE_PATH}/`.length);
+    const relativePath = outputPathFor(item.path);
     const localPath = join(OUT_DIR, relativePath);
     const transformed = await renderMarkdown(item.path, imageIndex);
     const current = await readFile(localPath, "utf8").catch(() => null);
