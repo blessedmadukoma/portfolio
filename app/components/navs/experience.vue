@@ -35,8 +35,7 @@
   const toggleAwardDropdown = (id: number) => {
     openAwardDropdown.value = openAwardDropdown.value === id ? null : id;
   };
-  const openCertificate = (url: string, event: MouseEvent) => {
-    event.stopPropagation();
+  const openCertificate = (url: string) => {
     certificateModal.value = url;
   };
 </script>
@@ -277,7 +276,7 @@
               <button
                 v-if="award.certificateURL"
                 class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                @click="openCertificate(award.certificateURL, $event)"
+                @click.stop="openCertificate(award.certificateURL)"
               >
                 View certificate →
               </button>
@@ -288,28 +287,10 @@
     </section>
   </section>
 
-  <!-- Certificate modal -->
-  <Teleport to="body">
-    <Transition name="fade">
-      <div
-        v-if="certificateModal"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
-        @click="certificateModal = null"
-      >
-        <div class="relative max-w-3xl w-full" @click.stop>
-          <button
-            class="absolute -top-8 right-0 text-white/80 hover:text-white text-sm"
-            @click="certificateModal = null"
-          >
-            Close ✕
-          </button>
-          <img
-            :src="certificateModal"
-            alt="Certificate"
-            class="w-full rounded-lg shadow-2xl"
-          />
-        </div>
-      </div>
-    </Transition>
-  </Teleport>
+  <ui-image-modal
+    v-if="certificateModal"
+    :src="certificateModal"
+    alt="Certificate"
+    @close="certificateModal = null"
+  />
 </template>

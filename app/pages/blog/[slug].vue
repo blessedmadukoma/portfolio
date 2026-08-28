@@ -18,6 +18,7 @@
 
   const route = useRoute();
   const slug = route.params.slug as string;
+  const isCoverImageFocused = ref(false);
 
   // Not awaited: Vue's SSR renderer still resolves this via onServerPrefetch
   // before calling this component's render function (same pattern as
@@ -124,12 +125,19 @@
           </div>
 
           <!-- Cover image -->
-          <img
+          <button
             v-if="post?.image"
-            :src="obsidianImageToProxy(post.image as string)"
-            :alt="post.title"
-            class="w-full rounded-lg object-cover max-h-80"
-          />
+            type="button"
+            class="block w-full cursor-zoom-in"
+            :aria-label="`Focus image: ${post.title}`"
+            @click="isCoverImageFocused = true"
+          >
+            <img
+              :src="obsidianImageToProxy(post.image as string)"
+              :alt="post.title"
+              class="max-h-80 w-full rounded-lg object-cover"
+            />
+          </button>
 
           <!-- Post content -->
           <article
@@ -141,5 +149,12 @@
         </div>
       </div>
     </div>
+
+    <ui-image-modal
+      v-if="post?.image && isCoverImageFocused"
+      :src="obsidianImageToProxy(post.image as string)"
+      :alt="post.title"
+      @close="isCoverImageFocused = false"
+    />
   </section>
 </template>
