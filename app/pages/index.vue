@@ -36,7 +36,7 @@
       {
         property: "og:description",
         content:
-          "Discover innovative projects, cutting-edge skills & research, and connect with Blessed Madukoma — your next Software, AI/ML & Research Engineer.",
+          "Blessed Madukoma builds reliable software, data, and AI-enabled systems through research, engineering, and production-focused projects.",
       },
       { property: "og:type", content: "website" },
     ],

@@ -27,7 +27,7 @@
         role="dialog"
         aria-modal="true"
         :aria-label="alt"
-        @click="close"
+        @click.self="close"
       >
         <div class="pointer-events-none relative inline-block max-h-[88vh] max-w-[92vw]">
           <button

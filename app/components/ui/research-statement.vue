@@ -7,11 +7,12 @@
     <Teleport to="body">
       <div
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+        @click.self="emit('close')"
       >
         <div
-          class="relative bg-white dark:bg-zinc-900 rounded-lg shadow-lg px-10 py-4 max-w-3xl w-full text-sm mx-4 max-h-[90vh] overflow-y-auto"
+          class="relative bg-white dark:bg-zinc-900 rounded-lg shadow-lg px-10 py-6 max-w-4xl w-[94vw] text-sm mx-4 max-h-[92vh] overflow-y-auto"
         >
-          <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center justify-between mb-4">
             <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">
               Research &amp; Engineering Focus
             </h2>
@@ -25,48 +26,29 @@
             </button>
           </div>
 
-          <p class="text-zinc-800 dark:text-zinc-300 mb-3">
-            I design and study
-            <strong>production AI and data systems</strong>
-            that operate in real-world environments. My research explores how
-            software engineering principles, particularly
-            <strong>evaluation, reliability, and system design</strong>, help AI
-            systems remain dependable as models, users, and operating conditions
-            evolve after deployment.
-          </p>
-
-          <div class="mb-6">
-            <h3
-              class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-1"
-            >
-              Current Research
-            </h3>
-
-            <p class="text-zinc-800 dark:text-zinc-300 space-y-2">
-              <span class="block">
-                My
-                <a
-                  href="https://athletics-performance.mblessed.space/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                >
-                  current research</a
-                >
-                investigates
+          <div class="space-y-5">
+            <section>
+              <p class="text-zinc-800 dark:text-zinc-300">
+                I work on
                 <strong>
-                  performance anomaly detection in large-scale athletics data
-                </strong>
-                as a pathway toward automated integrity monitoring. The work
-                analyzes over one million competition records using statistical
-                and machine learning methods to identify abnormal performance
-                patterns. Beyond detection accuracy, it explores how analytical
-                systems can remain reliable under real-world decision-making
-                conditions.
-              </span>
+                  engineering reliable infrastructure for data-intensive,
+                  AI-enabled systems</strong
+                >. I care about what happens when AI components are connected to
+                real data, tools, services, and production workflows: what they
+                read, what they change, what they assume, and when their outputs
+                can still be trusted.
+              </p>
+            </section>
 
-              <span class="block">
-                This research is conducted at
+            <section>
+              <h3
+                class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-1"
+              >
+                Work So Far
+              </h3>
+
+              <p class="text-zinc-800 dark:text-zinc-300">
+                I am a Graduate Research Associate at
                 <strong>
                   <a
                     href="https://www.africa.engineering.cmu.edu/"
@@ -74,45 +56,70 @@
                     rel="noopener noreferrer"
                     class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                   >
-                    Carnegie Mellon University</a
+                    Carnegie Mellon University Africa</a
                   ></strong
-                >. Working on large-scale analytical systems has shaped my
-                broader research interests toward
-                <strong>software engineering for production AI systems</strong>,
-                particularly how AI systems are evaluated and maintained as they
-                evolve after deployment.
-              </span>
-            </p>
+                >, where I study the reliability of AI agents and production AI
+                systems after deployment.
+              </p>
 
-            <h3
-              class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-1 mt-4"
-            >
-              Research Direction
-            </h3>
+              <p class="text-zinc-800 dark:text-zinc-300 mt-2">
+                I previously built a
+                <a
+                  href="https://athletics-performance.mblessed.space/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                >
+                  benchmarking platform</a
+                >
+                for performance anomaly detection in athletics, covering 1.5M+
+                competition records, 19,000+ competitions, and 14 detection
+                methods. The work was published at
+                <strong>IEEE SDS 2026</strong> and received a
+                <strong>Best Paper Honorable Mention</strong>.
+              </p>
 
-            <p class="text-zinc-800 dark:text-zinc-300 mb-2">
-              My long-term research lies at the intersection of
-              <strong>software engineering and production AI (SE4AI).</strong>
-              I study how AI-enabled software can be evaluated and engineered
-              to remain reliable as models, prompts, tools, data, and operating
-              environments evolve. I am extending that work to stateful,
-              tool-using agents, with a focus on how execution state, evidence,
-              and recovery affect dependable automation.
-            </p>
+              <p class="text-zinc-800 dark:text-zinc-300 mt-2">
+                That project <strong>shaped my current direction</strong> as the
+                difficult part was not only building a detector, but showing
+                whether the results meant anything and making each flag
+                traceable to the evidence behind it.
+              </p>
+            </section>
 
-            <p
-              class="italic text-indigo-700 dark:text-indigo-300 font-medium mt-4"
-            >
-              My core research question:
-            </p>
+            <section>
+              <h3
+                class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-1"
+              >
+                Current Focus
+              </h3>
 
-            <blockquote
-              class="border-l-4 border-indigo-400 pl-4 mt-2 text-zinc-800 dark:text-zinc-100 italic"
-            >
-              What systems and infrastructure do stateful, tool-using AI agents
-              need to safely and reliably automate real work?
-            </blockquote>
+              <p class="text-zinc-800 dark:text-zinc-300">
+                My current focus is
+                <strong>reliable agentic data systems:</strong> systems where AI
+                agents query data, call tools, compute results, keep state, and
+                produce conclusions that may become stale or invalid when the
+                data, tools, or execution environment changes. I currently use
+                sports analytics as a concrete workload for studying those
+                infrastructure problems.
+              </p>
+            </section>
 
+            <section>
+              <p
+                class="italic text-indigo-700 dark:text-indigo-300 font-medium"
+              >
+                The question I keep coming back to:
+              </p>
+
+              <blockquote
+                class="border-l-4 border-indigo-400 pl-4 mt-2 text-zinc-800 dark:text-zinc-100 italic"
+              >
+                What should a system record about AI-enabled work over data, so
+                its results can be trusted, replayed, repaired, or invalidated
+                when something changes?
+              </blockquote>
+            </section>
           </div>
         </div>
       </div>
