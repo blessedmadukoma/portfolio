@@ -8,6 +8,7 @@
   };
 
   const showModal = ref(false);
+  const showMap = ref(false);
 </script>
 
 <template>
@@ -57,11 +58,18 @@
           @click="showModal = true"
           class="ml-1 underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
         >
-          Read my research statement
-        </button>
+          Read my research statement</button
+        >, or see
+        <button
+          @click="showMap = true"
+          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
+        >
+          how I think about my work</button
+        >.
       </span>
     </p>
 
     <ui-research-statement v-if="showModal" @close="showModal = false" />
+    <ui-research-map v-if="showMap" @close="showMap = false" />
   </section>
 </template>
