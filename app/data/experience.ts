@@ -1,21 +1,21 @@
 export const WORK_EXPERIENCE = [
-  // {
-  //   company: "CMU-Africa: Languages and Spatial Technologies Laboratory",
-  //   position: "Graduate Research Associate",
-  //   startDate: "June 2026",
-  //   endDate: null,
-  //   description:
-  //     "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
-  //   location: "Kigali, Rwanda",
-  //   imageURL: "/logos/svgs/cmu.svg",
-  //   // link: "https://www.mininfra.gov.rw",
-  //   workRoles: [
-  //     "Developing anomaly detection <a href='https://athletics-performance.mblessed.space' target='_blank' style='text-decoration: underline; color: #60a5fa;'>framework</a> for athletics performance analysis under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, implementing statistical and ensemble methods to identify performance patterns indicative of potential doping violations.",
-  //     "Conducting systematic literature review of AI applications in anti-doping, identifying research gaps and unexplored methodologies for next-generation detection systems.",
-  //   ],
-  // },
   {
-    company: "CMU-Africa: Languages and Spatial Technologies Laboratory",
+    company: "CMU-Africa: Spatial and Languages Technologies (SaLT) Lab",
+    position: "Graduate Research Associate",
+    startDate: "June 2026",
+    endDate: null,
+    // description:
+    //   "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
+    location: "Kigali, Rwanda",
+    imageURL: "/logos/svgs/cmu.svg",
+    // link: "https://www.mininfra.gov.rw",
+    workRoles: [
+      "Conducting research on reliable infrastructure for data-intensive, AI-enabled systems, focusing on agentic data workflows, execution provenance, state recovery, replay, invalidation, and post-deployment reliability.",
+      "Developing experimental workloads for tool-using AI systems, including sports analytics as a testbed, to study how data, tools, state, and execution traces affect whether outputs remain valid under change.",
+    ],
+  },
+  {
+    company: "CMU-Africa: Spatial and Languages Technologies (SaLT) Lab",
     position: "Graduate Research Assistant",
     startDate: "Sep 2025",
     endDate: "May 2026",
