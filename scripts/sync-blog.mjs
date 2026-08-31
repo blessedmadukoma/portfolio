@@ -217,24 +217,6 @@ async function renderMarkdown(gitlabPath, imageIndex) {
 }
 
 // ── sync ─────────────────────────────────────────────────────────────────────
-console.log("🔄  Syncing blog posts from GitLab Repository API…");
-
-const [publishedFiles, imageIndex] = await Promise.all([
-  listMarkdownFiles(),
-  buildImageIndex(),
-]);
-const mdFiles = [
-  ...publishedFiles,
-  ...PORTFOLIO_RESEARCH_FILES.map((path) => ({
-    type: "blob",
-    path,
-    name: path.split("/").pop(),
-  })),
-];
-
-console.log(`  📷  Indexed ${imageIndex.size} image(s)`);
-
-await mkdir(OUT_DIR, { recursive: true });
 function outputPathFor(gitlabPath) {
   if (gitlabPath.startsWith(`${BLOG_SOURCE_PATH}/`)) {
     return gitlabPath.slice(`${BLOG_SOURCE_PATH}/`.length);
@@ -242,31 +224,66 @@ function outputPathFor(gitlabPath) {
   return join("research", gitlabPath.split("/").pop());
 }
 
-const remoteNames = new Set(mdFiles.map((item) => outputPathFor(item.path)));
-const existingNames = await listLocalMarkdownFiles();
+async function syncBlog() {
+  console.log("🔄  Syncing blog posts from GitLab Repository API…");
 
-await Promise.all(
-  mdFiles.map(async (item) => {
-    const relativePath = outputPathFor(item.path);
-    const localPath = join(OUT_DIR, relativePath);
-    const transformed = await renderMarkdown(item.path, imageIndex);
-    const current = await readFile(localPath, "utf8").catch(() => null);
-    if (current === transformed) {
-      console.log(`  =  ${relativePath}`);
-      return;
-    }
-    await mkdir(dirname(localPath), { recursive: true });
-    await writeFile(localPath, transformed, "utf8");
-    console.log(`  ✓  ${relativePath}`);
-  })
-);
+  const [publishedFiles, imageIndex] = await Promise.all([
+    listMarkdownFiles(),
+    buildImageIndex(),
+  ]);
+  const mdFiles = [
+    ...publishedFiles,
+    ...PORTFOLIO_RESEARCH_FILES.map((path) => ({
+      type: "blob",
+      path,
+      name: path.split("/").pop(),
+    })),
+  ];
 
-const staleNames = existingNames.filter((name) => !remoteNames.has(name));
-await Promise.all(
-  staleNames.map(async (relativePath) => {
-    await rm(join(OUT_DIR, relativePath), { force: true });
-    console.log(`  −  ${relativePath}`);
-  }),
-);
+  console.log(`  📷  Indexed ${imageIndex.size} image(s)`);
 
-console.log(`✅  Synced ${mdFiles.length} blog post(s) to content/blog/`);
+  await mkdir(OUT_DIR, { recursive: true });
+  const remoteNames = new Set(mdFiles.map((item) => outputPathFor(item.path)));
+  const existingNames = await listLocalMarkdownFiles();
+  const renderedFiles = await Promise.all(
+    mdFiles.map(async (item) => ({
+      relativePath: outputPathFor(item.path),
+      content: await renderMarkdown(item.path, imageIndex),
+    })),
+  );
+
+  await Promise.all(
+    renderedFiles.map(async ({ relativePath, content }) => {
+      const localPath = join(OUT_DIR, relativePath);
+      const current = await readFile(localPath, "utf8").catch(() => null);
+      if (current === content) {
+        console.log(`  =  ${relativePath}`);
+        return;
+      }
+      await mkdir(dirname(localPath), { recursive: true });
+      await writeFile(localPath, content, "utf8");
+      console.log(`  ✓  ${relativePath}`);
+    })
+  );
+
+  const staleNames = existingNames.filter((name) => !remoteNames.has(name));
+  await Promise.all(
+    staleNames.map(async (relativePath) => {
+      await rm(join(OUT_DIR, relativePath), { force: true });
+      console.log(`  −  ${relativePath}`);
+    }),
+  );
+
+  console.log(`✅  Synced ${mdFiles.length} blog post(s) to content/blog/`);
+}
+
+try {
+  await syncBlog();
+} catch (error) {
+  const cachedFiles = await listLocalMarkdownFiles();
+  const message = error instanceof Error ? error.message : String(error);
+  console.warn(`⚠️  Blog sync failed: ${message}`);
+  console.warn(
+    `   Starting with ${cachedFiles.length} cached blog post(s). Run \`yarn sync\` later to retry.`,
+  );
+}
