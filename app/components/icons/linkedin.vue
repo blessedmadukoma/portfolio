@@ -70,7 +70,7 @@
  *
  * duration: 0.5s / ease-out matches {duration: .5, ease: "easeOut"}.
  */
-  .linkedin-link:hover .lines {
+  .linkedin-link:is(:hover, .is-socially-active) .lines {
     animation: li-draw 0.5s cubic-bezier(0, 0, 0.58, 1) forwards;
   }
 

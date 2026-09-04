@@ -10,8 +10,9 @@ export const WORK_EXPERIENCE = [
     imageURL: "/logos/svgs/cmu.svg",
     // link: "https://www.mininfra.gov.rw",
     workRoles: [
-      "Conducting research on reliable infrastructure for data-intensive, AI-enabled systems, focusing on agentic data workflows, execution provenance, state recovery, replay, invalidation, and post-deployment reliability.",
-      "Developing experimental workloads for tool-using AI systems, including sports analytics as a testbed, to study how data, tools, state, and execution traces affect whether outputs remain valid under change.",
+      "Exploring systems and infrastructure for AI agents that operate over real data, tools, and services, with a current focus on execution reliability and data/evidence validity.",
+      "Completed empirical pilots on historical agent traces and semantic monitoring under component changes, documenting observed failures and the limits of proposed methods.",
+      "Building small tool-using prototypes towards a football tactical-analysis workload for studying execution and evidence.",
     ],
   },
   {

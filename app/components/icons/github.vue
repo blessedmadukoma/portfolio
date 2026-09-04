@@ -58,7 +58,7 @@
  *   duration: 0.5s / ease-in-out matches {duration:.5, ease:"easeInOut"}.
  *   overflow:visible on the <svg> prevents the rotated icon from being clipped.
  */
-  .github-link:hover .github-icon {
+  .github-link:is(:hover, .is-socially-active) .github-icon {
     animation: gh-wiggle 0.5s ease-in-out forwards;
     transform-origin: center;
   }

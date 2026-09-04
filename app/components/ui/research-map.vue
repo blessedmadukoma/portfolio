@@ -3,52 +3,60 @@
 
   const pillars = [
     {
+      name: "Agent systems",
+      what: "Agents that plan, use tools, access data, and perform multi-step work.",
+    },
+    {
       name: "Data-intensive systems",
-      what: "Databases, pipelines, APIs, files, streams, indexes, and systems built around changing data.",
+      what: "Databases, pipelines, APIs, files, streams, indexes, and changing data.",
     },
     {
-      name: "Production AI systems",
-      what: "AI-enabled software once it is connected to real tools, users, services, and workflows.",
-    },
-    {
-      name: "Reliable infrastructure",
-      what: "State, logs, provenance, recovery, replay, invalidation, observability, and fault tolerance.",
-    },
-    {
-      name: "Research engineering",
-      what: "Reading papers, building artifacts, testing hypotheses, instrumenting systems, and measuring results.",
+      name: "Systems infrastructure",
+      what: "Execution, state, recovery, provenance, coordination, isolation, observability, and related mechanisms.",
     },
   ];
 
-  const lenses = [
+  const focusAreas = [
     {
-      name: "State and recovery",
-      what: "What must survive so a run can resume after failure.",
+      name: "Execution reliability",
+      items: [
+        [
+          "State and recovery",
+          "What must survive so a run can resume after failure.",
+        ],
+        [
+          "Provenance and reproducibility",
+          "What data, tools, code paths, and intermediate values a result depended on, and what is needed to reproduce it.",
+        ],
+        [
+          "External effects and isolation",
+          "What the run changes outside itself, and whether those effects can be contained.",
+        ],
+      ],
     },
     {
-      name: "Provenance",
-      what: "What data, tools, code paths, and intermediate values a result depended on.",
+      name: "Data and evidence validity",
+      items: [
+        [
+          "Data dependencies",
+          "What data and environmental conditions a conclusion relies on.",
+        ],
+        [
+          "Validity under change",
+          "Whether a result still holds after data, tools, schemas, models, or environments change.",
+        ],
+        [
+          "Supported conclusions",
+          "Whether the available evidence still supports the conclusion the system produced.",
+        ],
+      ],
     },
     {
-      name: "Validity under change",
-      what: "Whether a result still holds after data, tools, schemas, models, or environments change.",
+      name: "Across both problem areas",
+      items: [
+        ["Measurement", "How to show that the system became more dependable."],
+      ],
     },
-    {
-      name: "Isolation of effects",
-      what: "What the run changes outside itself, and whether those effects can be contained.",
-    },
-    {
-      name: "Measurement",
-      what: "How to show that the system became more dependable.",
-    },
-  ];
-
-  const swaps = [
-    ["Agentic data systems", "AI-generated data workflows"],
-    ["Tool-using agents", "ML production pipelines"],
-    ["Sports-data agent", "Scientific data assistants"],
-    ["Agent replay and invalidation", "Pipeline validity and recovery"],
-    ["Agent provenance", "AI system observability and lineage"],
   ];
 </script>
 
@@ -60,143 +68,172 @@
         @click.self="emit('close')"
       >
         <div
-          class="relative bg-white dark:bg-zinc-900 rounded-lg shadow-lg px-10 py-6 max-w-6xl w-[96vw] text-sm mx-4 max-h-[92vh] overflow-y-auto"
+          class="relative w-[calc(100vw-2rem)] max-w-5xl max-h-[90dvh] overflow-y-auto overscroll-contain rounded-lg bg-white px-4 py-4 text-[13px] leading-5 shadow-lg dark:bg-zinc-900 sm:px-6 sm:py-5"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="research-map-title"
         >
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+          <div class="mb-3 flex items-center justify-between gap-3">
+            <h2
+              id="research-map-title"
+              class="text-base font-semibold text-zinc-900 dark:text-zinc-100 sm:text-lg"
+            >
               How I Think About My Work
             </h2>
 
             <button
               @click="emit('close')"
-              class="text-3xl text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 ml-4 transition-colors"
+              class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-2xl text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
               aria-label="Close"
             >
               &times;
             </button>
           </div>
 
-          <p class="text-zinc-800 dark:text-zinc-300 mb-6 max-w-4xl">
+          <p class="mb-5 text-zinc-700 dark:text-zinc-300">
             My broad direction is
-            <strong>
-              engineering reliable infrastructure for data-intensive, AI-enabled
-              systems</strong
-            >. My current focus is agents because they put data access, tool
-            use, state, execution, and changing outputs in the same run.
+            <strong class="font-medium">
+              systems and infrastructure for AI agents that operate over real
+              data, tools, and services</strong
+            >. <br />
+            I am particularly interested in what infrastructure these systems
+            need to <b class="font-medium">execute work reliably</b> and to
+            <b class="font-medium">keep their results valid</b>
+            as the <b class="font-medium">underlying world changes</b>.
           </p>
 
-          <section class="mb-7">
+          <section class="mb-5">
             <h3
-              class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-3"
+              class="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
             >
               The Stable Core
             </h3>
 
-            <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            <div class="grid gap-2.5 md:grid-cols-3">
               <div
                 v-for="pillar in pillars"
                 :key="pillar.name"
-                class="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800"
+                class="min-w-0 rounded-md border border-zinc-200 p-3 dark:border-zinc-800"
               >
                 <h4 class="font-semibold text-zinc-900 dark:text-zinc-100">
                   {{ pillar.name }}
                 </h4>
-                <p class="mt-1.5 text-zinc-600 dark:text-zinc-400">
+                <p class="mt-1 text-xs leading-[1.5] text-zinc-600 dark:text-zinc-400">
                   {{ pillar.what }}
                 </p>
               </div>
             </div>
           </section>
 
-          <section class="mb-7">
+          <section class="mb-5">
             <h3
-              class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-3"
+              class="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
+            >
+              How I Work
+            </h3>
+
+            <p
+              class="rounded-md bg-zinc-50 px-3 py-2 text-xs leading-5 text-zinc-600 dark:bg-zinc-800/40 dark:text-zinc-400"
+            >
+              Identify a practical need → examine prior work → build and
+              instrument systems → form and test hypotheses → measure results →
+              refine the claim.
+            </p>
+          </section>
+
+          <section class="mb-5">
+            <h3
+              class="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
             >
               How the Direction Narrows
             </h3>
 
             <div
-              class="grid items-stretch gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr]"
+              class="grid items-stretch gap-2 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]"
             >
               <div
-                class="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800"
+                class="min-w-0 rounded-md border border-zinc-200 p-3 dark:border-zinc-800"
               >
                 <span
-                  class="inline-flex rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
+                  class="inline-flex rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] leading-4 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
                 >
-                  Broad direction
+                  Research umbrella
                 </span>
-                <h4 class="mt-2 font-semibold text-zinc-900 dark:text-zinc-100">
-                  Reliable infrastructure for data-intensive AI-enabled systems
+                <h4 class="mt-1.5 font-medium text-zinc-900 dark:text-zinc-100">
+                  Systems infrastructure for AI agents
                 </h4>
-                <p class="mt-1.5 text-zinc-600 dark:text-zinc-400">
+                <p class="mt-1 text-xs leading-[1.5] text-zinc-600 dark:text-zinc-400">
                   The long-term research identity.
                 </p>
               </div>
 
               <div
-                class="hidden items-center justify-center text-2xl text-zinc-300 dark:text-zinc-700 md:flex"
+                class="hidden items-center justify-center text-lg text-zinc-400 dark:text-zinc-600 md:flex"
+                aria-hidden="true"
               >
                 →
               </div>
 
               <div
-                class="rounded-lg border border-indigo-200 bg-indigo-50/60 p-4 dark:border-indigo-900/60 dark:bg-indigo-950/30"
+                class="min-w-0 rounded-md border border-indigo-200 bg-indigo-50/60 p-3 dark:border-indigo-900/60 dark:bg-indigo-950/30"
               >
                 <span
-                  class="inline-flex rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300"
+                  class="inline-flex rounded-full bg-indigo-100 px-2 py-0.5 text-[11px] font-medium leading-4 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300"
                 >
-                  Current focus
+                  Current problem areas
                 </span>
-                <h4 class="mt-2 font-semibold text-zinc-900 dark:text-zinc-100">
-                  Reliable agentic data systems
+                <h4 class="mt-1.5 font-medium text-zinc-900 dark:text-zinc-100">
+                  Execution reliability + data and evidence validity
                 </h4>
-                <p class="mt-1.5 text-zinc-600 dark:text-zinc-400">
-                  Agents query data, call tools, compute results, keep state,
-                  and produce conclusions that may become stale or invalid.
+                <p class="mt-1 text-xs leading-[1.5] text-zinc-600 dark:text-zinc-400">
+                  Related systems problems in agent-driven work over real data,
+                  tools, and services.
                 </p>
               </div>
 
               <div
-                class="hidden items-center justify-center text-2xl text-zinc-300 dark:text-zinc-700 md:flex"
+                class="hidden items-center justify-center text-lg text-zinc-400 dark:text-zinc-600 md:flex"
+                aria-hidden="true"
               >
                 →
               </div>
 
               <div
-                class="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800"
+                class="min-w-0 rounded-md border border-zinc-200 p-3 dark:border-zinc-800"
               >
                 <span
-                  class="inline-flex rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
+                  class="inline-flex rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] leading-4 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
                 >
-                  Workload
+                  Experimental workloads
                 </span>
-                <h4 class="mt-2 font-semibold text-zinc-900 dark:text-zinc-100">
-                  Sports analytics agent
+                <h4 class="mt-1.5 font-medium text-zinc-900 dark:text-zinc-100">
+                  Sports analytics and data-intensive workflows
                 </h4>
-                <p class="mt-1.5 text-zinc-600 dark:text-zinc-400">
-                  A concrete workload I can build, instrument, break, and
-                  measure.
+                <p class="mt-1 text-xs leading-[1.5] text-zinc-600 dark:text-zinc-400">
+                  Concrete systems I can build, instrument, break, and measure.
                 </p>
               </div>
             </div>
           </section>
 
-          <section class="mb-7">
+          <section class="mb-5">
             <h3
-              class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-3"
+              class="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
             >
               What One Run Looks Like
             </h3>
 
             <div
-              class="overflow-x-auto rounded-lg border border-zinc-200 p-4 dark:border-zinc-800"
+              class="overflow-x-auto rounded-md border border-zinc-200 p-2 dark:border-zinc-800 sm:p-3"
+              tabindex="0"
+              role="region"
+              aria-label="Agent execution diagram; scroll horizontally on smaller screens"
             >
               <svg
                 viewBox="0 0 930 300"
-                class="block h-auto w-full min-w-[900px]"
+                class="mx-auto block h-auto w-full min-w-[900px] max-w-[930px]"
                 role="img"
-                aria-label="A tool-using AI system moves from question through plan, data access, tool calls and computation to a typed conclusion, drawing on changing data, external tools and execution state. Brackets underneath mark the spans concerned with provenance and read-sets, with state, side effects and recovery, and with measurement of reliability."
+                aria-label="A tool-using AI system moves from question through plan, data access, tool calls, and computation to a typed conclusion. Annotations show the related concerns of data and evidence validity, execution reliability, and measurement across both."
               >
                 <defs>
                   <marker
@@ -337,7 +374,7 @@
                   fill="none"
                 >
                   <path d="M290,185 v7 H930 v-7" />
-                  <path d="M450,220 v7 H930 v-7" />
+                  <path d="M145,220 v7 H730 v-7" />
                   <path d="M0,255 v7 H930 v-7" />
                 </g>
 
@@ -346,86 +383,52 @@
                   class="fill-indigo-600 dark:fill-indigo-400"
                   font-size="11"
                 >
-                  <text x="610" y="181">provenance and read-sets</text>
-                  <text x="690" y="216">state, side effects and recovery</text>
-                  <text x="465" y="251">measurement of reliability</text>
+                  <text x="610" y="181">data and evidence validity</text>
+                  <text x="437" y="216">execution reliability</text>
+                  <text x="465" y="251">measurement across both</text>
                 </g>
               </svg>
             </div>
 
             <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
-              The hard part is knowing what the run depended on, what changed,
-              and whether the result can still be trusted, replayed, repaired,
-              or invalidated.
+              The infrastructure must support reliable execution and show
+              whether the data and evidence still support each result as the
+              world changes.
             </p>
-          </section>
-
-          <section class="mb-7">
-            <h3
-              class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-3"
-            >
-              What I Look At Inside It
-            </h3>
-
-            <dl class="grid gap-3 md:grid-cols-2">
-              <div
-                v-for="lens in lenses"
-                :key="lens.name"
-                class="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800"
-              >
-                <dt class="font-medium text-zinc-900 dark:text-zinc-100">
-                  {{ lens.name }}
-                </dt>
-                <dd class="mt-1 text-zinc-600 dark:text-zinc-400">
-                  {{ lens.what }}
-                </dd>
-              </div>
-            </dl>
           </section>
 
           <section>
             <h3
-              class="text-base tracking-wide font-semibold text-zinc-800 dark:text-zinc-200 mb-1"
+              class="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
             >
-              If Agents Stop Being the Best Focus
+              What I Look At Inside It
             </h3>
 
-            <p class="text-zinc-600 dark:text-zinc-400 mb-3">
-              The core direction stays. The current workload can change.
-            </p>
-
-            <div
-              class="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800"
-            >
-              <table class="w-full text-left">
-                <thead>
-                  <tr
-                    class="border-b border-zinc-200 bg-zinc-50 text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900/50 dark:text-zinc-400"
+            <div class="grid gap-2.5 md:grid-cols-2">
+              <section
+                v-for="area in focusAreas"
+                :key="area.name"
+                class="min-w-0 rounded-md border border-zinc-200 p-3 dark:border-zinc-800"
+                :class="area.items.length === 1 ? 'md:col-span-2' : ''"
+              >
+                <h4 class="mb-2 font-semibold text-zinc-900 dark:text-zinc-100">
+                  {{ area.name }}
+                </h4>
+                <dl class="space-y-2">
+                  <div
+                    v-for="(item, index) in area.items"
+                    :key="item[0]"
+                    :class="index > 0 ? 'border-t border-zinc-100 pt-2 dark:border-zinc-800' : ''"
                   >
-                    <th class="px-4 py-2 font-medium">Current focus</th>
-                    <th class="px-4 py-2 font-medium">Could become</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr
-                    v-for="(row, i) in swaps"
-                    :key="row[0]"
-                    :class="
-                      i < swaps.length - 1
-                        ? 'border-b border-zinc-200 dark:border-zinc-800'
-                        : ''
-                    "
-                  >
-                    <td class="px-4 py-2 text-zinc-800 dark:text-zinc-300">
-                      {{ row[0] }}
-                    </td>
-                    <td class="px-4 py-2 text-zinc-600 dark:text-zinc-400">
-                      {{ row[1] }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <dt class="font-medium text-zinc-900 dark:text-zinc-100">
+                      {{ item[0] }}
+                    </dt>
+                    <dd class="mt-0.5 text-xs leading-[1.5] text-zinc-600 dark:text-zinc-400">
+                      {{ item[1] }}
+                    </dd>
+                  </div>
+                </dl>
+              </section>
             </div>
           </section>
         </div>
