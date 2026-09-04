@@ -38,7 +38,7 @@
    * mirroring the cap-throw gesture — matches the wiggle/draw family
    * used by the other social icons.
    */
-  .scholar-link:hover .scholar-icon {
+  .scholar-link:is(:hover, .is-socially-active) .scholar-icon {
     animation: scholar-toss 0.5s ease-in-out forwards;
     transform-origin: center;
   }

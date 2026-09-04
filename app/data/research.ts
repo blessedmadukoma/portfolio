@@ -13,18 +13,40 @@ export interface ResearchPaper {
   tags: string[];
 }
 
-export interface ResearchProject {
+interface ResearchProjectBase {
   title: string;
   status: string;
   summary: string;
-  finding: string;
   tags: string[];
   href: string;
 }
 
+export type ResearchProject = ResearchProjectBase &
+  (
+    | { stage: "completed"; finding: string }
+    | { stage: "in-progress"; progress: string }
+  );
+
 export const RESEARCH_PROJECTS: ResearchProject[] = [
   {
+    title: "Football Tactical Analysis Agent",
+    stage: "in-progress",
+    status: "In development",
+    summary:
+      "Developing a tool-using agent for evidence-backed match analysis as a workload for studying execution reliability and data/evidence validity.",
+    progress:
+      "Work started with small tool-using prototypes. The football workflow is in development; this is not a completed research result.",
+    tags: [
+      "AI agents",
+      "Sports analytics",
+      "Execution reliability",
+      "Evidence validity",
+    ],
+    href: "/blog/building-toward-reliable-ai-agents",
+  },
+  {
     title: "Historical Trace Coverage for Regression Selection in Stochastic Tool-Using Agents",
+    stage: "completed",
     status: "Completed empirical pilot",
     summary:
       "I tested whether historical execution traces can safely identify agent tasks that need rerunning after a tool implementation changes.",
@@ -35,6 +57,7 @@ export const RESEARCH_PROJECTS: ResearchProject[] = [
   },
   {
     title: "Semantic Monitoring Under Component Evolution",
+    stage: "completed",
     status: "Completed controlled pilot",
     summary:
       "I tested whether a deterministic safety monitor remains trustworthy when its upstream semantic extractor changes.",

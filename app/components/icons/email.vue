@@ -92,7 +92,7 @@
  */
 
   /* envelope top crease: draw + fade in */
-  .email-link:hover .envelope-top {
+  .email-link:is(:hover, .is-socially-active) .envelope-top {
     animation: env-draw-top 0.4s cubic-bezier(0, 0, 0.58, 1) forwards;
   }
 
@@ -108,7 +108,7 @@
   }
 
   /* envelope flap: draw + fade in, delayed until top finishes */
-  .email-link:hover .envelope-flap {
+  .email-link:is(:hover, .is-socially-active) .envelope-flap {
     animation: env-draw-flap 0.5s cubic-bezier(0, 0, 0.58, 1) 0.4s forwards;
     /*
    * Without fill-mode we'd see the flap instantly appear before the
@@ -133,7 +133,7 @@
   }
 
   /* sides: subtle vertical scale pop */
-  .email-link:hover .sides {
+  .email-link:is(:hover, .is-socially-active) .sides {
     animation: env-sides-pop 0.3s cubic-bezier(0, 0, 0.58, 1) forwards;
   }
 

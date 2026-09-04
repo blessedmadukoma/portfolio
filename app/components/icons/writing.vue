@@ -85,24 +85,24 @@
  */
 
   /* shaft: draws first, longest path so gets the most time */
-  .medium-link:hover .pen-body {
+  .medium-link:is(:hover, .is-socially-active) .pen-body {
     animation: pen-draw 0.45s cubic-bezier(0, 0, 0.58, 1) forwards;
   }
 
   /* guide line: draws simultaneously with shaft, shorter so finishes first */
-  .medium-link:hover .pen-line {
+  .medium-link:is(:hover, .is-socially-active) .pen-line {
     animation: pen-draw 0.3s cubic-bezier(0, 0, 0.58, 1) forwards;
   }
 
   /* nib: starts once the shaft is well under way */
-  .medium-link:hover .pen-nib {
+  .medium-link:is(:hover, .is-socially-active) .pen-nib {
     animation: pen-draw 0.35s cubic-bezier(0, 0, 0.58, 1) 0.3s forwards;
     /* keep hidden during delay */
     stroke-dashoffset: 1;
   }
 
   /* anchor dot: pops in last */
-  .medium-link:hover .pen-dot {
+  .medium-link:is(:hover, .is-socially-active) .pen-dot {
     animation: pen-dot-pop 0.25s cubic-bezier(0, 0, 0.58, 1) 0.4s forwards;
     opacity: 0;
     transform: scale(0.4);

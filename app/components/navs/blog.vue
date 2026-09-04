@@ -40,35 +40,6 @@
         >
           Selected writing on research, agent systems, software engineering,
           and data systems.
-          <span class="relative inline-block font-bold">
-            <svg
-              class="rough-annotation"
-              viewBox="0 0 48 29"
-              style="
-                position: absolute;
-                top: 0;
-                left: 0;
-                overflow: visible;
-                pointer-events: none;
-                width: 100%;
-                height: 100%;
-              "
-            >
-              <path
-                d="M2 12 Q10 10, 18 12 T34 11 T42 13"
-                fill="none"
-                stroke="#F2D5C4"
-                stroke-width="30"
-                stroke-linecap="round"
-                style="
-                  stroke-dashoffset: 50px;
-                  stroke-dasharray: 50px;
-                  animation: 800ms ease-out forwards rough-notation-dash;
-                "
-              ></path>
-            </svg>
-            <span style="position: relative; z-index: 1">Why:</span>
-          </span>
           Browse by topic or open the complete archive.
         </span>
 
