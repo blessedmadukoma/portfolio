@@ -1,6 +1,9 @@
 <script lang="ts" setup>
+  import {
+    normalizeObsidianPost,
+    useNativePosts,
+  } from "~/composables/useBlogPosts";
   import { RESEARCH_PAPERS } from "~/data/research";
-  import { normalizeObsidianPost, useNativePosts } from "~/composables/useBlogPosts";
 
   const papers = ref(RESEARCH_PAPERS);
   const { data: posts } = useNativePosts();
@@ -14,14 +17,18 @@
       { title: "Learning records", types: ["learning-log"] },
       { title: "Research experiments", types: ["experiment"] },
       { title: "Research notes", types: [] },
-    ].map((group) => ({
-      title: group.title,
-      projects: projects.value.filter((project) =>
-        group.types.length
-          ? group.types.includes(project.contentType ?? "")
-          : !["learning-log", "experiment"].includes(project.contentType ?? ""),
-      ),
-    })).filter((group) => group.projects.length > 0),
+    ]
+      .map((group) => ({
+        title: group.title,
+        projects: projects.value.filter((project) =>
+          group.types.length
+            ? group.types.includes(project.contentType ?? "")
+            : !["learning-log", "experiment"].includes(
+                project.contentType ?? "",
+              ),
+        ),
+      }))
+      .filter((group) => group.projects.length > 0),
   );
   const activeSection = ref<"projects" | "publications">("publications");
   const certificateModal = ref<string | null>(null);
@@ -58,17 +65,6 @@
         <button
           class="rounded-md px-3 py-1.5 text-xs transition-colors"
           :class="
-            activeSection === 'projects'
-              ? 'bg-white font-medium text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100'
-              : 'text-zinc-500 dark:text-zinc-400'
-          "
-          @click="activeSection = 'projects'"
-        >
-          Projects ({{ projects.length }})
-        </button>
-        <button
-          class="rounded-md px-3 py-1.5 text-xs transition-colors"
-          :class="
             activeSection === 'publications'
               ? 'bg-white font-medium text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100'
               : 'text-zinc-500 dark:text-zinc-400'
@@ -77,10 +73,24 @@
         >
           Publications ({{ papers.length }})
         </button>
+        <button
+          class="rounded-md px-3 py-1.5 text-xs transition-colors"
+          :class="
+            activeSection === 'projects'
+              ? 'bg-white font-medium text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100'
+              : 'text-zinc-500 dark:text-zinc-400'
+          "
+          @click="activeSection = 'projects'"
+        >
+          Projects ({{ projects.length }})
+        </button>
       </div>
 
       <template v-if="activeSection === 'projects'">
-        <p v-if="!projects.length" class="text-sm text-zinc-500 dark:text-zinc-400">
+        <p
+          v-if="!projects.length"
+          class="text-sm text-zinc-500 dark:text-zinc-400"
+        >
           No research records are published yet.
         </p>
         <section
@@ -137,9 +147,9 @@
 
     <template v-if="activeSection === 'publications'">
       <div>
-        <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <!-- <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           Publications
-        </h2>
+        </h2> -->
         <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
           Peer-reviewed work and formal research outputs.
         </p>
