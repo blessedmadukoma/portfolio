@@ -1,25 +1,27 @@
 <script lang="ts" setup>
-  import { RESEARCH_PAPERS, RESEARCH_PROJECTS } from "~/data/research";
+  import { RESEARCH_PAPERS } from "~/data/research";
+  import { normalizeObsidianPost, useNativePosts } from "~/composables/useBlogPosts";
 
   const papers = ref(RESEARCH_PAPERS);
-  const projects = ref(RESEARCH_PROJECTS);
+  const { data: posts } = useNativePosts();
+  const projects = computed(() =>
+    (posts.value ?? [])
+      .filter((post) => post.portfolio === true)
+      .map((post) => ({ ...normalizeObsidianPost(post), status: post.status })),
+  );
   const projectGroups = computed(() =>
     [
-      {
-        title: "Work in progress",
-        description:
-          "Current builds and investigations, separate from completed research findings.",
-        projects: projects.value.filter(
-          (project) => project.stage === "in-progress",
-        ),
-      },
-      {
-        title: "Completed experiments",
-        description:
-          "Completed empirical work, including findings that did not justify a method claim.",
-        projects: projects.value.filter((project) => project.stage === "completed"),
-      },
-    ].filter((group) => group.projects.length > 0),
+      { title: "Learning records", types: ["learning-log"] },
+      { title: "Research experiments", types: ["experiment"] },
+      { title: "Research notes", types: [] },
+    ].map((group) => ({
+      title: group.title,
+      projects: projects.value.filter((project) =>
+        group.types.length
+          ? group.types.includes(project.contentType ?? "")
+          : !["learning-log", "experiment"].includes(project.contentType ?? ""),
+      ),
+    })).filter((group) => group.projects.length > 0),
   );
   const activeSection = ref<"projects" | "publications">("publications");
   const certificateModal = ref<string | null>(null);
@@ -78,6 +80,9 @@
       </div>
 
       <template v-if="activeSection === 'projects'">
+        <p v-if="!projects.length" class="text-sm text-zinc-500 dark:text-zinc-400">
+          No research records are published yet.
+        </p>
         <section
           v-for="group in projectGroups"
           :key="group.title"
@@ -87,14 +92,11 @@
             <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
               {{ group.title }}
             </h2>
-            <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-              {{ group.description }}
-            </p>
           </div>
 
           <div
             v-for="project in group.projects"
-            :key="project.title"
+            :key="project.id"
             class="space-y-3 rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900/50"
           >
             <div class="flex flex-wrap items-start justify-between gap-3">
@@ -104,25 +106,14 @@
                 {{ project.title }}
               </h3>
               <span
+                v-if="project.status"
                 class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
               >
                 {{ project.status }}
               </span>
             </div>
             <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              {{ project.summary }}
-            </p>
-            <p
-              v-if="project.stage === 'completed'"
-              class="border-l-2 border-zinc-300 pl-3 text-sm leading-relaxed text-zinc-700 dark:border-zinc-600 dark:text-zinc-300"
-            >
-              <strong>Finding:</strong> {{ project.finding }}
-            </p>
-            <p
-              v-else
-              class="border-l-2 border-zinc-300 pl-3 text-sm leading-relaxed text-zinc-700 dark:border-zinc-600 dark:text-zinc-300"
-            >
-              <strong>Current stage:</strong> {{ project.progress }}
+              {{ project.description }}
             </p>
             <div class="flex flex-wrap gap-1.5">
               <span
@@ -137,11 +128,7 @@
               :to="project.href"
               class="inline-flex text-xs font-medium text-zinc-700 underline underline-offset-4 transition-colors hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white"
             >
-              {{
-                project.stage === 'completed'
-                  ? 'Read the research record'
-                  : 'Read the learning record'
-              }} →
+              Read the record →
             </NuxtLink>
           </div>
         </section>

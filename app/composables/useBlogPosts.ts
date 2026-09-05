@@ -45,7 +45,7 @@ export interface NativePost {
   category?: ThoughtCategory;
   series?: string;
   part?: number;
-  status?: "draft" | "published" | "archived";
+  status?: string;
   featured?: boolean;
   portfolio?: boolean;
 }
@@ -173,6 +173,6 @@ export function normalizeObsidianPost(post: NativePost): NormalizedPost {
 export function useNativePosts() {
   return useAsyncData("obsidian-posts", async () => {
     const posts = await queryCollection("blog").order("date", "DESC").all();
-    return posts.filter((post) => !post.draft && post.status !== "archived");
+    return posts.filter((post) => !post.draft && post.status !== "draft" && post.status !== "archived");
   });
 }

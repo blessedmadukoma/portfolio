@@ -16,7 +16,7 @@ export default defineContentConfig({
         category: z.enum(["research", "engineering", "building"]).optional(),
         series: z.string().optional(),
         part: z.number().int().positive().optional(),
-        status: z.enum(["draft", "published", "archived"]).optional(),
+        status: z.string().optional(),
         featured: z.boolean().optional(),
         portfolio: z.boolean().optional(),
         // Historical import metadata. Hashnode is not queried at runtime.
