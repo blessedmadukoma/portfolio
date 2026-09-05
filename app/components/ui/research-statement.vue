@@ -36,29 +36,12 @@
 
           <div class="space-y-4">
             <section>
-              <h3
-                class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
-              >
-                Purpose
-              </h3>
-              <blockquote
-                class="mt-1.5 border-l-4 border-indigo-400 pl-3 font-semibold italic text-zinc-800 dark:text-zinc-100"
-              >
-                Enable people to delegate data-intensive work while keeping
-                execution controlled and results supported as the system changes.
-              </blockquote>
-            </section>
-
-            <section>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I am interested in
-                <strong>
-                  systems and infrastructure for AI agents that operate over real
-                  data, tools, and services</strong
-                >. I care about what happens underneath these agents as they
-                execute real work: how their work is represented and executed,
-                what state and evidence it depends on, how failures are handled,
-                and whether results remain valid as data and environments change.
+                I am interested in making
+                <strong>production AI systems dependable</strong>. My current
+                focus is <strong>AI agents</strong> that read data, call tools,
+                save intermediate results, and update files or records. I focus
+                on checks and records that remain necessary as models improve.
               </p>
             </section>
 
@@ -108,47 +91,52 @@
               </p>
 
               <p class="text-zinc-800 dark:text-zinc-300 mt-2">
-                That project <strong>shaped my current direction</strong> as the
-                difficult part was not only building a detector, but showing
-                whether the results meant anything and making each flag
-                traceable to the evidence behind it.
+                That project <strong>shaped my current direction</strong>.
+                I needed to check whether each flagged performance was supported
+                by the data and show the records behind it.
               </p>
+            </section>
+
+            <section>
+              <h3
+                class="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
+              >
+                Questions I Am Exploring
+              </h3>
+
+              <ol class="list-decimal space-y-2 pl-5 text-zinc-800 dark:text-zinc-300">
+                <li>
+                  <strong class="!font-semibold">Protecting data across a workflow:</strong>
+                  How can the system enforce data-use rules as agents move or
+                  transform data?
+                </li>
+                <li>
+                  <strong class="!font-semibold">Keeping actions within approval:</strong>
+                  How does the system ensure that an agent’s final action
+                  matches what the user authorised?
+                </li>
+                <li>
+                  <strong class="!font-semibold">Recording what happened:</strong>
+                  What must the system record so we can check what an agent did
+                  and what changed?
+                </li>
+              </ol>
             </section>
 
             <section>
               <h3
                 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
               >
-                Current Focus
+                Current Work
               </h3>
-
               <p class="text-zinc-800 dark:text-zinc-300">
-                I am currently exploring two related systems problems. The first
-                is <strong>execution reliability</strong>: how agent-driven work
-                should manage state, recovery, provenance, reproducibility, and
-                external effects. The second is
-                <strong>data and evidence validity</strong>: how systems can
-                determine whether the information an agent relied on is still
-                correct and whether its conclusions remain supported when
-                underlying data or environments change. I use data-intensive
-                workloads, including sports analytics, as concrete systems I can
-                build, instrument, break, and measure.
+                I am building a small football-analysis agent and recording its
+                tool calls to test what happens when calls fail, repeat, or run
+                after approval changes. For each test, I specify what should
+                happen, what the run record must show, and what checks could
+                prevent an incorrect action. I use these tests and prior research
+                to choose a specific problem to study.
               </p>
-            </section>
-
-            <section>
-              <p
-                class="italic text-indigo-700 dark:text-indigo-300 font-medium"
-              >
-                The question I keep coming back to:
-              </p>
-
-              <blockquote
-                class="mt-1.5 border-l-4 border-indigo-400 pl-3 italic text-zinc-800 dark:text-zinc-100"
-              >
-                How should we build the systems underneath AI agents that operate
-                over real data and tools?
-              </blockquote>
             </section>
           </div>
         </div>

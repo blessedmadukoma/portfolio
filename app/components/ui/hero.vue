@@ -31,11 +31,10 @@
       class="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
     >
       <p>
-        I’m a software engineer and systems researcher exploring
-        <strong>infrastructure for AI agents</strong> that operate over real
-        data, tools, and services. My aim is to enable people to delegate
-        data-intensive work while keeping execution controlled and results
-        supported as the system changes.
+        I’m a software engineer and systems researcher exploring how to make
+        <strong>production AI systems dependable</strong>. My current focus is
+        <strong>AI agents</strong> that read data, call tools, save intermediate
+        results, and update files or records.
       </p>
       <p>
         My research on
