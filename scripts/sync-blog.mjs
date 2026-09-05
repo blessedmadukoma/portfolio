@@ -1,11 +1,12 @@
 /**
- * Fetches only the blog posts from the private Obsidian vault via the
+ * Fetches published blog posts and opted-in research notes from Obsidian via the
  * GitLab Repository API (no full git clone). Run before `nuxt dev` / `nuxt build`.
  */
 
 import { mkdir, writeFile, rm, readFile, readdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parse } from "yaml";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT_DIR = join(ROOT, "content", "blog");
@@ -35,11 +36,7 @@ const TOKEN = process.env.GITLAB_TOKEN ?? "";
 const PROJECT_ID = process.env.GITLAB_PROJECT_ID ?? "";
 const BRANCH = "main";
 const BLOG_SOURCE_PATH = "Blogs - Published";
-const PORTFOLIO_RESEARCH_FILES = [
-  "Research/08. AI Agent Systems Research/01. Completed Experiments/01-historical-trace-coverage-for-agent-regression-selection.md",
-  "Research/08. AI Agent Systems Research/01. Completed Experiments/02-semantic-monitoring-under-component-evolution.md",
-  "Research/08. AI Agent Systems Research/02. Current Projects/Football Tactical Analysis Agent/01. learning-what-an-agent-is.md",
-];
+const RESEARCH_SOURCE_PATH = "Research";
 const GITLAB_API = `https://gitlab.com/api/v4/projects/${PROJECT_ID}/repository`;
 
 if (!TOKEN || !PROJECT_ID) {
@@ -56,13 +53,18 @@ const HEADERS = {
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|tiff?)$/i;
 
 async function listDirectory(path) {
-  const url = `${GITLAB_API}/tree?path=${encodeURIComponent(path)}&ref=${BRANCH}&per_page=100`;
-  const res = await fetch(url, { headers: HEADERS });
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`GitLab API ${res.status} for "${path}": ${body}`);
+  const items = [];
+  let page = "1";
+  while (page) {
+    const url = `${GITLAB_API}/tree?path=${encodeURIComponent(path)}&ref=${BRANCH}&per_page=100&page=${page}`;
+    const res = await fetch(url, { headers: HEADERS });
+    if (!res.ok) {
+      throw new Error(`GitLab API ${res.status} for "${path}"`);
+    }
+    items.push(...await res.json());
+    page = res.headers.get("X-Next-Page");
   }
-  return res.json();
+  return items;
 }
 
 async function listMarkdownFiles(path = BLOG_SOURCE_PATH) {
@@ -209,8 +211,16 @@ function rewriteImageUrls(markdown, imageIndex) {
   });
 }
 
-async function renderMarkdown(gitlabPath, imageIndex) {
-  const raw = await getRawFile(gitlabPath);
+function frontmatter(raw) {
+  const match = raw.trimStart().match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  return match ? parse(match[1]) ?? {} : {};
+}
+
+function isPublished(metadata) {
+  return metadata.draft !== true && metadata.status !== "draft" && metadata.status !== "archived";
+}
+
+function renderMarkdown(raw, imageIndex) {
   return injectReadingTime(
     rewriteImageUrls(transformObsidianImages(raw.trimStart()), imageIndex),
   );
@@ -221,36 +231,46 @@ function outputPathFor(gitlabPath) {
   if (gitlabPath.startsWith(`${BLOG_SOURCE_PATH}/`)) {
     return gitlabPath.slice(`${BLOG_SOURCE_PATH}/`.length);
   }
-  return join("research", gitlabPath.split("/").pop());
+  return join("research", gitlabPath.slice(`${RESEARCH_SOURCE_PATH}/`.length));
 }
 
 async function syncBlog() {
   console.log("🔄  Syncing blog posts from GitLab Repository API…");
 
-  const [publishedFiles, imageIndex] = await Promise.all([
+  const [publishedFiles, researchFiles, imageIndex] = await Promise.all([
     listMarkdownFiles(),
+    listMarkdownFiles(RESEARCH_SOURCE_PATH),
     buildImageIndex(),
   ]);
-  const mdFiles = [
-    ...publishedFiles,
-    ...PORTFOLIO_RESEARCH_FILES.map((path) => ({
-      type: "blob",
-      path,
-      name: path.split("/").pop(),
-    })),
-  ];
 
   console.log(`  📷  Indexed ${imageIndex.size} image(s)`);
 
+  // Read and select everything before changing the local cache.
+  const renderedFiles = [];
+  const candidates = [...publishedFiles, ...researchFiles];
+  // Limit concurrent reads to avoid overwhelming the repository API.
+  for (let offset = 0; offset < candidates.length; offset += 8) {
+    const batch = await Promise.all(
+      candidates.slice(offset, offset + 8).map(async (item) => {
+        const raw = await getRawFile(item.path);
+        const metadata = frontmatter(raw);
+        const isResearch = item.path.startsWith(`${RESEARCH_SOURCE_PATH}/`);
+        if (!isPublished(metadata)) return null;
+        if (isResearch && (metadata.portfolio !== true || metadata.draft !== false)) return null;
+        return {
+          relativePath: outputPathFor(item.path),
+          content: renderMarkdown(raw, imageIndex),
+        };
+      }),
+    );
+    renderedFiles.push(...batch.filter(Boolean));
+  }
+  const remoteNames = new Set(renderedFiles.map((item) => item.relativePath));
+  if (remoteNames.size !== renderedFiles.length) {
+    throw new Error("Multiple source notes resolve to the same output path");
+  }
   await mkdir(OUT_DIR, { recursive: true });
-  const remoteNames = new Set(mdFiles.map((item) => outputPathFor(item.path)));
   const existingNames = await listLocalMarkdownFiles();
-  const renderedFiles = await Promise.all(
-    mdFiles.map(async (item) => ({
-      relativePath: outputPathFor(item.path),
-      content: await renderMarkdown(item.path, imageIndex),
-    })),
-  );
 
   await Promise.all(
     renderedFiles.map(async ({ relativePath, content }) => {
@@ -274,7 +294,7 @@ async function syncBlog() {
     }),
   );
 
-  console.log(`✅  Synced ${mdFiles.length} blog post(s) to content/blog/`);
+  console.log(`✅  Synced ${renderedFiles.length} blog post(s) to content/blog/`);
 }
 
 try {
