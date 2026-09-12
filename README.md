@@ -1,78 +1,70 @@
-# Nuxt Minimal Starter
+# Portfolio
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Personal site and blog at [mblessed.space](https://mblessed.space). Nuxt 4 with
+server-side rendering, deployed on Vercel. Blog and research content is authored
+in Obsidian and synced at build time.
+
+## Stack
+
+- Nuxt 4 (Vue 3) with Nitro, SSR enabled
+- Nuxt Content for Markdown, with Shiki dual-theme highlighting
+- Tailwind CSS, with `@nuxtjs/color-mode` for class-based dark mode
+- Vercel KV (Upstash Redis) for blog view counts
+- Yarn Berry
 
 ## Setup
 
-Make sure to install dependencies:
-
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
 yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
 yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+`yarn dev` and `yarn build` both run `scripts/sync-blog.mjs` first, which pulls
+content from the Obsidian vault. Run `yarn nuxt dev` to skip the sync and use the
+content already in `content/blog/`.
 
-Build the application for production:
+| Script | Purpose |
+| --- | --- |
+| `yarn dev` | Sync content, then start the dev server |
+| `yarn sync` | Sync content only |
+| `yarn build` | Sync content, then build for production |
+| `yarn preview` | Serve the production build locally |
 
-```bash
-# npm
-npm run build
+## Environment
 
-# pnpm
-pnpm build
+Copy `.env.example` to `.env`. All values are optional for local development
+except where noted.
 
-# yarn
-yarn build
+| Variable | Purpose |
+| --- | --- |
+| `GITLAB_TOKEN` | Read access to the Obsidian vault repository. Required for `yarn sync` and for serving blog images. |
+| `GITLAB_PROJECT_ID` | Vault project id on GitLab. |
+| `KV_REST_API_URL`, `KV_REST_API_TOKEN` | Vercel KV credentials. Required in production. Without them, local runs fall back to a filesystem store under `.data/`. |
+| `CANARY_SECRET` | Gates the contact attribution review. |
+| `VERCEL_DEPLOY_HOOK` | Stored as a GitHub secret, not read by the app. A workflow posts to it to trigger a rebuild. See Deployment. |
 
-# bun
-bun run build
+Production credentials in `.env` are used by local runs too. Anything written
+while developing goes to the live store.
+
+## Structure
+
+```
+app/
+  components/   ui/, navs/, icons/, content/
+  data/         experience, projects, research, tools
+  composables/  useBlogPosts, usePostViews
+  pages/        index, blog/, blog/[slug]
+  pkg/enums.ts  tab to component map
+server/
+  api/          blog images, view counts
+  utils/        KV client and per-feature stores
+shared/utils/   code shared between app and server
+scripts/        Obsidian sync and its tests
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+The homepage is a single route. The Thoughts, Experience, Research, Projects and
+Tools sections are client-side tabs registered in `app/pkg/enums.ts`, not
+separate pages.
 
 ## Obsidian publishing
 
@@ -101,4 +93,33 @@ and rebuilds. Run `yarn sync` to update the local content. A successful sync
 removes notes that were deleted or no longer meet the publication rules. If the
 sync fails, the previous local content is retained.
 
-Run the sync checks with `node --test scripts/sync-blog.test.mjs`.
+`content/blog/` is generated and gitignored. Edits there are overwritten by the
+next sync.
+
+## View counts
+
+Counts are the sum of a baseline in the note's frontmatter and a live counter in
+KV. Increments are deduplicated per visitor for 24 hours using an httpOnly
+cookie, and are skipped for known bot user agents and cross-site requests.
+
+## Contact attribution
+
+Inbound outreach carries a reference code, so messages drafted by automated tools
+can be distinguished from ones a person wrote and a sender's claimed identity can
+be checked before replying. Entry point is `shared/utils/canary.ts`.
+`CANARY_SECRET` gates the review.
+
+## Tests
+
+```bash
+node --test scripts/sync-blog.test.mjs
+```
+
+## Deployment
+
+Vercel builds from `main`. Publishing a note is meant to trigger a rebuild
+through a Vercel deploy hook, so it does not need a commit here.
+
+`.github/workflows/sync-portfolio.yml` fires on pushes under
+`Blogs - Published/`, a path that exists only in the vault repository. As
+committed here it never runs. The workflow belongs in the vault repository.
