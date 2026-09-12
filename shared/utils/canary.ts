@@ -1,4 +1,6 @@
-export const CONTACT_VERIFY_URL = "https://mblessed.space/api/contact/verify";
+// Canonical host: the bare domain 307s to www, which not every client follows.
+export const CONTACT_VERIFY_URL =
+  "https://www.mblessed.space/api/contact/verify";
 
 /**
  * Generates a reference code whose middle segment is the base36 minute it was
