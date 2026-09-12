@@ -67,6 +67,7 @@ export default defineNuxtConfig({
       // Production view counts use Vercel KV directly for atomic updates.
       // This filesystem mount supports local development without KV.
       views: { driver: "fs", base: "./.data/views" },
+      canary: { driver: "fs", base: "./.data/canary" },
     },
   },
 });
