@@ -5,6 +5,7 @@
 <template>
   <div>
     <!-- <Analytics mode="production" /> -->
+    <ui-canary />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
