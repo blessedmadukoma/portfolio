@@ -15,50 +15,12 @@ const INCREMENT_ONCE_SCRIPT = `
   return 0
 `;
 
-function hasKvConfiguration() {
-  return Boolean(
-    process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN,
-  );
-}
-
-async function kvCommand<T>(command: string, ...args: Array<string | number>) {
-  const url = process.env.KV_REST_API_URL?.replace(/\/+$/, "");
-  const token = process.env.KV_REST_API_TOKEN;
-  if (!url || !token) return null;
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify([command, ...args]),
-  });
-  const payload = (await response.json()) as { result?: T; error?: string };
-  if (!response.ok || payload.error) {
-    throw createError({
-      statusCode: 502,
-      statusMessage: payload.error || "KV request failed",
-    });
-  }
-  return payload.result ?? null;
-}
-
 function countKey(slug: string) {
   return `${COUNT_KEY_PREFIX}${slug}`;
 }
 
 function seenKey(slug: string, visitorId: string) {
   return `${SEEN_KEY_PREFIX}${slug}:${visitorId}`;
-}
-
-function assertDurableStorageInProduction() {
-  if (process.env.VERCEL && !hasKvConfiguration()) {
-    throw createError({
-      statusCode: 503,
-      statusMessage: "View storage is not configured",
-    });
-  }
 }
 
 export async function getLocalViewCount(slug: string): Promise<number> {
