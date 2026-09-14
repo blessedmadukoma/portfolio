@@ -39,7 +39,23 @@ test("sync discovers opted-in notes, respects publication flags, pagination and 
       };
     `);
     const note = (fields) => `---\ntitle: Test\n${fields}\n---\nPublic content\n`;
+    const citations = [
+      "---",
+      "title: Citations",
+      'tags: ["a","b"]',
+      "---",
+      "Inline [6] and [Online] markers, already-escaped \\[1\\], a `arr[0]` span,",
+      "a [link](https://example.com) and a reference [2][3].",
+      "",
+      "```js",
+      'const re = /```[\\s\\S]*?```/g; // [not-a-citation]',
+      "```",
+      "",
+      "[6] A. Gallant, \"ripgrep.\"",
+      "",
+    ].join("\n");
     const files = {
+      "Blogs - Published/citations.md": citations,
       "Blogs - Published/legacy.md": note("slug: legacy"),
       "Blogs - Published/draft.md": note("status: draft"),
       "Research/Nested/new.md": note("portfolio: true # opt in\ndraft: false\nstatus: completed empirical pilot"),
@@ -61,6 +77,15 @@ test("sync discovers opted-in notes, respects publication flags, pagination and 
     await run();
     assert.match(await readFile(join(output, "research/Nested/new.md"), "utf8"), /completed empirical pilot/);
     await access(join(output, "legacy.md"));
+
+    const synced = await readFile(join(output, "citations.md"), "utf8");
+    assert.match(synced, /Inline \\\[6\\\] and \\\[Online\\\] markers/);
+    assert.match(synced, /already-escaped \\\[1\\\],/);
+    assert.match(synced, /a `arr\[0\]` span,/);
+    assert.match(synced, /a \[link\]\(https:\/\/example\.com\) and a reference \[2\]\[3\]\./);
+    assert.match(synced, /const re = \/```\[\\s\\S\]\*\?```\/g; \/\/ \[not-a-citation\]/);
+    assert.match(synced, /^\\\[6\\\] A\. Gallant/m);
+    assert.match(synced, /^tags: \["a","b"\]$/m);
     for (const name of ["private", "unfinished", "implicit", "archived", "quoted"]) {
       await assert.rejects(access(join(output, `research/Nested/${name}.md`)));
     }

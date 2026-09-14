@@ -52,6 +52,10 @@ const HEADERS = {
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|tiff?)$/i;
 
+// Excludes already-escaped brackets, images, links, reference links and
+// definitions, and MDC spans that carry attributes.
+const BARE_SPAN = /(^|[^\\!\]])\[([^[\]\n]+)\](?![([:{])/g;
+
 async function listDirectory(path) {
   const items = [];
   let page = "1";
@@ -211,6 +215,33 @@ function rewriteImageUrls(markdown, imageIndex) {
   });
 }
 
+// Step 3: escape bare [text], which remark-mdc parses as inline-span syntax and
+// renders as <span>text</span>, silently dropping the brackets from IEEE citations.
+function escapeBracketSpans(markdown) {
+  const lines = markdown.split("\n");
+  let inFence = false;
+  let inFrontmatter = lines[0] === "---";
+
+  return lines
+    .map((line, index) => {
+      if (inFrontmatter) {
+        if (index > 0 && line === "---") inFrontmatter = false;
+        return line;
+      }
+      if (/^\s*(```|~~~)/.test(line)) {
+        inFence = !inFence;
+        return line;
+      }
+      if (inFence) return line;
+
+      return line
+        .split(/(`[^`\n]*`)/)
+        .map((segment, i) => (i % 2 ? segment : segment.replace(BARE_SPAN, "$1\\[$2\\]")))
+        .join("");
+    })
+    .join("\n");
+}
+
 function frontmatter(raw) {
   const match = raw.trimStart().match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
   return match ? parse(match[1]) ?? {} : {};
@@ -222,7 +253,7 @@ function isPublished(metadata) {
 
 function renderMarkdown(raw, imageIndex) {
   return injectReadingTime(
-    rewriteImageUrls(transformObsidianImages(raw.trimStart()), imageIndex),
+    escapeBracketSpans(rewriteImageUrls(transformObsidianImages(raw.trimStart()), imageIndex)),
   );
 }
 
