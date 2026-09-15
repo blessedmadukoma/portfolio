@@ -60,11 +60,17 @@ server/
   utils/        KV client and per-feature stores
 shared/utils/   code shared between app and server
 scripts/        Obsidian sync and its tests
+docs/           post template and writing guide
 ```
 
 The homepage is a single route. The Thoughts, Experience, Research, Projects and
 Tools sections are client-side tabs registered in `app/pkg/enums.ts`, not
 separate pages.
+
+`/blog` lists every published post grouped by year and then month, newest first,
+with a count on each group. The Research, Engineering and Building buttons filter
+the list through a `?category=` query parameter, and the groups re-form around the
+result.
 
 ## Obsidian publishing
 
@@ -95,6 +101,22 @@ sync fails, the previous local content is retained.
 
 `content/blog/` is generated and gitignored. Edits there are overwritten by the
 next sync.
+
+## Writing
+
+New posts start from `docs/post-template.md`. `docs/writing-guide.md` describes the
+structure it follows: a concrete opening, the takeaway stated up front as a claim,
+the body, limitations, what changes next, and references. Optional blocks cover
+posts that report their own measurements, approaches that were tried, or a survey
+of other people's work.
+
+Copy the template into the vault to write. `docs/` sits outside the `blog/**`
+content collection, so the sync never touches it.
+
+Set `category` on every post, one of `research`, `engineering` or `building`. It
+drives the filters on `/blog`. Without it the site infers the category from a fixed
+tag list, so a post with an unlisted tag is filed under Engineering. Leave
+`readingTime` unset and the sync computes it.
 
 ## View counts
 
