@@ -119,7 +119,6 @@
               <span v-if="post.date">{{ formatDate(post.date as string) }}</span>
               <span v-if="post.date">·</span>
               <span v-if="post.readingTime">{{ post.readingTime }} min read</span>
-              <span v-if="post.readingTime">·</span>
               <!-- <span>{{ views ?? 0 }} {{ (views ?? 0) === 1 ? 'view' : 'views' }}</span> -->
             </div>
           </div>
