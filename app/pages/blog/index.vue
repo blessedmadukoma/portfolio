@@ -3,6 +3,8 @@
     THOUGHT_CATEGORIES,
     type ThoughtCategory,
     normalizeObsidianPost,
+    postMonth,
+    postYear,
     useNativePosts,
   } from "~/composables/useBlogPosts";
 
@@ -43,6 +45,30 @@
       (post) => !activeCategory.value || post.category === activeCategory.value,
     ),
   );
+
+  // Posts arrive date-DESC and Map keeps insertion order, so years and months need no re-sort.
+  const archive = computed(() => {
+    const years = new Map<string, Map<string, typeof posts.value>>();
+
+    for (const post of posts.value) {
+      const year = postYear(post.date) || "Undated";
+      const month = postMonth(post.date) || "Undated";
+      if (!years.has(year)) years.set(year, new Map());
+      const months = years.get(year)!;
+      if (!months.has(month)) months.set(month, []);
+      months.get(month)!.push(post);
+    }
+
+    return [...years].map(([year, months]) => ({
+      year,
+      count: [...months.values()].reduce((total, list) => total + list.length, 0),
+      months: [...months].map(([month, monthPosts]) => ({
+        month,
+        count: monthPosts.length,
+        posts: monthPosts,
+      })),
+    }));
+  });
 
   function setCategory(category: ThoughtCategory | "") {
     const query = { ...route.query };
@@ -135,11 +161,39 @@
         No published posts match these filters.
       </p>
 
-      <NavsBlogPostItem
-        v-for="post in posts"
-        :key="post.id"
-        :post="post"
-      />
+      <section
+        v-for="group in archive"
+        :key="group.year"
+        class="border-b border-zinc-200 pb-4 last:border-0 last:pb-0 dark:border-zinc-800"
+      >
+        <h2
+          class="sticky top-0 z-20 -mx-4 flex items-baseline gap-1.5 bg-white/90 px-4 py-2 backdrop-blur dark:bg-zinc-950/90"
+        >
+          <span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+            {{ group.year }}
+          </span>
+          <sup class="text-xs font-normal text-zinc-500 dark:text-zinc-400">
+            {{ group.count }}
+          </sup>
+        </h2>
+
+        <div
+          v-for="entry in group.months"
+          :key="entry.month"
+          class="flex flex-col border-b border-zinc-100 py-2 last:border-0 last:pb-0 md:flex-row md:items-start dark:border-zinc-800/60"
+        >
+          <h3
+            class="mb-1 flex shrink-0 items-baseline gap-1.5 md:mb-0 md:w-24 md:pt-3.5"
+          >
+            <span class="text-sm text-zinc-600 dark:text-zinc-300">{{ entry.month }}</span>
+            <sup class="text-[11px] text-zinc-400 dark:text-zinc-500">{{ entry.count }}</sup>
+          </h3>
+
+          <div class="w-full min-w-0">
+            <NavsBlogPostItem v-for="post in entry.posts" :key="post.id" :post="post" />
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 </template>
