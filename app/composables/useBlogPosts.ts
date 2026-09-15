@@ -69,14 +69,40 @@ export interface NormalizedPost {
   category: ThoughtCategory;
 }
 
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 export function formatDate(dateString: string): string {
   if (!dateString) return "";
-  const date = new Date(dateString);
+  // Date-only strings parse as UTC; force local so the card date matches its year heading.
+  const date = new Date(
+    /^\d{4}-\d{2}-\d{2}$/.test(dateString) ? `${dateString}T00:00:00` : dateString,
+  );
   return date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
+}
+
+export function postYear(dateString: string): string {
+  return dateString.slice(0, 4);
+}
+
+export function postMonth(dateString: string): string {
+  return MONTH_NAMES[Number(dateString.slice(5, 7)) - 1] ?? "";
 }
 
 export function obsidianImageToProxy(src?: string) {
