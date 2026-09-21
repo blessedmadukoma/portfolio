@@ -47,6 +47,16 @@
             >
               Live
             </a>
+            <a
+              v-for="reference in project.references"
+              :key="reference.url"
+              :href="reference.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            >
+              {{ reference.label }}
+            </a>
           </div>
         </div>
 

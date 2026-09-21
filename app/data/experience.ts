@@ -10,9 +10,9 @@ export const WORK_EXPERIENCE = [
     imageURL: "/logos/svgs/cmu.svg",
     // link: "https://www.mininfra.gov.rw",
     workRoles: [
-      "Studying how to make production AI systems dependable by checking how agents use data, ensuring their actions match user approval, and recording what happened.",
-      "Completed empirical pilots on historical agent traces and semantic monitoring under component changes, documenting observed failures and the limits of proposed methods.",
-      "Building a football-analysis agent and recording its tool calls to study what happens when calls fail, repeat, or run after approval changes.",
+      "Researching reliability problems in AI agents that discover, read, and transform data.",
+      "Completed three empirical pilots on agent traces, semantic monitoring, and autonomous data discovery.",
+      "Currently studying whether data checks can detect failures before agent-generated programs run.",
     ],
   },
   {

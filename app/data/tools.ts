@@ -172,12 +172,12 @@ export const TOOLS: Tool[] = [
     image: "https://cdn.simpleicons.org/pandas",
     category: "data",
   },
-  // {
-  //   name: "Streamlit",
-  //   URL: "https://streamlit.io/",
-  //   image: "https://cdn.simpleicons.org/streamlit",
-  //   category: "data",
-  // },
+  {
+    name: "Streamlit",
+    URL: "https://streamlit.io/",
+    image: "https://cdn.simpleicons.org/streamlit",
+    category: "data",
+  },
   {
     name: "GitHub Actions",
     URL: "https://github.com/features/actions",
@@ -208,11 +208,17 @@ export const TOOLS: Tool[] = [
     image: "https://cdn.simpleicons.org/fastapi",
     category: "web",
   },
+  {
+    name: "DuckDB",
+    URL: "https://duckdb.org/",
+    image: "https://cdn.simpleicons.org/duckdb",
+    category: "database",
+  },
   // {
-  //   name: "DuckDB",
-  //   URL: "https://duckdb.org/",
-  //   image: "https://cdn.simpleicons.org/duckdb",
-  //   category: "database",
+  //   name: "Airflow",
+  //   URL: "https://airflow.apache.org/",
+  //   image: "https://cdn.simpleicons.org/apacheairflow",
+  //   category: "devops",
   // },
   // {
   //   name: "XGBoost",
