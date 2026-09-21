@@ -31,25 +31,12 @@
       class="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
     >
       <p>
-        I’m a software engineer and systems researcher studying
-        <strong>infrastructure for reliable AI-generated workloads</strong> that
-        work with tabular and other data formats. My current research focuses on
-        <strong>inferring</strong>, <strong>verifying</strong> and
-        <strong>validating</strong> the data requirements of AI-generated Python
-        code before execution.
-      </p>
-      <p>
-        My research on
-        <a
-          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
-          href="https://athletics-performance.mblessed.space"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          athletics performance anomaly detection</a
-        >
-        led to this direction because I had to trace detected anomalies to their
-        source records. I’m also building
+        Software engineer and systems researcher building reliable
+        infrastructure for AI-generated workloads over tabular and other data
+        formats.
+        <br />
+        <strong>Current:</strong> Studying how to check generated code’s data
+        requirements before execution and building
         <a
           href="https://sedge.app"
           target="_blank"
@@ -61,15 +48,15 @@
             aria-hidden="true"
           >
             <img
-              src="/logos/svgs/sedge-mark.svg"
+              src="/logos/imgs/sedge-favicon.png"
               alt=""
               class="h-[13px] w-[13px]"
             />
           </span>
           <span class="underline">Sedge</span></a
-        >, a data operating system that brings together data pipelines,
-        governance, and analysis.
+        >, a data operating system for pipelines, governance, and analysis.
       </p>
+
       <p>
         <button
           @click="showModal = true"

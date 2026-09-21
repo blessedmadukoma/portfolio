@@ -37,12 +37,12 @@
           <div class="space-y-4">
             <section>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I study
-                <strong>infrastructure for reliable AI-generated workloads</strong>,
-                from one-off programs to multi-step pipelines that work with
-                tabular and other data. My current research asks how a system
-                can derive and check the data requirements of short-lived
-                Python programs over tabular data before an AI agent runs them.
+                I study infrastructure for reliable AI-generated workloads over
+                tabular and other data formats. My current project focuses on
+                <strong>program–data compatibility</strong>: whether a
+                low-latency gate can derive exact data requirements from a
+                short-lived Python program and check the source before an agent
+                executes it.
               </p>
             </section>
 
@@ -50,11 +50,11 @@
               <h3
                 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
               >
-                Work So Far
+                How I Got Here
               </h3>
 
               <p class="text-zinc-800 dark:text-zinc-300">
-                I am a Graduate Research Associate at
+                At
                 <strong>
                   <a
                     href="https://www.africa.engineering.cmu.edu/"
@@ -62,42 +62,31 @@
                     rel="noopener noreferrer"
                     class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                   >
-                    Carnegie Mellon University Africa</a
+                    Carnegie Mellon University Africa’s SaLT Lab</a
                   ></strong
-                >, where I study the reliability of AI agents and production AI
-                systems.
-              </p>
-
-              <p class="text-zinc-800 dark:text-zinc-300 mt-2">
-                I previously built a
+                >, I study reliability problems in agents that discover, read,
+                and transform data. Previously, I built an
                 <a
                   href="https://athletics-performance.mblessed.space/"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                 >
-                  benchmarking platform</a
+                  athletics anomaly-detection benchmark platform</a
                 >
-                for performance anomaly detection in athletics, covering 1.5M+
-                performance records, 19,000+ competitions, and 14 detection
-                methods. The work was published at
-                <strong>IEEE SDS 2026</strong> and received a
+                with over 1.5M+ performance records, 19,000+ competitions, and
+                14 detection methods. The work received a
                 <a
                   :href="certificateUrl"
                   class="font-semibold text-indigo-600 underline underline-offset-2 hover:text-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300"
                   aria-haspopup="dialog"
                   @click.prevent="showCertificate = true"
                   >Best Paper Honorable Mention</a
-                >.
-              </p>
-
-              <p class="text-zinc-800 dark:text-zinc-300 mt-2">
-                While building the athletics system, I had to trace each
-                detected anomaly back to the underlying performance and
-                sanctions data so I could verify and explain it. This showed me
-                that reliable outputs depend on valid inputs and visible
-                evidence, which led me to study whether systems can check the
-                data requirements of AI-generated workloads before execution.
+                >
+                at <strong>IEEE SDS 2026</strong>. To verify and explain a
+                detected anomaly, I had to trace it to the underlying
+                performance and sanctions data. This showed me that reliable
+                outputs depend on valid inputs and visible evidence.
               </p>
             </section>
 
@@ -105,26 +94,17 @@
               <h3
                 class="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
               >
-                Questions I Am Exploring
+                Current Project
               </h3>
-
-              <ol class="list-decimal space-y-2 pl-5 text-zinc-800 dark:text-zinc-300">
-                <li>
-                  <strong class="!font-semibold">Finding exact requirements:</strong>
-                  Which table, column, type, null, and operation requirements
-                  can the system derive from generated Python code?
-                </li>
-                <li>
-                  <strong class="!font-semibold">Catching the right failures:</strong>
-                  Which failures come from the source data, and which come from
-                  the generated program or its execution environment?
-                </li>
-                <li>
-                  <strong class="!font-semibold">Checking before execution:</strong>
-                  Can the system generate and run useful checks fast enough for
-                  programs that an agent creates and uses once?
-                </li>
-              </ol>
+              <p class="text-zinc-800 dark:text-zinc-300">
+                I am testing which failures in recorded data-agent programs can
+                be predicted from exact program–data requirements. The first
+                scope covers files or tables, columns, type conversions,
+                null-sensitive operations, and join keys. The gate would return
+                <code>run</code>, <code>block</code>, or <code>unknown</code>
+                with a reason, while distinguishing source, program, executor,
+                and ordinary-code failures.
+              </p>
             </section>
 
             <section>
@@ -134,37 +114,43 @@
                 Current Work
               </h3>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I have completed an initial study of
+                I studied
                 <a
                   href="https://ssc.io/pdf/duckdq.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                >DuckDQ</a>
+                  >DuckDQ</a
+                >
                 and
                 <a
                   href="https://arxiv.org/abs/2604.21765"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                >PrismaDV</a>, which cover fast data assertions and
-                code-informed test generation.
-                My next step is to inspect failed and successful DABstep cells
-                and test whether an exact pre-execution check could detect a
-                real source-data failure. In parallel, I am prototyping
-                schema-aware validation for generated SQL in
+                  >PrismaDV</a
+                >
+                to understand efficient assertion execution and code-informed
+                test generation. Next, I will inspect one DABstep run containing
+                one failed cell and two successful cells, classify each result,
+                and implement one exact check if the evidence supports it. In
+                parallel, I am exploring schema-aware checks for generated SQL
+                in
                 <a
                   href="https://sedge.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                >Sedge</a> using
+                  >Sedge</a
+                >
+                using
                 <a
                   href="https://github.com/ajitpratap0/GoSQLX"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                >GoSQLX</a>.
+                  >GoSQLX</a
+                >.
               </p>
             </section>
           </div>

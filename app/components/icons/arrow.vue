@@ -1,5 +1,16 @@
+<script setup lang="ts">
+  withDefaults(defineProps<{ open?: boolean }>(), {
+    open: false,
+  });
+</script>
+
 <template>
-  <span class="transition-transform duration-200 group-hover:rotate-90">
+  <span
+    :class="[
+      'inline-flex transition-transform duration-200 ease-out',
+      open ? 'rotate-90' : 'group-hover:rotate-90',
+    ]"
+  >
     <svg
       class="inline w-4 h-4 text-zinc-400"
       fill="none"
