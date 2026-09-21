@@ -37,11 +37,12 @@
           <div class="space-y-4">
             <section>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I am interested in making
-                <strong>production AI systems dependable</strong>. My current
-                focus is <strong>AI agents</strong> that read data, call tools,
-                save intermediate results, and update files or records. I focus
-                on checks and records that remain necessary as models improve.
+                I study
+                <strong>infrastructure for reliable AI-generated workloads</strong>,
+                from one-off programs to multi-step pipelines that work with
+                tabular and other data. My current research asks how a system
+                can derive and check the data requirements of short-lived
+                Python programs over tabular data before an AI agent runs them.
               </p>
             </section>
 
@@ -64,7 +65,7 @@
                     Carnegie Mellon University Africa</a
                   ></strong
                 >, where I study the reliability of AI agents and production AI
-                systems after deployment.
+                systems.
               </p>
 
               <p class="text-zinc-800 dark:text-zinc-300 mt-2">
@@ -78,7 +79,7 @@
                   benchmarking platform</a
                 >
                 for performance anomaly detection in athletics, covering 1.5M+
-                competition records, 19,000+ competitions, and 14 detection
+                performance records, 19,000+ competitions, and 14 detection
                 methods. The work was published at
                 <strong>IEEE SDS 2026</strong> and received a
                 <a
@@ -91,9 +92,12 @@
               </p>
 
               <p class="text-zinc-800 dark:text-zinc-300 mt-2">
-                That project <strong>shaped my current direction</strong>.
-                I needed to check whether each flagged performance was supported
-                by the data and show the records behind it.
+                While building the athletics system, I had to trace each
+                detected anomaly back to the underlying performance and
+                sanctions data so I could verify and explain it. This showed me
+                that reliable outputs depend on valid inputs and visible
+                evidence, which led me to study whether systems can check the
+                data requirements of AI-generated workloads before execution.
               </p>
             </section>
 
@@ -106,19 +110,19 @@
 
               <ol class="list-decimal space-y-2 pl-5 text-zinc-800 dark:text-zinc-300">
                 <li>
-                  <strong class="!font-semibold">Protecting data across a workflow:</strong>
-                  How can the system enforce data-use rules as agents move or
-                  transform data?
+                  <strong class="!font-semibold">Finding exact requirements:</strong>
+                  Which table, column, type, null, and operation requirements
+                  can the system derive from generated Python code?
                 </li>
                 <li>
-                  <strong class="!font-semibold">Keeping actions within approval:</strong>
-                  How does the system ensure that an agent’s final action
-                  matches what the user authorised?
+                  <strong class="!font-semibold">Catching the right failures:</strong>
+                  Which failures come from the source data, and which come from
+                  the generated program or its execution environment?
                 </li>
                 <li>
-                  <strong class="!font-semibold">Recording what happened:</strong>
-                  What must the system record so we can check what an agent did
-                  and what changed?
+                  <strong class="!font-semibold">Checking before execution:</strong>
+                  Can the system generate and run useful checks fast enough for
+                  programs that an agent creates and uses once?
                 </li>
               </ol>
             </section>
@@ -130,12 +134,37 @@
                 Current Work
               </h3>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I am building a small football-analysis agent and recording its
-                tool calls to test what happens when calls fail, repeat, or run
-                after approval changes. For each test, I specify what should
-                happen, what the run record must show, and what checks could
-                prevent an incorrect action. I use these tests and prior research
-                to choose a specific problem to study.
+                I have completed an initial study of
+                <a
+                  href="https://ssc.io/pdf/duckdq.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                >DuckDQ</a>
+                and
+                <a
+                  href="https://arxiv.org/abs/2604.21765"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                >PrismaDV</a>, which cover fast data assertions and
+                code-informed test generation.
+                My next step is to inspect failed and successful DABstep cells
+                and test whether an exact pre-execution check could detect a
+                real source-data failure. In parallel, I am prototyping
+                schema-aware validation for generated SQL in
+                <a
+                  href="https://sedge.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                >Sedge</a> using
+                <a
+                  href="https://github.com/ajitpratap0/GoSQLX"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                >GoSQLX</a>.
               </p>
             </section>
           </div>

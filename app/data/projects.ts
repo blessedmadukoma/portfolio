@@ -1,4 +1,39 @@
-export const PROJECTS = [
+export interface ProjectReference {
+  label: string;
+  url: string;
+}
+
+export interface Project {
+  title: string;
+  briefText: string;
+  description: string;
+  live: string;
+  apiDoc: string;
+  github: string;
+  alt: string;
+  technologies: string[];
+  imageURL?: string;
+  references?: ProjectReference[];
+}
+
+export const PROJECTS: Project[] = [
+  // {
+  //   title: "Sedge",
+  //   briefText: "Context-aware data analysis and SQL validation",
+  //   description:
+  //     "Building a data operating system that brings together data pipelines, governance, and analysis.",
+  //   live: "https://sedge.app",
+  //   apiDoc: "",
+  //   github: "",
+  //   alt: "sedge-data-workspace",
+  //   technologies: ["Go", "PostgreSQL"],
+  //   references: [
+  //     {
+  //       label: "GoSQLX",
+  //       url: "https://github.com/ajitpratap0/GoSQLX",
+  //     },
+  //   ],
+  // },
   {
     title: "Athletics Performance Outlier Detection",
     briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
@@ -47,7 +82,7 @@ export const PROJECTS = [
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/telco-customer-analysis-readme",
     alt: "telco-customer-churn-analysis",
-    technologies: ["Python", "Scikit-Learn", "Plotly"],
+    technologies: ["Python", "scikit-learn", "Plotly"],
   },
   {
     title: "CoreSentiment",

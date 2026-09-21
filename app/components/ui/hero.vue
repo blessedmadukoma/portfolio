@@ -31,10 +31,12 @@
       class="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
     >
       <p>
-        I’m a software engineer and systems researcher exploring how to make
-        <strong>production AI systems dependable</strong>. My current focus is
-        <strong>AI agents</strong> that read data, call tools, save intermediate
-        results, and update files or records.
+        I’m a software engineer and systems researcher studying
+        <strong>infrastructure for reliable AI-generated workloads</strong> that
+        work with tabular and other data formats. My current research focuses on
+        <strong>inferring</strong>, <strong>verifying</strong> and
+        <strong>validating</strong> the data requirements of AI-generated Python
+        code before execution.
       </p>
       <p>
         My research on
@@ -46,15 +48,27 @@
         >
           athletics performance anomaly detection</a
         >
-        shaped this interest in evidence and reliability. Alongside my research,
-        I’m building
+        led to this direction because I had to trace detected anomalies to their
+        source records. I’m also building
         <a
           href="https://sedge.app"
           target="_blank"
           rel="noopener noreferrer"
-          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
-          >Sedge</a
-        >, a platform for building reliable, data-driven applications.
+          class="inline-flex items-center gap-1 align-middle text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
+        >
+          <span
+            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-white ring-1 ring-zinc-200 dark:ring-zinc-700"
+            aria-hidden="true"
+          >
+            <img
+              src="/logos/svgs/sedge-mark.svg"
+              alt=""
+              class="h-[13px] w-[13px]"
+            />
+          </span>
+          <span class="underline">Sedge</span></a
+        >, a data operating system that brings together data pipelines,
+        governance, and analysis.
       </p>
       <p>
         <button

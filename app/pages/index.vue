@@ -24,12 +24,12 @@
       {
         name: "description",
         content:
-          "Explore the portfolio of Blessed Madukoma, showcasing projects, skills, and contact information.",
+          "Blessed Madukoma is a software engineer and systems researcher studying infrastructure for reliable AI-generated workloads.",
       },
       {
         name: "keywords",
         content:
-          "Blessed Madukoma, portfolio, Software Engineer, Research Engineer, projects, contact",
+          "Blessed Madukoma, Software Engineer, Research Engineer, AI-generated workloads, data infrastructure, Sedge",
       },
       { name: "author", content: "Blessed Madukoma" },
       { property: "og:title", content: "Blessed Madukoma | Portfolio" },
