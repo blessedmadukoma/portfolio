@@ -78,7 +78,7 @@
                     class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
                   >
                     {{ experience.position }}
-                    <IconsArrow />
+                    <IconsArrow :open="openWorkDropdown === id" />
                   </p>
                 </h3>
                 <p
@@ -105,21 +105,27 @@
           </div>
         </div>
 
-        <Transition name="expand">
+        <Transition name="accordion">
           <div
             v-if="openWorkDropdown === id"
-            class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
+            class="grid"
           >
-            <ul
-              class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3"
-            >
-              <li
-                v-for="(role, idx) in experience.workRoles"
-                :key="idx"
-                class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
-                v-html="role"
-              ></li>
-            </ul>
+            <div class="min-h-0 overflow-hidden">
+              <div
+                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
+              >
+                <ul
+                  class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3"
+                >
+                  <li
+                    v-for="(role, idx) in experience.workRoles"
+                    :key="idx"
+                    class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+                    v-html="role"
+                  ></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </Transition>
       </div>
@@ -162,7 +168,7 @@
                       @click.stop
                       >{{ education.institution }}</a
                     >
-                    <IconsArrow />
+                    <IconsArrow :open="openEducationDropdown === id" />
                   </p>
                 </h3>
                 <p
@@ -184,29 +190,35 @@
           </div>
         </div>
 
-        <Transition name="expand">
+        <Transition name="accordion">
           <div
             v-if="openEducationDropdown === id"
-            class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
+            class="grid"
           >
-            <ul
-              class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3"
-            >
+            <div class="min-h-0 overflow-hidden">
               <div
-                v-if="education.thesis"
-                class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
               >
-                <strong>Thesis: </strong>
-                <span v-html="education.thesis"></span>
+                <ul
+                  class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3"
+                >
+                  <li
+                    v-if="education.thesis"
+                    class="list-none sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+                  >
+                    <strong>Thesis: </strong>
+                    <span v-html="education.thesis"></span>
+                  </li>
+                  <li
+                    v-for="(item, index) in education.description"
+                    :key="index"
+                    class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+                  >
+                    {{ item }}
+                  </li>
+                </ul>
               </div>
-              <li
-                v-for="(item, index) in education.description"
-                :key="index"
-                class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
-              >
-                {{ item }}
-              </li>
-            </ul>
+            </div>
           </div>
         </Transition>
       </div>
@@ -239,7 +251,7 @@
                   class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
                 >
                   {{ award.title }}
-                  <IconsArrow />
+                  <IconsArrow :open="openAwardDropdown === id" />
                 </p>
               </h3>
               <p class="text-xs md:text-sm text-zinc-500 dark:text-zinc-400">
@@ -254,32 +266,38 @@
           </p>
         </div>
 
-        <Transition name="expand">
+        <Transition name="accordion">
           <div
             v-if="openAwardDropdown === id"
-            class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
+            class="grid"
           >
-            <p class="text-sm text-zinc-600 dark:text-zinc-300 py-3">
-              {{ award.description }}
-            </p>
-            <div class="flex items-center gap-3">
-              <a
-                v-if="award.link"
-                :href="award.link"
-                target="_blank"
-                rel="noopener"
-                class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                @click.stop
+            <div class="min-h-0 overflow-hidden">
+              <div
+                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
               >
-                View paper →
-              </a>
-              <button
-                v-if="award.certificateURL"
-                class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                @click.stop="openCertificate(award.certificateURL)"
-              >
-                View certificate →
-              </button>
+                <p class="text-sm text-zinc-600 dark:text-zinc-300 py-3">
+                  {{ award.description }}
+                </p>
+                <div class="flex items-center gap-3">
+                  <a
+                    v-if="award.link"
+                    :href="award.link"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                    @click.stop
+                  >
+                    View paper →
+                  </a>
+                  <button
+                    v-if="award.certificateURL"
+                    class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                    @click.stop="openCertificate(award.certificateURL)"
+                  >
+                    View certificate →
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </Transition>
