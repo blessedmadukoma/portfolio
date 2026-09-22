@@ -64,7 +64,7 @@
         >
           Read my research statement
         </button>
-        or see
+        , see
         <button
           @click="showMap = true"
           class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"

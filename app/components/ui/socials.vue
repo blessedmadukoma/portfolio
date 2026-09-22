@@ -6,7 +6,7 @@
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const activateNext = () => {
-      activeSocialIndex.value = (activeSocialIndex.value + 1) % 5;
+      activeSocialIndex.value = (activeSocialIndex.value + 1) % 6;
     };
 
     activateNext();
@@ -25,5 +25,6 @@
     <icons-linkedin :class="{ 'is-socially-active': activeSocialIndex === 2 }" />
     <icons-writing :class="{ 'is-socially-active': activeSocialIndex === 3 }" />
     <icons-scholar :class="{ 'is-socially-active': activeSocialIndex === 4 }" />
+    <icons-cv :class="{ 'is-socially-active': activeSocialIndex === 5 }" />
   </div>
 </template>
