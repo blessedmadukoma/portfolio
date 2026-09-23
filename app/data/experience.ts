@@ -10,9 +10,8 @@ export const WORK_EXPERIENCE = [
     imageURL: "/logos/svgs/cmu.svg",
     // link: "https://www.mininfra.gov.rw",
     workRoles: [
-      "Researching reliability problems in AI agents that discover, read, and transform data.",
-      "Completed three empirical pilots on agent traces, semantic monitoring, and autonomous data discovery.",
-      "Currently studying whether data checks can detect failures before agent-generated programs run.",
+      "Researching how to make AI agents that discover, read, and transform tabular data more reliable, with three completed empirical pilots on agent traces, semantic monitoring, and autonomous data discovery.",
+      "Currently studying whether a low-latency gate can find the exact data an AI-generated program needs and check the source of that data before the program runs.",
     ],
   },
   {
