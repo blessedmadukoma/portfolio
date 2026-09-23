@@ -1,80 +1,79 @@
 <script setup lang="ts">
-  const colorMode = useColorMode();
+const colorMode = useColorMode();
 
-  const isDark = computed(() => colorMode.value === "dark");
+const isDark = computed(() => colorMode.value === "dark");
 
-  const toggleTheme = () => {
-    colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
-  };
+const toggleTheme = () => {
+	colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
+};
 
-  const showModal = ref(false);
-  const showMap = ref(false);
+const showModal = ref(false);
+const showMap = ref(false);
 </script>
 
 <template>
-  <section>
-    <h1
-      class="text-2xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center justify-between mb-4"
-    >
-      <span>Hi👋🏿, I'm Blessed</span>
-      <button
-        @click="toggleTheme"
-        class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-500 transition-colors duration-200 cursor-pointer"
-        :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
-      >
-        <icons-sun class="hidden dark:block" />
-        <icons-moon class="block dark:hidden" />
-      </button>
-    </h1>
+	<section>
+		<h1
+			class="text-2xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center justify-between mb-4"
+		>
+			<span>Hi👋🏿, I'm Blessed</span>
+			<button
+				@click="toggleTheme"
+				class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-500 transition-colors duration-200 cursor-pointer"
+				:aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
+			>
+				<icons-sun class="hidden dark:block" />
+				<icons-moon class="block dark:hidden" />
+			</button>
+		</h1>
 
-    <div
-      class="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
-    >
-      <p>
-        Software engineer and systems researcher building reliable
-        infrastructure for AI-generated workloads over tabular and other data
-        formats.
-        <br />
-        <strong>Current:</strong> Studying how to check generated code’s data
-        requirements before execution and building
-        <a
-          href="https://sedge.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 align-middle text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
-        >
-          <span
-            class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-white ring-1 ring-zinc-200 dark:ring-zinc-700"
-            aria-hidden="true"
-          >
-            <img
-              src="/logos/imgs/sedge-favicon.png"
-              alt=""
-              class="h-[13px] w-[13px]"
-            />
-          </span>
-          <span class="underline">Sedge</span></a
-        >, a data operating system for pipelines, governance, and analysis.
-      </p>
+		<div
+			class="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
+		>
+			<p>
+				Software engineer and systems researcher building reliable
+				infrastructure for AI-generated workloads over tabular and other data
+				formats.
+				<br />
+				<strong>Current:</strong> Studying how to check generated code’s data
+				requirements before execution and building
+				<a
+					href="https://sedge.app"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-1 align-middle text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
+				>
+					<span
+						class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-white ring-1 ring-zinc-200 dark:ring-zinc-700"
+						aria-hidden="true"
+					>
+						<img
+							src="/logos/imgs/sedge-favicon.png"
+							alt=""
+							class="h-[13px] w-[13px]"
+						/>
+					</span>
+					<span class="underline">Sedge</span></a
+				>, a data operating system for pipelines, governance, and analysis.
+			</p>
 
-      <p>
-        <button
-          @click="showModal = true"
-          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
-        >
-          Read my research statement
-        </button>
-        , see
-        <button
-          @click="showMap = true"
-          class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
-        >
-          how I think about my work</button
-        >.
-      </p>
-    </div>
+			<p>
+				<button
+					@click="showModal = true"
+					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
+				>
+					Read my research statement</button
+				>, or see
+				<button
+					@click="showMap = true"
+					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
+				>
+					how I think about my work</button
+				>.
+			</p>
+		</div>
 
-    <ui-research-statement v-if="showModal" @close="showModal = false" />
-    <ui-research-map v-if="showMap" @close="showMap = false" />
-  </section>
+		<ui-research-statement v-if="showModal" @close="showModal = false" />
+		<ui-research-map v-if="showMap" @close="showMap = false" />
+	</section>
 </template>
