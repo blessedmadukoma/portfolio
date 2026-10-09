@@ -14,9 +14,9 @@
   );
   const projectGroups = computed(() =>
     [
-      { title: "Learning records", types: ["learning-log"] },
       { title: "Research experiments", types: ["experiment"] },
       { title: "Research notes", types: [] },
+      { title: "Learning records", types: ["learning-log"] },
     ]
       .map((group) => ({
         title: group.title,
@@ -48,11 +48,8 @@
   };
 
   const sortedPapers = computed(() => {
-    return [...papers.value].sort((a, b) => {
-      if (a.status === "in-progress" && b.status === "published") return -1;
-      if (a.status === "published" && b.status === "in-progress") return 1;
-      return 0;
-    });
+    const order = { preprint: 0, "in-progress": 1, published: 2 } as const;
+    return [...papers.value].sort((a, b) => order[a.status] - order[b.status]);
   });
 </script>
 
@@ -82,7 +79,7 @@
           "
           @click="activeSection = 'projects'"
         >
-          Projects ({{ projects.length }})
+          Records ({{ projects.length }})
         </button>
       </div>
 
@@ -151,7 +148,7 @@
           Publications
         </h2> -->
         <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-          Peer-reviewed work and formal research outputs.
+          Papers in journals, conferences and on arXiv.
         </p>
       </div>
       <div
@@ -183,6 +180,12 @@
             In Progress
           </span>
           <span
+            v-else-if="paper.status === 'preprint'"
+            class="flex-shrink-0 px-2 py-0.5 text-xs font-medium rounded-full bg-sky-100 text-sky-800 dark:bg-sky-900/30 dark:text-sky-400 whitespace-nowrap"
+          >
+            Preprint
+          </span>
+          <span
             v-else
             class="flex-shrink-0 px-2 py-0.5 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 whitespace-nowrap"
           >
@@ -203,9 +206,9 @@
           </template>
         </p>
 
-        <!-- Venue (published only) -->
+        <!-- Venue (published papers and preprints) -->
         <div
-          v-if="paper.status === 'published'"
+          v-if="paper.conference"
           class="text-xs text-zinc-500 dark:text-zinc-400 !mt-1"
         >
           <p>
@@ -233,15 +236,35 @@
           </span>
         </div>
 
-        <!-- PDF link -->
-        <div v-if="paper.pdfUrl">
+        <!-- PDF and code links -->
+        <div
+          v-if="paper.pdfUrl || paper.codeUrl || paper.recordUrl"
+          class="flex flex-wrap gap-2"
+        >
+          <NuxtLink
+            v-if="paper.recordUrl"
+            :to="paper.recordUrl"
+            class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            Read the Research Record →
+          </NuxtLink>
           <a
+            v-if="paper.pdfUrl"
             :href="paper.pdfUrl"
             target="_blank"
             rel="noopener"
             class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             View Paper →
+          </a>
+          <a
+            v-if="paper.codeUrl"
+            :href="paper.codeUrl"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            Code and Data →
           </a>
         </div>
       </div>
@@ -251,7 +274,7 @@
   <ui-image-modal
     v-if="certificateModal"
     :src="certificateModal"
-    alt="SDS 2026 Honorable Mention - Best Full Paper Award certificate"
+    alt="SDS 2026 Honorable Mention - Best Paper Award certificate"
     @close="certificateModal = null"
   />
 </template>
