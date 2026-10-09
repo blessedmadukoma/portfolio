@@ -22,7 +22,7 @@
               id="research-statement-title"
               class="text-base font-semibold text-zinc-900 dark:text-zinc-100 sm:text-lg"
             >
-              Research &amp; Engineering Focus
+              Research Statement
             </h2>
 
             <button
@@ -37,120 +37,116 @@
           <div class="space-y-4">
             <section>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I study infrastructure for reliable AI-generated workloads over
-                tabular and other data formats. My current project focuses on
-                <strong>program–data compatibility</strong>: whether a
-                low-latency gate can derive exact data requirements from a
-                short-lived Python program and check the source before an agent
-                executes it.
+                I study how to keep AI-powered data systems correct as data,
+                definitions, access rules and tools change, and what that
+                costs. Agents now write and run analysis code over
+                organisational data. Their answers depend on the data version,
+                the definitions and the rows they can see.
               </p>
             </section>
 
             <section>
-              <h3
-                class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
-              >
-                How I Got Here
+              <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                What I Mean by Correct
               </h3>
+              <p class="text-zinc-800 dark:text-zinc-300">
+                By correct, I mean an answer that matches a reference answer
+                computed with full, current information, or one that says
+                clearly that it is partial. By cost, I mean cost per correct
+                answer, checks or recomputations per change, and unnecessary
+                interventions.
+              </p>
+            </section>
 
+            <section>
+              <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                What I Have Found
+              </h3>
               <p class="text-zinc-800 dark:text-zinc-300">
                 At
-                <strong>
-                  <a
-                    href="https://www.africa.engineering.cmu.edu/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                  >
-                    Carnegie Mellon University Africa’s SaLT Lab</a
-                  ></strong
-                >, I study reliability problems in agents that discover, read,
-                and transform data. Previously, I built an
                 <a
-                  href="https://athletics-performance.mblessed.space/"
+                  href="https://www.africa.engineering.cmu.edu/"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                  >Carnegie Mellon University Africa’s SaLT Lab</a
+                >, I worked with Prof. Prasenjit Mitra on agents that write
+                analysis code. I analysed 283,435 recorded steps across six
+                benchmarks. Traces did not always record the code that ran or
+                the result the model received. In a pre-registered rerun,
+                executing the model’s code as written removed the failures
+                caused by the harness’s code wrapper, without a detectable
+                change in accuracy.
+              </p>
+              <p class="mt-2 text-zinc-800 dark:text-zinc-300">
+                Separately, in a
+                <NuxtLink
+                  to="/blog/does-an-ai-agent-know-when-it-cannot-see-all-the-data"
+                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                  >pre-registered study</NuxtLink
                 >
-                  athletics anomaly-detection benchmark platform</a
-                >
-                with over 1.5M+ performance records, 19,000+ competitions, and
-                14 detection methods. The work received a
-                <a
-                  :href="certificateUrl"
-                  class="font-semibold text-indigo-600 underline underline-offset-2 hover:text-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300"
-                  aria-haspopup="dialog"
-                  @click.prevent="showCertificate = true"
-                  >Best Paper Honorable Mention</a
-                >
-                at <strong>IEEE SDS 2026</strong>. To verify and explain a
-                detected anomaly, I had to trace it to the underlying
-                performance and sanctions data. This showed me that reliable
-                outputs depend on valid inputs and visible evidence.
+                on five public databases
+                with row-level access rules, cheaper models that were not told
+                the rules presented partial answers as complete in 70–95% of
+                affected cases with a final answer.
               </p>
             </section>
 
             <section>
-              <h3
-                class="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
-              >
-                Current Project
+              <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                What I Want to Study Next
               </h3>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I am testing which failures in recorded data-agent programs can
-                be predicted from exact program–data requirements. The first
-                scope covers files or tables, columns, type conversions,
-                null-sensitive operations, and join keys. The gate would return
-                <code>run</code>, <code>block</code>, or <code>unknown</code>
-                with a reason, while distinguishing source, program, executor,
-                and ordinary-code failures.
+                I want to track an analysis’s dependencies on data versions,
+                definitions, access scope and tool behaviour. When one of them
+                changes, the system could select a check, a recomputation, a
+                partial-answer label or abstention. I would compare this with
+                refreshing all context or changing nothing. A related question
+                is how to provide useful coverage labels without revealing
+                protected data.
               </p>
-            </section>
-
-            <section>
-              <h3
-                class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200"
-              >
-                Current Work
-              </h3>
-              <p class="text-zinc-800 dark:text-zinc-300">
-                I studied
-                <a
-                  href="https://ssc.io/pdf/duckdq.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                  >DuckDQ</a
-                >
-                and
-                <a
-                  href="https://arxiv.org/abs/2604.21765"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                  >PrismaDV</a
-                >
-                to understand efficient assertion execution and code-informed
-                test generation. Next, I will inspect one DABstep run containing
-                one failed cell and two successful cells, classify each result,
-                and implement one exact check if the evidence supports it. In
-                parallel, I am exploring schema-aware checks for generated SQL
-                in
+              <p class="mt-2 text-zinc-800 dark:text-zinc-300">
+                I am also building
                 <a
                   href="https://sedge.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                   >Sedge</a
-                >
-                using
+                >, a data operating system in development that keeps a
+                catalogue of what a company’s data means and uses it to answer
+                questions with AI. Its planned
+                access rules and change tracking
+                are where I can test these methods on a working system.
+              </p>
+            </section>
+
+            <section>
+              <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                Earlier Work
+              </h3>
+              <p class="text-zinc-800 dark:text-zinc-300">
+                I built an
                 <a
-                  href="https://github.com/ajitpratap0/GoSQLX"
+                  href="https://athletics-performance.mblessed.space/"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                  >GoSQLX</a
-                >.
+                  >athletics anomaly-detection benchmark platform</a
+                >
+                over 1.6 million performances from more than 19,000
+                competitions. Our full paper benchmarked eight methods and
+                received the
+                <a
+                  :href="certificateUrl"
+                  class="font-semibold text-indigo-600 underline underline-offset-2 hover:text-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300"
+                  aria-haspopup="dialog"
+                  @click.prevent="showCertificate = true"
+                  >Honorable Mention - Best Paper Award</a
+                >
+                at the 13th IEEE Swiss Conference on Data Science and AI
+                (SDS2026). A flag there is a starting point for investigation,
+                not a verdict.
               </p>
             </section>
           </div>
@@ -160,7 +156,7 @@
     <ui-image-modal
       v-if="showCertificate"
       :src="certificateUrl"
-      alt="SDS 2026 Honorable Mention - Best Full Paper Award certificate"
+      alt="SDS 2026 Honorable Mention - Best Paper Award certificate"
       @close="showCertificate = false"
     />
   </ClientOnly>

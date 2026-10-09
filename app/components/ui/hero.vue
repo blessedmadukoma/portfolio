@@ -31,12 +31,13 @@ const showMap = ref(false);
 			class="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
 		>
 			<p>
-				Software engineer and systems researcher building reliable
-				infrastructure for AI-generated workloads over tabular and other data
-				formats.
+				Software engineer and researcher. I study how to keep AI-powered
+				data systems correct as data, definitions, access rules and tools
+				change, and what that costs.
 				<br />
-				<strong>Current:</strong> Studying how to check generated code’s data
-				requirements before execution and building
+				<strong>Current:</strong> a preprint on what agent traces hide, a
+				study of whether AI agents know when they cannot see all the data,
+				and
 				<a
 					href="https://sedge.app"
 					target="_blank"
@@ -54,7 +55,7 @@ const showMap = ref(false);
 						/>
 					</span>
 					<span class="underline">Sedge</span></a
-				>, a data operating system for pipelines, governance, and analysis.
+				>, a data operating system in development.
 			</p>
 
 			<p>
@@ -63,17 +64,18 @@ const showMap = ref(false);
 					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
 				>
 					Read my research statement</button
-				>, or see
+				>.
+				<!-- Research map retired (9 Oct 2026): the statement now covers it.
 				<button
 					@click="showMap = true"
 					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
 				>
 					how I think about my work</button
-				>.
+				> -->
 			</p>
 		</div>
 
 		<ui-research-statement v-if="showModal" @close="showModal = false" />
-		<ui-research-map v-if="showMap" @close="showMap = false" />
+		<!-- <ui-research-map v-if="showMap" @close="showMap = false" /> -->
 	</section>
 </template>
