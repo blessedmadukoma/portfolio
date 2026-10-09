@@ -5,7 +5,8 @@
 <template>
   <div>
     <!-- <Analytics mode="production" /> -->
-    <ui-canary />
+    <!-- Canary disabled for the application cycle (9 Oct 2026). -->
+    <!-- <ui-canary /> -->
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
