@@ -18,33 +18,6 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    title: "Sedge",
-    briefText: "Data pipelines, governance and analysis",
-    description:
-      "A data operating system in development (MVP) that keeps a catalogue of what a company’s data means and uses it to answer questions with AI. Access rules and change tracking are planned.",
-    live: "https://sedge.app",
-    apiDoc: "",
-    github: "",
-    alt: "sedge-data-workspace",
-    technologies: ["Go", "PostgreSQL", "Redis"],
-  },
-  // Enable after the v2.0.0 release is pushed and the
-  // arXiv version is live. Update the DOI to the v2.0.0 version DOI.
-  // {
-  //   title: "What Agent Traces Do Not Record: Code and Data",
-  //   briefText: "Release for the preprint",
-  //   description:
-  //     "Scripts that rebuild every count in the paper from the public DABstep and DataAgentBench data, the frozen checker releases, our run outputs, the materials of the pre-registered rerun and the audit labels.",
-  //   live: "",
-  //   apiDoc: "",
-  //   github: "https://github.com/blessedmadukoma/data-agent-traces",
-  //   alt: "data-agent-traces",
-  //   technologies: ["Python"],
-  //   references: [
-  //     { label: "DOI", url: "https://doi.org/10.5281/zenodo.22999968" },
-  //   ],
-  // },
-  {
     title: "Athletics Performance Outlier Detection",
     briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
     description:
@@ -65,6 +38,31 @@ export const PROJECTS: Project[] = [
     ],
     references: [
       { label: "Paper", url: "https://arxiv.org/abs/2604.21953" },
+    ],
+  },
+  {
+    title: "Sedge",
+    briefText: "Data pipelines, governance and analysis",
+    description:
+      "A data operating system in development (MVP) that keeps a catalogue of what a company’s data means and uses it to answer questions with AI. Access rules and change tracking are planned.",
+    live: "https://sedge.app",
+    apiDoc: "",
+    github: "",
+    alt: "sedge-data-workspace",
+    technologies: ["Go", "PostgreSQL", "Redis"],
+  },
+  {
+    title: "What Agent Traces Do Not Record: Code and Data",
+    briefText: "Code and data for my study of LLM data agents",
+    description:
+      "Code and data for my study of LLM agents that write code to analyse data: parsers for public agent traces, a checker that blocks code naming missing columns, keys or files, and the scripts for every experiment.",
+    live: "",
+    apiDoc: "",
+    github: "https://github.com/blessedmadukoma/data-agent-traces",
+    alt: "data-agent-traces",
+    technologies: ["Python"],
+    references: [
+      { label: "DOI", url: "https://doi.org/10.5281/zenodo.22999967" },
     ],
   },
   {
