@@ -53,7 +53,7 @@
               <p class="text-zinc-800 dark:text-zinc-300">
                 With Prof. Prasenjit Mitra at
                 <a
-                  href="https://www.africa.engineering.cmu.edu/"
+                  href="https://language-lab-gamma.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"

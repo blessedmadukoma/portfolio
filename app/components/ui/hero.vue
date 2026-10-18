@@ -65,7 +65,13 @@ const showMap = ref(false);
 					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
 				>
 					Read my research statement</button
-				>.
+				>, or
+				<a
+					href="mailto:blessedmadukoma@gmail.com"
+					class="underline hover:text-zinc-900 dark:hover:text-zinc-100"
+					>email me</a
+				>: I am open to AI and research engineering roles, including
+				relocation.
 				<!-- Research map retired (9 Oct 2026): the statement now covers it.
 				<button
 					@click="showMap = true"

@@ -8,7 +8,7 @@ export const WORK_EXPERIENCE = [
     //   "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/cmu.svg",
-    // link: "https://www.mininfra.gov.rw",
+    link: "https://language-lab-gamma.vercel.app",
     workRoles: [
       "Analysed 283,435 steps of LLM data agents with Prof. Prasenjit Mitra. In DataAgentBench’s logs, the harness caused 21.6% of Python steps to fail with syntax errors shown as the model’s; removing them changes how its six models rank. <a href='https://github.com/blessedmadukoma/data-agent-traces' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Code</a>.",
       "Built a static checker (Python ast) that blocks steps naming files, columns or keys missing from the data, and names what exists. After two fixes, it blocked none of 8,517 working steps on three unseen benchmarks.",
@@ -26,7 +26,7 @@ export const WORK_EXPERIENCE = [
       "Built an anomaly-detection platform over 1.6 million athletics performances with 8+ detection methods. The full paper was published at IEEE SDS 2026.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/cmu.svg",
-    // link: "https://www.mininfra.gov.rw",
+    link: "https://language-lab-gamma.vercel.app",
     workRoles: [
       "Built an anomaly detection <a href='https://athletics-performance.mblessed.space' target='_blank' style='text-decoration: underline; color: #60a5fa;'>platform & dashboard</a> (FastAPI, PostgreSQL, DuckDB, Redis) over 1.6 million athletics performances from 19,000+ competitions (2010–2025) under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, featuring fuzzy athlete search across 214k+ athletes, career timelines, elite filtering, and end-to-end audit trails for anti-doping prioritisation. <a href='https://arxiv.org/abs/2604.21953' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Full paper published at IEEE SDS 2026</a>.",
       "Implemented 8+ statistical, ML and Bayesian detection methods, with explainable consensus flagging that requires agreement between at least two methods. Compared flags with publicly confirmed Athletics Integrity Unit sanctions as partial labels; a flag is a lead for investigation, not a verdict.",
