@@ -68,11 +68,11 @@
             </div>
 
             <p class="text-xs leading-5 text-zinc-600 dark:text-zinc-400">
-              My checker reduced executed data-reference errors by 93% in a
-              live experiment but did not raise accuracy. That result made me
-              examine both the system’s behaviour and the evidence used to
-              evaluate it, then turn to failures that can remain unnoticed while
-              code runs.
+              In controlled experiments, blocking data-reference errors raised
+              accuracy by only 0.68 points, and only where they were frequent.
+              That result made me examine both the system’s behaviour and the
+              evidence used to evaluate it, then turn to failures that can
+              remain unnoticed while code runs.
             </p>
 
             <section class="border-l-2 border-indigo-200 pl-4 dark:border-indigo-900">

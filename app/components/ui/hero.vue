@@ -35,7 +35,7 @@ const showMap = ref(false);
 				data systems correct as data, definitions, access rules and tools
 				change, and what that costs.
 				<br />
-				<strong>Current:</strong> a preprint on what agent traces hide, a
+				<strong>Current:</strong> a paper on what agent traces do not record, a
 				study of whether AI agents know when they cannot see all the data,
 				and
 				<a

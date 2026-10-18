@@ -28,10 +28,10 @@ export const PROJECTS: Project[] = [
     alt: "sedge-data-workspace",
     technologies: ["Go", "PostgreSQL", "Redis"],
   },
-  // Enable on Mon 12 Oct 2026, after the v2.0.0 release is pushed and the
+  // Enable after the v2.0.0 release is pushed and the
   // arXiv version is live. Update the DOI to the v2.0.0 version DOI.
   // {
-  //   title: "What Agent Traces Hide: Code and Data",
+  //   title: "What Agent Traces Do Not Record: Code and Data",
   //   briefText: "Release for the preprint",
   //   description:
   //     "Scripts that rebuild every count in the paper from the public DABstep and DataAgentBench data, the frozen checker releases, our run outputs, the materials of the pre-registered rerun and the audit labels.",
@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     title: "Athletics Performance Outlier Detection",
     briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
     description:
-      "An anomaly-detection platform for 1.6 million athletics performances, with 14 methods and supporting records for investigators.",
+      "An anomaly-detection platform for 1.6 million athletics performances, with 8+ detection methods and supporting records for investigators.",
     live: "https://athletics-performance.mblessed.space",
     apiDoc: "",
     github: "",

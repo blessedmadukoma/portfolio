@@ -1,6 +1,6 @@
 export const WORK_EXPERIENCE = [
   {
-    company: "CMU-Africa: Spatial and Languages Technologies (SaLT) Lab",
+    company: "CMU-Africa: Spatial and Language Technologies (SaLT) Lab",
     position: "Graduate Research Associate",
     startDate: "June 2026",
     endDate: "Sep 2026",
@@ -10,26 +10,26 @@ export const WORK_EXPERIENCE = [
     imageURL: "/logos/svgs/cmu.svg",
     // link: "https://www.mininfra.gov.rw",
     workRoles: [
-      "Analysed 283,435 recorded steps across six benchmarks with Prof. Prasenjit Mitra, studying whether traces faithfully record the execution of agents that write analysis code. Hand-labelled 400 failed steps and measured agreement with an independent LLM coder.",
-      "Ran a pre-registered experiment in which executing the model’s code as written changed the recorded failures without a detectable change in accuracy. Audited my own execution software and recovered 1,380 missing answers by replay.",
-      "Built a checker that blocks a step only when it can establish that a named data item is missing. In a live experiment on 411 QRData questions, it reduced executed data-reference errors by 93% but did not raise accuracy.",
+      "Analysed 283,435 steps of LLM data agents with Prof. Prasenjit Mitra. In DataAgentBench’s logs, the harness caused 21.6% of Python steps to fail with syntax errors shown as the model’s; removing them changes how its six models rank. <a href='https://github.com/blessedmadukoma/data-agent-traces' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Code</a>.",
+      "Built a static checker (Python ast) that blocks steps naming files, columns or keys missing from the data, and names what exists. After two fixes, it blocked none of 8,517 working steps on three unseen benchmarks.",
+      "Ran pre-registered experiments (36,990 runs): blocking these errors raised accuracy only where they were frequent (0.68 points), with no detectable advantage over an error message listing the existing names.",
     ],
   },
   {
-    company: "CMU-Africa: Spatial and Languages Technologies (SaLT) Lab",
+    company: "CMU-Africa: Spatial and Language Technologies (SaLT) Lab",
     position: "Graduate Research Assistant",
     startDate: "Sep 2025",
     endDate: "May 2026",
     // description:
     //   "I develop anomaly detection frameworks for athletics by integrating statistical and ensemble methods to uncover performance patterns indicative of potential doping. Complementing this, I conduct systematic reviews of AI applications in anti-doping to identify key research gaps and steer innovative future detection strategies.",
     description:
-      "Built an anomaly-detection platform over 1.6 million athletics performances. Benchmarked eight methods in the full paper published at IEEE SDS 2026, then expanded the platform to 14 methods.",
+      "Built an anomaly-detection platform over 1.6 million athletics performances with 8+ detection methods. The full paper was published at IEEE SDS 2026.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/cmu.svg",
     // link: "https://www.mininfra.gov.rw",
     workRoles: [
       "Built an anomaly detection <a href='https://athletics-performance.mblessed.space' target='_blank' style='text-decoration: underline; color: #60a5fa;'>platform & dashboard</a> (FastAPI, PostgreSQL, DuckDB, Redis) over 1.6 million athletics performances from 19,000+ competitions (2010–2025) under <a href='https://www.africa.engineering.cmu.edu/about/contact/directory/bios/mitra-prasenjit.html' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Prof. Prasenjit Mitra</a>, featuring fuzzy athlete search across 214k+ athletes, career timelines, elite filtering, and end-to-end audit trails for anti-doping prioritisation. <a href='https://arxiv.org/abs/2604.21953' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Full paper published at IEEE SDS 2026</a>.",
-      "Benchmarked eight statistical, ML and Bayesian detection methods in the published paper, then expanded the platform to 14 methods. Added explainable consensus flagging requiring agreement between at least two methods. Compared flags with publicly confirmed Athletics Integrity Unit sanctions as partial labels; a flag is a lead for investigation, not a verdict.",
+      "Implemented 8+ statistical, ML and Bayesian detection methods, with explainable consensus flagging that requires agreement between at least two methods. Compared flags with publicly confirmed Athletics Integrity Unit sanctions as partial labels; a flag is a lead for investigation, not a verdict.",
       "Developed a sports analytics policy briefing for Rwanda’s Ministry of Sports (MINISPORTS), identifying gaps in national talent identification and proposing a 10-year data roadmap aligned with Vision 2050.",
       // "Co-authored (with lead author Joel Maison) research on player archetypes and movement patterns in the Basketball Africa League using possession-adjusted K-means clustering. Accepted at the African Data Science Conference (ADSC 2026, Johannesburg) with Prof. Ronald Yurko (CMU Pittsburgh).",
     ],
@@ -67,8 +67,8 @@ export const WORK_EXPERIENCE = [
     ],
   },
   {
-    company: "The UPANZI Network/Cy-LAB",
-    position: "Graduate Research Assistant",
+    company: "The UPANZI Network",
+    position: "Software Engineer",
     startDate: "Sep 2024",
     endDate: "Dec 2024",
     description:
@@ -127,7 +127,7 @@ export const EDUCATION = [
       "Completed a 2-year MSc program specializing in Software Engineering, Big Data, and Applied Machine Learning at CMU Africa's campus in Rwanda.",
       "Notable courses: Machine Learning in Production (MLiP), Engineering Data-Intensive Scalable Systems (EDISS), Data Structures & Algorithms (DSA), Programming for Data Analytics (PDA), Data, Inference, and Applied Machine Learning (DIAML).",
       "Served as Chairman of the Academic Innovation Sub-Committee within the student Research Committee, contributing to academic and research initiatives across the cohort.",
-      "Conducted graduate research under Prof. Prasenjit Mitra, building an anomaly-detection platform over 1.6 million athletics performances. The full paper benchmarked eight methods and was published at IEEE SDS 2026; the platform now contains 14 methods.",
+      "Conducted graduate research under Prof. Prasenjit Mitra, building an anomaly-detection platform with 8+ detection methods over 1.6 million athletics performances. The full paper was published at IEEE SDS 2026.",
     ],
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/cmu.svg",
