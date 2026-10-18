@@ -37,24 +37,12 @@
           <div class="space-y-4">
             <section>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I study how to keep AI-powered data systems correct as data,
-                definitions, access rules and tools change, and what that
-                costs. Agents now write and run analysis code over
-                organisational data. Their answers depend on the data version,
-                the definitions and the rows they can see.
-              </p>
-            </section>
-
-            <section>
-              <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
-                What I Mean by Correct
-              </h3>
-              <p class="text-zinc-800 dark:text-zinc-300">
-                By correct, I mean an answer that matches a reference answer
-                computed with full, current information, or one that says
-                clearly that it is partial. By cost, I mean cost per correct
-                answer, checks or recomputations per change, and unnecessary
-                interventions.
+                I study how to keep AI-powered data systems
+                <span class="font-semibold text-zinc-900 dark:text-zinc-100">correct</span>
+                as <em>data</em>, <em>definitions</em>, <em>access rules</em>
+                and <em>tools</em> change, and what that costs. A correct
+                answer matches complete, up-to-date data, or it says clearly
+                that it is incomplete.
               </p>
             </section>
 
@@ -63,61 +51,78 @@
                 What I Have Found
               </h3>
               <p class="text-zinc-800 dark:text-zinc-300">
-                At
+                With Prof. Prasenjit Mitra at
                 <a
                   href="https://www.africa.engineering.cmu.edu/"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                  >Carnegie Mellon University Africa’s SaLT Lab</a
-                >, I worked with Prof. Prasenjit Mitra on agents that write
-                analysis code. I analysed 283,435 recorded steps across six
-                benchmarks. Traces did not always record the code that ran or
-                the result the model received. In a pre-registered rerun,
-                executing the model’s code as written removed the failures
-                caused by the harness’s code wrapper, without a detectable
-                change in accuracy.
+                  >CMU Africa’s SaLT Lab</a
+                >, I studied AI agents that write code to analyse data.
               </p>
-              <p class="mt-2 text-zinc-800 dark:text-zinc-300">
-                Separately, in a
-                <NuxtLink
-                  to="/blog/does-an-ai-agent-know-when-it-cannot-see-all-the-data"
-                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                  >pre-registered study</NuxtLink
-                >
-                on five public databases
-                with row-level access rules, cheaper models that were not told
-                the rules presented partial answers as complete in 70–95% of
-                affected cases with a final answer.
+              <ul class="mt-2 list-disc space-y-1.5 pl-5 text-zinc-800 dark:text-zinc-300">
+                <li>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Logs can blame the model for the software around it.</span>
+                  In DataAgentBench’s public logs, that software made 21.6% of
+                  the agents’ code steps fail, and the logs showed these
+                  failures as the model’s own. Removing them changed how six
+                  models ranked (<a
+                    href="https://github.com/blessedmadukoma/data-agent-traces"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                    >code</a
+                  >).
+                </li>
+                <li>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Errors the model can see are the smaller problem.</span>
+                  A checker that stops code from using columns or files that do
+                  not exist raised accuracy by only 0.68 points. A clear error
+                  message worked as well.
+                </li>
+                <li>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Errors the model cannot see stay silent.</span>
+                  When access rules hid some rows and the model was not told,
+                  cheaper models presented incomplete answers as complete in
+                  70–95% of affected cases (<NuxtLink
+                    to="/blog/does-an-ai-agent-know-when-it-cannot-see-all-the-data"
+                    class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                    >study</NuxtLink
+                  >).
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                Why I Work on Silent Errors
+              </h3>
+              <p class="text-zinc-800 dark:text-zinc-300">
+                Better models will keep fixing errors they can see. They cannot
+                fix what the data does not show, such as a definition that
+                changed or rows they may not read. People still act on these
+                answers, so the system has to catch them. For example, my
+                Fantasy Premier League agent once reported the wrong scores for
+                a footballer, while its log showed a successful step.
               </p>
             </section>
 
             <section>
               <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
-                What I Want to Study Next
+                What I Am Working On
               </h3>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I want to track an analysis’s dependencies on data versions,
-                definitions, access scope and tool behaviour. When one of them
-                changes, the system could select a check, a recomputation, a
-                partial-answer label or abstention. I would compare this with
-                refreshing all context or changing nothing. A related question
-                is how to provide useful coverage labels without revealing
-                protected data.
-              </p>
-              <p class="mt-2 text-zinc-800 dark:text-zinc-300">
-                I am also building
+                When something an answer depends on changes, which answers
+                become wrong, and what is the cheapest way to fix or flag them?
+                I am working on this in
                 <a
                   href="https://sedge.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                   >Sedge</a
-                >, a data operating system in development that keeps a
-                catalogue of what a company’s data means and uses it to answer
-                questions with AI. Its planned
-                access rules and change tracking
-                are where I can test these methods on a working system.
+                >, a data operating system I am building that uses AI to answer
+                questions about a company’s data.
               </p>
             </section>
 
@@ -135,8 +140,9 @@
                   >athletics anomaly-detection benchmark platform</a
                 >
                 over 1.6 million performances from more than 19,000
-                competitions. Our full paper benchmarked eight methods and
-                received the
+                competitions (2010–2025), with 8+ detection methods. It links
+                each flag to its evidence, so a flag is a starting point for
+                investigation, not a verdict. Our full paper received the
                 <a
                   :href="certificateUrl"
                   class="font-semibold text-indigo-600 underline underline-offset-2 hover:text-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-400 dark:text-indigo-400 dark:hover:text-indigo-300"
@@ -145,8 +151,7 @@
                   >Honorable Mention - Best Paper Award</a
                 >
                 at the 13th IEEE Swiss Conference on Data Science and AI
-                (SDS2026). A flag there is a starting point for investigation,
-                not a verdict.
+                (SDS2026).
               </p>
             </section>
           </div>

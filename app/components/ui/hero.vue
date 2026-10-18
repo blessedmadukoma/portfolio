@@ -32,7 +32,8 @@ const showMap = ref(false);
 		>
 			<p>
 				Software engineer and researcher. I study how to keep AI-powered
-				data systems correct as data, definitions, access rules and tools
+				data systems <strong>correct</strong> as <em>data</em>, <em>definitions</em>,
+				<em>access rules</em> and <em>tools</em>
 				change, and what that costs.
 				<br />
 				<strong>Current:</strong> a paper on what agent traces do not record, a
@@ -55,7 +56,7 @@ const showMap = ref(false);
 						/>
 					</span>
 					<span class="underline">Sedge</span></a
-				>, a data operating system in development.
+				>, a data operating system.
 			</p>
 
 			<p>
