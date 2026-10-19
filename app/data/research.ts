@@ -68,7 +68,7 @@ export const RESEARCH_PAPERS: ResearchPaper[] = [
 		date: "Dec 01 2025",
 		year: 2025,
 		abstract:
-			"This study investigates COVID-19 vulnerability across Nigeria, moving beyond traditional urban-focused analyses to map risks in diverse geographic contexts. The research identifies key socioeconomic and health infrastructure factors that contribute to vulnerability patterns, providing insights for targeted public health interventions across both urban and rural areas.",
+			"Built a composite risk score for COVID-19 vulnerability across Nigeria's 36 states and the Federal Capital Territory. The score combines poverty (weight 0.4), access to healthcare (0.3), population density (0.2) and age (0.1), adjusted by case rates per 100,000. Lagos scored 673.47 against a national average of 28.16 and had 35.4% of national cases. The score shows where testing, vaccines and health resources should go first. Rural underreporting means that the real risk outside the cities may be higher than the score shows.",
 		pdfUrl: "https://neurips.cc/virtual/2025/loc/san-diego/133847",
 		arxivUrl: "https://arxiv.org/abs/2509.05398",
 		tags: [
