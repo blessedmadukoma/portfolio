@@ -48,6 +48,7 @@ export interface NativePost {
   status?: string;
   featured?: boolean;
   portfolio?: boolean;
+  research?: boolean;
 }
 
 export interface NormalizedPost {

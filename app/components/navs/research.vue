@@ -9,7 +9,7 @@
   const { data: posts } = useNativePosts();
   const projects = computed(() =>
     (posts.value ?? [])
-      .filter((post) => post.portfolio === true)
+      .filter((post) => post.research === true)
       .map((post) => ({ ...normalizeObsidianPost(post), status: post.status })),
   );
   const projectGroups = computed(() =>

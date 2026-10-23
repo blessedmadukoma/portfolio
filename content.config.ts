@@ -18,7 +18,10 @@ export default defineContentConfig({
         part: z.number().int().positive().optional(),
         status: z.string().optional(),
         featured: z.boolean().optional(),
+        // portfolio: true publishes the note on the blog (scripts/sync-blog.mjs).
         portfolio: z.boolean().optional(),
+        // research: true also lists the note under Records on the Research tab.
+        research: z.boolean().optional(),
         // Historical import metadata. Hashnode is not queried at runtime.
         source: z.literal("hashnode").optional(),
         hashnodeId: z.string().optional(),
