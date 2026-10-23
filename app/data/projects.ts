@@ -42,14 +42,14 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "Sedge",
-    briefText: "Data pipelines, governance and analysis",
+    briefText: "Safe AI queries over company data",
     description:
-      "A data operating system in development (MVP) that keeps a catalogue of what a company’s data means and uses it to answer questions with AI. Access rules and change tracking are planned.",
+      "A data operating system (MVP) that catalogues what a company’s data means and lets AI answer questions over it in SQL. I built the Go backend, where every AI-written query is checked before it runs.",
     live: "https://sedge.app",
     apiDoc: "",
     github: "",
     alt: "sedge-data-workspace",
-    technologies: ["Go", "PostgreSQL", "Redis"],
+    technologies: ["Go", "PostgreSQL", "MySQL", "Redis", "Docker"],
   },
   {
     title: "What Agent Traces Do Not Record: Code and Data",

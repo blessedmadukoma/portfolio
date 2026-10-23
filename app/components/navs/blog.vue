@@ -20,7 +20,16 @@
       return { ...normalized, views: viewCounts.value?.[normalized.slug] };
     }),
   );
-  const recentWriting = computed(() => normalizedObsidian.value.slice(0, 3));
+  const recentWriting = computed(() => normalizedObsidian.value.slice(0, 5));
+  const categoryCounts = computed(() =>
+    Object.fromEntries(
+      (Object.keys(THOUGHT_CATEGORIES) as ThoughtCategory[]).map((category) => [
+        category,
+        normalizedObsidian.value.filter((post) => post.category === category)
+          .length,
+      ]),
+    ) as Record<ThoughtCategory, number>,
+  );
 
   const collections = (Object.entries(THOUGHT_CATEGORIES) as Array<
     [ThoughtCategory, (typeof THOUGHT_CATEGORIES)[ThoughtCategory]]
@@ -58,8 +67,13 @@
           :to="collection.to"
           class="rounded-lg border border-zinc-200 p-3 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
         >
-          <h3 class="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+          <h3
+            class="flex items-center justify-between gap-2 text-sm font-medium text-zinc-800 dark:text-zinc-200"
+          >
             {{ collection.label }}
+            <span class="text-xs font-normal text-zinc-500 dark:text-zinc-400">
+              {{ categoryCounts[collection.category] }}
+            </span>
           </h3>
           <p class="mt-1 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
             {{ collection.description }}
