@@ -1,15 +1,19 @@
 /**
- * Fetches published blog posts and opted-in research notes from Obsidian via the
- * GitLab Repository API (no full git clone). Run before `nuxt dev` / `nuxt build`.
+ * Fetches the Obsidian notes marked `portfolio: true` and `draft: false`, from
+ * any folder of the vault, through the GitLab API (no full git clone). Writes
+ * each one to content/blog/<slug>.md and writes the list of images they use
+ * for the image route. Run before `nuxt dev` / `nuxt build`.
  */
 
 import { mkdir, writeFile, rm, readFile, readdir } from "node:fs/promises";
-import { join, dirname } from "node:path";
+import { join, dirname, posix } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT_DIR = join(ROOT, "content", "blog");
+// server/api/blog-image.get.ts serves only the paths in this list.
+const IMAGE_LIST = join(ROOT, "server", "assets", "blog-images.json");
 
 // ── env ──────────────────────────────────────────────────────────────────────
 // Use process.env (Vercel / CI) first, fall back to .env file for local dev
@@ -35,9 +39,13 @@ await loadEnv();
 const TOKEN = process.env.GITLAB_TOKEN ?? "";
 const PROJECT_ID = process.env.GITLAB_PROJECT_ID ?? "";
 const BRANCH = "main";
-const BLOG_SOURCE_PATH = "Blogs - Published";
-const RESEARCH_SOURCE_PATH = "Research";
-const GITLAB_API = `https://gitlab.com/api/v4/projects/${PROJECT_ID}/repository`;
+// Older notes keep their images in this folder and link to them relative to
+// it. Keep resolving those links.
+const LEGACY_IMAGE_ROOT = "Blogs - Published";
+// Search for the key only, so "portfolio:true" and "portfolio: true" both match.
+const PUBLISH_FLAG = "portfolio:";
+const GITLAB_PROJECT_API = `https://gitlab.com/api/v4/projects/${PROJECT_ID}`;
+const GITLAB_API = `${GITLAB_PROJECT_API}/repository`;
 
 if (!TOKEN || !PROJECT_ID) {
   console.error("❌  GITLAB_TOKEN and GITLAB_PROJECT_ID must be set");
@@ -56,33 +64,73 @@ const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|tiff?)$/i;
 // definitions, and MDC spans that carry attributes.
 const BARE_SPAN = /(^|[^\\!\]])\[([^[\]\n]+)\](?![([:{])/g;
 
-async function listDirectory(path) {
+// GitLab.com allows a Free-plan user 100 API requests a minute
+// (RateLimit-Name: burst_traffic_per_user_free_plan). Each response carries
+// GitLab's own count for the current window (RateLimit-Remaining) and the time
+// the window ends (RateLimit-Reset). When the count reaches 0, wait for the
+// next window. If a request still gets HTTP 429, wait for Retry-After and send
+// it again.
+const MAX_RETRIES = 3;
+const MAX_WAIT_SECONDS = 120;
+const rateLimit = { remaining: Infinity, resetAt: 0 };
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function gitlabFetch(url) {
+  for (let attempt = 0; ; attempt += 1) {
+    const wait = rateLimit.resetAt - Date.now();
+    if (rateLimit.remaining <= 0 && wait > 0) {
+      console.log(`  ⏳  GitLab rate limit reached; waiting ${Math.ceil(wait / 1000)}s for the next window…`);
+      await sleep(wait + 1000);
+    }
+    const res = await fetch(url, { headers: HEADERS });
+    const remaining = res.headers.get("RateLimit-Remaining");
+    const reset = res.headers.get("RateLimit-Reset");
+    if (remaining !== null && reset !== null) {
+      rateLimit.remaining = Number(remaining);
+      rateLimit.resetAt = Number(reset) * 1000;
+    }
+    const seconds = Number(res.headers.get("Retry-After")) || 60;
+    if (res.status !== 429 || attempt === MAX_RETRIES || seconds > MAX_WAIT_SECONDS) return res;
+    await res.body?.cancel();
+    console.log(`  ⏳  GitLab rate limit reached; retrying in ${seconds}s…`);
+    await sleep((seconds + 1) * 1000);
+  }
+}
+
+// One recursive listing of the whole vault, used to resolve image links.
+async function listVault() {
   const items = [];
   let page = "1";
   while (page) {
-    const url = `${GITLAB_API}/tree?path=${encodeURIComponent(path)}&ref=${BRANCH}&per_page=100&page=${page}`;
-    const res = await fetch(url, { headers: HEADERS });
+    const url = `${GITLAB_API}/tree?recursive=true&ref=${BRANCH}&per_page=100&page=${page}`;
+    const res = await gitlabFetch(url);
     if (!res.ok) {
-      throw new Error(`GitLab API ${res.status} for "${path}"`);
+      throw new Error(`GitLab API ${res.status} for the vault tree`);
     }
     items.push(...await res.json());
     page = res.headers.get("X-Next-Page");
   }
-  return items;
+  return items.filter((item) => item.type === "blob").map((item) => item.path);
 }
 
-async function listMarkdownFiles(path = BLOG_SOURCE_PATH) {
-  const items = await listDirectory(path);
-  const nested = await Promise.all(
-    items
-      .filter((item) => item.type === "tree")
-      .map((item) => listMarkdownFiles(item.path)),
-  );
-
-  return [
-    ...items.filter((item) => item.type === "blob" && item.name.endsWith(".md")),
-    ...nested.flat(),
-  ];
+// Ask GitLab which notes contain the flag key, so the sync reads only those
+// notes. isPublished() still checks the frontmatter, because the search also
+// matches the key in body text and the value can be false.
+async function listFlaggedNotes() {
+  const items = [];
+  let page = "1";
+  while (page) {
+    const url = `${GITLAB_PROJECT_API}/search?scope=blobs&search=${encodeURIComponent(PUBLISH_FLAG)}&ref=${BRANCH}&per_page=100&page=${page}`;
+    const res = await gitlabFetch(url);
+    if (!res.ok) {
+      throw new Error(`GitLab API ${res.status} for search "${PUBLISH_FLAG}"`);
+    }
+    items.push(...await res.json());
+    page = res.headers.get("X-Next-Page");
+  }
+  // The search returns one result for each matching part of a file.
+  return [...new Set(items.map((item) => item.path).filter((path) => path.endsWith(".md")))];
 }
 
 async function listLocalMarkdownFiles(path = OUT_DIR, prefix = "") {
@@ -104,7 +152,7 @@ async function listLocalMarkdownFiles(path = OUT_DIR, prefix = "") {
 async function getRawFile(path) {
   const encodedPath = encodeURIComponent(path);
   const url = `${GITLAB_API}/files/${encodedPath}/raw?ref=${BRANCH}`;
-  const res = await fetch(url, { headers: HEADERS });
+  const res = await gitlabFetch(url);
   if (!res.ok) {
     const body = await res.text();
     throw new Error(`GitLab API ${res.status} for "${path}": ${body}`);
@@ -112,34 +160,18 @@ async function getRawFile(path) {
   return res.text();
 }
 
-// Build a filename → full repo path index from the git tree.
-// Obsidian wiki-links store only the bare filename; the tree API lets us
-// resolve "cover.png" → "Blogs - Published/images/obsidian-blog/cover.png".
-async function buildImageIndex() {
-  const index = new Map();
-  const prefix = `${BLOG_SOURCE_PATH}/images/`;
-  let page = 1;
-
-  while (true) {
-    const url = `${GITLAB_API}/tree?recursive=true&ref=${BRANCH}&per_page=100&page=${page}`;
-    const res = await fetch(url, { headers: HEADERS });
-    if (!res.ok) {
-      console.warn("⚠️  Could not fetch git tree — bare image filenames may not resolve correctly");
-      return index;
-    }
-    const items = await res.json();
-    for (const item of items) {
-      if (item.type === "blob" && item.path.startsWith(prefix) && IMAGE_EXT.test(item.path)) {
-        const filename = item.path.split("/").pop();
-        if (!index.has(filename)) index.set(filename, item.path);
-      }
-    }
-    const nextPage = res.headers.get("X-Next-Page");
-    if (!nextPage) break;
-    page = parseInt(nextPage, 10);
+// Index the vault for image links. Obsidian links give a bare filename
+// ("cover.png"), a path relative to the note, or a path from the vault root.
+function buildVaultIndex(paths) {
+  const images = paths.filter((path) => IMAGE_EXT.test(path));
+  // Prefer the old blog image folder, so existing bare filenames resolve as before.
+  const preferred = images.filter((path) => path.startsWith(`${LEGACY_IMAGE_ROOT}/images/`));
+  const byName = new Map();
+  for (const path of [...preferred, ...images]) {
+    const name = posix.basename(path);
+    if (!byName.has(name)) byName.set(name, path);
   }
-
-  return index;
+  return { paths: new Set(paths), byName };
 }
 
 /**
@@ -189,30 +221,61 @@ function transformObsidianImages(markdown) {
   });
 }
 
-// Step 2: rewrite relative image paths to absolute proxy URLs.
-// Uses imageIndex (filename → full repo path) to resolve bare Obsidian filenames
-// to their actual subfolder location under SOURCE_PATH/images/.
-function rewriteImageUrls(markdown, imageIndex) {
+// Step 2: point image links at the image route. The route serves only the
+// paths that published posts use (see writeImageList()).
+function safeDecode(text, decode = decodeURI) {
+  try {
+    return decode(text);
+  } catch {
+    return text;
+  }
+}
+
+function resolveImagePath(ref, notePath, vault) {
+  for (const variant of new Set([ref, safeDecode(ref)])) {
+    const candidates = [
+      posix.join(posix.dirname(notePath), variant),
+      posix.normalize(variant),
+      posix.join(LEGACY_IMAGE_ROOT, variant),
+      posix.join(LEGACY_IMAGE_ROOT, "images", variant),
+    ];
+    const found = candidates.find((candidate) => vault.paths.has(candidate))
+      ?? (variant.includes("/") ? undefined : vault.byName.get(variant));
+    if (found) return found;
+  }
+  // Not in the vault: keep the old rule, so the link fails as it did before.
+  if (ref.startsWith(`${LEGACY_IMAGE_ROOT}/`)) return ref;
+  return ref.startsWith("images/") ? `${LEGACY_IMAGE_ROOT}/${ref}` : `${LEGACY_IMAGE_ROOT}/images/${ref}`;
+}
+
+// Returns the image route URL for an image link, or null to keep the link.
+function imageUrl(src, notePath, vault, { cover = false } = {}) {
+  if (/^(https?:)?\/\//.test(src) || src.startsWith("/api/blog-image")) return null;
+  // A body link that starts with "/" points to the site itself (public/).
+  // A cover image that starts with "/" is a path from the vault root.
+  if (src.startsWith("/") && !cover) return null;
+  const path = resolveImagePath(src.replace(/^\.?\//, ""), notePath, vault);
+  return `/api/blog-image?path=${encodeURIComponent(path)}`;
+}
+
+function rewriteImageUrls(markdown, notePath, vault) {
   return markdown.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
-    if (/^(https?:)?\/\//.test(src) || src.startsWith("/")) return match;
-    const clean = src.replace(/^\.\//, "");
-
-    let fullPath;
-    if (!clean.includes("/")) {
-      // Bare filename — resolve via the git tree index
-      fullPath = imageIndex.get(clean) ?? `${BLOG_SOURCE_PATH}/images/${clean}`;
-    } else if (clean.startsWith(`${BLOG_SOURCE_PATH}/`)) {
-      // Obsidian sometimes emits the full vault-relative path — already correct
-      fullPath = clean;
-    } else {
-      // Has a subfolder — root under SOURCE_PATH/images/ if not already there
-      fullPath = clean.startsWith("images/")
-        ? `${BLOG_SOURCE_PATH}/${clean}`
-        : `${BLOG_SOURCE_PATH}/images/${clean}`;
-    }
-
-    return `![${alt}](/api/blog-image?path=${encodeURIComponent(fullPath)})`;
+    const url = imageUrl(src, notePath, vault);
+    return url ? `![${alt}](${url})` : match;
   });
+}
+
+// The frontmatter `image` is the cover. Resolve it here, so the site does not
+// have to guess its folder.
+function rewriteCoverImage(markdown, notePath, vault) {
+  const block = markdown.match(/^---\r?\n[\s\S]*?\r?\n---(?=\r?\n|$)/);
+  if (!block) return markdown;
+  const rewritten = block[0].replace(/^image:[ \t]*(\S.*)$/m, (line, value) => {
+    const src = value.trim().replace(/^["']|["']$/g, "").replace(/^\[\[|\]\]$/g, "").split("|")[0].trim();
+    const url = imageUrl(src, notePath, vault, { cover: true });
+    return url ? `image: "${url}"` : line;
+  });
+  return rewritten + markdown.slice(block[0].length);
 }
 
 // Step 3: escape bare [text], which remark-mdc parses as inline-span syntax and
@@ -248,58 +311,90 @@ function frontmatter(raw) {
 }
 
 function isPublished(metadata) {
-  return metadata.draft !== true && metadata.status !== "draft" && metadata.status !== "archived";
+  return metadata.portfolio === true
+    && metadata.draft === false
+    && metadata.status !== "draft"
+    && metadata.status !== "archived";
 }
 
-function renderMarkdown(raw, imageIndex) {
-  return injectReadingTime(
-    escapeBracketSpans(rewriteImageUrls(transformObsidianImages(raw.trimStart()), imageIndex)),
+function renderMarkdown(raw, notePath, vault) {
+  const withImages = rewriteCoverImage(
+    rewriteImageUrls(transformObsidianImages(raw.trimStart()), notePath, vault),
+    notePath,
+    vault,
   );
+  return injectReadingTime(escapeBracketSpans(withImages));
 }
 
 // ── sync ─────────────────────────────────────────────────────────────────────
-function outputPathFor(gitlabPath) {
-  if (gitlabPath.startsWith(`${BLOG_SOURCE_PATH}/`)) {
-    return gitlabPath.slice(`${BLOG_SOURCE_PATH}/`.length);
+const SLUG = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
+
+// Name each post by its slug, so moving or renaming the note in Obsidian does
+// not change its URL or its view count.
+function outputPathFor(notePath, metadata) {
+  if (metadata.slug === undefined || metadata.slug === null) {
+    console.warn(`  ⚠️  "${notePath}" has no slug; its URL will change if you rename the note`);
+    return posix.basename(notePath);
   }
-  return join("research", gitlabPath.slice(`${RESEARCH_SOURCE_PATH}/`.length));
+  const slug = String(metadata.slug);
+  if (!SLUG.test(slug)) throw new Error(`Invalid slug "${slug}" in "${notePath}"`);
+  return `${slug}.md`;
+}
+
+const IMAGE_ROUTE_PATH = /\/api\/blog-image\?path=([^)\s"'&]+)/g;
+
+// Write every vault image that the published posts link to, including links
+// written by hand in a note. Text that only looks like a link (for example in
+// a code block) and links to missing files are left out.
+async function writeImageList(posts, vault) {
+  const paths = new Set();
+  for (const { content } of posts) {
+    for (const match of content.matchAll(IMAGE_ROUTE_PATH)) {
+      const path = safeDecode(match[1], decodeURIComponent);
+      if (vault.paths.has(path) && IMAGE_EXT.test(path)) paths.add(path);
+    }
+  }
+  const list = `${JSON.stringify([...paths].sort(), null, 2)}\n`;
+  const current = await readFile(IMAGE_LIST, "utf8").catch(() => null);
+  if (current !== list) {
+    await mkdir(dirname(IMAGE_LIST), { recursive: true });
+    await writeFile(IMAGE_LIST, list, "utf8");
+  }
+  return paths.size;
 }
 
 async function syncBlog() {
   console.log("🔄  Syncing blog posts from GitLab Repository API…");
 
-  const [publishedFiles, researchFiles, imageIndex] = await Promise.all([
-    listMarkdownFiles(),
-    listMarkdownFiles(RESEARCH_SOURCE_PATH),
-    buildImageIndex(),
-  ]);
-
-  console.log(`  📷  Indexed ${imageIndex.size} image(s)`);
+  const [vaultPaths, notePaths] = await Promise.all([listVault(), listFlaggedNotes()]);
+  const vault = buildVaultIndex(vaultPaths);
 
   // Read and select everything before changing the local cache.
   const renderedFiles = [];
-  const candidates = [...publishedFiles, ...researchFiles];
   // Limit concurrent reads to avoid overwhelming the repository API.
-  for (let offset = 0; offset < candidates.length; offset += 8) {
+  for (let offset = 0; offset < notePaths.length; offset += 8) {
     const batch = await Promise.all(
-      candidates.slice(offset, offset + 8).map(async (item) => {
-        const raw = await getRawFile(item.path);
+      notePaths.slice(offset, offset + 8).map(async (notePath) => {
+        const raw = await getRawFile(notePath);
         const metadata = frontmatter(raw);
-        const isResearch = item.path.startsWith(`${RESEARCH_SOURCE_PATH}/`);
         if (!isPublished(metadata)) return null;
-        if (isResearch && (metadata.portfolio !== true || metadata.draft !== false)) return null;
         return {
-          relativePath: outputPathFor(item.path),
-          content: renderMarkdown(raw, imageIndex),
+          notePath,
+          relativePath: outputPathFor(notePath, metadata),
+          content: renderMarkdown(raw, notePath, vault),
         };
       }),
     );
     renderedFiles.push(...batch.filter(Boolean));
   }
-  const remoteNames = new Set(renderedFiles.map((item) => item.relativePath));
-  if (remoteNames.size !== renderedFiles.length) {
-    throw new Error("Multiple source notes resolve to the same output path");
+  const sources = new Map();
+  for (const { notePath, relativePath } of renderedFiles) {
+    if (sources.has(relativePath)) {
+      throw new Error(`"${sources.get(relativePath)}" and "${notePath}" both publish to ${relativePath}`);
+    }
+    sources.set(relativePath, notePath);
   }
+  const remoteNames = new Set(sources.keys());
   await mkdir(OUT_DIR, { recursive: true });
   const existingNames = await listLocalMarkdownFiles();
 
@@ -325,6 +420,8 @@ async function syncBlog() {
     }),
   );
 
+  const imageCount = await writeImageList(renderedFiles, vault);
+  console.log(`  📷  ${imageCount} image(s) allowed for the image route`);
   console.log(`✅  Synced ${renderedFiles.length} blog post(s) to content/blog/`);
 }
 
