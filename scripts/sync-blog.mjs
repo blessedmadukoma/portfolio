@@ -337,4 +337,5 @@ try {
   console.warn(
     `   Starting with ${cachedFiles.length} cached blog post(s). Run \`yarn sync\` later to retry.`,
   );
+  if (process.env.VERCEL && cachedFiles.length === 0) process.exit(1);
 }
