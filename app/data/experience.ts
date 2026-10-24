@@ -126,7 +126,7 @@ export const WORK_EXPERIENCE = [
     location: "Lagos, Nigeria",
     imageURL:
       "https://res.cloudinary.com/dqsggbqmf/image/upload/v1675251272/21ctl/21st_century_logo_FULL_2_babx2s.png",
-    link: "https://21ctl.com",
+    link: "https://www.21ctl.com",
     workRoles: [
       "Cut release time by 40% by automating deployments (CI/CD with Docker and GitHub webhooks).",
       "Coordinated DNS service restoration and implemented failover protocols across Tier III and IV data centres; uptime held at 99.99%.",
