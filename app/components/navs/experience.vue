@@ -35,6 +35,15 @@
   const toggleAwardDropdown = (id: number) => {
     openAwardDropdown.value = openAwardDropdown.value === id ? null : id;
   };
+  const hostOf = (url: string) => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return url;
+    }
+  };
+  const linkText = (item: { link?: string; linkLabel?: string }) =>
+    item.linkLabel || (item.link ? hostOf(item.link) : "");
   const openCertificate = (url: string) => {
     certificateModal.value = url;
   };
@@ -50,13 +59,26 @@
         >
           Work Experience
         </p>
-        <a
-          class="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline transition-colors"
-          target="_blank"
-          href="/docs/Madukoma Blessed Resume.pdf"
-        >
-          CV/Resume
-        </a>
+        <span class="flex items-center gap-3 text-xs">
+          <a
+            class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline transition-colors"
+            target="_blank"
+            rel="noopener"
+            href="/docs/Madukoma Blessed Resume.pdf"
+            title="Resume for industry roles"
+          >
+            Resume
+          </a>
+          <a
+            class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline transition-colors"
+            target="_blank"
+            rel="noopener"
+            href="/docs/Madukoma Blessed Academic CV.pdf"
+            title="Academic CV for PhD and research positions"
+          >
+            Academic CV
+          </a>
+        </span>
       </h2>
 
       <div
@@ -67,6 +89,11 @@
       >
         <div
           class="flex items-start space-x-3 py-2 tracking-wide group cursor-pointer"
+          role="button"
+          tabindex="0"
+          :aria-expanded="openWorkDropdown === id"
+          @keydown.enter.prevent="toggleWorkDropdown(id)"
+          @keydown.space.prevent="toggleWorkDropdown(id)"
         >
           <div class="pr-2 pl-1 flex space-x-4 flex-1">
             <ui-img :alt="experience.company" :img-url="experience.imageURL" />
@@ -91,15 +118,7 @@
               <p
                 class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 !mt-0"
               >
-                <a
-                  :href="experience.link"
-                  target="_blank"
-                  rel="noopener"
-                  class="underline md:no-underline md:group-hover:underline group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
-                  @click.stop
-                >
-                  {{ experience.company }}
-                </a>
+                {{ experience.company }}
               </p>
             </div>
           </div>
@@ -124,6 +143,30 @@
                     v-html="role"
                   ></li>
                 </ul>
+                <a
+                  v-if="experience.link"
+                  :href="experience.link"
+                  target="_blank"
+                  rel="noopener"
+                  class="link-out mt-1 inline-flex items-center gap-1.5 rounded-sm py-1 text-sm font-medium text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700 hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:text-blue-400 dark:decoration-blue-400/30 dark:hover:text-blue-300 dark:focus-visible:ring-offset-zinc-800"
+                  @click.stop
+                >
+                  Visit {{ linkText(experience) }}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="h-3.5 w-3.5 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4.25 5.5a.75.75 0 0 0-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 0 0 .75-.75v-4a.75.75 0 0 1 1.5 0v4A2.25 2.25 0 0 1 12.75 17h-8.5A2.25 2.25 0 0 1 2 14.75v-8.5A2.25 2.25 0 0 1 4.25 4h5a.75.75 0 0 1 0 1.5h-5Zm7.25-.75a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 1 1-1.06-1.06l5.22-5.22h-1.69a.75.75 0 0 1-.75-.75Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="sr-only">(opens in a new tab)</span>
+                </a>
               </div>
             </div>
           </div>
@@ -149,6 +192,11 @@
       >
         <div
           class="flex items-start space-x-3 py-2 tracking-wide group cursor-pointer"
+          role="button"
+          tabindex="0"
+          :aria-expanded="openEducationDropdown === id"
+          @keydown.enter.prevent="toggleEducationDropdown(id)"
+          @keydown.space.prevent="toggleEducationDropdown(id)"
         >
           <div class="pr-2 pl-1 flex space-x-4 flex-1">
             <ui-img
@@ -161,13 +209,7 @@
                   <p
                     class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
                   >
-                    <a
-                      :href="education.link"
-                      target="_blank"
-                      rel="noopener"
-                      @click.stop
-                      >{{ education.institution }}</a
-                    >
+                    {{ education.institution }}
                     <IconsArrow :open="openEducationDropdown === id" />
                   </p>
                 </h3>
@@ -217,6 +259,30 @@
                     {{ item }}
                   </li>
                 </ul>
+                <a
+                  v-if="education.link"
+                  :href="education.link"
+                  target="_blank"
+                  rel="noopener"
+                  class="link-out mt-1 inline-flex items-center gap-1.5 rounded-sm py-1 text-sm font-medium text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700 hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:text-blue-400 dark:decoration-blue-400/30 dark:hover:text-blue-300 dark:focus-visible:ring-offset-zinc-800"
+                  @click.stop
+                >
+                  Visit {{ linkText(education) }}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="h-3.5 w-3.5 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4.25 5.5a.75.75 0 0 0-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 0 0 .75-.75v-4a.75.75 0 0 1 1.5 0v4A2.25 2.25 0 0 1 12.75 17h-8.5A2.25 2.25 0 0 1 2 14.75v-8.5A2.25 2.25 0 0 1 4.25 4h5a.75.75 0 0 1 0 1.5h-5Zm7.25-.75a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 1 1-1.06-1.06l5.22-5.22h-1.69a.75.75 0 0 1-.75-.75Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="sr-only">(opens in a new tab)</span>
+                </a>
               </div>
             </div>
           </div>
@@ -278,23 +344,38 @@
                 <p class="text-sm text-zinc-600 dark:text-zinc-300 py-3">
                   {{ award.description }}
                 </p>
-                <div class="flex items-center gap-3">
+                <div class="flex flex-wrap items-center gap-x-5 gap-y-1">
                   <a
                     v-if="award.link"
                     :href="award.link"
                     target="_blank"
                     rel="noopener"
-                    class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                    class="link-out mt-1 inline-flex items-center gap-1.5 rounded-sm py-1 text-sm font-medium text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700 hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:text-blue-400 dark:decoration-blue-400/30 dark:hover:text-blue-300 dark:focus-visible:ring-offset-zinc-800"
                     @click.stop
                   >
-                    View paper →
+                    View paper
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="h-3.5 w-3.5 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4.25 5.5a.75.75 0 0 0-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 0 0 .75-.75v-4a.75.75 0 0 1 1.5 0v4A2.25 2.25 0 0 1 12.75 17h-8.5A2.25 2.25 0 0 1 2 14.75v-8.5A2.25 2.25 0 0 1 4.25 4h5a.75.75 0 0 1 0 1.5h-5Zm7.25-.75a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 1 1-1.06-1.06l5.22-5.22h-1.69a.75.75 0 0 1-.75-.75Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                    <span class="sr-only">(opens in a new tab)</span>
                   </a>
                   <button
                     v-if="award.certificateURL"
-                    class="text-xs underline text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                    type="button"
+                    class="link-out mt-1 inline-flex items-center gap-1.5 rounded-sm py-1 text-sm font-medium text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700 hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:text-blue-400 dark:decoration-blue-400/30 dark:hover:text-blue-300 dark:focus-visible:ring-offset-zinc-800"
                     @click.stop="openCertificate(award.certificateURL)"
                   >
-                    View certificate →
+                    View certificate
                   </button>
                 </div>
               </div>

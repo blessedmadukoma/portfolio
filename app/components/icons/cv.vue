@@ -4,7 +4,7 @@
     target="_blank"
     rel="noopener noreferrer"
     class="cv-link flex shrink-0 items-center gap-[6px] whitespace-nowrap rounded-lg px-2.5 py-1.5 -ml-2.5 text-[12.5px] font-medium text-[#6b6661] transition-colors hover:bg-black/[0.04] hover:text-[#111] dark:text-zinc-400 dark:hover:bg-white/[0.08] dark:hover:text-zinc-100"
-    aria-label="Open CV PDF"
+    aria-label="Open resume PDF"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@
       <path class="cv-line cv-line-one" d="M8 13h8" pathLength="1" />
       <path class="cv-line cv-line-two" d="M8 17h5" pathLength="1" />
     </svg>
-    CV
+    Resume
   </a>
 </template>
 
