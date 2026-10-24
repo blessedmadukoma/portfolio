@@ -19,7 +19,7 @@ export const WORK_EXPERIENCE = [
   },
   {
     company: "SLS Energy",
-    position: "Backend Software Engineer (Part-time)",
+    position: "Backend Software Engineer (Contract)",
     startDate: "Jun 2026",
     endDate: "Aug 2026",
     description:
@@ -54,7 +54,7 @@ export const WORK_EXPERIENCE = [
   },
   {
     company: "Rwanda's Ministry of Infrastructure (MININFRA)",
-    position: "Data Engineering and Analytics Engineer (Part-time Contract)",
+    position: "Data Engineering and Analytics Engineer (Contract)",
     startDate: "May 2025",
     endDate: "Sep 2025",
     description:
