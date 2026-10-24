@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
     apiDoc: "",
     github: "",
     alt: "mininfra-infrastructure-intelligence",
-    technologies: ["Vue.js", "Data Engineering"],
+    technologies: ["Grafana", "Data Engineering"],
   },
   {
     title: "Go-ZeptoMail",

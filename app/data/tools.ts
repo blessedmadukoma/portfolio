@@ -150,6 +150,12 @@ export const TOOLS: Tool[] = [
     category: "devops",
   },
   {
+    name: "Grafana",
+    URL: "https://grafana.com/",
+    image: "https://cdn.simpleicons.org/grafana",
+    category: "devops",
+  },
+  {
     name: "Ollama",
     URL: "https://ollama.com/",
     image: "https://cdn.simpleicons.org/ollama",

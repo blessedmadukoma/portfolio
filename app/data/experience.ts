@@ -58,13 +58,13 @@ export const WORK_EXPERIENCE = [
     startDate: "May 2025",
     endDate: "Sep 2025",
     description:
-      "Architected Rwanda's infrastructure intelligence platform with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a> integrating real estate and transportation data. Developed a Vue.js dashboard with 12+ trend analyses for infrastructure sectors.",
+      "Architected Rwanda's infrastructure intelligence platform with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a> integrating real estate and transportation data. Developed a Grafana dashboard with 12+ trend analyses for infrastructure sectors.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/imgs/mininfra.png",
     link: "https://www.mininfra.gov.rw",
     workRoles: [
       "Architected Rwanda's <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>infrastructure intelligence platform</a> with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a> integrating real estate data, with an architecture designed to take more ministry data sources.",
-      "Developed a <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>dashboard</a> with 12+ trend analyses for each infrastructure sector (transportation and real estate), consolidating cross-ministry data to attract foreign investment.",
+      "Developed a Grafana <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>dashboard</a> with 12+ trend analyses for each infrastructure sector (transportation and real estate), consolidating cross-ministry data to attract foreign investment. Moved the dashboard from Vue.js to Grafana so more people could contribute analyses.",
       // "Contributed to technical decision-making across 3 development phases, documenting architectural choices and design rationale through documentation pieces and authoring a <a href='#' target='_blank' style='text-decoration: underline; color: #60a5fa;'>technical blog</a>.",
     ],
   },
