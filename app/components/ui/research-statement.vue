@@ -140,7 +140,7 @@
                   >athletics anomaly-detection benchmark platform</a
                 >
                 over 1.6 million performances from more than 19,000
-                competitions (2010–2025), with 8+ detection methods. It links
+                competitions (2010–2025), with eight detection methods. It links
                 each flag to its evidence, so a flag is a starting point for
                 investigation, not a verdict. Our full paper received the
                 <a

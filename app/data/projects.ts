@@ -21,7 +21,7 @@ export const PROJECTS: Project[] = [
     title: "Athletics Performance Outlier Detection",
     briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
     description:
-      "An anomaly-detection platform for 1.6 million athletics performances, with 8+ detection methods and supporting records for investigators.",
+      "An anomaly-detection platform for 1.6 million athletics performances, with eight detection methods and supporting records for investigators.",
     live: "https://athletics-performance.mblessed.space",
     apiDoc: "",
     github: "",
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
     title: "Sedge",
     briefText: "Safe AI queries over company data",
     description:
-      "A data operating system (MVP) that catalogues what a company’s data means and lets AI answer questions over it in SQL. I built the Go backend, where every AI-written query is checked before it runs.",
+      "A data operating system (MVP) that catalogues what a company’s data means and lets AI answer questions over it in SQL. I built the Go backend, and I am adding the checks every AI-written query must pass before it runs (in code review).",
     live: "https://sedge.app",
     apiDoc: "",
     github: "",
