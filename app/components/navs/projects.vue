@@ -7,8 +7,9 @@
 
   type Tool = (typeof TOOLS)[number];
 
+  const normalise = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, "");
   const findTool = (tech: string) =>
-    tools.value.find((t: Tool) => t.name.toLowerCase() === tech.toLowerCase());
+    tools.value.find((t: Tool) => normalise(t.name) === normalise(tech));
 </script>
 
 <template>
@@ -77,6 +78,7 @@
             <img
               v-if="findTool(tech)"
               :src="findTool(tech)?.image"
+              :class="{ 'dark:brightness-0 dark:invert': findTool(tech)?.darkInvert }"
               :alt="tech"
               class="w-3 h-3 object-contain"
               loading="lazy"

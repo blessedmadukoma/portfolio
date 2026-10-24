@@ -11,6 +11,8 @@ export interface Tool {
   URL: string;
   image: string;
   category: ToolCategory;
+  // Dark icons (black or navy) turn white in dark mode so they stay visible.
+  darkInvert?: boolean;
 }
 
 export const TOOL_CATEGORIES: { key: ToolCategory; label: string }[] = [
@@ -18,7 +20,7 @@ export const TOOL_CATEGORIES: { key: ToolCategory; label: string }[] = [
   { key: "web", label: "Frameworks & Libraries" },
   { key: "database", label: "Databases" },
   { key: "devops", label: "DevOps, Cloud & Infra" },
-  { key: "data", label: "Data Science & ML" },
+  { key: "data", label: "Data, ML & LLMs" },
   { key: "research", label: "Research & Writing" },
 ];
 
@@ -79,13 +81,13 @@ export const TOOLS: Tool[] = [
   //   //   "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996010/portfolio-images/icons/logo_ract_okeq3a.svg",
   //   image: "https://cdn.simpleicons.org/react",
   // },
-  // {
-  //   name: "NextJS",
-  //   URL: "https://nextjs.org/",
-  //   image:
-  //     "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996009/portfolio-images/icons/logo_next_m8h67m.svg",
-  //   // image: "https://cdn.simpleicons.org/nextdotjs/gray",
-  // },
+  {
+    name: "NextJS",
+    URL: "https://nextjs.org/",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996009/portfolio-images/icons/logo_next_m8h67m.svg",
+    category: "web",
+  },
   {
     name: "TailwindCSS",
     URL: "https://tailwindcss.com/",
@@ -96,17 +98,15 @@ export const TOOLS: Tool[] = [
   {
     name: "PostgreSQL",
     URL: "https://www.postgresql.org/",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1280px-Postgresql_elephant.svg.png",
+    image: "https://cdn.simpleicons.org/postgresql",
     category: "database",
   },
-  // {
-  //   name: "MySQL",
-  //   URL: "https://www.mysql.com/",
-  //   image:
-  //     "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996009/portfolio-images/icons/logo_mysql_di7mwv.svg",
-  //   // image: "https://cdn.simpleicons.org/mysql",
-  // },
+  {
+    name: "MySQL",
+    URL: "https://www.mysql.com/",
+    image: "https://cdn.simpleicons.org/mysql",
+    category: "database",
+  },
   {
     name: "Redis",
     URL: "https://redis.io/",
@@ -121,20 +121,41 @@ export const TOOLS: Tool[] = [
     //   "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/docker-icon_kfykje.svg",
     category: "devops",
   },
-  {
-    name: "Git",
-    URL: "https://git-scm.com/",
-    image:
-      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/logo_git_qpfmlr.svg",
-    category: "devops",
-  },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
   // {
-  //   name: "NodeJS",
-  //   URL: "https://nodejs.org/en/",
+  //   name: "Git",
+  //   URL: "https://git-scm.com/",
   //   image:
-  //     "https://res.cloudinary.com/dqjowwy5k/image/upload/v1688022741/portfolio-images/icons/nodejs-icon_prfnyy.svg",
+  //     "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/logo_git_qpfmlr.svg",
   //   category: "devops",
   // },
+  {
+    name: "NodeJS",
+    URL: "https://nodejs.org/en/",
+    image:
+      "https://res.cloudinary.com/dqjowwy5k/image/upload/v1688022741/portfolio-images/icons/nodejs-icon_prfnyy.svg",
+    category: "web",
+  },
+  {
+    name: "Kafka",
+    URL: "https://kafka.apache.org/",
+    image: "https://cdn.simpleicons.org/apachekafka",
+    category: "devops",
+    darkInvert: true,
+  },
+  {
+    name: "pytest",
+    URL: "https://docs.pytest.org/",
+    image: "https://cdn.simpleicons.org/pytest",
+    category: "devops",
+  },
+  {
+    name: "Ollama",
+    URL: "https://ollama.com/",
+    image: "https://cdn.simpleicons.org/ollama",
+    category: "data",
+    darkInvert: true,
+  },
   // {
   //   name: "ExpressJS",
   //   URL: "https://expressjs.com/",
@@ -171,13 +192,15 @@ export const TOOLS: Tool[] = [
     URL: "https://pandas.pydata.org/",
     image: "https://cdn.simpleicons.org/pandas",
     category: "data",
+    darkInvert: true,
   },
-  {
-    name: "Streamlit",
-    URL: "https://streamlit.io/",
-    image: "https://cdn.simpleicons.org/streamlit",
-    category: "data",
-  },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
+  // {
+  //   name: "Streamlit",
+  //   URL: "https://streamlit.io/",
+  //   image: "https://cdn.simpleicons.org/streamlit",
+  //   category: "data",
+  // },
   {
     name: "GitHub Actions",
     URL: "https://github.com/features/actions",
@@ -190,12 +213,13 @@ export const TOOLS: Tool[] = [
     image: "https://cdn.simpleicons.org/scikitlearn",
     category: "data",
   },
-  {
-    name: "Plotly",
-    URL: "https://plotly.com/",
-    image: "https://cdn.simpleicons.org/plotly",
-    category: "data",
-  },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
+  // {
+  //   name: "Plotly",
+  //   URL: "https://plotly.com/",
+  //   image: "https://cdn.simpleicons.org/plotly",
+  //   category: "data",
+  // },
   // {
   //   name: "Flask",
   //   URL: "https://flask.palletsprojects.com/",
@@ -244,14 +268,15 @@ export const TOOLS: Tool[] = [
   //   image:
   //     "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996010/portfolio-images/icons/logo_vscode_cmy0ix.svg",
   // },
-  {
-    name: "GitHub",
-    URL: "https://github.com",
-    // image:
-    //   "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/logo_github_tpt08t.svg",
-    image: "https://cdn.simpleicons.org/github",
-    category: "devops",
-  },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
+  // {
+  //   name: "GitHub",
+  //   URL: "https://github.com",
+  //   // image:
+  //   //   "https://res.cloudinary.com/dqjowwy5k/image/upload/v1685996008/portfolio-images/icons/logo_github_tpt08t.svg",
+  //   image: "https://cdn.simpleicons.org/github",
+  //   category: "devops",
+  // },
   // {
   //   name: "Bitbucket",
   //   URL: "https://bitbucket.org/",
@@ -264,41 +289,46 @@ export const TOOLS: Tool[] = [
     image: "https://cdn.simpleicons.org/latex",
     category: "research",
   },
-  {
-    name: "Overleaf",
-    URL: "https://www.overleaf.com/",
-    image: "https://cdn.simpleicons.org/overleaf",
-    category: "research",
-  },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
+  // {
+  //   name: "Overleaf",
+  //   URL: "https://www.overleaf.com/",
+  //   image: "https://cdn.simpleicons.org/overleaf",
+  //   category: "research",
+  // },
   {
     name: "Obsidian",
     URL: "https://obsidian.md/",
     image: "https://cdn.simpleicons.org/obsidian",
     category: "research",
   },
-  {
-    name: "Jupyter",
-    URL: "https://jupyter.org/",
-    image: "https://cdn.simpleicons.org/jupyter",
-    category: "data",
-  },
-  {
-    name: "NumPy",
-    URL: "https://numpy.org/",
-    image: "https://cdn.simpleicons.org/numpy",
-    category: "data",
-  },
-  {
-    name: "SciPy",
-    URL: "https://scipy.org/",
-    image: "https://cdn.simpleicons.org/scipy",
-    category: "data",
-  },
-  {
-    name: "Matplotlib",
-    URL: "https://matplotlib.org/",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg",
-    category: "data",
-  },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
+  // {
+  //   name: "Jupyter",
+  //   URL: "https://jupyter.org/",
+  //   image: "https://cdn.simpleicons.org/jupyter",
+  //   category: "data",
+  // },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
+  // {
+  //   name: "NumPy",
+  //   URL: "https://numpy.org/",
+  //   image: "https://cdn.simpleicons.org/numpy",
+  //   category: "data",
+  // },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
+  // {
+  //   name: "SciPy",
+  //   URL: "https://scipy.org/",
+  //   image: "https://cdn.simpleicons.org/scipy",
+  //   category: "data",
+  // },
+  // Hidden 24 Oct 2026: low signal for the roles he targets.
+  // {
+  //   name: "Matplotlib",
+  //   URL: "https://matplotlib.org/",
+  //   image:
+  //     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg",
+  //   category: "data",
+  // },
 ];

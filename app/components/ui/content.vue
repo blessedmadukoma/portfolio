@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="flex-1 overflow-y-auto pt-2">
+    <div class="flex-1 overflow-y-auto pt-2 -mx-2 px-2">
       <component :is="activeTab" v-if="activeTab" />
       <!-- Fallback must match the first tab in app/pkg/enums.ts. -->
       <navs-research v-else />
