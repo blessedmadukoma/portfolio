@@ -58,28 +58,28 @@ export const WORK_EXPERIENCE = [
     startDate: "May 2025",
     endDate: "Sep 2025",
     description:
-      "Architected Rwanda's infrastructure intelligence platform with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a> integrating real estate and transportation data. Developed a Grafana dashboard with 12+ trend analyses for infrastructure sectors.",
+      "Architected Rwanda's infrastructure intelligence platform with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a>, built to attract foreign investment: pipelines that join construction-permit and land-use records, and a Grafana dashboard of 12+ indicators.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/imgs/mininfra.png",
     link: "https://www.mininfra.gov.rw",
     workRoles: [
-      "Architected Rwanda's <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>infrastructure intelligence platform</a> with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a> integrating real estate data, with an architecture designed to take more ministry data sources.",
-      "Developed a Grafana <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>dashboard</a> with 12+ trend analyses for each infrastructure sector (transportation and real estate), consolidating cross-ministry data to attract foreign investment. Moved the dashboard from Vue.js to Grafana so more people could contribute analyses.",
+      "Architected Rwanda's <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>infrastructure intelligence platform</a> with <a href='https://www.linkedin.com/in/irene-busah' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Irene</a>, built to attract foreign investment and designed to take more ministry data sources.",
+      "Built pipelines that join construction-permit and land-use records, and a Grafana <a href='https://insights.mininfra.gov.rw' target='_blank' style='text-decoration: underline; color: #60a5fa;'>dashboard</a> of 12+ indicators such as permit throughput and capital-allocation trends.",
       // "Contributed to technical decision-making across 3 development phases, documenting architectural choices and design rationale through documentation pieces and authoring a <a href='#' target='_blank' style='text-decoration: underline; color: #60a5fa;'>technical blog</a>.",
     ],
   },
   {
-    company: "HuzaHR",
+    company: "Huza HR",
     position: "Software Engineer",
     startDate: "Jun 2025",
     endDate: "Sep 2025",
     description:
-      "Completed a required 3-month internship for my MSc coursework. Reviewed code across the ATS recruitment platform and built its email notification system and core recruitment pages.",
+      "Built the email-notification system behind the company’s first fully digital applicant-tracking workflow, and reviewed code across the ATS recruitment platform.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/huza.svg",
     link: "https://www.huzahr.com",
     workRoles: [
-      "Built the email notification system (candidate messages, recruiter alerts and internal notifications, with delivery tracking) that enabled the company’s first fully digital applicant-tracking workflow.",
+      "Built the email-notification system (candidate, recruiter and internal templates with delivery tracking) behind the company’s first fully digital applicant-tracking workflow.",
       "Built the core recruitment pages in Next.js and backend services in Node.js for the <a href='https://dev.jobs.huzahr.com/' target='_blank' style='text-decoration: underline; color: #60a5fa;'>ATS recruitment platform</a>.",
     ],
   },
@@ -116,8 +116,8 @@ export const WORK_EXPERIENCE = [
     ],
   },
   {
-    company: "21ST Century Technologies",
-    position: "Software Architect",
+    company: "21st Century Technologies",
+    position: "Software Architect (National Youth Service)",
     startDate: "Dec 2022",
     endDate: "Nov 2023",
     description:
@@ -161,7 +161,7 @@ export const EDUCATION = [
     endDate: "Jun 2022",
     description: [
       "Completed a 4-year Software Engineering program focused on software design, algorithms, systems engineering, cloud computing, and artificial intelligence.",
-      "Served as Student Body President of the Babcock University Computer Club (BUCC), contributed to peer tutoring initiatives, and participated in the university volleyball team as team setter.",
+      "Served as Executive President of the Babcock University Computer Club (BUCC), a student tech community of 2,000+ members; contributed to peer tutoring initiatives, and participated in the university volleyball team as team setter.",
       "Gained practical industry experience through a compulsory 6-month internship and built a strong foundation in backend engineering, system architecture, and collaborative software development.",
     ],
     location: "Ogun, Nigeria",
@@ -178,7 +178,7 @@ export const EDUCATION = [
       "Software Quality Testing",
     ],
     activities: [
-      "Student Body President, Babcock University Computer Club (BUCC)",
+      "Executive President, Babcock University Computer Club (BUCC)",
       "Tutorial Team",
       "School Volleyball Team",
     ],
