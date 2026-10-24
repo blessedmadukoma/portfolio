@@ -135,3 +135,9 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* Inline links in data strings use #60a5fa, which is too light on white
+   (about 2.5:1). Darken them in light mode only (blue-600, about 5:1). */
+html:not(.dark) a[style*="#60a5fa"] {
+  color: #2563eb !important;
+}
