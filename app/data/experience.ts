@@ -19,7 +19,7 @@ export const WORK_EXPERIENCE = [
   },
   {
     company: "SLS Energy",
-    position: "Backend Software Engineer",
+    position: "Backend Software Engineer (Part-time)",
     startDate: "Jun 2026",
     endDate: "Aug 2026",
     description:
@@ -54,7 +54,7 @@ export const WORK_EXPERIENCE = [
   },
   {
     company: "Rwanda's Ministry of Infrastructure (MININFRA)",
-    position: "Data Engineering and Analytics Engineer (Contract)",
+    position: "Data Engineering and Analytics Engineer (Part-time Contract)",
     startDate: "May 2025",
     endDate: "Sep 2025",
     description:
@@ -74,11 +74,12 @@ export const WORK_EXPERIENCE = [
     startDate: "Jun 2025",
     endDate: "Sep 2025",
     description:
-      "Built the email-notification system behind the company’s first fully digital applicant-tracking workflow, and reviewed code across the ATS recruitment platform.",
+      "Joined as a software engineer through the 3-month industry placement my MSc requires: wrote and reviewed code across the ATS recruitment platform, and built its email-notification system and core recruitment pages.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/huza.svg",
     link: "https://www.huzahr.com",
     workRoles: [
+      "Joined as a software engineer through the 3-month industry placement my MSc requires; wrote production code and reviewed teammates’ code across the ATS recruitment platform.",
       "Built the email-notification system (candidate, recruiter and internal templates with delivery tracking) behind the company’s first fully digital applicant-tracking workflow.",
       "Built the core recruitment pages in Next.js and backend services in Node.js for the <a href='https://dev.jobs.huzahr.com/' target='_blank' style='text-decoration: underline; color: #60a5fa;'>ATS recruitment platform</a>.",
     ],

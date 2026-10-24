@@ -70,7 +70,7 @@ const showMap = ref(false);
 					href="mailto:blessedmadukoma@gmail.com"
 					class="underline hover:text-zinc-900 dark:hover:text-zinc-100"
 					>email me</a
-				>: I am open to AI and research engineering roles.
+				>: I am open to AI and research engineering roles, including remote.
 				<!-- Research map retired (9 Oct 2026): the statement now covers it.
 				<button
 					@click="showMap = true"
