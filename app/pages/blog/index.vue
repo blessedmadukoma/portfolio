@@ -89,31 +89,10 @@
 </script>
 
 <template>
-  <main class="min-h-screen py-8">
+  <div class="min-h-screen">
+    <ui-blog-navigation back-to="/" back-label="Portfolio" />
     <section class="max-w-3xl mx-auto w-full px-4 py-6">
       <header class="mb-6 space-y-4">
-        <NuxtLink
-          to="/"
-          class="inline-flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M19 12H5" />
-            <path d="m12 5-7 7 7 7" />
-          </svg>
-          Back
-        </NuxtLink>
-
         <div class="flex items-center justify-between gap-4">
           <div>
             <p
@@ -167,7 +146,7 @@
         class="border-b border-zinc-200 pb-4 last:border-0 last:pb-0 dark:border-zinc-800"
       >
         <h2
-          class="sticky top-0 z-20 -mx-4 flex items-baseline gap-1.5 bg-white/90 px-4 py-2 backdrop-blur dark:bg-zinc-950/90"
+          class="sticky top-16 z-20 -mx-4 flex items-baseline gap-1.5 bg-white/90 px-4 py-2 backdrop-blur dark:bg-zinc-950/90"
         >
           <span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
             {{ group.year }}
@@ -195,5 +174,5 @@
         </div>
       </section>
     </section>
-  </main>
+  </div>
 </template>

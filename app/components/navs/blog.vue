@@ -41,24 +41,29 @@
 </script>
 
 <template>
-  <section id="writing" class="space-y-3 mr-6">
+  <section id="writing" class="space-y-4">
     <section class="space-y-2">
-      <h2 class="flex justify-between items-center">
-        <span
-          class="hidden md:block py-2 text-sm text-zinc-600 dark:text-zinc-400"
-        >
-          Selected writing on research, agent systems, software engineering,
-          and data systems.
-          Browse by topic or open the complete archive.
-        </span>
+      <header class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="min-w-0 space-y-1">
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+            Writing
+          </h2>
+          <p class="max-w-xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Notes on research, software engineering and data systems.
+          </p>
+        </div>
 
         <NuxtLink
           to="/blog"
-          class="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline transition-colors py-2"
+          class="link-out inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-sm py-1 text-sm font-medium text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700 hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:text-blue-400 dark:decoration-blue-400/30 dark:hover:text-blue-300 dark:focus-visible:ring-offset-zinc-950 self-start sm:self-center"
         >
-          All Posts ({{ normalizedObsidian.length }})
+          All posts
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
         </NuxtLink>
-      </h2>
+      </header>
 
       <div class="grid gap-2 md:grid-cols-3">
         <NuxtLink

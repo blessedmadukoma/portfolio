@@ -1,12 +1,4 @@
 <script setup lang="ts">
-const colorMode = useColorMode();
-
-const isDark = computed(() => colorMode.value === "dark");
-
-const toggleTheme = () => {
-	colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
-};
-
 const showModal = ref(false);
 const showMap = ref(false);
 </script>
@@ -17,14 +9,7 @@ const showMap = ref(false);
 			class="text-2xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center justify-between mb-4"
 		>
 			<span>Hi👋🏿, I'm Blessed</span>
-			<button
-				@click="toggleTheme"
-				class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-500 transition-colors duration-200 cursor-pointer"
-				:aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
-			>
-				<icons-sun class="hidden dark:block" />
-				<icons-moon class="block dark:hidden" />
-			</button>
+			<ui-theme-toggle />
 		</h1>
 
 		<div
