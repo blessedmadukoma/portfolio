@@ -137,7 +137,7 @@
           v-if="post.image"
           :src="post.image"
           :alt="post.title"
-          class="w-full h-full object-cover"
+          class="w-full h-full object-contain"
         />
         <div v-else class="w-full h-full flex items-center justify-center">
           <icons-obsidian

@@ -134,7 +134,7 @@
             <img
               :src="obsidianImageToProxy(post.image as string)"
               :alt="post.title"
-              class="max-h-80 w-full rounded-lg object-cover"
+              class="block h-auto w-full rounded-lg border border-zinc-200 dark:border-zinc-700"
             />
           </button>
 

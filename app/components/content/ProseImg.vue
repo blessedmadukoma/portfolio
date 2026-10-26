@@ -28,7 +28,7 @@
 <template>
   <button
     type="button"
-    class="block cursor-zoom-in"
+    class="block max-w-full cursor-zoom-in"
     :aria-label="`Focus image: ${alt ?? 'figure'}`"
     @click="isFocused = true"
   >
@@ -38,7 +38,7 @@
       :title="title"
       :width="width"
       :height="height"
-      class="rounded-lg max-w-full"
+      class="block h-auto max-w-full rounded-lg"
       loading="lazy"
     />
   </button>
