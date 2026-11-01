@@ -56,12 +56,14 @@ const openStatement = (v: "statement" | "map") => {
 					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
 				>
 					Read my research statement</button
+				> <span class="whitespace-nowrap"
+					>(<button
+						@click="openStatement('map')"
+						class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
+					>see it as a map</button
+					>),</span
 				>
-				(<button
-					@click="openStatement('map')"
-					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
-				>see it as a map</button
-				>), or
+				or
 				<a
 					href="mailto:blessedmadukoma@gmail.com"
 					class="underline hover:text-zinc-900 dark:hover:text-zinc-100"

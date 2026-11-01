@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col h-full py-2 space-y-4">
+  <section class="flex flex-1 flex-col py-2 space-y-4 md:h-full">
     <section class="space-y-2 flex-shrink-0">
       <ui-hero />
       <ui-socials />
