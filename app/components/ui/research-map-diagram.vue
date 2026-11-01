@@ -46,6 +46,17 @@ const arms = [
   },
 ];
 
+// Small screens only: the part of the line from the question that runs beside box k of arm i
+// (0 = arm card, 1 = research and industry, 2 = from my work). Each part covers the gap above its box,
+// and the line stops at the branch to the last arm.
+const spine = (i: number, k: number) => {
+  const last = i === arms.length - 1;
+  if (last && k > 0) return "hidden";
+  const top = k > 0 ? "-top-2.5" : i === 0 ? "-top-3" : "-top-[22px]";
+  const end = last ? "h-[47px]" : "bottom-0";
+  return `absolute left-[9px] w-0.5 bg-zinc-500 dark:bg-zinc-400 sm:hidden ${top} ${end}`;
+};
+
 const eras = [
   { title: "Before agents", text: "SQL queries, reports and dashboards" },
   { title: "Today", text: "AI agents that write queries and code" },
@@ -74,39 +85,51 @@ const eras = [
       </div>
     </div>
 
+    <!-- On small screens, a line runs down from the question with a branch to each arm. -->
     <div class="grid gap-2.5 sm:grid-cols-3">
-      <template v-for="arm in arms" :key="arm.title">
-        <div :class="['rounded-md border-2 p-3', arm.card, arm.order[0]]">
-          <p :class="['text-[11px] font-bold uppercase tracking-wider', arm.label]">
-            {{ arm.title }}
-          </p>
-          <p class="mt-1 text-zinc-800 dark:text-zinc-200">{{ arm.question }}</p>
+      <template v-for="(arm, i) in arms" :key="arm.title">
+        <div :class="['relative flex flex-col max-sm:pl-6', arm.order[0]]">
+          <span :class="spine(i, 0)" aria-hidden="true"></span>
+          <span
+            class="absolute left-[9px] top-[23px] h-0.5 w-[9px] bg-zinc-500 dark:bg-zinc-400 sm:hidden"
+            aria-hidden="true"
+          ></span>
+          <span
+            class="absolute left-[18px] top-[19px] h-0 w-0 border-y-[5px] border-l-[6px] border-y-transparent border-l-zinc-500 dark:border-l-zinc-400 sm:hidden"
+            aria-hidden="true"
+          ></span>
+          <div :class="['flex-1 rounded-md border-2 p-3', arm.card]">
+            <p :class="['text-[11px] font-bold uppercase tracking-wider', arm.label]">
+              {{ arm.title }}
+            </p>
+            <p class="mt-1 text-zinc-800 dark:text-zinc-200">{{ arm.question }}</p>
+          </div>
         </div>
-        <div
-          :class="[
-            'rounded-md border border-dotted border-zinc-300 p-2.5 text-xs leading-5 dark:border-zinc-700',
-            arm.order[1],
-          ]"
-        >
-          <p>
-            <span class="font-semibold text-zinc-900 dark:text-zinc-100">Research:</span>
-            {{ arm.research }}
-          </p>
-          <p>
-            <span class="font-semibold text-zinc-900 dark:text-zinc-100">Industry:</span>
-            {{ arm.industry }}
-          </p>
+        <div :class="['relative flex flex-col max-sm:pl-6', arm.order[1]]">
+          <span :class="spine(i, 1)" aria-hidden="true"></span>
+          <div
+            class="flex-1 rounded-md border border-dotted border-zinc-300 p-2.5 text-xs leading-5 dark:border-zinc-700"
+          >
+            <p>
+              <span class="font-semibold text-zinc-900 dark:text-zinc-100">Research:</span>
+              {{ arm.research }}
+            </p>
+            <p>
+              <span class="font-semibold text-zinc-900 dark:text-zinc-100">Industry:</span>
+              {{ arm.industry }}
+            </p>
+          </div>
         </div>
-        <div
-          :class="[
-            'mb-3 rounded-md border border-dashed border-zinc-300 p-2.5 text-xs leading-5 dark:border-zinc-700 sm:mb-0',
-            arm.order[2],
-          ]"
-        >
-          <p class="font-semibold text-zinc-900 dark:text-zinc-100">From my work</p>
-          <ul class="mt-1 list-disc space-y-0.5 pl-4">
-            <li v-for="item in arm.work" :key="item">{{ item }}</li>
-          </ul>
+        <div :class="['relative mb-3 flex flex-col max-sm:pl-6 sm:mb-0', arm.order[2]]">
+          <span :class="spine(i, 2)" aria-hidden="true"></span>
+          <div
+            class="flex-1 rounded-md border border-dashed border-zinc-300 p-2.5 text-xs leading-5 dark:border-zinc-700"
+          >
+            <p class="font-semibold text-zinc-900 dark:text-zinc-100">From my work</p>
+            <ul class="mt-1 list-disc space-y-0.5 pl-4">
+              <li v-for="item in arm.work" :key="item">{{ item }}</li>
+            </ul>
+          </div>
         </div>
       </template>
     </div>
