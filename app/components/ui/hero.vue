@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const showModal = ref(false);
 const showMap = ref(false);
+const statementView = ref<"statement" | "map">("statement");
+const openStatement = (v: "statement" | "map") => {
+	statementView.value = v;
+	showModal.value = true;
+};
 </script>
 
 <template>
@@ -21,9 +26,10 @@ const showMap = ref(false);
 				<em>access rules</em> and <em>tools</em>
 				change, and what that costs.
 				<br />
-				<strong>Current:</strong> a paper on what agent traces do not record, a
-				study of whether AI agents know when they cannot see all the data,
-				and
+				<strong>Current:</strong> when can people (in business and research)
+				trust an answer computed from data? I work on what the data means,
+				which answers a change
+				makes wrong, and what evidence an answer must carry. I am building
 				<a
 					href="https://sedge.app"
 					target="_blank"
@@ -46,11 +52,16 @@ const showMap = ref(false);
 
 			<p>
 				<button
-					@click="showModal = true"
+					@click="openStatement('statement')"
 					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
 				>
 					Read my research statement</button
-				>, or
+				>
+				(<button
+					@click="openStatement('map')"
+					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
+				>see it as a map</button
+				>), or
 				<a
 					href="mailto:blessedmadukoma@gmail.com"
 					class="underline hover:text-zinc-900 dark:hover:text-zinc-100"
@@ -66,7 +77,11 @@ const showMap = ref(false);
 			</p>
 		</div>
 
-		<ui-research-statement v-if="showModal" @close="showModal = false" />
+		<ui-research-statement
+			v-if="showModal"
+			:initial-view="statementView"
+			@close="showModal = false"
+		/>
 		<!-- <ui-research-map v-if="showMap" @close="showMap = false" /> -->
 	</section>
 </template>

@@ -52,10 +52,10 @@ export const PROJECTS: Project[] = [
     technologies: ["Go", "PostgreSQL", "MySQL", "Redis", "Docker"],
   },
   {
-    title: "What Agent Traces Do Not Record: Code and Data",
+    title: "data-agent-traces: Code and Data",
     briefText: "Code and data for my study of LLM data agents",
     description:
-      "Code and data for my study of LLM agents that write code to analyse data: parsers for public agent traces, a checker that blocks code naming missing columns, keys or files, and the scripts for every experiment.",
+      "Code and data for my study of LLM agents that write code to analyse data: parsers for public agent traces, a checker that blocks code naming missing columns, keys or files, the scripts for every experiment, and probes that test whether agent harnesses change what runs without recording it.",
     live: "",
     apiDoc: "",
     github: "https://github.com/blessedmadukoma/data-agent-traces",

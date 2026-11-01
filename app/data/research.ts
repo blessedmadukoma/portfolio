@@ -16,9 +16,8 @@ export interface ResearchPaper {
 }
 
 export const RESEARCH_PAPERS: ResearchPaper[] = [
-	// Enable after arXiv is live and Prof. Mitra has approved.
-	// Before enabling: check the abstract sentences against the arXiv version,
-	// add arxivUrl and pdfUrl, and confirm the final title.
+	// Not planned for release: I stopped this paper on 1 Nov 2026. The code and
+	// data stay public as a record (see projects.ts). Kept here for reference.
 	// {
 	//   title:
 	//     "What Agent Traces Do Not Record: Harness Effects and Data-Reference Errors in Code-Writing LLM-based Agents for Data Analysis",
