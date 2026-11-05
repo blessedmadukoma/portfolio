@@ -21,15 +21,12 @@ const openStatement = (v: "statement" | "map") => {
 			class="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
 		>
 			<p>
-				Software engineer and researcher. I study how to keep AI-powered
-				data systems <strong>correct</strong> as <em>data</em>, <em>definitions</em>,
-				<em>access rules</em> and <em>tools</em>
-				change, and what that costs.
+				Software engineer and researcher. I study which changes to AI-powered
+				data systems make their answers <strong>complete and up to date</strong>,
+				or clear about what they lack, and at what cost.
 				<br />
-				<strong>Current:</strong> when can people (in business and research)
-				trust an answer computed from data? I work on what the data means,
-				which answers a change
-				makes wrong, and what evidence an answer must carry. I am building
+				<strong>Current:</strong> can a system tell an AI agent when rows it
+				may not see change its answer, without leaking them? I am building
 				<a
 					href="https://sedge.app"
 					target="_blank"

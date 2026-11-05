@@ -3,37 +3,23 @@
 // light and dark themes and stacks on small screens. Keep it in step with the tldraw frame.
 const arms = [
   {
-    title: "Meaning",
+    title: "Scope",
     question:
-      "Does everyone who uses a name like “active customer” compute the same thing?",
-    research: "Ontologies and data integration",
-    industry: "Semantic layers and shared metric definitions",
+      "Does the answer say what data it covered, including rows the user may not read?",
+    research: "Fine-grained access control",
+    industry: "Row-level security",
     work: [
-      "Data-reference errors: code that names data that does not exist",
-      "Sedge: an ontology for business definitions",
+      "Hidden rows: cheaper models presented partial answers as complete in 70–95% of affected cases",
+      "Next: a note that tells the agent when hidden rows matter, with a limited leak",
     ],
     card: "border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950/40",
     label: "text-blue-700 dark:text-blue-300",
     order: ["sm:order-1", "sm:order-4", "sm:order-7"],
   },
   {
-    title: "Change",
+    title: "Evidence",
     question:
-      "When data, definitions or access rules change, which answers already given are now wrong or no longer allowed, and how can we find them cheaply?",
-    research: "Incremental view maintenance",
-    industry: "Keeping AI answers, caches and reports current",
-    work: [
-      "Hidden rows: partial answers presented as complete in 70–95% of affected cases",
-      "Answer invalidation: re-check only what a change touches",
-    ],
-    card: "border-orange-500 bg-orange-50 dark:border-orange-400 dark:bg-orange-950/40",
-    label: "text-orange-700 dark:text-orange-300",
-    order: ["sm:order-2", "sm:order-5", "sm:order-8"],
-  },
-  {
-    title: "Support",
-    question:
-      "What evidence must come with an answer so that someone else can check it?",
+      "What must come with an answer so that someone else can check it, and does the log show what actually ran?",
     research: "Data provenance",
     industry: "Agent observability and audit logs",
     work: [
@@ -42,6 +28,19 @@ const arms = [
     ],
     card: "border-emerald-600 bg-emerald-50 dark:border-emerald-400 dark:bg-emerald-950/40",
     label: "text-emerald-700 dark:text-emerald-300",
+    order: ["sm:order-2", "sm:order-5", "sm:order-8"],
+  },
+  {
+    title: "Change (planned)",
+    question:
+      "Which answers already given become wrong when data, definitions or access rules change?",
+    research: "Incremental view maintenance",
+    industry: "Keeping AI answers, caches and reports current",
+    work: [
+      "Planned: re-check only the answers a change touches",
+    ],
+    card: "border-orange-500 bg-orange-50 dark:border-orange-400 dark:bg-orange-950/40",
+    label: "text-orange-700 dark:text-orange-300",
     order: ["sm:order-3", "sm:order-6", "sm:order-9"],
   },
 ];
@@ -69,11 +68,11 @@ const eras = [
     <p
       class="mx-auto max-w-xl rounded-md border-2 border-violet-500 bg-violet-50 px-4 py-3 text-center text-sm font-semibold text-zinc-900 dark:border-violet-400 dark:bg-violet-950/40 dark:text-zinc-100"
     >
-      When can people (in business and research) trust an answer computed from
-      data?
+      When can someone act on an answer computed from data, and which changes
+      to the system make that true more often, at a cost they can afford?
     </p>
 
-    <!-- Elbow connectors from the question to the three arms (wider screens only). -->
+    <!-- Elbow connectors from the question to the three parts (wider screens only). -->
     <div class="relative hidden h-7 sm:block" aria-hidden="true">
       <div class="absolute left-1/2 top-0 h-3 w-0.5 -translate-x-1/2 bg-zinc-500 dark:bg-zinc-400"></div>
       <div class="absolute left-[16.667%] right-[16.667%] top-3 h-0.5 bg-zinc-500 dark:bg-zinc-400"></div>

@@ -80,12 +80,13 @@
           <div v-else class="space-y-4">
             <section>
               <p class="text-zinc-800 dark:text-zinc-300">
-                I study how to keep AI-powered data systems
-                <span class="font-semibold text-zinc-900 dark:text-zinc-100">correct</span>
-                as <em>data</em>, <em>definitions</em>, <em>access rules</em>
-                and <em>tools</em> change, and what that costs. A correct
-                answer matches complete, up-to-date data, or it says clearly
-                that it is incomplete.
+                I study which changes to AI-powered data systems make their
+                answers <span class="font-semibold text-zinc-900 dark:text-zinc-100">complete and up to date</span>, or clear about
+                what they lack, and at what cost. A correct answer matches
+                complete, up-to-date data, or it says clearly that it is
+                incomplete or out of date. Cost means what a change adds: time,
+                tokens, needless warnings, or information leaked to someone who
+                may not see it.
               </p>
             </section>
 
@@ -106,48 +107,52 @@
               </p>
               <ul class="mt-2 list-disc space-y-1.5 pl-5 text-zinc-800 dark:text-zinc-300">
                 <li>
-                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Logs can hide what the harness did.</span>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Partial answers presented as complete.</span>
+                  When access rules hid some rows and the model was not told,
+                  three cheaper models presented partial answers as complete in
+                  70–95% of affected cases. A stronger model made the opposite
+                  mistake: it doubted half of the complete answers (<NuxtLink
+                    to="/blog/does-an-ai-agent-know-when-it-cannot-see-all-the-data"
+                    class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                    >study</NuxtLink
+                  >).
+                </li>
+                <li>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">A log may not show what ran.</span>
                   The harness is the software that runs the model’s code. In
-                  DataAgentBench’s public logs, it made 21.6% of Python steps fail,
-                  and the logs blamed the model (<a
+                  DataAgentBench’s public logs, it made 21.6% of Python steps
+                  fail, and the logs show those failures as the model’s (<a
                     href="https://github.com/blessedmadukoma/data-agent-traces"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                     >code</a
-                  >). Every smolagents version from 1.0 to 1.26 silently swaps a
-                  missing variable for a similar one and logs success.
+                  >). All 11 smolagents versions I tested, from 1.0 to 1.26,
+                  silently swap a missing variable for a similar one and log
+                  success.
                 </li>
                 <li>
-                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Errors the model can see are the smaller problem.</span>
-                  A checker that stops code from using columns or files that do
-                  not exist raised accuracy by only 0.68 points. A clear error
-                  message worked as well.
-                </li>
-                <li>
-                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Errors the model cannot see stay silent.</span>
-                  When access rules hid some rows and the model was not told,
-                  cheaper models presented incomplete answers as complete in
-                  70–95% of affected cases (<NuxtLink
-                    to="/blog/does-an-ai-agent-know-when-it-cannot-see-all-the-data"
-                    class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
-                    >study</NuxtLink
-                  >).
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Fewer errors did not mean better answers.</span>
+                  A checker that stops code from naming columns or files that do
+                  not exist cut one model’s errors from 3,316 to 2, but raised its
+                  accuracy by only 1.44 points. It gave no detectable gain over a
+                  plain error message that lists the existing names.
                 </li>
               </ul>
             </section>
 
             <section>
               <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
-                Why I Work on Silent Errors
+                Where This Started
               </h3>
               <p class="text-zinc-800 dark:text-zinc-300">
-                Better models will keep fixing errors they can see. They cannot
-                fix what the data does not show, such as a definition that
-                changed or rows they may not read. People still act on these
-                answers, so the system has to catch them. For example, my
-                Fantasy Premier League agent once reported the wrong scores for
-                a footballer, while its log showed a successful step.
+                I am curious about what data can tell us that we aren’t seeing
+                yet. That curiosity runs through my COVID-19 vulnerability study
+                and my athletics research. Finding a pattern raises further
+                questions: what produced it, what the analysis leaves out, and
+                whether someone can act on it. AI systems now produce answers
+                with much less manual work, and nobody reads every step, so those
+                questions now fall on the system.
               </p>
             </section>
 
@@ -159,35 +164,37 @@
                 One question connects this work:
               </p>
               <p class="mt-1.5 border-l-2 border-indigo-300 pl-3 font-medium text-zinc-900 dark:border-indigo-700 dark:text-zinc-100">
-                When can people (in business and research) trust an answer
-                computed from data?
+                When can someone act on an answer computed from data, and which
+                changes to the system make that true more often, at a cost they
+                can afford?
               </p>
               <ul class="mt-2 list-disc space-y-1.5 pl-5 text-zinc-800 dark:text-zinc-300">
                 <li>
-                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Meaning.</span>
-                  Keeping what a name such as “active customer” means the same
-                  for every person and program that uses it.
-                  <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">Research: ontologies and data integration. Industry:
-                    semantic layers and shared metric definitions.</span>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Scope.</span>
+                  Does the answer say what data it covered, including rows the
+                  user may not read?
+                  <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">Research: fine-grained access control. Industry:
+                    row-level security.</span>
                 </li>
                 <li>
-                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Change.</span>
-                  Finding which answers already given become wrong or no longer
-                  allowed when data, definitions or access rules change, at a
-                  cost that grows with the change, not with the history.
-                  <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">Research: incremental view maintenance. Industry:
-                    keeping AI answers, caches and reports current.</span>
-                </li>
-                <li>
-                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Support.</span>
-                  Deciding what evidence must come with an answer so that
-                  someone else can check it.
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Evidence.</span>
+                  What must come with an answer so that someone else can check
+                  it, and does the log show what actually ran?
                   <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">Research: data provenance. Industry: agent
                     observability and audit logs.</span>
                 </li>
+                <li>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Change (planned).</span>
+                  Which answers already given become wrong when data, definitions
+                  or access rules change?
+                  <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">Research: incremental view maintenance. Industry:
+                    keeping AI answers, caches and reports current.</span>
+                </li>
               </ul>
               <p class="mt-2 text-zinc-800 dark:text-zinc-300">
-                I study these questions in my research and build them into
+                Next, I am testing whether a system can tell an agent when hidden
+                rows change its answer, with a known, limited leak and far fewer
+                false warnings. I build these ideas into
                 <a
                   href="https://sedge.app"
                   target="_blank"
