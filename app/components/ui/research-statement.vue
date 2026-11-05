@@ -111,7 +111,7 @@
                   When access rules hid some rows and the model was not told,
                   three cheaper models presented partial answers as complete in
                   70–95% of affected cases. A stronger model made the opposite
-                  mistake: it doubted half of the complete answers (<NuxtLink
+                  mistake: in a small sample, it doubted 8 of its 16 complete answers (<NuxtLink
                     to="/blog/does-an-ai-agent-know-when-it-cannot-see-all-the-data"
                     class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                     >study</NuxtLink
@@ -132,7 +132,7 @@
                   success.
                 </li>
                 <li>
-                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Fewer errors did not mean better answers.</span>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Fewer errors meant only slightly better answers.</span>
                   A checker that stops code from naming columns or files that do
                   not exist cut one model’s errors from 3,316 to 2, but raised its
                   accuracy by only 1.44 points. It gave no detectable gain over a

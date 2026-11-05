@@ -26,7 +26,7 @@ const openStatement = (v: "statement" | "map") => {
 				or clear about what they lack, and at what cost.
 				<br />
 				<strong>Current:</strong> can a system tell an AI agent when rows it
-				may not see change its answer, without leaking them? I am building
+				may not see change its answer, with a known, limited leak? I am building
 				<a
 					href="https://sedge.app"
 					target="_blank"
