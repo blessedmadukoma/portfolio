@@ -60,7 +60,7 @@
         class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-900/50"
       >
         <button
-          class="rounded-md px-3 py-1.5 text-xs transition-colors"
+          class="rounded-md px-3 py-1.5 text-[13px] transition-colors md:text-xs"
           :class="
             activeSection === 'publications'
               ? 'bg-white font-medium text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100'
@@ -71,7 +71,7 @@
           Publications ({{ papers.length }})
         </button>
         <button
-          class="rounded-md px-3 py-1.5 text-xs transition-colors"
+          class="rounded-md px-3 py-1.5 text-[13px] transition-colors md:text-xs"
           :class="
             activeSection === 'projects'
               ? 'bg-white font-medium text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100'
@@ -147,7 +147,7 @@
         <!-- <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           Publications
         </h2> -->
-        <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+        <p class="mt-1 text-[13px] text-zinc-500 dark:text-zinc-400 md:text-xs">
           Papers in journals, conferences and on arXiv.
         </p>
       </div>
@@ -157,9 +157,11 @@
         class="space-y-3 py-4 px-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-sm transition-all duration-300 ease-out"
       >
         <!-- Title + status badge -->
-        <div class="flex justify-between items-start gap-3">
+        <div
+          class="flex flex-col-reverse items-start gap-2 md:flex-row md:justify-between md:gap-3"
+        >
           <h3
-            class="text-sm font-medium text-zinc-900 dark:text-zinc-100 flex-1 leading-snug"
+            class="w-full text-[15px] font-semibold leading-snug text-zinc-900 dark:text-zinc-100 md:w-auto md:flex-1 md:text-sm md:font-medium"
           >
             {{ paper.title }}
             <span v-if="paper.arxivUrl">
@@ -194,7 +196,7 @@
         </div>
 
         <!-- Authors -->
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 italic !mt-0.5">
+        <p class="!mt-1.5 text-[13px] leading-snug text-zinc-500 italic dark:text-zinc-400 md:!mt-0.5 md:text-xs">
           <template v-for="(author, idx) in paper.authors" :key="idx">
             <strong
               v-if="author === 'Blessed Madukoma'"
@@ -209,7 +211,7 @@
         <!-- Venue (published papers and preprints) -->
         <div
           v-if="paper.conference"
-          class="text-xs text-zinc-500 dark:text-zinc-400 !mt-1"
+          class="!mt-1 text-[13px] leading-snug text-zinc-500 dark:text-zinc-400 md:text-xs"
         >
           <p>
             <span class="font-medium">{{ paper.conference }}</span>
@@ -220,13 +222,13 @@
 
         <!-- Abstract -->
         <p
-          class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed !mt-0.5"
+          class="!mt-3 text-sm leading-[1.65] text-zinc-600 dark:text-zinc-400 md:!mt-0.5 md:leading-relaxed"
           v-html="paper.abstract"
           @click="openCertificate"
         ></p>
 
         <!-- Tags -->
-        <div class="flex flex-wrap gap-1.5 !mt-1">
+        <div class="flex flex-wrap gap-1.5 !mt-3 md:!mt-1">
           <span
             v-for="tag in paper.tags"
             :key="tag"
@@ -244,7 +246,7 @@
           <NuxtLink
             v-if="paper.recordUrl"
             :to="paper.recordUrl"
-            class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            class="inline-flex items-center gap-1 text-[13px] md:text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             Read the Research Record →
           </NuxtLink>
@@ -253,7 +255,7 @@
             :href="paper.pdfUrl"
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            class="inline-flex items-center gap-1 text-[13px] md:text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             View Paper →
           </a>
@@ -262,7 +264,7 @@
             :href="paper.codeUrl"
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            class="inline-flex items-center gap-1 text-[13px] md:text-xs font-medium px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
             Code and Data →
           </a>

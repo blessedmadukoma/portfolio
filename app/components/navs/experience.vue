@@ -50,7 +50,7 @@
 </script>
 
 <template>
-  <section class="space-y-6 pr-4">
+  <section class="space-y-6 md:pr-4">
     <!-- Work Experience -->
     <section class="space-y-2">
       <h2 class="py-1 flex justify-between items-center">
@@ -88,40 +88,41 @@
         @click="toggleWorkDropdown(id)"
       >
         <div
-          class="flex items-start space-x-3 py-2 tracking-wide group cursor-pointer"
+          class="group flex cursor-pointer items-start gap-3 py-3 md:gap-0 md:space-x-3 md:py-2 md:tracking-wide"
           role="button"
           tabindex="0"
           :aria-expanded="openWorkDropdown === id"
           @keydown.enter.prevent="toggleWorkDropdown(id)"
           @keydown.space.prevent="toggleWorkDropdown(id)"
         >
-          <div class="pr-2 pl-1 flex space-x-4 flex-1">
+          <div class="flex min-w-0 flex-1 gap-3 md:gap-0 md:space-x-4 md:pl-1 md:pr-2">
             <ui-img :alt="experience.company" :img-url="experience.imageURL" />
 
-            <div class="space-y-1 md:space-y-0 flex-1">
-              <div class="md:flex justify-between items-center">
-                <h3 class="font-semibold text-sm md:text-base">
+            <div class="flex min-w-0 flex-1 flex-col md:block">
+              <div class="contents md:flex md:items-center md:justify-between">
+                <h3 class="order-1 text-[15px] font-semibold leading-snug md:order-none md:text-base md:leading-normal">
                   <p
-                    class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
+                    class="text-zinc-800 dark:text-zinc-100 md:flex md:items-center md:space-x-2 md:text-zinc-600 md:dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
                   >
                     {{ experience.position }}
-                    <IconsArrow :open="openWorkDropdown === id" />
+                    <IconsArrow class="hidden md:inline-flex" :open="openWorkDropdown === id" />
                   </p>
                 </h3>
                 <p
-                  class="text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap italic"
+                  class="order-3 mt-1 whitespace-nowrap text-[13px] tabular-nums text-zinc-500 dark:text-zinc-400 md:order-none md:mt-0 md:text-xs md:italic"
                 >
-                  {{ experience.startDate }} —
+                  {{ experience.startDate }} –
                   {{ experience.endDate ? experience.endDate : "Present" }}
                 </p>
               </div>
               <p
-                class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 !mt-0"
+                class="order-2 mt-0.5 text-sm leading-snug text-zinc-600 dark:text-zinc-300 md:order-none md:mt-0"
               >
                 {{ experience.company }}
               </p>
             </div>
           </div>
+          <IconsArrow class="mt-0.5 shrink-0 md:hidden" :open="openWorkDropdown === id" />
         </div>
 
         <Transition name="accordion">
@@ -131,15 +132,15 @@
           >
             <div class="min-h-0 overflow-hidden">
               <div
-                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
+                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-4 pb-3 md:px-3"
               >
                 <ul
-                  class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3"
+                  class="list-disc space-y-2.5 py-3 pl-4 leading-[1.6] max-md:marker:text-zinc-400 md:list-inside md:space-y-2 md:pl-0 md:leading-loose md:tracking-wide"
                 >
                   <li
                     v-for="(role, idx) in experience.workRoles"
                     :key="idx"
-                    class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+                    class="text-sm text-zinc-600 dark:text-zinc-300"
                     v-html="role"
                   ></li>
                 </ul>
@@ -191,45 +192,48 @@
         @click="toggleEducationDropdown(id)"
       >
         <div
-          class="flex items-start space-x-3 py-2 tracking-wide group cursor-pointer"
+          class="group flex cursor-pointer items-start gap-3 py-3 md:gap-0 md:space-x-3 md:py-2 md:tracking-wide"
           role="button"
           tabindex="0"
           :aria-expanded="openEducationDropdown === id"
           @keydown.enter.prevent="toggleEducationDropdown(id)"
           @keydown.space.prevent="toggleEducationDropdown(id)"
         >
-          <div class="pr-2 pl-1 flex space-x-4 flex-1">
+          <div class="flex min-w-0 flex-1 gap-3 md:gap-0 md:space-x-4 md:pl-1 md:pr-2">
             <ui-img
               :alt="education.institution"
               :img-url="education.imageURL"
             />
-            <div class="space-y-1 md:space-y-0 flex-1">
-              <div class="md:flex justify-between items-center">
-                <h3 class="font-semibold text-sm md:text-base">
+            <div class="flex min-w-0 flex-1 flex-col md:block">
+              <div class="contents md:flex md:items-center md:justify-between">
+                <h3 class="order-1 text-[15px] font-semibold leading-snug md:order-none md:text-base md:leading-normal">
                   <p
-                    class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
+                    class="text-zinc-800 dark:text-zinc-100 md:flex md:items-center md:space-x-2 md:text-zinc-600 md:dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
                   >
                     {{ education.institution }}
-                    <IconsArrow :open="openEducationDropdown === id" />
+                    <IconsArrow class="hidden md:inline-flex" :open="openEducationDropdown === id" />
                   </p>
                 </h3>
                 <p
-                  class="text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap italic"
+                  class="order-3 mt-1 whitespace-nowrap text-[13px] tabular-nums text-zinc-500 dark:text-zinc-400 md:order-none md:mt-0 md:text-xs md:italic"
                 >
-                  {{ education.startDate }} —
+                  {{ education.startDate }} –
                   {{ education.endDate ? education.endDate : "Present" }}
                 </p>
               </div>
               <p
-                class="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 !mt-0"
+                class="order-2 mt-0.5 text-sm leading-snug text-zinc-600 dark:text-zinc-300 md:order-none md:mt-0"
               >
                 {{ education.degree }}
-                <span v-if="education.grade" class="text-zinc-400"
-                  >· {{ education.grade }}</span
+                <span
+                  v-if="education.grade"
+                  class="mt-0.5 block text-zinc-500 dark:text-zinc-400 md:mt-0 md:inline md:text-zinc-400"
+                  ><span class="hidden md:inline">· </span>{{ education.grade }}</span
                 >
               </p>
             </div>
           </div>
+          <IconsArrow class="mt-0.5 shrink-0 md:hidden" :open="openEducationDropdown === id" />
         </div>
 
         <Transition name="accordion">
@@ -239,14 +243,14 @@
           >
             <div class="min-h-0 overflow-hidden">
               <div
-                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
+                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-4 pb-3 md:px-3"
               >
                 <ul
-                  class="list-disc list-inside space-y-2 tracking-wide leading-loose py-3"
+                  class="list-disc space-y-2.5 py-3 pl-4 leading-[1.6] max-md:marker:text-zinc-400 md:list-inside md:space-y-2 md:pl-0 md:leading-loose md:tracking-wide"
                 >
                   <li
                     v-if="education.thesis"
-                    class="list-none sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+                    class="-ml-4 list-none text-sm text-zinc-600 dark:text-zinc-300 md:ml-0"
                   >
                     <strong>Thesis: </strong>
                     <span v-html="education.thesis"></span>
@@ -254,7 +258,7 @@
                   <li
                     v-for="(item, index) in education.description"
                     :key="index"
-                    class="sm:text-sm text-base text-zinc-600 dark:text-zinc-300"
+                    class="text-sm text-zinc-600 dark:text-zinc-300"
                   >
                     {{ item }}
                   </li>
@@ -307,29 +311,33 @@
         @click="toggleAwardDropdown(id)"
       >
         <div
-          class="flex flex-1 justify-between items-start space-x-3 py-2 tracking-wide group cursor-pointer"
+          class="group flex flex-1 cursor-pointer items-start justify-between gap-3 py-3 md:gap-0 md:space-x-3 md:py-2 md:tracking-wide"
         >
-          <div class="pl-1 pr-2 flex space-x-4">
+          <div class="flex min-w-0 flex-1 gap-3 md:flex-none md:gap-0 md:space-x-4 md:pl-1 md:pr-2">
             <ui-img :alt="award.organization" :img-url="award.imageURL" />
-            <div class="space-y-1 md:space-y-0">
-              <h3 class="font-semibold text-sm md:text-base">
+            <div class="min-w-0 md:space-y-0">
+              <h3 class="text-[15px] font-semibold leading-snug md:text-base md:leading-normal">
                 <p
-                  class="text-zinc-600 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 flex items-center space-x-2"
+                  class="text-zinc-800 dark:text-zinc-100 md:flex md:items-center md:space-x-2 md:text-zinc-600 md:dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
                 >
                   {{ award.title }}
-                  <IconsArrow :open="openAwardDropdown === id" />
+                  <IconsArrow class="hidden md:inline-flex" :open="openAwardDropdown === id" />
                 </p>
               </h3>
-              <p class="text-xs md:text-sm text-zinc-500 dark:text-zinc-400">
+              <p class="mt-0.5 text-sm leading-snug text-zinc-600 dark:text-zinc-400 md:mt-0 md:text-zinc-500">
                 {{ award.organization }}
+              </p>
+              <p class="mt-1 text-[13px] tabular-nums text-zinc-500 dark:text-zinc-400 md:hidden">
+                {{ award.date }}
               </p>
             </div>
           </div>
           <p
-            class="block text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap italic"
+            class="hidden whitespace-nowrap text-xs italic text-zinc-500 dark:text-zinc-400 md:block"
           >
             {{ award.date }}
           </p>
+          <IconsArrow class="mt-0.5 shrink-0 md:hidden" :open="openAwardDropdown === id" />
         </div>
 
         <Transition name="accordion">
@@ -339,9 +347,9 @@
           >
             <div class="min-h-0 overflow-hidden">
               <div
-                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-3 pb-3"
+                class="w-full my-2 bg-zinc-50 dark:bg-zinc-800 rounded-md px-4 pb-3 md:px-3"
               >
-                <p class="text-sm text-zinc-600 dark:text-zinc-300 py-3">
+                <p class="py-3 text-sm leading-[1.6] text-zinc-600 dark:text-zinc-300 md:leading-normal">
                   {{ award.description }}
                 </p>
                 <div class="flex flex-wrap items-center gap-x-5 gap-y-1">

@@ -18,13 +18,13 @@ const openStatement = (v: "statement" | "map") => {
 		</h1>
 
 		<div
-			class="space-y-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
+			class="space-y-3 text-[15px] leading-[1.6] text-zinc-600 dark:text-zinc-400 md:text-sm md:leading-relaxed"
 		>
 			<p>
 				Software engineer and researcher. I study which changes to AI-powered
 				data systems make their answers <strong>complete and up to date</strong>,
 				or clear about what they lack, and at what cost.
-				<br />
+				<span class="mt-2 block md:mt-0">
 				<strong>Current:</strong> can a system tell an AI agent when rows it
 				may not see change its answer, with a known, limited leak? I am building
 				<a
@@ -45,6 +45,7 @@ const openStatement = (v: "statement" | "map") => {
 					</span>
 					<span class="underline">Sedge</span></a
 				>, a data operating system.
+				</span>
 			</p>
 
 			<p>

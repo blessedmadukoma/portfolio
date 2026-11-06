@@ -16,27 +16,27 @@
 </script>
 
 <template>
-  <section class="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <section v-for="group in groupedTools" :key="group.key" class="space-y-1">
-      <h2 class="font-bold">{{ group.label }}</h2>
-      <div class="flex flex-wrap gap-2 -ml-2">
+  <section class="mt-3 grid grid-cols-1 gap-7 md:mt-2 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+    <section v-for="group in groupedTools" :key="group.key" class="space-y-3 md:space-y-1">
+      <h2 class="text-[15px] font-semibold text-zinc-900 dark:text-zinc-100 md:text-base md:font-bold">{{ group.label }}</h2>
+      <div class="flex flex-wrap gap-x-5 gap-y-3 md:-ml-2 md:gap-2">
         <a
           v-for="tool in group.tools"
           :key="tool.name"
           :href="tool.URL"
           target="_blank"
           rel="noopener"
-          class="flex items-center space-x-2 pl-2 pr-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
+          class="group flex items-center gap-2 rounded-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 md:py-2 md:pl-2 md:pr-3"
         >
           <img
             :src="tool.image"
             :alt="tool.name"
-            class="w-5 h-5 object-contain"
+            class="h-[18px] w-[18px] shrink-0 object-contain md:h-5 md:w-5"
             :class="{ 'dark:brightness-0 dark:invert': tool.darkInvert }"
             loading="lazy"
           />
           <span
-            class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+            class="text-[15px] leading-6 text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100 md:text-sm md:leading-5"
           >
             {{ tool.name }}
           </span>

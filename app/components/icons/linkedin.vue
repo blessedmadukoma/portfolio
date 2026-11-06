@@ -3,7 +3,7 @@
     href="https://www.linkedin.com/in/blessed-madukoma"
     target="_blank"
     rel="noopener noreferrer"
-    class="linkedin-link flex items-center gap-[6px] hover:text-[#111] dark:hover:text-zinc-100 transition-colors rounded-lg px-2.5 py-1.5 -ml-2.5 hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-[12.5px] font-medium text-[#6b6661] dark:text-zinc-400"
+    class="linkedin-link flex items-center gap-[6px] hover:text-[#111] dark:hover:text-zinc-100 transition-colors rounded-lg px-1.5 py-1 -ml-1.5 md:px-2.5 md:py-1.5 md:-ml-2.5 hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-sm md:text-[12.5px] md:leading-normal font-medium text-[#6b6661] dark:text-zinc-400"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +15,7 @@
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="linkedin-icon cursor-pointer text-current pointer-events-none"
+      class="h-[18px] w-[18px] md:h-4 md:w-4 linkedin-icon cursor-pointer text-current pointer-events-none"
       aria-hidden="true"
     >
       <!-- Invisible clip path — standard Tabler/Lucide pattern -->
