@@ -13,7 +13,7 @@ export const WORK_EXPERIENCE = [
     workRoles: [
       "Traced 37% of DataAgentBench’s recorded agent failures (16,293 of 44,277) to its harness, not its six LLMs (including GPT-5.2 and Gemini 3 Pro); removing them reorders the models by failed steps. With Prof. Prasenjit Mitra, analysed 283,435 agent steps across six benchmarks. <a href='https://github.com/blessedmadukoma/data-agent-traces' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Code</a>.",
       "Built a static guardrail in Python (ast) that blocks agent code naming missing files, columns or keys before it runs, with zero false blocks on 8,517 working steps from three unseen benchmarks; on DABstep, a standard linter (pyflakes) flags only 6% of the errors it stops.",
-      "Built a sandboxed agent harness (no network, read-only data) and ran 36,990 pre-registered runs: the guardrail cut errors that ran from 3,316 to 2 (gpt-oss-120b) and raised accuracy by 0.68 points, with no detectable edge over a cheaper error message listing valid names.",
+      "Built a sandboxed agent harness (no network, read-only data) and ran 36,990 pre-registered runs: for gpt-oss-120b, the guardrail cut errors that ran from 3,316 to 2 and raised accuracy by 1.44 points; no detectable gain for gemma4-31b or over a cheaper error message listing valid names.",
       "Wrote two policy documents for Rwanda’s Ministry of Sports (MINISPORTS): an action plan to close the national sports talent gap, and a feasibility study of sports prediction systems.",
     ],
   },

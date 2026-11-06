@@ -24,19 +24,19 @@
       {
         name: "description",
         content:
-          "Blessed Madukoma is a software engineer and researcher. He studies how to keep AI-powered data systems correct as data, definitions, access rules and tools change, and what that costs.",
+          "Blessed Madukoma is a software engineer and researcher. He studies which changes to AI-powered data systems make their answers complete and up to date, or clear about what they lack, and at what cost.",
       },
       {
         name: "keywords",
         content:
-          "Blessed Madukoma, Software Engineer, Researcher, AI-powered data systems, agentic data systems, data systems, correctness, cost, access control, Sedge",
+          "Blessed Madukoma, Software Engineer, Researcher, AI-powered data systems, data agents, access control, data provenance, agent observability, Sedge",
       },
       { name: "author", content: "Blessed Madukoma" },
       { property: "og:title", content: "Blessed Madukoma | Portfolio" },
       {
         property: "og:description",
         content:
-          "Blessed Madukoma is a software engineer and researcher. He studies how to keep AI-powered data systems correct as data, definitions, access rules and tools change, and what that costs.",
+          "Blessed Madukoma is a software engineer and researcher. He studies which changes to AI-powered data systems make their answers complete and up to date, or clear about what they lack, and at what cost.",
       },
       { property: "og:type", content: "website" },
     ],

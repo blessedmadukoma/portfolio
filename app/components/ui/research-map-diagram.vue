@@ -24,7 +24,7 @@ const arms = [
     industry: "Agent observability and audit logs",
     work: [
       "DataAgentBench: 21.6% of Python steps failed because of the harness, logged as the model’s",
-      "smolagents: a missing variable silently swapped for a similar one",
+      "smolagents: all 11 versions tested silently swap a missing variable for a similar one",
     ],
     card: "border-emerald-600 bg-emerald-50 dark:border-emerald-400 dark:bg-emerald-950/40",
     label: "text-emerald-700 dark:text-emerald-300",
