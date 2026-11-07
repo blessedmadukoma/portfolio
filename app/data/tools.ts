@@ -1,3 +1,5 @@
+import langfuseIcon from "~/assets/svgs/langfuse.svg?url";
+
 export type ToolCategory =
   | "language"
   | "web"
@@ -165,7 +167,7 @@ export const TOOLS: Tool[] = [
   {
     name: "Langfuse",
     URL: "https://langfuse.com/",
-    image: "/logos/svgs/langfuse.svg",
+    image: langfuseIcon,
     category: "data",
   },
   // {
