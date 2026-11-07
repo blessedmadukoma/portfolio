@@ -162,6 +162,13 @@ export const TOOLS: Tool[] = [
     category: "data",
     darkInvert: true,
   },
+  {
+    name: "Langfuse",
+    URL: "https://langfuse.com/",
+    image: "/logos/svgs/langfuse.svg",
+    category: "data",
+    darkInvert: true,
+  },
   // {
   //   name: "ExpressJS",
   //   URL: "https://expressjs.com/",
