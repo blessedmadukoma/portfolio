@@ -18,6 +18,17 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    title: "FPL agent",
+    briefText: "Fantasy Premier League assistant and evaluation dashboard",
+    description:
+      "A Fantasy Premier League assistant that projects player points and recommends transfers, line-ups and chips through seven read-only tools. Frozen data snapshots, Langfuse traces and 20 fixed evaluation cases make each run inspectable. The live dashboard shows saved runs, scores and failed checks.",
+    live: "https://fpl-agent.mblessed.space",
+    apiDoc: "",
+    github: "https://github.com/blessedmadukoma/fpl-agent",
+    alt: "fpl-agent",
+    technologies: ["Python", "FastAPI", "DuckDB", "Ollama", "Langfuse", "Docker"],
+  },
+  {
     title: "Athletics Performance Outlier Detection",
     briefText: "Comparative Analysis of Anomaly Detection Methods in Sports",
     description:
