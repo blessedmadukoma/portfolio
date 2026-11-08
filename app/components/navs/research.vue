@@ -7,11 +7,26 @@
 
   const papers = ref(RESEARCH_PAPERS);
   const { data: posts } = useNativePosts();
-  const projects = computed(() =>
-    (posts.value ?? [])
+  // Research pages that are not blog posts, listed with the records.
+  const pageRecords = [
+    {
+      id: "page/research/data-agent-traces",
+      title: "What agent traces do not record",
+      description:
+        "Close-out of my study of AI data agents: what the public traces do not record, what did not work, why I stopped, and the open problems I am exploring.",
+      tags: ["ai-agents", "agent-traces"],
+      href: "/research/data-agent-traces",
+      contentType: "experiment",
+      status: "stopped study, close-out",
+    },
+  ];
+
+  const projects = computed(() => [
+    ...pageRecords,
+    ...(posts.value ?? [])
       .filter((post) => post.research === true)
       .map((post) => ({ ...normalizeObsidianPost(post), status: post.status })),
-  );
+  ]);
   const projectGroups = computed(() =>
     [
       { title: "Research experiments", types: ["experiment"] },

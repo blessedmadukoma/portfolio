@@ -14,7 +14,7 @@
       {
         name: "description",
         content:
-          "Close-out of my study of AI data agents: what the public traces do not record, what did not work, why I stopped, and the open problem I am exploring.",
+          "Close-out of my study of AI data agents: what the public traces do not record, what did not work, why I stopped, and the open problems I am exploring.",
       },
     ],
     link: [
@@ -27,16 +27,20 @@
 
   type Screen = "summary" | "research" | "open" | "evidence";
 
-  const screen = ref<Screen>("summary");
+  const screen = ref<Screen>("research");
   const mainEl = ref<HTMLElement | null>(null);
 
-  // Each screen except the Summary has a link of its own, for example
-  // /research/data-agent-traces#open-problem.
+  // Each screen except the first has a link of its own, for example
+  // /research/data-agent-traces#open-problems. Older links still work.
   const hashFor: Record<Screen, string> = {
-    summary: "",
-    research: "my-research",
-    open: "open-problem",
+    research: "",
+    summary: "summary",
     evidence: "evidence",
+    open: "open-problems",
+  };
+  const oldHashes: Record<string, Screen> = {
+    "my-research": "research",
+    "open-problem": "open",
   };
 
   function show(name: Screen) {
@@ -50,19 +54,39 @@
     );
   }
 
+  // The sidebar can shrink to a row of icons, as on the FPL agent site. The
+  // choice is kept in this browser only; storage can fail, so it is optional.
+  const collapsed = ref(false);
+  const sidebarKey = "dat-sidebar";
+
+  function toggleSidebar() {
+    collapsed.value = !collapsed.value;
+    try {
+      localStorage.setItem(sidebarKey, collapsed.value ? "collapsed" : "expanded");
+    } catch {
+      // Storage is blocked; the sidebar still works for this visit.
+    }
+  }
+
   onMounted(() => {
     const hash = location.hash.slice(1);
-    const match = (Object.keys(hashFor) as Screen[]).find(
-      (k) => hashFor[k] !== "" && hashFor[k] === hash,
-    );
+    const match =
+      (Object.keys(hashFor) as Screen[]).find(
+        (k) => hashFor[k] !== "" && hashFor[k] === hash,
+      ) ?? oldHashes[hash];
     if (match) screen.value = match;
+    try {
+      collapsed.value = localStorage.getItem(sidebarKey) === "collapsed";
+    } catch {
+      collapsed.value = false;
+    }
   });
 
   const tabs: { key: Screen; label: string }[] = [
-    { key: "summary", label: "Summary" },
     { key: "research", label: "My research" },
-    { key: "open", label: "Open problem" },
+    { key: "summary", label: "Summary" },
     { key: "evidence", label: "Evidence" },
+    { key: "open", label: "Open problems" },
   ];
 
   const repoUrl = "https://github.com/blessedmadukoma/data-agent-traces";
@@ -144,7 +168,7 @@
       name: "Scope",
       question:
         "Does the answer say which data it covered, including rows the user may not see?",
-      status: "Studied in my hidden-rows study, September 2026 (Open problem tab).",
+      status: "Studied in my hidden-rows study, September 2026 (Open problems tab).",
     },
     {
       name: "Evidence",
@@ -160,9 +184,42 @@
     },
   ];
 
-  // Open problem screen. Fixed text written here, so v-html is safe.
+  // Open problems screen: one problem for each part, then the focus.
+  const problems: {
+    part: string;
+    name: string;
+    problem: string;
+    status?: string;
+    focus?: boolean;
+  }[] = [
+    {
+      part: "Scope",
+      name: "Hidden rows",
+      problem:
+        "An AI model cannot tell whether rows the user may not see change its answer. The database system can, but telling the user can reveal those rows.",
+      // No status line: the focus details below give the evidence.
+      focus: true,
+    },
+    {
+      part: "Evidence",
+      name: "Records that hide what ran",
+      problem:
+        "A trace does not show what the harness changed, so a reader cannot tell who caused a failure.",
+      status:
+        "Measured in the paper I stopped: the harness caused 36.8% of DataAgentBench's failed steps.",
+    },
+    {
+      part: "Change",
+      name: "Answers that go out of date",
+      problem:
+        "I found no system that re-checks answers already given when data, definitions or access rules change.",
+      status: "Planned; no result yet.",
+    },
+  ];
+
+  // Focus details. Fixed text written here, so v-html is safe.
   const openPoints: string[] = [
-    "<b>The evidence:</b> on five BIRD databases under PostgreSQL row-level security, three cheaper models gave partial answers as complete in 70% to 95% of the cases where hidden rows changed the answer.",
+    `<b>The evidence:</b> in my <a href="${studyUrl}">hidden-rows study</a>, on five BIRD databases under PostgreSQL row-level security, three cheaper models gave partial answers as complete in 70% to 95% of the cases where hidden rows changed the answer.`,
     "<b>Why the model cannot solve it alone:</b> it sees only the visible rows. On a 40-pair sample, Claude Opus never hid a partial answer, but it doubted 8 of 16 complete answers.",
   ];
 
@@ -320,12 +377,27 @@
 </script>
 
 <template>
-  <div class="dat">
+  <div :class="['dat', { collapsed }]">
     <div class="shell">
       <aside class="side">
-        <div class="brand">
-          <div class="logo" aria-hidden="true">dt</div>
-          <div><b>data-agent-traces</b><span>Sep – Nov 2026</span></div>
+        <div class="side-head">
+          <div class="brand">
+            <div class="logo" aria-hidden="true">dt</div>
+            <div class="brand-text"><b>data-agent-traces</b><span>Sep – Nov 2026</span></div>
+          </div>
+          <button
+            type="button"
+            class="side-toggle"
+            :aria-expanded="!collapsed"
+            :aria-label="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+            :title="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+            @click="toggleSidebar"
+          >
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2.5" width="12" height="11" rx="2" />
+              <path d="M6 2.5v11" />
+            </svg>
+          </button>
         </div>
         <nav class="nav" role="tablist" aria-label="Screens">
           <button
@@ -337,6 +409,7 @@
             :aria-selected="screen === t.key"
             :aria-controls="`screen-${t.key}`"
             :aria-current="screen === t.key ? 'page' : undefined"
+            :title="t.label"
             @click="show(t.key)"
           >
             <svg
@@ -373,7 +446,7 @@
                 <path d="M13 18h8" />
               </template>
             </svg>
-            {{ t.label }}
+            <span class="label">{{ t.label }}</span>
           </button>
         </nav>
         <div class="info">
@@ -504,7 +577,7 @@
           </div>
         </section>
 
-        <!-- OPEN PROBLEM -->
+        <!-- OPEN PROBLEMS -->
         <section
           v-show="screen === 'open'"
           id="screen-open"
@@ -514,19 +587,29 @@
         >
           <div class="head">
             <div>
-              <h1 id="h-open">The open problem I am exploring</h1>
-              <p>
-                From my <a :href="studyUrl">hidden-rows study</a>: an AI model
-                cannot tell whether rows the user may not see change its answer.
-                The database system can, because it holds both the access rule
-                and the data, but telling the user can reveal those rows.
-              </p>
+              <h1 id="h-open">Open problems I am exploring</h1>
             </div>
           </div>
 
+          <ol class="problems">
+            <li
+              v-for="pb in problems"
+              :key="pb.part"
+              :class="['problem', { focus: pb.focus }]"
+            >
+              <div class="problem-top">
+                <span class="part-tag">{{ pb.part }}</span>
+                <b>{{ pb.name }}</b>
+                <span v-if="pb.focus" class="chip accent">Focus</span>
+              </div>
+              <p>{{ pb.problem }}</p>
+              <span v-if="pb.status" class="status">{{ pb.status }}</span>
+            </li>
+          </ol>
+
           <div class="op-grid">
             <div class="card op">
-              <h2>What I found and tested</h2>
+              <h2>Focus: what I found and tested</h2>
               <ul class="proof">
                 <li v-for="(pt, i) in openPoints" :key="i" v-html="pt"></li>
               </ul>
@@ -687,9 +770,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   display: flex; flex-direction: column; gap: 22px; min-height: 0; overflow-y: auto;
   padding-block: 20px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: 16px;
 }
-.brand { display: flex; align-items: center; gap: 10px; padding: 0 4px; }
+.side-head { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 4px; min-width: 0; }
+.side-toggle { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: none; color: var(--muted); cursor: pointer; flex: none; }
+.side-toggle:hover { background: var(--sunken); color: var(--fg); }
+.side-toggle svg { width: 16px; height: 16px; }
 .logo { width: 28px; height: 28px; border-radius: 7px; background: var(--ink); color: var(--ink-fg); display: grid; place-items: center; font: 600 11px/1 var(--font-mono); flex: none; }
-.brand b { display: block; font-size: 14.5px; font-weight: 600; line-height: 1.2; }
+.brand b { display: block; font-size: 14.5px; font-weight: 600; line-height: 1.2; white-space: nowrap; }
 .brand span { font-size: 12px; color: var(--faint); }
 .nav { display: flex; flex-direction: column; gap: 4px; }
 .nav button { cursor: pointer; text-align: left; background: transparent; display: flex; align-items: center; gap: 10px; height: 38px; padding: 0 10px; border-radius: 8px; text-decoration: none; color: var(--muted); font-size: 14px; border: 1px solid transparent; }
@@ -755,7 +842,17 @@ td :deep(.mono) { font-family: var(--font-mono); font-size: 0.92em; }
 .now .keep p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 .now .keep a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
-/* Open problem */
+/* Open problems */
+.problems { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.problem { border: 1px solid var(--line); border-radius: 10px; background: var(--card); padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.problem.focus { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); background: color-mix(in srgb, var(--accent-soft) 45%, var(--card)); box-shadow: inset 3px 0 0 var(--accent); }
+.problem-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.problem-top b { font-size: 14px; font-weight: 600; }
+.problem-top .chip { margin-left: auto; }
+.part-tag { font: 500 10.5px/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); border: 1px solid var(--line); border-radius: 4px; padding: 3px 5px; background: var(--sunken); }
+.problem p { font-size: 13px; line-height: 1.45; color: var(--fg); }
+.problem .status { font-size: 12px; line-height: 1.4; color: var(--faint); margin-top: auto; }
+
 .head p a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .research { padding: 16px 20px; border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; display: flex; flex-direction: column; gap: 6px; }
@@ -796,9 +893,20 @@ td.n { font-variant-numeric: tabular-nums; }
 td .sub { display: block; font-size: 12px; color: var(--faint); }
 .sq { display: inline-grid; place-items: center; width: 18px; height: 18px; border: 1.5px solid var(--harness); color: var(--harness); font: 600 11px/1 var(--font-mono); border-radius: 3px; }
 
+/* Collapsed sidebar: a row of icons (wide screens only) */
+@media (min-width: 761px) {
+  .dat.collapsed .shell { grid-template-columns: 64px minmax(0, 1fr); }
+  .dat.collapsed .side { padding-inline: 12px; }
+  .dat.collapsed .side-head { flex-direction: column; gap: 12px; }
+  .dat.collapsed .brand { padding: 0; }
+  .dat.collapsed .brand-text, .dat.collapsed .info { display: none; }
+  .dat.collapsed .nav button { justify-content: center; padding: 0; }
+  .dat.collapsed .nav .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+
 /* Short laptop or projector screens */
 @media (min-width: 761px) and (max-height: 800px) {
-  .screen { gap: 8px; padding-block: 10px; }
+  .screen { gap: 7px; padding-block: 9px; }
   .head h1 { font-size: 24px; }
   .head p { font-size: 13px; margin-top: 4px; }
   .proof { gap: 0; }
@@ -810,9 +918,12 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
   .research .plain, .part p, .connect p { font-size: 13px; line-height: 1.5; }
   .part { padding: 10px 14px; gap: 4px; }
   .beat { padding: 5px 16px; }
-  .op { padding: 8px 16px; gap: 6px; }
-  .op th, .op td { padding: 4px 8px; }
-  .op table, .op .solution { font-size: 12px; line-height: 1.4; }
+  .op { padding: 7px 14px; gap: 5px; }
+  .op h2 { font-size: 14px; }
+  .problem { padding: 6px 12px; gap: 1px; }
+  .problem p { font-size: 12.5px; line-height: 1.4; }
+  .op th, .op td { padding: 3px 8px; line-height: 1.35; }
+  .op table, .op .solution { font-size: 12px; line-height: 1.35; }
   th { padding: 7px 14px; }
   td { padding: 4px 14px; line-height: 1.4; }
 }
@@ -820,6 +931,7 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
   .beat { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .now { grid-template-columns: minmax(0, 1fr); }
   .op-grid { grid-template-columns: minmax(0, 1fr); }
+  .problems { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
   .dat { height: auto; overflow: visible; }
@@ -835,7 +947,7 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
   .shell { grid-template-columns: minmax(0, 1fr); height: auto; }
   .side { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px; border-right: 0; border-bottom: 1px solid var(--line); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px; }
   .nav { flex-direction: row; margin-left: auto; }
-  .info { display: none; }
+  .info, .side-toggle { display: none; }
   .main { overflow: visible; }
   .screen { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
   .head { flex-direction: column; }

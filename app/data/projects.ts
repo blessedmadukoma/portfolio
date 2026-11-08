@@ -74,6 +74,7 @@ export const PROJECTS: Project[] = [
     technologies: ["Python"],
     references: [
       { label: "DOI", url: "https://doi.org/10.5281/zenodo.22999967" },
+      { label: "Close-out", url: "/research/data-agent-traces" },
     ],
   },
   {
