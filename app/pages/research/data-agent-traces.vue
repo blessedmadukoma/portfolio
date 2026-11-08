@@ -1448,7 +1448,7 @@ td :deep(.mono) {
 	font-size: 14px;
 	line-height: 1.6;
 	color: var(--fg);
-	max-width: 110ch;
+	/*max-width: 110ch;*/
 }
 .parts {
 	display: grid;
