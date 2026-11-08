@@ -75,11 +75,15 @@
         (k) => hashFor[k] !== "" && hashFor[k] === hash,
       ) ?? oldHashes[hash];
     if (match) screen.value = match;
+    // With no saved choice, small laptop screens start with the sidebar
+    // collapsed so that each tab fits on one screen.
+    let saved: string | null = null;
     try {
-      collapsed.value = localStorage.getItem(sidebarKey) === "collapsed";
+      saved = localStorage.getItem(sidebarKey);
     } catch {
-      collapsed.value = false;
+      saved = null;
     }
+    collapsed.value = saved ? saved === "collapsed" : window.innerWidth < 1366;
   });
 
   const tabs: { key: Screen; label: string }[] = [
@@ -94,8 +98,9 @@
   const studyUrl =
     "/blog/does-an-ai-agent-know-when-it-cannot-see-all-the-data";
 
+  // Fixed text written here, so v-html is safe.
   const keepText =
-    "smolagents, a popular agent library, quietly replaces a variable name that does not exist with a similar one, and the trace says the step worked. All 11 versions I tested do this.";
+    '<a href="https://huggingface.co/docs/smolagents/index" target="_blank" rel="noopener noreferrer">smolagents</a>, a popular agent library, quietly replaces a variable name that does not exist with a similar one, and the trace says the step worked. All 11 versions I tested do this.';
 
   // The points are fixed text written here, so v-html is safe. A point that
   // is an object with "head" is a small heading inside the list.
@@ -197,7 +202,7 @@
       name: "Hidden rows",
       problem:
         "An AI model cannot tell whether rows the user may not see change its answer. The database system can, but telling the user can reveal those rows.",
-      // No status line: the focus details below give the evidence.
+      status: "Details below.",
       focus: true,
     },
     {
@@ -515,7 +520,7 @@
             <div class="card keep">
               <span class="k">What I keep</span>
               <p>
-                {{ keepText }}
+                <span v-html="keepText"></span>
                 <span class="phone-only">
                   Code and data:
                   <a :href="repoUrl" target="_blank" rel="noopener noreferrer">GitHub</a>,
@@ -597,11 +602,7 @@
               :key="pb.part"
               :class="['problem', { focus: pb.focus }]"
             >
-              <div class="problem-top">
-                <span class="part-tag">{{ pb.part }}</span>
-                <b>{{ pb.name }}</b>
-                <span v-if="pb.focus" class="chip accent">Focus</span>
-              </div>
+              <h2>{{ pb.name }} <span>({{ pb.part }})</span></h2>
               <p>{{ pb.problem }}</p>
               <span v-if="pb.status" class="status">{{ pb.status }}</span>
             </li>
@@ -742,6 +743,7 @@
   --fg: #1c1917;
   --muted: #57534e;
   --faint: #78716c;
+  --text-2: #44403c;
   --line: #e7e5e4;
   --ink: #1c1917;
   --ink-fg: #fafaf9;
@@ -797,11 +799,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .screen {
   min-height: 100%; display: flex; flex-direction: column; gap: clamp(12px, 2vh, 20px);
   padding-block: clamp(18px, 3.2vh, 34px); padding-left: clamp(16px, 3vw, 40px); padding-right: max(16px, env(safe-area-inset-right, 0px), 3vw);
-  max-width: 1240px;
+  max-width: 1400px;
 }
 .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 .head h1 { font-size: 28px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; }
-.head p { color: var(--muted); font-size: 14px; margin-top: 6px; max-width: 96ch; }
+.head p { color: var(--muted); font-size: 14px; margin-top: 6px; }
 .head p b { color: var(--fg); font-weight: 600; }
 .tag { flex: none; font: 500 12px/1 var(--font-mono); padding: 8px 10px; border-radius: 6px; background: var(--sunken); color: var(--muted); border: 1px solid var(--line); white-space: nowrap; }
 
@@ -816,7 +818,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
 /* Story */
 .story { overflow: hidden; }
-.beat { display: grid; grid-template-columns: 116px minmax(0, 0.75fr) minmax(0, 1.9fr); gap: 18px; padding: 13px 18px; border-top: 1px solid var(--line); align-items: start; }
+.beat { display: grid; grid-template-columns: 116px minmax(0, 0.75fr) minmax(0, 1.9fr); gap: 18px; padding: 10px 18px; border-top: 1px solid var(--line); align-items: start; }
 .beat:first-child { border-top: 0; }
 .step { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--muted); padding-top: 1px; }
 .step i { font-style: normal; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 600 11.5px/1 var(--font-mono); background: var(--sunken); color: var(--muted); border: 1px solid var(--line); flex: none; }
@@ -826,9 +828,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .beat.next .step i { background: var(--accent-soft); color: var(--accent); border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
 .beat.next { background: color-mix(in srgb, var(--accent-soft) 45%, var(--card)); }
 .claim { font-size: 15px; line-height: 1.45; font-weight: 500; }
-.proof { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; font-size: 13px; line-height: 1.5; color: var(--muted); font-variant-numeric: tabular-nums; }
+.proof { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.5; color: var(--text-2); font-variant-numeric: tabular-nums; }
 .proof li { position: relative; padding-left: 14px; }
-.proof li::before { content: ""; position: absolute; left: 3px; top: 0.66em; width: 4px; height: 4px; border-radius: 50%; background: var(--faint); }
+.proof li::before { content: ""; position: absolute; left: 3px; top: 0.68em; width: 4px; height: 4px; border-radius: 50%; background: var(--faint); }
 .proof :deep(b) { color: var(--fg); font-weight: 600; }
 .proof :deep(.mono) { font-family: var(--font-mono); font-size: 0.92em; color: var(--fg); }
 .proof li.head { padding-left: 0; margin-top: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--faint); }
@@ -840,18 +842,18 @@ td :deep(.mono) { font-family: var(--font-mono); font-size: 0.92em; }
 .now .card { padding: 13px 18px; display: flex; flex-direction: column; gap: 3px; }
 .now .k { font-size: 12.5px; color: var(--faint); }
 .now .keep p { font-size: 13px; color: var(--muted); line-height: 1.5; }
-.now .keep a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.now .keep a, .now .keep :deep(a) { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
 /* Open problems */
-.problems { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.problem { border: 1px solid var(--line); border-radius: 10px; background: var(--card); padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.problem.focus { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); background: color-mix(in srgb, var(--accent-soft) 45%, var(--card)); box-shadow: inset 3px 0 0 var(--accent); }
-.problem-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.problem-top b { font-size: 14px; font-weight: 600; }
-.problem-top .chip { margin-left: auto; }
-.part-tag { font: 500 10.5px/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); border: 1px solid var(--line); border-radius: 4px; padding: 3px 5px; background: var(--sunken); }
-.problem p { font-size: 13px; line-height: 1.45; color: var(--fg); }
-.problem .status { font-size: 12px; line-height: 1.4; color: var(--faint); margin-top: auto; }
+.problems { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.problem { padding: 12px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.problem + .problem { border-left: 1px solid var(--line); }
+.problem.focus { box-shadow: inset 0 2px 0 var(--accent); }
+.problem h2 { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+.problem h2 span { font-weight: 400; color: var(--faint); }
+.problem p { font-size: 13.5px; line-height: 1.5; color: var(--text-2); }
+.problem .status { font-size: 12.5px; line-height: 1.4; color: var(--faint); margin-top: auto; }
+.problem.focus .status { color: var(--accent); font-weight: 500; }
 
 .head p a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
@@ -910,8 +912,8 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
   .head h1 { font-size: 24px; }
   .head p { font-size: 13px; margin-top: 4px; }
   .proof { gap: 0; }
-  .claim { font-size: 13.5px; line-height: 1.4; }
-  .proof { font-size: 12.5px; line-height: 1.45; }
+  .claim { font-size: 14px; line-height: 1.4; }
+  .proof { font-size: 13.5px; line-height: 1.45; }
   .now .card { padding: 8px 16px; }
   .research { padding: 12px 18px; }
   .research .sentence { font-size: 16px; }
@@ -920,8 +922,8 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
   .beat { padding: 5px 16px; }
   .op { padding: 7px 14px; gap: 5px; }
   .op h2 { font-size: 14px; }
-  .problem { padding: 6px 12px; gap: 1px; }
-  .problem p { font-size: 12.5px; line-height: 1.4; }
+  .problem { padding: 8px 14px; gap: 2px; }
+  .problem p { font-size: 13px; line-height: 1.4; }
   .op th, .op td { padding: 3px 8px; line-height: 1.35; }
   .op table, .op .solution { font-size: 12px; line-height: 1.35; }
   th { padding: 7px 14px; }
@@ -932,6 +934,7 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
   .now { grid-template-columns: minmax(0, 1fr); }
   .op-grid { grid-template-columns: minmax(0, 1fr); }
   .problems { grid-template-columns: minmax(0, 1fr); }
+  .problem + .problem { border-left: 0; border-top: 1px solid var(--line); }
 }
 @media (max-width: 760px) {
   .dat { height: auto; overflow: visible; }

@@ -15,7 +15,7 @@
       description:
         "Close-out of my study of AI data agents: what the public traces do not record, what did not work, why I stopped, and the open problems I am exploring.",
       tags: ["ai-agents", "agent-traces"],
-      href: "/research/data-agent-traces",
+      href: "/research/data-agent-traces#summary",
       contentType: "experiment",
       status: "stopped study, close-out",
     },

@@ -128,7 +128,7 @@
                     class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                     >code</a
                   >; <NuxtLink
-                    to="/research/data-agent-traces"
+                    to="/research/data-agent-traces#summary"
                     class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
                     >close-out page</NuxtLink
                   >). All 11 smolagents versions I tested, from 1.0 to 1.26,
