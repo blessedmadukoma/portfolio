@@ -14,7 +14,7 @@
       {
         name: "description",
         content:
-          "Close-out of my study of AI data agents: what the public traces do not record, what did not work, why I stopped, and what I test next.",
+          "Close-out of my study of AI data agents: what the public traces do not record, what did not work, why I stopped, and the open problem I am exploring.",
       },
     ],
     link: [
@@ -48,57 +48,111 @@
   const keepText =
     "smolagents, a popular agent library, quietly replaces a variable name that does not exist with a similar one, and the trace says the step worked. All 11 versions I tested do this.";
 
-  // The proofs are fixed text written here, so v-html is safe.
+  // The points are fixed text written here, so v-html is safe. A point that
+  // is an object with "head" is a small heading inside the list.
+  type Point = string | { head: string };
+
   const beats: {
     n: number;
     step: string;
     kind: "" | "found" | "fail" | "stop" | "next";
     claim: string;
-    proof: string;
+    points: Point[];
   }[] = [
     {
       n: 1,
       step: "Problem",
       kind: "",
       claim:
-        "Researchers judge AI models by the mistakes recorded in their traces.",
-      proof:
-        "Two well-known test suites for data agents, DataAgentBench and DABstep, publish their traces: <b>273,090 steps</b> in total. I checked whether each recorded mistake was really the model's.",
+        "Researchers compare AI models by counting the mistakes recorded in their traces. I checked whether each recorded mistake was really the model's.",
+      points: [
+        "<b>Data:</b> the published traces of two test suites for data agents, DataAgentBench and DABstep: <b>273,090 steps</b>.",
+        "<b>How I found it:</b> I was building a checker that stops a program before it runs if the program names a file or column that does not exist. To test it, I sorted the recorded failures by cause: the data, the model's program or the harness.",
+        "<b>Why it matters:</b> if the harness causes a mistake and the trace blames the model, the ranking of models is wrong, and developers change the model or the prompt instead of fixing the harness.",
+      ],
     },
     {
       n: 2,
       step: "Finding",
       kind: "found",
       claim:
-        "The harness caused many of the mistakes that the traces show as the model's.",
-      proof:
-        "In DataAgentBench, the harness broke about <b>one in five</b> of the Python programs the models wrote (21.6%). It placed each program inside a text string, which changed some characters, so correct programs failed. The trace still showed the model's program next to the error. Without these failures, the order of the six models by number of mistakes changes: gpt-5.1 falls from <b>second to fourth</b> place.",
+        "In DataAgentBench, the harness caused 36.8% of the failed steps that the traces show as the model's (16,293 of 44,277).",
+      points: [
+        'The models wrote valid Python, for example <span class="mono">print("\\n".join(rows))</span>.',
+        'The harness put the code inside a text string before it ran it. Python turned the <span class="mono">\\n</span> into a real line break, so the step failed with <span class="mono">SyntaxError: unterminated string literal</span>.',
+        "The trace showed the model's valid code next to that error.",
+        "Ranked by failed steps per run (fewest first), gpt-5.1 is <b>second</b> with these failures and <b>fourth</b> without them.",
+      ],
     },
     {
       n: 3,
       step: "What did not work",
       kind: "fail",
       claim:
-        "Stopping a common mistake before it happened made the final answers only slightly better.",
-      proof:
-        "The mistake was a program that asks for a file or column that does not exist. My checker stopped almost all of them: for one model, they fell from <b>3,316 to 2</b>. Yet the share of correct answers rose by only <b>1.4 percentage points</b>, from 55.9% to 57.3%. A simple error message that lists the files and columns that do exist helped about as much; my experiments could not tell the two apart.",
+        "My checker stopped almost every program that named a missing file or column, but the share of correct answers rose only a little.",
+      points: [
+        "<b>Test:</b> QRData, 411 data-analysis questions, each run 10 times, with two models.",
+        "<b>gpt-oss:120b:</b> these mistakes fell from <b>3,316 to 2</b>. Correct answers rose from <b>55.9%&nbsp;to&nbsp;57.3%</b>.",
+        "<b>gemma4:31b:</b> these mistakes fell from <b>343 to 0</b>. Correct answers did not change measurably.",
+        "A plain error message that lists the files and columns that exist helped about as much as the checker. The difference between the two was too small to measure.",
+      ],
     },
     {
       n: 4,
       step: "Why I stopped",
       kind: "stop",
       claim:
-        "My main finding turned out to be a deliberate design choice, others had already published the general idea, and my evidence was too thin.",
-      proof:
-        "DataAgentBench's own instructions say the program \"will be quoted by triple double-quotes and passed as a string\", and its authors confirmed this is deliberate. At least <b>seven</b> studies from 2026 already show that a harness can change an agent's results. My controlled reruns used only <b>two models</b>, and after I fixed the harness, one model's share of correct answers fell by 9.6 percentage points, for a reason I could not find.",
+        "The main finding was a deliberate design, the general idea was already published, and my reruns could not explain one result.",
+      points: [
+        '<b>Deliberate:</b> DataAgentBench\'s prompt says the code "will be quoted by triple double-quotes and passed as a string", and its authors confirmed this is on purpose. The prompt does not say that <span class="mono">\\n</span> becomes a line break.',
+        "<b>Already published:</b> at least seven studies from 2026 show that changing the harness changes agents' scores and rankings.",
+        "<b>Unexplained result:</b> I reran 54 DataAgentBench tasks with the code passed unchanged. The syntax errors fell to zero for both models. gpt-oss:120b's correct answers did not change measurably, but gpt-5-mini's fell from <b>44.7%&nbsp;to&nbsp;35.1%</b>.",
+        // Commented out on 8 Nov 2026 to keep the screen short; the Evidence
+        // tab has the same fact in its "2×2 rerun" row. Uncomment to restore.
+        // "The fix also changed one sentence of the prompt. A test to separate these two causes stopped after 212 runs, when my API credit ran out.",
+      ],
     },
     {
       n: 5,
-      step: "Next",
+      step: "Open problem I am exploring",
       kind: "next",
       claim:
-        "I will test whether the system around an agent can warn it when hidden rows change its answer, and reveal only a small, measured amount about those rows.",
-      proof: `In my <a href="${studyUrl}">earlier study</a>, access rules hid some rows of a database. A warning based only on the access rule revealed nothing, but it also flagged <b>45%</b> of answers that were in fact complete. An exact warning was always right, but a short script could use it to work out totals the user may not see, with 17 to 23 questions for each total. Next, I build warnings between these two and measure both costs: false alarms and leaked information.`,
+        "From my hidden-rows study: an AI model cannot tell whether rows the user may not see change its answer. The database system can, because it holds both the access rule and the data, but telling the user can reveal those rows.",
+      points: [
+        `<b>The evidence:</b> in my <a href="${studyUrl}">hidden-rows study</a> (five BIRD databases under PostgreSQL row-level security), three cheaper models gave partial answers as complete in 70% to 95% of the cases where hidden rows changed the answer.`,
+        "<b>Why the model cannot solve it alone:</b> it sees only the visible rows. On a 40-pair sample, Claude Opus never hid a partial answer, but it doubted 8 of 16 complete answers.",
+        "<b>Check A</b> uses only the SQL query and the access rule, never the hidden rows. It reveals nothing about them, but it labelled 633 of 1,419 complete answers (45%) as possibly incomplete.",
+        "<b>Check B</b> runs the query on all rows. It is always right about whether the hidden rows change the result, but a script that read only its yes-or-no output recovered hidden totals in 17&nbsp;to&nbsp;23 queries each, for example the bank's 4,500 accounts when the user sees 778.",
+        '<b>A possible solution:</b> checks between A and B that write the scope into the final answer, for example "778 accounts in your region; other regions are hidden". They would be measured by two costs: complete answers labelled incomplete, and how much a script can learn about the hidden rows.',
+        { head: "How this differs from related ideas" },
+        "<b>Non-Truman access control</b> (Rizvi et al., 2004): rejects a SQL query when hidden rows could change its result, so the user gets no answer. Here, the agent still answers, and the answer states its scope.",
+        "<b>Query auditing</b> (Kenthapadi et al., 2005): decides whether to answer or refuse each query so that no private value can be worked out, and proves that a refusal computed from the hidden data leaks. Here, the decision is a scope label on the agent's final answer, which can combine several queries. The same leak applies, so it is measured.",
+        "<b>Differential privacy:</b> adds random noise to answers to limit what anyone can learn about one record. Here, the answer for the visible rows must stay exact. Noise could be added to the scope label only, as one possible check between A and B.",
+        "<b>Access-control checks for text-to-SQL</b> (Fei et al., 2026): test whether the generated SQL stays inside the data a role may read. Here, the SQL is allowed; the question is whether the answer says that it is partial.",
+        '<b>Model abstention</b> (training a model to say "I don\'t know"): changes how the model writes. Here, the fact that decides the answer is in the hidden rows, which the model cannot see.',
+        "<b>Partial Evidence Bench</b> (Tallam, 2026): measures the same failure for documents. Here, the data are in databases, and what the scope label reveals is measured.",
+      ],
+    },
+  ];
+
+  const parts: { name: string; question: string; status: string }[] = [
+    {
+      name: "Scope",
+      question:
+        "Does the answer say which data it covered, including rows the user may not see?",
+      status: "Studied in my hidden-rows study, September 2026 (row 5).",
+    },
+    {
+      name: "Evidence",
+      question:
+        "Does the record of how an answer was made show what actually ran?",
+      status: "Studied here (rows 1 to 4).",
+    },
+    {
+      name: "Change",
+      question:
+        "Which answers already given become wrong when data, definitions or access rules change?",
+      status: "Planned; no result yet.",
     },
   ];
 
@@ -189,7 +243,7 @@
       setup: "BIRD, 5 databases, 131 affected questions, 3 models",
       result:
         "Partial answers shown as complete: 70–95%. Opus (40 pairs): 0 of 16, but doubted 8 of 16 complete",
-      verdict: "next study",
+      verdict: "open problem",
       chip: "accent",
     },
   ];
@@ -245,19 +299,15 @@
         <div class="info">
           <div>
             <div class="k">Status</div>
-            <div class="dotline">Paper stopped on 1 Nov 2026</div>
-          </div>
-          <div>
-            <div class="k">What I keep</div>
-            <div class="v">{{ keepText }}</div>
+            <div class="dotline">Paper stopped · 1 Nov 2026</div>
           </div>
           <div>
             <div class="k">Code and data</div>
-            <div class="v mono">
-              v2.2.0 ·
+            <div class="v">
               <a :href="repoUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
               ·
               <a :href="zenodoUrl" target="_blank" rel="noopener noreferrer">Zenodo</a>
+              <span class="ver">v2.2.0</span>
             </div>
           </div>
           <div>
@@ -297,7 +347,14 @@
             >
               <span class="step"><i>{{ b.n }}</i>{{ b.step }}</span>
               <p class="claim">{{ b.claim }}</p>
-              <p class="proof" v-html="b.proof"></p>
+              <ul class="proof">
+                <li
+                  v-for="(pt, i) in b.points"
+                  :key="i"
+                  :class="{ head: typeof pt !== 'string' }"
+                  v-html="typeof pt === 'string' ? pt : pt.head"
+                ></li>
+              </ul>
             </div>
           </div>
 
@@ -309,14 +366,39 @@
                 answers complete and up to date, or clear about what they lack,
                 and at what cost.
               </p>
+              <p class="plain">
+                <span>In plain words:</span> when an AI agent answers a question
+                from data, I study how the system can make the answer say when
+                it is incomplete or out of date, and what that costs.
+              </p>
+              <span class="k parts-k">Three parts of the question</span>
+              <div class="parts">
+                <div v-for="pt in parts" :key="pt.name" class="part">
+                  <b>{{ pt.name }}</b>
+                  <p>{{ pt.question }}</p>
+                  <span>{{ pt.status }}</span>
+                </div>
+              </div>
+              <p class="plain connect">
+                <span>How the parts connect:</span> Scope and Change ask the
+                same question about two versions of the data: all rows against
+                the rows the user sees, and today's data against the data the
+                answer used. Both can be decided by comparing the rows an answer
+                read with the rows that differ. Evidence supplies the record of
+                what each answer read. In all three, the fact that decides
+                whether an answer is right is outside the model, so the system
+                must supply it.
+              </p>
             </div>
-            <!-- Phones: the sidebar card is hidden, so its finding shows here. -->
-            <div class="card keep keep-mobile">
+            <div class="card keep">
               <span class="k">What I keep</span>
               <p>
-                {{ keepText }} Code and data:
-                <a :href="repoUrl" target="_blank" rel="noopener noreferrer">GitHub</a>,
-                <a :href="zenodoUrl" target="_blank" rel="noopener noreferrer">Zenodo</a>.
+                {{ keepText }}
+                <span class="phone-only">
+                  Code and data:
+                  <a :href="repoUrl" target="_blank" rel="noopener noreferrer">GitHub</a>,
+                  <a :href="zenodoUrl" target="_blank" rel="noopener noreferrer">Zenodo</a>.
+                </span>
               </p>
             </div>
           </div>
@@ -334,8 +416,8 @@
             <div>
               <h1 id="h-evidence">Evidence</h1>
               <p>
-                How each number on the Summary was measured. "pts" means
-                percentage points; "CI" is the 95% confidence interval.
+                How each number on the Summary was measured. "pts" is the
+                gap between two percentages: 55.9% to 57.3% is +1.4 pts; "CI" is the 95% confidence interval.
                 Sources: paper draft (13 Oct 2026), experiment log (1 Nov
                 2026), hidden-rows study (26 Sep 2026).
               </p>
@@ -444,10 +526,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .nav button svg { width: 16px; height: 16px; flex: none; }
 .nav button:hover { color: var(--fg); background: var(--sunken); }
 .nav button[aria-current="page"] { background: var(--card); border-color: var(--line); color: var(--fg); font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-.info { margin-top: auto; border: 1px solid var(--line); background: var(--card); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.info { margin-top: auto; border: 1px solid var(--line); background: var(--card); border-radius: 10px; padding: 14px 12px; display: flex; flex-direction: column; gap: 14px; }
 .info .k { font: 500 10.5px/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
 .info .v { font-size: 13px; }
-.info .v.mono { font-size: 12.5px; }
+.info .ver { margin-left: 6px; font: 500 11.5px/1 var(--font-mono); color: var(--faint); }
 .info a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 .info a.home { color: inherit; text-decoration: none; }
 .info a.home:hover { color: var(--accent); }
@@ -477,7 +559,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
 /* Story */
 .story { overflow: hidden; }
-.beat { display: grid; grid-template-columns: 132px minmax(0, 0.75fr) minmax(0, 1.5fr); gap: 18px; padding: 13px 18px; border-top: 1px solid var(--line); align-items: start; }
+.beat { display: grid; grid-template-columns: 124px minmax(0, 0.9fr) minmax(0, 1.65fr); gap: 18px; padding: 13px 18px; border-top: 1px solid var(--line); align-items: start; }
 .beat:first-child { border-top: 0; }
 .step { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--muted); padding-top: 1px; }
 .step i { font-style: normal; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 600 11.5px/1 var(--font-mono); background: var(--sunken); color: var(--muted); border: 1px solid var(--line); flex: none; }
@@ -487,9 +569,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .beat.next .step i { background: var(--accent-soft); color: var(--accent); border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
 .beat.next { background: color-mix(in srgb, var(--accent-soft) 45%, var(--card)); }
 .claim { font-size: 15px; line-height: 1.45; font-weight: 500; }
-.proof { font-size: 13px; line-height: 1.5; color: var(--muted); font-variant-numeric: tabular-nums; }
+.proof { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; font-size: 13px; line-height: 1.5; color: var(--muted); font-variant-numeric: tabular-nums; }
+.proof li { position: relative; padding-left: 14px; }
+.proof li::before { content: ""; position: absolute; left: 3px; top: 0.66em; width: 4px; height: 4px; border-radius: 50%; background: var(--faint); }
 .proof :deep(b) { color: var(--fg); font-weight: 600; }
-.proof :deep(.mono) { color: var(--fg); }
+.proof :deep(.mono) { font-family: var(--font-mono); font-size: 0.92em; color: var(--fg); }
+.proof li.head { padding-left: 0; margin-top: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--faint); }
+.proof li.head::before { display: none; }
 .proof :deep(a) { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 td :deep(.mono) { font-family: var(--font-mono); font-size: 0.92em; }
 
@@ -498,9 +584,18 @@ td :deep(.mono) { font-family: var(--font-mono); font-size: 0.92em; }
 .now .k { font-size: 12.5px; color: var(--faint); }
 .now .lead { border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; }
 .now .lead p { font-size: 15px; font-weight: 500; line-height: 1.45; }
+.now .lead p.plain { margin-top: 4px; font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--muted); }
+.now .lead p.plain span { color: var(--faint); font-weight: 500; }
 .now .keep p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 .now .keep a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
-.now .keep-mobile { display: none; }
+.now .parts-k { margin-top: 10px; }
+.parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 2px; }
+.part { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--sunken); display: flex; flex-direction: column; gap: 3px; }
+.part b { font-size: 13.5px; font-weight: 600; }
+.now .lead .part p { font-size: 13px; font-weight: 400; line-height: 1.45; color: var(--fg); }
+.part span { font-size: 12px; color: var(--faint); }
+.now .lead p.connect { margin-top: 10px; }
+.phone-only { display: none; }
 
 /* Evidence tables */
 .sec-title { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
@@ -521,10 +616,12 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
   .head h1 { font-size: 24px; }
   .head p { font-size: 13px; margin-top: 4px; }
   .beat { padding: 8px 16px; }
+  .proof { gap: 1px; }
   .claim { font-size: 13.5px; line-height: 1.4; }
   .proof { font-size: 12.5px; line-height: 1.45; }
-  .now .card { padding: 9px 16px; }
+  .now .card { padding: 8px 16px; }
   .now .lead p { font-size: 14px; }
+  .now .lead p.plain { margin-top: 2px; font-size: 12.5px; line-height: 1.45; }
   th { padding: 7px 14px; }
   td { padding: 4px 14px; line-height: 1.4; }
 }
@@ -534,7 +631,8 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
 }
 @media (max-width: 760px) {
   .dat { height: auto; overflow: visible; }
-  .now .keep-mobile { display: flex; }
+  .phone-only { display: inline; }
+  .parts { grid-template-columns: minmax(0, 1fr); }
   .shell { grid-template-columns: minmax(0, 1fr); height: auto; }
   .side { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px; border-right: 0; border-bottom: 1px solid var(--line); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px; }
   .nav { flex-direction: row; margin-left: auto; }
