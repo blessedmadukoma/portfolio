@@ -25,18 +25,43 @@
     ],
   });
 
-  type Screen = "summary" | "evidence";
+  type Screen = "summary" | "research" | "open" | "evidence";
 
   const screen = ref<Screen>("summary");
   const mainEl = ref<HTMLElement | null>(null);
 
+  // Each screen except the Summary has a link of its own, for example
+  // /research/data-agent-traces#open-problem.
+  const hashFor: Record<Screen, string> = {
+    summary: "",
+    research: "my-research",
+    open: "open-problem",
+    evidence: "evidence",
+  };
+
   function show(name: Screen) {
     screen.value = name;
     mainEl.value?.scrollTo({ top: 0 });
+    const hash = hashFor[name];
+    history.replaceState(
+      history.state,
+      "",
+      hash ? `#${hash}` : location.pathname + location.search,
+    );
   }
+
+  onMounted(() => {
+    const hash = location.hash.slice(1);
+    const match = (Object.keys(hashFor) as Screen[]).find(
+      (k) => hashFor[k] !== "" && hashFor[k] === hash,
+    );
+    if (match) screen.value = match;
+  });
 
   const tabs: { key: Screen; label: string }[] = [
     { key: "summary", label: "Summary" },
+    { key: "research", label: "My research" },
+    { key: "open", label: "Open problem" },
     { key: "evidence", label: "Evidence" },
   ];
 
@@ -112,27 +137,6 @@
         // "The fix also changed one sentence of the prompt. A test to separate these two causes stopped after 212 runs, when my API credit ran out.",
       ],
     },
-    {
-      n: 5,
-      step: "Open problem I am exploring",
-      kind: "next",
-      claim:
-        "From my hidden-rows study: an AI model cannot tell whether rows the user may not see change its answer. The database system can, because it holds both the access rule and the data, but telling the user can reveal those rows.",
-      points: [
-        `<b>The evidence:</b> in my <a href="${studyUrl}">hidden-rows study</a> (five BIRD databases under PostgreSQL row-level security), three cheaper models gave partial answers as complete in 70% to 95% of the cases where hidden rows changed the answer.`,
-        "<b>Why the model cannot solve it alone:</b> it sees only the visible rows. On a 40-pair sample, Claude Opus never hid a partial answer, but it doubted 8 of 16 complete answers.",
-        "<b>Check A</b> uses only the SQL query and the access rule, never the hidden rows. It reveals nothing about them, but it labelled 633 of 1,419 complete answers (45%) as possibly incomplete.",
-        "<b>Check B</b> runs the query on all rows. It is always right about whether the hidden rows change the result, but a script that read only its yes-or-no output recovered hidden totals in 17&nbsp;to&nbsp;23 queries each, for example the bank's 4,500 accounts when the user sees 778.",
-        '<b>A possible solution:</b> checks between A and B that write the scope into the final answer, for example "778 accounts in your region; other regions are hidden". They would be measured by two costs: complete answers labelled incomplete, and how much a script can learn about the hidden rows.',
-        { head: "How this differs from related ideas" },
-        "<b>Non-Truman access control</b> (Rizvi et al., 2004): rejects a SQL query when hidden rows could change its result, so the user gets no answer. Here, the agent still answers, and the answer states its scope.",
-        "<b>Query auditing</b> (Kenthapadi et al., 2005): decides whether to answer or refuse each query so that no private value can be worked out, and proves that a refusal computed from the hidden data leaks. Here, the decision is a scope label on the agent's final answer, which can combine several queries. The same leak applies, so it is measured.",
-        "<b>Differential privacy:</b> adds random noise to answers to limit what anyone can learn about one record. Here, the answer for the visible rows must stay exact. Noise could be added to the scope label only, as one possible check between A and B.",
-        "<b>Access-control checks for text-to-SQL</b> (Fei et al., 2026): test whether the generated SQL stays inside the data a role may read. Here, the SQL is allowed; the question is whether the answer says that it is partial.",
-        '<b>Model abstention</b> (training a model to say "I don\'t know"): changes how the model writes. Here, the fact that decides the answer is in the hidden rows, which the model cannot see.',
-        "<b>Partial Evidence Bench</b> (Tallam, 2026): measures the same failure for documents. Here, the data are in databases, and what the scope label reveals is measured.",
-      ],
-    },
   ];
 
   const parts: { name: string; question: string; status: string }[] = [
@@ -140,19 +144,85 @@
       name: "Scope",
       question:
         "Does the answer say which data it covered, including rows the user may not see?",
-      status: "Studied in my hidden-rows study, September 2026 (row 5).",
+      status: "Studied in my hidden-rows study, September 2026 (Open problem tab).",
     },
     {
       name: "Evidence",
       question:
         "Does the record of how an answer was made show what actually ran?",
-      status: "Studied here (rows 1 to 4).",
+      status: "Studied in the paper I stopped (Summary tab).",
     },
     {
       name: "Change",
       question:
         "Which answers already given become wrong when data, definitions or access rules change?",
       status: "Planned; no result yet.",
+    },
+  ];
+
+  // Open problem screen. Fixed text written here, so v-html is safe.
+  const openPoints: string[] = [
+    "<b>The evidence:</b> on five BIRD databases under PostgreSQL row-level security, three cheaper models gave partial answers as complete in 70% to 95% of the cases where hidden rows changed the answer.",
+    "<b>Why the model cannot solve it alone:</b> it sees only the visible rows. On a 40-pair sample, Claude Opus never hid a partial answer, but it doubted 8 of 16 complete answers.",
+  ];
+
+  const checkRows: { label: string; a: string; b: string }[] = [
+    {
+      label: "Uses",
+      a: "The SQL query and the access rule, never the hidden rows",
+      b: "The query, run on all rows",
+    },
+    {
+      label: "Mistakes",
+      a: "Labelled 633 of 1,419 complete answers (45%) as possibly incomplete",
+      b: "None: always right about whether the hidden rows change the result",
+    },
+    {
+      label: "Reveals",
+      a: "Nothing about the hidden rows",
+      b: "A script that read only its yes-or-no output recovered hidden totals in 17&nbsp;to&nbsp;23 queries each, such as the bank's 4,500 accounts when the user sees 778",
+    },
+  ];
+
+  const solution =
+    '<b>A possible solution:</b> checks between A and B that write the scope into the final answer, for example "778 accounts in your region; other regions are hidden". They would be measured by two costs: complete answers labelled incomplete, and how much a script can learn about the hidden rows.';
+
+  const related: { idea: string; cite: string; does: string; here: string }[] = [
+    {
+      idea: "Non-Truman access control",
+      cite: "Rizvi et al., 2004",
+      does: "Rejects a SQL query when hidden rows could change its result, so the user gets no answer.",
+      here: "The agent still answers, and the answer states its scope.",
+    },
+    {
+      idea: "Query auditing",
+      cite: "Kenthapadi et al., 2005",
+      does: "Answers or refuses each query so that no private value can be worked out, and proves that a refusal computed from the hidden data leaks.",
+      here: "The decision is a scope label on the agent's final answer, which can combine several queries. The same leak applies, so it is measured.",
+    },
+    {
+      idea: "Differential privacy",
+      cite: "",
+      does: "Adds random noise to answers to limit what anyone can learn about one record.",
+      here: "The answer for the visible rows must stay exact. Noise could be added to the scope label only, as one possible check between A and B.",
+    },
+    {
+      idea: "Access-control checks for text-to-SQL",
+      cite: "Fei et al., 2026",
+      does: "Tests whether the generated SQL stays inside the data a role may read.",
+      here: "The SQL is allowed; the question is whether the answer says that it is partial.",
+    },
+    {
+      idea: "Model abstention",
+      cite: 'Training a model to say "I don\'t know"',
+      does: "Changes how the model writes.",
+      here: "The fact that decides the answer is in the hidden rows, which the model cannot see.",
+    },
+    {
+      idea: "Partial Evidence Bench",
+      cite: "Tallam, 2026",
+      does: "Measures the same failure for documents.",
+      here: "The data are in databases, and what the scope label reveals is measured.",
     },
   ];
 
@@ -285,6 +355,16 @@
                 <path d="M16 17H8" />
                 <path d="M10 9H8" />
               </template>
+              <template v-else-if="t.key === 'research'">
+                <circle cx="12" cy="12" r="9" />
+                <circle cx="12" cy="12" r="5" />
+                <circle cx="12" cy="12" r="1" />
+              </template>
+              <template v-else-if="t.key === 'open'">
+                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                <path d="M9 18h6" />
+                <path d="M10 22h4" />
+              </template>
               <template v-else>
                 <path d="m3 17 2 2 4-4" />
                 <path d="m3 7 2 2 4-4" />
@@ -359,37 +439,6 @@
           </div>
 
           <div class="now">
-            <div class="card lead">
-              <span class="k">My research in one sentence</span>
-              <p>
-                I study which changes to AI-powered data systems make their
-                answers complete and up to date, or clear about what they lack,
-                and at what cost.
-              </p>
-              <p class="plain">
-                <span>In plain words:</span> when an AI agent answers a question
-                from data, I study how the system can make the answer say when
-                it is incomplete or out of date, and what that costs.
-              </p>
-              <span class="k parts-k">Three parts of the question</span>
-              <div class="parts">
-                <div v-for="pt in parts" :key="pt.name" class="part">
-                  <b>{{ pt.name }}</b>
-                  <p>{{ pt.question }}</p>
-                  <span>{{ pt.status }}</span>
-                </div>
-              </div>
-              <p class="plain connect">
-                <span>How the parts connect:</span> Scope and Change ask the
-                same question about two versions of the data: all rows against
-                the rows the user sees, and today's data against the data the
-                answer used. Both can be decided by comparing the rows an answer
-                read with the rows that differ. Evidence supplies the record of
-                what each answer read. In all three, the fact that decides
-                whether an answer is right is outside the model, so the system
-                must supply it.
-              </p>
-            </div>
             <div class="card keep">
               <span class="k">What I keep</span>
               <p>
@@ -400,6 +449,127 @@
                   <a :href="zenodoUrl" target="_blank" rel="noopener noreferrer">Zenodo</a>.
                 </span>
               </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- MY RESEARCH -->
+        <section
+          v-show="screen === 'research'"
+          id="screen-research"
+          class="screen"
+          role="tabpanel"
+          aria-labelledby="h-research"
+        >
+          <div class="head">
+            <div>
+              <h1 id="h-research">My research</h1>
+            </div>
+          </div>
+
+          <div class="card research">
+            <span class="k">My research in one sentence</span>
+            <p class="sentence">
+              I study which changes to AI-powered data systems make their
+              answers complete and up to date, or clear about what they lack,
+              and at what cost.
+            </p>
+            <p class="plain">
+              <span>In plain words:</span> when an AI agent answers a question
+              from data, I study how the system can make the answer say when it
+              is incomplete or out of date, and what that costs.
+            </p>
+          </div>
+
+          <div class="sec-title"><h2>Three parts of the question</h2></div>
+          <div class="parts">
+            <div v-for="pt in parts" :key="pt.name" class="part">
+              <b>{{ pt.name }}</b>
+              <p>{{ pt.question }}</p>
+              <span>{{ pt.status }}</span>
+            </div>
+          </div>
+
+          <div class="card connect">
+            <span class="k">How the parts connect</span>
+            <p>
+              Scope and Change ask the same question about two versions of the
+              data: all rows against the rows the user sees, and today's data
+              against the data the answer used. Both can be decided by comparing
+              the rows an answer read with the rows that differ. Evidence
+              supplies the record of what each answer read. In all three, the
+              fact that decides whether an answer is right is outside the model,
+              so the system must supply it.
+            </p>
+          </div>
+        </section>
+
+        <!-- OPEN PROBLEM -->
+        <section
+          v-show="screen === 'open'"
+          id="screen-open"
+          class="screen"
+          role="tabpanel"
+          aria-labelledby="h-open"
+        >
+          <div class="head">
+            <div>
+              <h1 id="h-open">The open problem I am exploring</h1>
+              <p>
+                From my <a :href="studyUrl">hidden-rows study</a>: an AI model
+                cannot tell whether rows the user may not see change its answer.
+                The database system can, because it holds both the access rule
+                and the data, but telling the user can reveal those rows.
+              </p>
+            </div>
+          </div>
+
+          <div class="op-grid">
+            <div class="card op">
+              <h2>What I found and tested</h2>
+              <ul class="proof">
+                <li v-for="(pt, i) in openPoints" :key="i" v-html="pt"></li>
+              </ul>
+              <div class="box">
+                <table class="checks">
+                  <thead>
+                    <tr>
+                      <th scope="col"><span class="sr-only">Property</span></th>
+                      <th scope="col">Check A</th>
+                      <th scope="col">Check B</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="r in checkRows" :key="r.label">
+                      <th scope="row">{{ r.label }}</th>
+                      <td v-html="r.a"></td>
+                      <td v-html="r.b"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="solution" v-html="solution"></p>
+            </div>
+            <div class="card op">
+              <h2>How this differs from related ideas</h2>
+              <div class="box">
+                <table class="related">
+                  <thead>
+                    <tr>
+                      <th scope="col">Idea</th>
+                      <th scope="col">What it does</th>
+                      <th scope="col">What is different here</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="r in related" :key="r.idea">
+                      <td data-label="Idea"><b>{{ r.idea }}</b><span v-if="r.cite" class="sub">{{ r.cite }}</span></td>
+                      <td data-label="What it does">{{ r.does }}</td>
+                      <td data-label="What is different here">{{ r.here }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </section>
@@ -559,7 +729,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
 /* Story */
 .story { overflow: hidden; }
-.beat { display: grid; grid-template-columns: 124px minmax(0, 0.9fr) minmax(0, 1.65fr); gap: 18px; padding: 13px 18px; border-top: 1px solid var(--line); align-items: start; }
+.beat { display: grid; grid-template-columns: 116px minmax(0, 0.75fr) minmax(0, 1.9fr); gap: 18px; padding: 13px 18px; border-top: 1px solid var(--line); align-items: start; }
 .beat:first-child { border-top: 0; }
 .step { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--muted); padding-top: 1px; }
 .step i { font-style: normal; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 600 11.5px/1 var(--font-mono); background: var(--sunken); color: var(--muted); border: 1px solid var(--line); flex: none; }
@@ -582,19 +752,35 @@ td :deep(.mono) { font-family: var(--font-mono); font-size: 0.92em; }
 .now { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
 .now .card { padding: 13px 18px; display: flex; flex-direction: column; gap: 3px; }
 .now .k { font-size: 12.5px; color: var(--faint); }
-.now .lead { border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; }
-.now .lead p { font-size: 15px; font-weight: 500; line-height: 1.45; }
-.now .lead p.plain { margin-top: 4px; font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--muted); }
-.now .lead p.plain span { color: var(--faint); font-weight: 500; }
 .now .keep p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 .now .keep a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
-.now .parts-k { margin-top: 10px; }
-.parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 2px; }
-.part { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--sunken); display: flex; flex-direction: column; gap: 3px; }
-.part b { font-size: 13.5px; font-weight: 600; }
-.now .lead .part p { font-size: 13px; font-weight: 400; line-height: 1.45; color: var(--fg); }
-.part span { font-size: 12px; color: var(--faint); }
-.now .lead p.connect { margin-top: 10px; }
+
+/* Open problem */
+.head p a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.research { padding: 16px 20px; border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; display: flex; flex-direction: column; gap: 6px; }
+.research .k, .connect .k, .op .k { font-size: 12.5px; color: var(--faint); }
+.research .sentence { font-size: 18px; font-weight: 500; line-height: 1.45; letter-spacing: -0.005em; }
+.research .plain { font-size: 14.5px; line-height: 1.55; color: var(--muted); }
+.research .plain span { color: var(--faint); font-weight: 500; }
+.connect { padding: 14px 20px; display: flex; flex-direction: column; gap: 4px; }
+.connect p { font-size: 14px; line-height: 1.6; color: var(--fg); max-width: 110ch; }
+.parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.part { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--card); display: flex; flex-direction: column; gap: 6px; }
+.part b { font-size: 15px; font-weight: 600; }
+.part p { font-size: 14px; line-height: 1.5; color: var(--fg); }
+.part span { font-size: 12.5px; color: var(--faint); margin-top: auto; }
+.op-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 14px; align-items: start; }
+.op { padding: 13px 18px; display: flex; flex-direction: column; gap: 10px; }
+.op h2 { font-size: 15px; font-weight: 600; }
+.op .box { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.op table { min-width: 0; font-size: 12.5px; }
+.op th, .op td { padding: 6px 10px; }
+.op tbody th { width: 76px; text-align: left; vertical-align: top; font: 600 12px/1.45 var(--font-sans); letter-spacing: 0; text-transform: none; color: var(--muted); background: var(--sunken); border-bottom: 1px solid var(--line); }
+.op tbody tr:last-child th { border-bottom: 0; }
+.op .related td:first-child { width: 30%; }
+.op .solution { font-size: 13px; line-height: 1.5; color: var(--muted); }
+.op .solution :deep(b) { color: var(--fg); font-weight: 600; }
 .phone-only { display: none; }
 
 /* Evidence tables */
@@ -612,27 +798,40 @@ td .sub { display: block; font-size: 12px; color: var(--faint); }
 
 /* Short laptop or projector screens */
 @media (min-width: 761px) and (max-height: 800px) {
-  .screen { gap: 10px; padding-block: 14px; }
+  .screen { gap: 8px; padding-block: 10px; }
   .head h1 { font-size: 24px; }
   .head p { font-size: 13px; margin-top: 4px; }
-  .beat { padding: 8px 16px; }
-  .proof { gap: 1px; }
+  .proof { gap: 0; }
   .claim { font-size: 13.5px; line-height: 1.4; }
   .proof { font-size: 12.5px; line-height: 1.45; }
   .now .card { padding: 8px 16px; }
-  .now .lead p { font-size: 14px; }
-  .now .lead p.plain { margin-top: 2px; font-size: 12.5px; line-height: 1.45; }
+  .research { padding: 12px 18px; }
+  .research .sentence { font-size: 16px; }
+  .research .plain, .part p, .connect p { font-size: 13px; line-height: 1.5; }
+  .part { padding: 10px 14px; gap: 4px; }
+  .beat { padding: 5px 16px; }
+  .op { padding: 8px 16px; gap: 6px; }
+  .op th, .op td { padding: 4px 8px; }
+  .op table, .op .solution { font-size: 12px; line-height: 1.4; }
   th { padding: 7px 14px; }
   td { padding: 4px 14px; line-height: 1.4; }
 }
 @media (max-width: 1100px) {
   .beat { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .now { grid-template-columns: minmax(0, 1fr); }
+  .op-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
   .dat { height: auto; overflow: visible; }
   .phone-only { display: inline; }
   .parts { grid-template-columns: minmax(0, 1fr); }
+  .nav { flex-wrap: wrap; }
+  .op .related thead { display: none; }
+  .op .related tr { display: block; border-bottom: 1px solid var(--line); padding: 6px 0; }
+  .op .related tr:last-child { border-bottom: 0; }
+  .op .related td { display: block; width: auto; border: 0; padding: 2px 10px; }
+  .op .related td:first-child { width: auto; }
+  .op .related td + td::before { content: attr(data-label) ": "; color: var(--faint); font-weight: 500; }
   .shell { grid-template-columns: minmax(0, 1fr); height: auto; }
   .side { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px; border-right: 0; border-bottom: 1px solid var(--line); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px; }
   .nav { flex-direction: row; margin-left: auto; }
