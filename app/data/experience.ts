@@ -13,7 +13,7 @@ export const WORK_EXPERIENCE = [
     workRoles: [
       "Traced 37% of DataAgentBench’s recorded agent failures (16,293 of 44,277) to its harness, not its six LLMs (including GPT-5.2 and Gemini 3 Pro); removing them reorders the models by failed steps. With Prof. Prasenjit Mitra, analysed 283,435 agent steps across six benchmarks. <a href='https://github.com/blessedmadukoma/data-agent-traces' target='_blank' style='text-decoration: underline; color: #60a5fa;'>Code</a>.",
       "Built a static guardrail in Python (ast) that blocks agent code naming missing files, columns or keys before it runs, with zero false blocks on 8,517 working steps from three unseen benchmarks; on DABstep, a standard linter (pyflakes) flags only 6% of the errors it stops.",
-      "Built a sandboxed agent harness (no network, read-only data) and ran 36,990 pre-registered runs: for gpt-oss-120b, the guardrail cut errors that ran from 3,316 to 2 and raised accuracy by 1.44 points; no detectable gain for gemma4-31b or over a cheaper error message listing valid names.",
+      "Built a sandboxed agent harness (no network, read-only data) and ran 36,990 pre-registered runs: for gpt-oss-120b, the guardrail cut reference errors from 3,316 to 2 and raised accuracy by 1.44 points. It gave no detectable gain for gemma4-31b, or over a cheaper error message that lists valid names.",
       "Wrote two policy documents for Rwanda’s Ministry of Sports (MINISPORTS): an action plan to close the national sports talent gap, and a feasibility study of sports prediction systems.",
     ],
   },
@@ -35,7 +35,7 @@ export const WORK_EXPERIENCE = [
   },
   {
     company: "CMU-Africa: Spatial and Language Technologies (SaLT) Lab",
-    position: "Graduate Research Assistant",
+    position: "Graduate Research Assistant (Part-time)",
     startDate: "Sep 2025",
     endDate: "May 2026",
     // description:
@@ -70,23 +70,23 @@ export const WORK_EXPERIENCE = [
   },
   {
     company: "Huza HR",
-    position: "Software Engineer",
+    position: "Software Engineer (MS Internship)",
     startDate: "Jun 2025",
     endDate: "Sep 2025",
     description:
-      "Joined as a software engineer through the 3-month industry placement my MSc requires: wrote and reviewed code across the ATS recruitment platform, and built its email-notification system and core recruitment pages.",
+      "Joined as a software engineer through the 3-month industry placement my MS requires: wrote and reviewed code across the ATS recruitment platform, and built its email-notification system and core recruitment pages.",
     location: "Kigali, Rwanda",
     imageURL: "/logos/svgs/huza.svg",
     link: "https://www.huzahr.com",
     workRoles: [
-      "Joined as a software engineer through the 3-month industry placement my MSc requires; wrote production code and reviewed teammates’ code across the ATS recruitment platform.",
+      "Joined as a software engineer through the 3-month industry placement my MS requires; wrote production code and reviewed teammates’ code across the ATS recruitment platform.",
       "Built the email-notification system (candidate, recruiter and internal templates with delivery tracking) behind the company’s first fully digital applicant-tracking workflow.",
       "Built the core recruitment pages in Next.js and backend services in Node.js for the <a href='https://dev.jobs.huzahr.com/' target='_blank' style='text-decoration: underline; color: #60a5fa;'>ATS recruitment platform</a>.",
     ],
   },
   {
     company: "The UPANZI Network",
-    position: "Software Engineer",
+    position: "Software Engineer (Part-time)",
     startDate: "Sep 2024",
     endDate: "Dec 2024",
     description:
@@ -138,12 +138,12 @@ export const WORK_EXPERIENCE = [
 export const EDUCATION = [
   {
     institution: "Carnegie Mellon University",
-    degree: "MSc, Information Technology",
+    degree: "MS, Information Technology",
     grade: "3.93/4.0 GPA",
     startDate: "Aug 2024",
     endDate: "May 2026",
     description: [
-      "Completed a 2-year MSc program specializing in Software Engineering, Big Data, and Applied Machine Learning at CMU Africa's campus in Rwanda.",
+      "Completed a 2-year MS program specializing in Software Engineering, Big Data, and Applied Machine Learning at CMU Africa's campus in Rwanda.",
       "Notable courses: Machine Learning in Production (MLiP), Engineering Data-Intensive Scalable Systems (EDISS), Data Structures & Algorithms (DSA), Programming for Data Analytics (PDA), Data, Inference, and Applied Machine Learning (DIAML).",
       "Served as Chairman of the Academic Innovation Sub-Committee within the student Research Committee, contributing to academic and research initiatives across the cohort.",
       "Conducted graduate research under Prof. Prasenjit Mitra, building an anomaly-detection platform with eight detection methods over 1.6 million athletics performances. The full paper was published at IEEE SDS 2026.",
