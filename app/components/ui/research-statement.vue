@@ -92,6 +92,31 @@
 
             <section>
               <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                Current Exploration: Incorrect Definitions
+              </h3>
+              <p class="text-zinc-800 dark:text-zinc-300">
+                A semantic layer tells an agent what database codes and business
+                terms mean. I am exploring what happens when one of those
+                definitions is wrong, and which checks can catch the resulting
+                error before an answer reaches the user.
+              </p>
+              <p class="mt-2 text-zinc-800 dark:text-zinc-300">
+                In an initial 81-run pilot with gpt-oss-120b, Kimi K3.1 Pro and
+                GPT-6.1 Sol, all nine runs of one targeted BIRD question answered
+                correctly with correct definitions. When I swapped two
+                definitions, all nine returned the wrong count without warning.
+                This is one affected question, so it does not establish how often
+                the failure occurs. The wider research direction remains
+                exploratory (<NuxtLink
+                  to="/blog/semantic-layer-errors"
+                  class="font-medium text-indigo-500 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300"
+                  >pilot design and limitations</NuxtLink
+                >).
+              </p>
+            </section>
+
+            <section>
+              <h3 class="mb-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
                 What I Have Found
               </h3>
               <p class="text-zinc-800 dark:text-zinc-300">
@@ -140,7 +165,8 @@
                   A checker that stops code from naming columns or files that do
                   not exist cut one model’s errors from 3,316 to 2, but raised its
                   accuracy by only 1.44 points. It gave no detectable gain over a
-                  plain error message that lists the existing names.
+                  plain error message that lists the existing names. I stopped
+                  the paper; the code, data and close-out record remain public.
                 </li>
               </ul>
             </section>
@@ -196,9 +222,10 @@
                 </li>
               </ul>
               <p class="mt-2 text-zinc-800 dark:text-zinc-300">
-                Next, I am testing whether a system can tell an agent when hidden
-                rows change its answer, with a known, limited leak and far fewer
-                false warnings. I build these ideas into
+                The semantic-layer pilot adds a question about meaning: can a
+                system detect a wrong definition even when the query runs
+                successfully? My earlier hidden-rows study asks whether the
+                answer makes its data scope clear. Both inform my work on
                 <a
                   href="https://sedge.app"
                   target="_blank"

@@ -74,15 +74,19 @@ result.
 
 ## Obsidian publishing
 
-Obsidian controls which research notes appear on the portfolio. The sync reads
-Markdown files under `Research/`, including its subfolders. To publish a note,
-set these YAML properties in Obsidian:
+Write articles and research records, including exploratory pilots, in the
+Obsidian vault. Do not create a Vue page or hardcoded research card for a new
+article or pilot. The sync reads flagged Markdown files from any vault folder.
+To publish a note, set these YAML properties in Obsidian:
 
 ```yaml
 portfolio: true
 draft: false
+research: true
 ```
 
+`portfolio: true` and `draft: false` publish the note on the blog.
+`research: true` also lists it under Records on the Research tab.
 Notes with `status: draft` or `status: archived` are excluded. Other status text,
 such as `completed empirical pilot`, is displayed on the research card. The card
 uses the note's `title`, `description`, `tags`, and `type`. Use `experiment` or
@@ -90,9 +94,9 @@ uses the note's `title`, `description`, `tags`, and `type`. Use `experiment` or
 Research notes. Set a unique `slug` to keep the public URL stable when you rename
 or move the file.
 
-The sync also imports notes from `Blogs - Published/`, except drafts and archived
-notes. Set `portfolio: true` there to include a note in the research cards.
-Formal publication entries are maintained separately in `app/data/research.ts`.
+These rules apply equally to `Research/`, `Blogs - Published/` and other vault
+folders. Formal publication entries are maintained separately in
+`app/data/research.ts`.
 
 Changes take effect after the vault is pushed to GitLab and the portfolio syncs
 and rebuilds. Run `yarn sync` to update the local content. A successful sync

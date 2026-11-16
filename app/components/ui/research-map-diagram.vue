@@ -10,7 +10,7 @@ const arms = [
     industry: "Row-level security",
     work: [
       "Hidden rows: cheaper models presented partial answers as complete in 70–95% of affected cases",
-      "Next: a note that tells the agent when hidden rows matter, with a limited leak",
+      "Open question: tell the agent when hidden rows matter, with a limited leak",
     ],
     card: "border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950/40",
     label: "text-blue-700 dark:text-blue-300",
@@ -65,6 +65,18 @@ const eras = [
 
 <template>
   <figure class="space-y-3 text-zinc-800 dark:text-zinc-300" aria-label="Research map">
+    <div class="rounded-md border border-indigo-200 bg-indigo-50 p-3 text-sm dark:border-indigo-800 dark:bg-indigo-950/40">
+      <p class="font-semibold text-zinc-900 dark:text-zinc-100">Current exploration: incorrect definitions</p>
+      <p class="mt-1">
+        When a business definition in a semantic layer is wrong, does a data
+        agent notice, and which checks can catch it?
+        <NuxtLink
+          to="/blog/semantic-layer-errors"
+          class="font-medium text-indigo-600 underline dark:text-indigo-400"
+        >First pilot and limitations</NuxtLink>.
+        The wider direction remains exploratory.
+      </p>
+    </div>
     <p
       class="mx-auto max-w-xl rounded-md border-2 border-violet-500 bg-violet-50 px-4 py-3 text-center text-sm font-semibold text-zinc-900 dark:border-violet-400 dark:bg-violet-950/40 dark:text-zinc-100"
     >

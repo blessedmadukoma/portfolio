@@ -25,8 +25,13 @@ const openStatement = (v: "statement" | "map") => {
 				data systems make their answers <strong>complete and up to date</strong>,
 				or clear about what they lack, and at what cost.
 				<span class="mt-2 block md:mt-0">
-				<strong>Current:</strong> can a system tell an AI agent when rows it
-				may not see change its answer, with a known, limited leak? I am building
+				<strong>Exploring:</strong> when a business definition in a semantic
+				layer is wrong, does a data agent notice, and which checks can catch it?
+				<NuxtLink
+					to="/blog/semantic-layer-errors"
+					class="underline text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
+				>Read the first pilot</NuxtLink>.
+				I am building
 				<a
 					href="https://sedge.app"
 					target="_blank"
