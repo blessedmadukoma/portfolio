@@ -6,6 +6,7 @@ const openStatement = (v: "statement" | "map") => {
 	statementView.value = v;
 	showModal.value = true;
 };
+const trackClick = useTrackClick();
 </script>
 
 <template>
@@ -21,17 +22,11 @@ const openStatement = (v: "statement" | "map") => {
 			class="space-y-3 text-[15px] leading-[1.6] text-zinc-600 dark:text-zinc-400 md:text-sm md:leading-relaxed"
 		>
 			<p>
-				Software engineer and researcher. I study which changes to AI-powered
-				data systems make their answers <strong>complete and up to date</strong>,
-				or clear about what they lack, and at what cost.
-				<span class="mt-2 block md:mt-0">
-				<strong>Exploring:</strong> when a business definition in a semantic
-				layer is wrong, does a data agent notice, and which checks can catch it?
-				<NuxtLink
-					to="/blog/semantic-layer-errors"
-					class="underline text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
-				>Read the first pilot</NuxtLink>.
-				I am building
+				<strong>Software engineer and researcher</strong> in Kigali, Rwanda
+				(UTC+2). I build systems that help people get
+				<strong>useful answers from complex data</strong>, and I research
+				<strong>what keeps those answers reliable</strong> as the data and its
+				meaning change. I am also building
 				<a
 					href="https://sedge.app"
 					target="_blank"
@@ -50,28 +45,50 @@ const openStatement = (v: "statement" | "map") => {
 					</span>
 					<span class="underline">Sedge</span></a
 				>, a data operating system.
-				</span>
 			</p>
 
+			<ul class="list-disc space-y-1 pl-5 marker:text-zinc-400">
+				<li>
+					At SLS Energy, I replaced a manual spreadsheet with a billing engine:
+					invoices for 9+ client organisations now go out within two days
+					instead of over a month.
+				</li>
+				<li>
+					My MS thesis at CMU-Africa checks 1.6 million athletics performances
+					and narrows 31,604 athletes to about 163 for investigators. It won a
+					Best Paper Honorable Mention at IEEE SDS 2026.
+				</li>
+			</ul>
+
 			<p>
+				I am open to AI and research engineering roles, remote or in Kigali:
+				<a
+					href="mailto:blessedmadukoma@gmail.com"
+					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
+					@click="trackClick('email')"
+					>email me</a
+				>
+				or
+				<a
+					href="/docs/Madukoma Blessed Academic CV.pdf"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
+					@click="trackClick('academic-cv')"
+					>open my CV</a
+				>. For research, read my
 				<button
 					@click="openStatement('statement')"
 					class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
 				>
-					Read my research statement</button
+					research statement</button
 				> <span class="whitespace-nowrap"
 					>(<button
 						@click="openStatement('map')"
 						class="underline text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 font-medium"
 					>see it as a map</button
-					>),</span
+					>).</span
 				>
-				or
-				<a
-					href="mailto:blessedmadukoma@gmail.com"
-					class="underline hover:text-zinc-900 dark:hover:text-zinc-100"
-					>email me</a
-				>: I am open to AI and research engineering roles, including remote.
 				<!-- Research map retired (9 Oct 2026): the statement now covers it.
 				<button
 					@click="showMap = true"

@@ -1,6 +1,7 @@
 <template>
   <a
     href="mailto:blessedmadukoma@gmail.com"
+    @click="trackClick('email')"
     class="email-link flex items-center gap-[6px] hover:text-[#111] dark:hover:text-zinc-100 transition-colors rounded-lg px-1.5 py-1 -ml-1.5 md:px-2.5 md:py-1.5 md:-ml-2.5 hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-sm md:text-[12.5px] md:leading-normal font-medium text-[#6b6661] dark:text-zinc-400"
   >
     <svg
@@ -53,8 +54,9 @@
   </a>
 </template>
 
-<script setup>
-  // No script logic needed — animation is purely CSS-driven.
+<script setup lang="ts">
+  // The animation is CSS-driven; the script only counts clicks.
+  const trackClick = useTrackClick();
 </script>
 
 <style scoped>
