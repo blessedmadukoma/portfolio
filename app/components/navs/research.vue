@@ -71,6 +71,17 @@
 <template>
   <section class="space-y-4 mt-0">
     <section class="space-y-3">
+      <p
+        class="text-[15px] leading-[1.6] text-zinc-600 dark:text-zinc-400 md:text-sm md:leading-relaxed"
+      >
+        <strong class="text-zinc-900 dark:text-zinc-100">Exploring:</strong>
+        when a business definition in a semantic layer is wrong, does a data
+        agent notice, and which checks can catch it?
+        <NuxtLink
+          to="/blog/semantic-layer-errors"
+          class="underline text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
+        >Read the first pilot</NuxtLink>.
+      </p>
       <div
         class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-900/50"
       >

@@ -19,12 +19,12 @@
   definePageMeta({ layout: "home" });
 
   useHead({
-    title: "Blessed M.",
+    title: "Blessed Madukoma",
     meta: [
       {
         name: "description",
         content:
-          "Blessed Madukoma is a software engineer and researcher. He studies which changes to AI-powered data systems make their answers complete and up to date, or clear about what they lack, and at what cost.",
+          "Blessed Madukoma is a software engineer and researcher in Kigali, Rwanda. He builds systems that help people get useful answers from complex data, and that keep working reliably as conditions change.",
       },
       {
         name: "keywords",
@@ -36,7 +36,7 @@
       {
         property: "og:description",
         content:
-          "Blessed Madukoma is a software engineer and researcher. He studies which changes to AI-powered data systems make their answers complete and up to date, or clear about what they lack, and at what cost.",
+          "Blessed Madukoma is a software engineer and researcher in Kigali, Rwanda. He builds systems that help people get useful answers from complex data, and that keep working reliably as conditions change.",
       },
       { property: "og:type", content: "website" },
     ],
