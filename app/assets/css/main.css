@@ -4,6 +4,14 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #ffffff;
+}
+
+/* The page colour behind the layout. It shows when the browser scrolls past
+   the end of the page, so it must match the theme. */
+html.dark {
+  background-color: #09090b;
+  color-scheme: dark;
 }
 
 body {
