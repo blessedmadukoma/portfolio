@@ -1,12 +1,8 @@
-<script setup lang="ts">
-  defineProps<{ widthClass: string }>();
-</script>
-
 <template>
   <header
     class="sticky top-0 z-30 border-b border-zinc-200 bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95"
   >
-    <div class="mx-auto w-full px-4" :class="widthClass">
+    <div class="mx-auto w-full max-w-6xl px-4">
       <!-- From md up: name, tabs in the centre, theme toggle. Below md the
            tabs move to a second row so they can scroll. -->
       <div
