@@ -1,22 +1,16 @@
 <template>
-  <section class="flex flex-1 flex-col py-2 space-y-4 md:h-full">
-    <section class="space-y-2 flex-shrink-0">
+  <div class="space-y-10 py-8">
+    <section class="space-y-2">
       <ui-hero />
       <ui-socials />
     </section>
 
-    <section class="flex-1 flex flex-col min-h-0">
-      <ui-content />
-    </section>
-
-    <section class="flex-shrink-0">
-      <ui-footer />
-    </section>
-  </section>
+    <ui-recent-thoughts />
+  </div>
 </template>
 
 <script setup lang="ts">
-  definePageMeta({ layout: "home" });
+  definePageMeta({ layout: "site" });
 
   useHead({
     title: "Blessed Madukoma",
