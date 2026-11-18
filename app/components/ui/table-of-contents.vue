@@ -58,11 +58,13 @@
         ticking = false;
       });
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Capture, because from md up the page scrolls inside the layout, and
+    // scroll events from an element do not bubble to the window.
+    document.addEventListener("scroll", onScroll, { capture: true, passive: true });
   });
 
   onBeforeUnmount(() => {
-    if (onScroll) window.removeEventListener("scroll", onScroll);
+    if (onScroll) document.removeEventListener("scroll", onScroll, { capture: true });
   });
 
   // Keep the active link visible inside the TOC's own scroll container as
@@ -80,7 +82,7 @@
     v-if="links.length"
     ref="navRef"
     aria-label="Table of contents"
-    class="max-h-[calc(100vh-10rem)] overflow-y-auto pr-2"
+    class="max-h-[calc(100dvh-14rem)] overflow-y-auto pr-2"
   >
     <p
       class="text-xs font-bold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500 mb-2"

@@ -147,7 +147,7 @@
         class="border-b border-zinc-200 pb-4 last:border-0 last:pb-0 dark:border-zinc-800"
       >
         <h2
-          class="sticky top-16 z-20 -mx-4 flex items-baseline gap-1.5 bg-white/90 px-4 py-2 backdrop-blur dark:bg-zinc-950/90"
+          class="sticky top-[6.5rem] z-20 md:top-0 -mx-4 flex items-baseline gap-1.5 bg-white/90 px-4 py-2 backdrop-blur dark:bg-zinc-950/90"
         >
           <span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
             {{ group.year }}
