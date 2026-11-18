@@ -1,0 +1,29 @@
+<script setup lang="ts">
+  defineProps<{ widthClass: string }>();
+</script>
+
+<template>
+  <header
+    class="sticky top-0 z-30 border-b border-zinc-200 bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95"
+  >
+    <div class="mx-auto w-full px-4" :class="widthClass">
+      <!-- From md up: name, tabs in the centre, theme toggle. Below md the
+           tabs move to a second row so they can scroll. -->
+      <div
+        class="flex h-14 items-center justify-between gap-3 md:grid md:h-16 md:grid-cols-[1fr_auto_1fr]"
+      >
+        <NuxtLink
+          to="/"
+          class="justify-self-start rounded-sm text-[15px] font-semibold tracking-tight text-zinc-900 hover:text-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:text-zinc-100 dark:hover:text-zinc-400 dark:focus-visible:ring-zinc-100"
+        >
+          Blessed Madukoma
+        </NuxtLink>
+        <ui-site-tabs class="hidden md:block" />
+        <div class="justify-self-end">
+          <ui-theme-toggle />
+        </div>
+      </div>
+      <ui-site-tabs class="pb-2 md:hidden" />
+    </div>
+  </header>
+</template>
