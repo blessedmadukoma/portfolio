@@ -39,9 +39,9 @@ except where noted.
 | --- | --- |
 | `GITLAB_TOKEN` | Read access to the Obsidian vault repository. Required for `yarn sync` and for serving blog images. |
 | `GITLAB_PROJECT_ID` | Vault project id on GitLab. |
-| `KV_REST_API_URL`, `KV_REST_API_TOKEN` | Vercel KV credentials. Required in production. Without them, local runs fall back to a filesystem store under `.data/`. |
+| `KV_REST_API_URL`, `KV_REST_API_TOKEN` | Vercel KV credentials. Required in production. Without them, local runs fall back to a filesystem store under `.data/`. The blog sync also keeps its last good result here. |
 | `CANARY_SECRET` | Gates the contact attribution review. |
-| `VERCEL_DEPLOY_HOOK` | Stored as a GitHub secret, not read by the app. A workflow posts to it to trigger a rebuild. See Deployment. |
+| `VERCEL_DEPLOY_HOOK` | A CI/CD variable of the vault project on GitLab, not read by the app. The vault pipeline posts to it to trigger a rebuild. See Deployment. |
 
 Production credentials in `.env` are used by local runs too. Anything written
 while developing goes to the live store.
@@ -100,8 +100,15 @@ folders. Formal publication entries are maintained separately in
 
 Changes take effect after the vault is pushed to GitLab and the portfolio syncs
 and rebuilds. Run `yarn sync` to update the local content. A successful sync
-removes notes that were deleted or no longer meet the publication rules. If the
-sync fails, the previous local content is retained.
+removes notes that were deleted or no longer meet the publication rules.
+
+If GitLab cannot be reached, or answers with a 5xx error, the sync retries with
+exponential backoff: the wait doubles from 1 s up to 32 s, with jitter, for at
+most 7 retries (about 48 to 95 s in total). If it still fails, it keeps the
+previous local content. A fresh build has no local content,
+so it restores the posts and the image list from the last good sync, which the
+sync saves in the KV store (key `blog-sync:snapshot`). A build stops only when
+there is no saved sync either, so the site never goes out with an empty blog.
 
 `content/blog/` is generated and gitignored. Edits there are overwritten by the
 next sync.
@@ -143,9 +150,9 @@ node --test scripts/sync-blog.test.mjs
 
 ## Deployment
 
-Vercel builds from `main`. Publishing a note is meant to trigger a rebuild
-through a Vercel deploy hook, so it does not need a commit here.
-
-`.github/workflows/sync-portfolio.yml` fires on pushes under
-`Blogs - Published/`, a path that exists only in the vault repository. As
-committed here it never runs. The workflow belongs in the vault repository.
+Vercel builds from `main`. Publishing a note does not need a commit here: the
+vault's GitLab pipeline (`.gitlab-ci.yml` in the vault, job `trigger-vercel`)
+runs on each push to its `main`. If a changed note has, or had, a `portfolio:`
+key, the job posts to the Vercel deploy hook "Obsidian sync", and Vercel
+rebuilds `main`. The hook URL is the vault's masked CI/CD variable
+`VERCEL_DEPLOY_HOOK`.
