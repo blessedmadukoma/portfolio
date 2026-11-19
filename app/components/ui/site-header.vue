@@ -1,10 +1,10 @@
 <template>
   <header
-    class="sticky top-0 z-30 border-b border-zinc-200 bg-white/95 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95"
+    class="z-30 bg-white dark:bg-zinc-950 md:border-b md:border-zinc-200 md:dark:border-zinc-800"
   >
     <div class="mx-auto w-full max-w-6xl px-4">
       <!-- From md up: name, tabs in the centre, theme toggle. Below md the
-           tabs move to a second row so they can scroll. -->
+           tabs sit in the page instead (ui-mobile-tabs). -->
       <div
         class="flex h-14 items-center justify-between gap-3 md:grid md:h-16 md:grid-cols-[1fr_auto_1fr]"
       >
@@ -19,7 +19,6 @@
           <ui-theme-toggle />
         </div>
       </div>
-      <ui-site-tabs class="pb-2 md:hidden" />
     </div>
   </header>
 </template>
