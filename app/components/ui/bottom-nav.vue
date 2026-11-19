@@ -47,29 +47,25 @@
   >
     <!-- Only the current page shows its label, so the bar fits a 320 px
          screen. The other items show their icon, and their label is for
-         screen readers. -->
+         screen readers. The bar is only as wide as its items. -->
     <ul
-      class="flex w-full max-w-sm items-center gap-1 rounded-2xl border border-zinc-200 bg-zinc-50 p-1.5 shadow-lg shadow-zinc-900/10 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40"
+      class="inline-flex items-center rounded-xl border border-zinc-200 bg-zinc-50 p-1 shadow-md shadow-zinc-900/10 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40"
     >
-      <li
-        v-for="item in ITEMS"
-        :key="item.to"
-        :class="isActive(item.to) ? 'shrink-0' : 'min-w-0 flex-1'"
-      >
+      <li v-for="item in ITEMS" :key="item.to">
         <NuxtLink
           :to="item.to"
           :aria-current="isActive(item.to) ? 'page' : undefined"
           :class="[
-            'flex h-11 items-center justify-center gap-1.5 rounded-xl px-3 text-[13px] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100',
+            'flex h-9 items-center justify-center gap-1 rounded-lg text-xs transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100',
             isActive(item.to)
-              ? 'bg-white font-medium text-zinc-900 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-zinc-700'
-              : 'text-zinc-500 hover:text-zinc-900 active:bg-zinc-200/70 dark:text-zinc-400 dark:hover:text-zinc-100 dark:active:bg-zinc-800',
+              ? 'bg-white px-2 font-medium text-zinc-900 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-zinc-700'
+              : 'w-9 text-zinc-500 hover:text-zinc-900 active:bg-zinc-200/70 dark:text-zinc-400 dark:hover:text-zinc-100 dark:active:bg-zinc-800',
           ]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
