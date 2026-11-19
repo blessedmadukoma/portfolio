@@ -4,7 +4,7 @@
   >
     <div class="mx-auto w-full max-w-6xl px-4">
       <!-- From md up: name, tabs in the centre, theme toggle. Below md the
-           tabs sit in the page instead (ui-mobile-tabs). -->
+           tabs are in the bar at the bottom of the screen (ui-bottom-nav). -->
       <div
         class="flex h-14 items-center justify-between gap-3 md:grid md:h-16 md:grid-cols-[1fr_auto_1fr]"
       >
