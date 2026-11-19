@@ -8,8 +8,9 @@
 </script>
 
 <template>
-  <div class="space-y-4 py-8">
-    <h1 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Projects</h1>
+  <!-- The active tab names the page, so the heading is for screen readers. -->
+  <div class="pb-4 pt-6">
+    <h1 class="sr-only">Projects</h1>
     <navs-projects />
   </div>
 </template>

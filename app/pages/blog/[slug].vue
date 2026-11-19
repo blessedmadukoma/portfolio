@@ -53,7 +53,7 @@
 
 <template>
   <section>
-    <div class="w-full py-8">
+    <div class="w-full pb-8 pt-6">
       <div class="md:grid md:grid-cols-[200px_1fr] md:gap-10">
         <!-- The reading controls stay in the top bar; the sidebar holds the TOC. -->
         <div class="hidden md:block md:sticky md:top-8 md:self-start">
@@ -108,7 +108,7 @@
           <!-- Post content -->
           <article
             v-if="post"
-            class="prose prose-zinc dark:prose-invert max-w-none prose-headings:scroll-mt-32 md:prose-headings:scroll-mt-8 prose-a:[overflow-wrap:anywhere]"
+            class="prose prose-zinc dark:prose-invert max-w-none prose-headings:scroll-mt-20 md:prose-headings:scroll-mt-8 prose-a:[overflow-wrap:anywhere]"
           >
             <ContentRenderer :value="post" />
           </article>
