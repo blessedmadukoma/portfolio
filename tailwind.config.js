@@ -1,6 +1,11 @@
 // tailwind.config.js
 const config = {
   darkMode: "class",
+  // hover: styles only on devices that can hover. On a phone they stuck to
+  // the last tapped item.
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     "./components/**/*.{js,vue,ts}",
     "./layouts/**/*.{js,vue,ts}",

@@ -5,6 +5,9 @@
 html {
   scroll-behavior: smooth;
   background-color: #ffffff;
+  /* Phones draw a grey or blue box over a tapped link, which ignores
+     rounded corners. Each control shows its own pressed state instead. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* The page colour behind the layout. It shows when the browser scrolls past
