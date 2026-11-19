@@ -47,19 +47,24 @@
   >
     <!-- Only the current page shows its label, so the bar fits a 320 px
          screen. The other items show their icon, and their label is for
-         screen readers. The bar is only as wide as its items. -->
+         screen readers. The bar is at most 320 px wide, and the icon items
+         share the width that the current page's label leaves. -->
     <ul
-      class="inline-flex items-center rounded-xl border border-zinc-200 bg-zinc-50 p-1 shadow-md shadow-zinc-900/10 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40"
+      class="flex w-full max-w-[20rem] items-center rounded-xl border border-zinc-200 bg-zinc-50 p-1 shadow-md shadow-zinc-900/10 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40"
     >
-      <li v-for="item in ITEMS" :key="item.to">
+      <li
+        v-for="item in ITEMS"
+        :key="item.to"
+        :class="isActive(item.to) ? 'shrink-0' : 'min-w-0 flex-1'"
+      >
         <NuxtLink
           :to="item.to"
           :aria-current="isActive(item.to) ? 'page' : undefined"
           :class="[
             'flex h-9 items-center justify-center gap-1 rounded-lg text-xs transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100',
             isActive(item.to)
-              ? 'bg-white px-2 font-medium text-zinc-900 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-zinc-700'
-              : 'w-9 text-zinc-500 hover:text-zinc-900 active:bg-zinc-200/70 dark:text-zinc-400 dark:hover:text-zinc-100 dark:active:bg-zinc-800',
+              ? 'bg-white px-2.5 font-medium text-zinc-900 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-zinc-700'
+              : 'w-full text-zinc-500 hover:text-zinc-900 active:bg-zinc-200/70 dark:text-zinc-400 dark:hover:text-zinc-100 dark:active:bg-zinc-800',
           ]"
         >
           <svg
