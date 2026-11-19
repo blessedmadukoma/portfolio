@@ -33,10 +33,12 @@
       class="flex-1 scroll-smooth md:min-h-0 md:overflow-y-auto"
     >
       <main class="mx-auto w-full px-4" :class="widthClass">
+        <!-- The home page places the mobile tabs below the greeting. -->
+        <ui-mobile-tabs v-if="route.meta.mobileTabs !== 'inline'" />
         <slot />
       </main>
     </div>
-    <div class="mx-auto w-full max-w-6xl shrink-0 px-4 pb-3">
+    <div class="mx-auto w-full max-w-6xl shrink-0 px-4 pb-2">
       <ui-footer />
     </div>
   </div>
