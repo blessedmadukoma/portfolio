@@ -1,18 +1,16 @@
 <template>
-  <div class="space-y-6 pb-4 pt-6 md:space-y-10">
+  <div class="space-y-10 pb-4 pt-6">
     <section class="space-y-2">
       <ui-hero />
       <ui-socials />
     </section>
-
-    <ui-mobile-tabs />
 
     <ui-recent-thoughts />
   </div>
 </template>
 
 <script setup lang="ts">
-  definePageMeta({ layout: "site", mobileTabs: "inline" });
+  definePageMeta({ layout: "site" });
 
   useHead({
     title: "Blessed Madukoma",

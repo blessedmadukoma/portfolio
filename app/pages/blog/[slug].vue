@@ -108,7 +108,7 @@
           <!-- Post content -->
           <article
             v-if="post"
-            class="prose prose-zinc dark:prose-invert max-w-none prose-headings:scroll-mt-20 md:prose-headings:scroll-mt-8 prose-a:[overflow-wrap:anywhere]"
+            class="prose prose-zinc dark:prose-invert max-w-none prose-headings:scroll-mt-6 md:prose-headings:scroll-mt-8 prose-a:[overflow-wrap:anywhere]"
           >
             <ContentRenderer :value="post" />
           </article>
