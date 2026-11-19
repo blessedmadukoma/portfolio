@@ -20,8 +20,27 @@ const mock = `
     if (page < items.length) headers["X-Next-Page"] = String(page + 1);
     return Response.json(items.slice(page - 1, page), { headers });
   };
-  globalThis.fetch = async (input) => {
+  globalThis.fetch = async (input, init = {}) => {
     const url = new URL(input);
+    // A fake Redis REST endpoint, kept in kv.json so it outlives one run.
+    if (url.hostname === "kv.test") {
+      const storeUrl = new URL("./kv.json", import.meta.url);
+      const store = JSON.parse(await readFile(storeUrl, "utf8").catch(() => "{}"));
+      const [command, key, value] = JSON.parse(init.body);
+      if (command === "SET") {
+        store[key] = value;
+        const { writeFileSync } = await import("node:fs");
+        writeFileSync(storeUrl, JSON.stringify(store));
+        return Response.json({ result: "OK" });
+      }
+      return Response.json({ result: store[key] ?? null });
+    }
+    // GitLab cannot be reached at all, or only for the first few requests.
+    if (process.env.MOCK_DOWN) throw new TypeError("fetch failed");
+    if (Number(process.env.MOCK_FAIL_TIMES ?? 0) > (globalThis.failures ?? 0)) {
+      globalThis.failures = (globalThis.failures ?? 0) + 1;
+      throw new TypeError("fetch failed");
+    }
     if (url.pathname.endsWith("/tree")) {
       if (url.searchParams.get("recursive") !== "true" || url.searchParams.has("path")) {
         return new Response("expected one recursive listing of the vault", { status: 400 });
@@ -114,7 +133,7 @@ test("sync publishes flagged notes from any folder by slug, resolves images and 
     const run = async (extraEnv = {}) => {
       await writeFile(join(fixture, "files.json"), JSON.stringify(files));
       return exec(process.execPath, ["--import", mockPath, join(fixture, "scripts/sync-blog.mjs")], {
-        env: { ...process.env, GITLAB_TOKEN: "test", GITLAB_PROJECT_ID: "test", ...extraEnv },
+        env: { ...process.env, GITLAB_TOKEN: "test", GITLAB_PROJECT_ID: "test", SYNC_RETRY_DELAY_MS: "0", ...extraEnv },
       });
     };
     const output = join(fixture, "content/blog");
@@ -195,6 +214,53 @@ test("sync publishes flagged notes from any folder by slug, resolves images and 
     files["Elsewhere/new.md"] = note("slug: new-post\nportfolio: false\ndraft: false");
     await run();
     await assert.rejects(access(join(output, "new-post.md")));
+  } finally {
+    await rm(fixture, { recursive: true, force: true });
+  }
+});
+
+test("sync retries failed connections and falls back to the last good sync", async () => {
+  const fixture = await mkdtemp(join(tmpdir(), "portfolio-sync-"));
+  try {
+    await mkdir(join(fixture, "scripts"));
+    await cp(join(root, "scripts/sync-blog.mjs"), join(fixture, "scripts/sync-blog.mjs"));
+    await symlink(join(root, "node_modules"), join(fixture, "node_modules"));
+    const mockPath = join(fixture, "mock.mjs");
+    await writeFile(mockPath, mock);
+    await writeFile(
+      join(fixture, "files.json"),
+      JSON.stringify({
+        "Blogs - Published/post.md": "---\ntitle: Post\nslug: post\nportfolio: true\ndraft: false\n---\n![[fig.png]]\n",
+        "Blogs - Published/fig.png": "png",
+      }),
+    );
+    const kvEnv = { KV_REST_API_URL: "https://kv.test", KV_REST_API_TOKEN: "test" };
+    const run = (extraEnv = {}) =>
+      exec(process.execPath, ["--import", mockPath, join(fixture, "scripts/sync-blog.mjs")], {
+        env: { ...process.env, GITLAB_TOKEN: "test", GITLAB_PROJECT_ID: "test", SYNC_RETRY_DELAY_MS: "0", ...extraEnv },
+      });
+    const output = join(fixture, "content/blog");
+    const imageList = join(fixture, "server/assets/blog-images.json");
+
+    // Two failed connections are retried, and the sync then succeeds and saves itself.
+    const first = await run({ ...kvEnv, MOCK_FAIL_TIMES: "2" });
+    assert.match(first.stdout, /GitLab request failed \(fetch failed\); retrying/);
+    assert.match(first.stdout, /Saved 1 post\(s\) as the last good sync/);
+    await access(join(output, "post.md"));
+
+    // A fresh build while GitLab is down restores the last good sync.
+    await rm(output, { recursive: true, force: true });
+    await rm(imageList, { force: true });
+    const restored = await run({ ...kvEnv, MOCK_DOWN: "1", VERCEL: "1" });
+    assert.match(restored.stderr, /Blog sync failed: fetch failed/);
+    assert.match(restored.stderr, /Restored 1 post\(s\) from the last good sync/);
+    assert.match(await readFile(join(output, "post.md"), "utf8"), /Blogs%20-%20Published%2Ffig\.png/);
+    assert.deepEqual(JSON.parse(await readFile(imageList, "utf8")), ["Blogs - Published/fig.png"]);
+
+    // With no saved sync and no cached posts, the build still stops.
+    await rm(output, { recursive: true, force: true });
+    await rm(join(fixture, "kv.json"), { force: true });
+    await assert.rejects(run({ ...kvEnv, MOCK_DOWN: "1", VERCEL: "1" }), (error) => error.code === 1);
   } finally {
     await rm(fixture, { recursive: true, force: true });
   }

@@ -8,6 +8,7 @@
 import { mkdir, writeFile, rm, readFile, readdir } from "node:fs/promises";
 import { join, dirname, posix } from "node:path";
 import { fileURLToPath } from "node:url";
+import { gzipSync, gunzipSync } from "node:zlib";
 import { parse } from "yaml";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -76,6 +77,32 @@ const rateLimit = { remaining: Infinity, resetAt: 0 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// A failed connection or a 5xx answer is retried after these waits (about one
+// minute in total). SYNC_RETRY_DELAY_MS replaces every wait, for the tests.
+const RETRY_DELAYS_MS = process.env.SYNC_RETRY_DELAY_MS
+  ? Array(4).fill(Number(process.env.SYNC_RETRY_DELAY_MS))
+  : [2_000, 5_000, 15_000, 30_000];
+
+async function fetchWithRetry(url, options) {
+  for (let attempt = 0; ; attempt += 1) {
+    const delay = RETRY_DELAYS_MS[attempt];
+    let res;
+    try {
+      res = await fetch(url, options);
+    } catch (error) {
+      if (delay === undefined) throw error;
+      const reason = error?.cause?.code ?? error?.message ?? String(error);
+      console.log(`  ⏳  GitLab request failed (${reason}); retrying in ${delay / 1000}s…`);
+      await sleep(delay);
+      continue;
+    }
+    if (res.status < 500 || delay === undefined) return res;
+    await res.body?.cancel();
+    console.log(`  ⏳  GitLab answered ${res.status}; retrying in ${delay / 1000}s…`);
+    await sleep(delay);
+  }
+}
+
 async function gitlabFetch(url) {
   for (let attempt = 0; ; attempt += 1) {
     const wait = rateLimit.resetAt - Date.now();
@@ -83,7 +110,7 @@ async function gitlabFetch(url) {
       console.log(`  ⏳  GitLab rate limit reached; waiting ${Math.ceil(wait / 1000)}s for the next window…`);
       await sleep(wait + 1000);
     }
-    const res = await fetch(url, { headers: HEADERS });
+    const res = await fetchWithRetry(url, { headers: HEADERS });
     const remaining = res.headers.get("RateLimit-Remaining");
     const reset = res.headers.get("RateLimit-Reset");
     if (remaining !== null && reset !== null) {
@@ -363,6 +390,60 @@ async function writeImageList(posts, vault) {
   return paths.size;
 }
 
+// ── last good sync, kept in the site's Redis store ──────────────────────────
+// A fresh build has no cached posts. If GitLab cannot be reached, the build
+// restores the posts and the image list from the last successful sync, so a
+// GitLab outage never takes the blog down. Without KV variables (local runs
+// without .env), this does nothing.
+const KV_URL = process.env.KV_REST_API_URL?.replace(/\/+$/, "") ?? "";
+const KV_TOKEN = process.env.KV_REST_API_TOKEN ?? "";
+const SNAPSHOT_KEY = "blog-sync:snapshot";
+
+async function kv(command) {
+  const res = await fetchWithRetry(KV_URL, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${KV_TOKEN}`, "Content-Type": "application/json" },
+    body: JSON.stringify(command),
+  });
+  const payload = await res.json().catch(() => ({}));
+  if (!res.ok || payload.error) throw new Error(payload.error ?? `KV answered ${res.status}`);
+  return payload.result ?? null;
+}
+
+async function saveSnapshot(files) {
+  if (!KV_URL || !KV_TOKEN) return;
+  try {
+    const images = await readFile(IMAGE_LIST, "utf8");
+    const json = JSON.stringify({ savedAt: new Date().toISOString(), files, images });
+    await kv(["SET", SNAPSHOT_KEY, gzipSync(json).toString("base64")]);
+    console.log(`  💾  Saved ${files.length} post(s) as the last good sync`);
+  } catch (error) {
+    // The posts are already written; a failed save must not fail the build.
+    console.warn(`⚠️  Could not save the last good sync: ${error?.message ?? error}`);
+  }
+}
+
+async function restoreSnapshot() {
+  if (!KV_URL || !KV_TOKEN) return 0;
+  try {
+    const stored = await kv(["GET", SNAPSHOT_KEY]);
+    if (!stored) return 0;
+    const { savedAt, files, images } = JSON.parse(gunzipSync(Buffer.from(stored, "base64")).toString("utf8"));
+    for (const { relativePath, content } of files) {
+      const localPath = join(OUT_DIR, relativePath);
+      await mkdir(dirname(localPath), { recursive: true });
+      await writeFile(localPath, content, "utf8");
+    }
+    await mkdir(dirname(IMAGE_LIST), { recursive: true });
+    await writeFile(IMAGE_LIST, images, "utf8");
+    console.warn(`   Restored ${files.length} post(s) from the last good sync (${savedAt}).`);
+    return files.length;
+  } catch (error) {
+    console.warn(`⚠️  Could not restore the last good sync: ${error?.message ?? error}`);
+    return 0;
+  }
+}
+
 async function syncBlog() {
   console.log("🔄  Syncing blog posts from GitLab Repository API…");
 
@@ -423,16 +504,22 @@ async function syncBlog() {
   const imageCount = await writeImageList(renderedFiles, vault);
   console.log(`  📷  ${imageCount} image(s) allowed for the image route`);
   console.log(`✅  Synced ${renderedFiles.length} blog post(s) to content/blog/`);
+  await saveSnapshot(renderedFiles.map(({ relativePath, content }) => ({ relativePath, content })));
 }
 
 try {
   await syncBlog();
 } catch (error) {
-  const cachedFiles = await listLocalMarkdownFiles();
   const message = error instanceof Error ? error.message : String(error);
   console.warn(`⚠️  Blog sync failed: ${message}`);
+  let cachedFiles = await listLocalMarkdownFiles();
+  if (cachedFiles.length === 0) {
+    await restoreSnapshot();
+    cachedFiles = await listLocalMarkdownFiles();
+  }
   console.warn(
     `   Starting with ${cachedFiles.length} cached blog post(s). Run \`yarn sync\` later to retry.`,
   );
+  // Never publish an empty blog: with no posts at all, stop the build.
   if (process.env.VERCEL && cachedFiles.length === 0) process.exit(1);
 }
