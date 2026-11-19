@@ -133,7 +133,7 @@ test("sync publishes flagged notes from any folder by slug, resolves images and 
     const run = async (extraEnv = {}) => {
       await writeFile(join(fixture, "files.json"), JSON.stringify(files));
       return exec(process.execPath, ["--import", mockPath, join(fixture, "scripts/sync-blog.mjs")], {
-        env: { ...process.env, GITLAB_TOKEN: "test", GITLAB_PROJECT_ID: "test", SYNC_RETRY_DELAY_MS: "0", ...extraEnv },
+        env: { ...process.env, GITLAB_TOKEN: "test", GITLAB_PROJECT_ID: "test", SYNC_RETRY_BASE_MS: "0", ...extraEnv },
       });
     };
     const output = join(fixture, "content/blog");
@@ -237,14 +237,16 @@ test("sync retries failed connections and falls back to the last good sync", asy
     const kvEnv = { KV_REST_API_URL: "https://kv.test", KV_REST_API_TOKEN: "test" };
     const run = (extraEnv = {}) =>
       exec(process.execPath, ["--import", mockPath, join(fixture, "scripts/sync-blog.mjs")], {
-        env: { ...process.env, GITLAB_TOKEN: "test", GITLAB_PROJECT_ID: "test", SYNC_RETRY_DELAY_MS: "0", ...extraEnv },
+        env: { ...process.env, GITLAB_TOKEN: "test", GITLAB_PROJECT_ID: "test", SYNC_RETRY_BASE_MS: "0", ...extraEnv },
       });
     const output = join(fixture, "content/blog");
     const imageList = join(fixture, "server/assets/blog-images.json");
 
     // Two failed connections are retried, and the sync then succeeds and saves itself.
     const first = await run({ ...kvEnv, MOCK_FAIL_TIMES: "2" });
-    assert.match(first.stdout, /GitLab request failed \(fetch failed\); retrying/);
+    // The vault listing and the search run in parallel, so each may fail once.
+    const retries = first.stdout.match(/GitLab request failed \(fetch failed\); retry \d of 7 in 0\.0s/g) ?? [];
+    assert.equal(retries.length, 2);
     assert.match(first.stdout, /Saved 1 post\(s\) as the last good sync/);
     await access(join(output, "post.md"));
 

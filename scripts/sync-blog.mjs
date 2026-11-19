@@ -77,28 +77,39 @@ const rateLimit = { remaining: Infinity, resetAt: 0 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// A failed connection or a 5xx answer is retried after these waits (about one
-// minute in total). SYNC_RETRY_DELAY_MS replaces every wait, for the tests.
-const RETRY_DELAYS_MS = process.env.SYNC_RETRY_DELAY_MS
-  ? Array(4).fill(Number(process.env.SYNC_RETRY_DELAY_MS))
-  : [2_000, 5_000, 15_000, 30_000];
+// A failed connection or a 5xx answer is retried with exponential backoff:
+// the wait doubles from 1 s and stops growing at 32 s, for at most 7 retries
+// (between about 48 s and 95 s in total). Each wait is random between half
+// and all of its value (jitter), so retries from parallel requests spread out.
+// A longer outage is covered by the last good sync below, so the build does
+// not wait any longer. SYNC_RETRY_BASE_MS replaces the 1 s, for the tests.
+const RETRY_BASE_MS = Number(process.env.SYNC_RETRY_BASE_MS ?? 1_000);
+const RETRY_MAX_MS = 32_000;
+const MAX_NETWORK_RETRIES = 7;
+
+function backoffDelay(attempt) {
+  const ceiling = Math.min(RETRY_MAX_MS, RETRY_BASE_MS * 2 ** attempt);
+  return ceiling / 2 + Math.random() * (ceiling / 2);
+}
 
 async function fetchWithRetry(url, options) {
   for (let attempt = 0; ; attempt += 1) {
-    const delay = RETRY_DELAYS_MS[attempt];
+    const last = attempt >= MAX_NETWORK_RETRIES;
     let res;
+    let reason;
     try {
       res = await fetch(url, options);
+      if (res.status < 500 || last) return res;
+      await res.body?.cancel();
+      reason = `HTTP ${res.status}`;
     } catch (error) {
-      if (delay === undefined) throw error;
-      const reason = error?.cause?.code ?? error?.message ?? String(error);
-      console.log(`  ⏳  GitLab request failed (${reason}); retrying in ${delay / 1000}s…`);
-      await sleep(delay);
-      continue;
+      if (last) throw error;
+      reason = error?.cause?.code ?? error?.message ?? String(error);
     }
-    if (res.status < 500 || delay === undefined) return res;
-    await res.body?.cancel();
-    console.log(`  ⏳  GitLab answered ${res.status}; retrying in ${delay / 1000}s…`);
+    const delay = backoffDelay(attempt);
+    console.log(
+      `  ⏳  GitLab request failed (${reason}); retry ${attempt + 1} of ${MAX_NETWORK_RETRIES} in ${(delay / 1000).toFixed(1)}s…`,
+    );
     await sleep(delay);
   }
 }

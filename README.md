@@ -102,8 +102,10 @@ Changes take effect after the vault is pushed to GitLab and the portfolio syncs
 and rebuilds. Run `yarn sync` to update the local content. A successful sync
 removes notes that were deleted or no longer meet the publication rules.
 
-If GitLab cannot be reached, the sync retries for about a minute. If it still
-fails, it keeps the previous local content. A fresh build has no local content,
+If GitLab cannot be reached, or answers with a 5xx error, the sync retries with
+exponential backoff: the wait doubles from 1 s up to 32 s, with jitter, for at
+most 7 retries (about 48 to 95 s in total). If it still fails, it keeps the
+previous local content. A fresh build has no local content,
 so it restores the posts and the image list from the last good sync, which the
 sync saves in the KV store (key `blog-sync:snapshot`). A build stops only when
 there is no saved sync either, so the site never goes out with an empty blog.
