@@ -43,20 +43,27 @@
 <template>
   <nav
     aria-label="Site sections"
-    class="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-40 md:hidden"
+    class="fixed inset-x-0 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-40 flex justify-center px-3 md:hidden"
   >
+    <!-- Only the current page shows its label, so the bar fits a 320 px
+         screen. The other items show their icon, and their label is for
+         screen readers. -->
     <ul
-      class="grid grid-cols-6 gap-0.5 rounded-2xl border border-zinc-200 bg-white/90 p-1 shadow-lg shadow-zinc-900/10 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90 dark:shadow-black/40"
+      class="flex w-full max-w-sm items-center gap-1 rounded-2xl border border-zinc-200 bg-zinc-50 p-1.5 shadow-lg shadow-zinc-900/10 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40"
     >
-      <li v-for="item in ITEMS" :key="item.to">
+      <li
+        v-for="item in ITEMS"
+        :key="item.to"
+        :class="isActive(item.to) ? 'shrink-0' : 'min-w-0 flex-1'"
+      >
         <NuxtLink
           :to="item.to"
           :aria-current="isActive(item.to) ? 'page' : undefined"
           :class="[
-            'flex flex-col items-center gap-0.5 rounded-xl px-0.5 pb-1 pt-1.5 text-[10.5px] leading-tight transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100',
+            'flex h-11 items-center justify-center gap-1.5 rounded-xl px-3 text-[13px] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100',
             isActive(item.to)
-              ? 'bg-zinc-100 font-medium text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100'
-              : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100',
+              ? 'bg-white font-medium text-zinc-900 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-zinc-700'
+              : 'text-zinc-500 hover:text-zinc-900 active:bg-zinc-200/70 dark:text-zinc-400 dark:hover:text-zinc-100 dark:active:bg-zinc-800',
           ]"
         >
           <svg
@@ -69,11 +76,14 @@
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
+            class="shrink-0"
             aria-hidden="true"
           >
             <path v-for="d in ICONS[item.to]" :key="d" :d="d" />
           </svg>
-          {{ item.label }}
+          <span :class="isActive(item.to) ? 'whitespace-nowrap' : 'sr-only'">
+            {{ item.label }}
+          </span>
         </NuxtLink>
       </li>
     </ul>
