@@ -2,6 +2,8 @@
   import { formatDate, obsidianImageToProxy } from "~/composables/useBlogPosts";
 
   definePageMeta({
+    layout: "site",
+    width: "5xl",
     validate: async (route) => {
       const slug = route.params.slug as string;
       const bySlug = await queryCollection("blog")
@@ -50,16 +52,25 @@
 </script>
 
 <template>
-  <section class="min-h-screen">
-    <ui-blog-navigation back-to="/blog" back-label="All posts" wide />
-    <div class="max-w-5xl mx-auto w-full px-4 py-8">
+  <section>
+    <div class="w-full pb-8 pt-6">
       <div class="md:grid md:grid-cols-[200px_1fr] md:gap-10">
         <!-- The reading controls stay in the top bar; the sidebar holds the TOC. -->
-        <div class="hidden md:block md:sticky md:top-24 md:self-start">
+        <div class="hidden md:block md:sticky md:top-8 md:self-start">
           <ui-table-of-contents :links="post?.body?.toc?.links ?? []" />
         </div>
 
         <div class="max-w-2xl space-y-6">
+          <NuxtLink
+            to="/blog"
+            class="inline-flex items-center gap-1.5 text-sm text-zinc-500 underline decoration-zinc-300 underline-offset-4 hover:text-zinc-900 hover:decoration-current dark:text-zinc-400 dark:decoration-zinc-700 dark:hover:text-zinc-100"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5" />
+              <path d="m12 5-7 7 7 7" />
+            </svg>
+            All thoughts
+          </NuxtLink>
           <!-- Post header -->
           <div v-if="post" class="space-y-2">
             <div
@@ -97,7 +108,7 @@
           <!-- Post content -->
           <article
             v-if="post"
-            class="prose prose-zinc dark:prose-invert max-w-none prose-headings:scroll-mt-24 prose-a:[overflow-wrap:anywhere]"
+            class="prose prose-zinc dark:prose-invert max-w-none prose-headings:scroll-mt-6 md:prose-headings:scroll-mt-8 prose-a:[overflow-wrap:anywhere]"
           >
             <ContentRenderer :value="post" />
           </article>

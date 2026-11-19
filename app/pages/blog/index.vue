@@ -8,6 +8,8 @@
     useNativePosts,
   } from "~/composables/useBlogPosts";
 
+  definePageMeta({ layout: "site", width: "3xl" });
+
   const { data: nativePosts } = useNativePosts();
   const { data: viewCounts } = useFetch<Record<string, number>>("/api/views");
   const route = useRoute();
@@ -89,9 +91,8 @@
 </script>
 
 <template>
-  <div class="min-h-screen">
-    <ui-blog-navigation back-to="/" back-label="Portfolio" />
-    <section class="max-w-3xl mx-auto w-full px-4 py-6">
+  <div>
+    <section class="w-full pb-8 pt-6">
       <header class="mb-6 space-y-4">
         <div class="flex items-center justify-between gap-4">
           <div>
@@ -146,7 +147,7 @@
         class="border-b border-zinc-200 pb-4 last:border-0 last:pb-0 dark:border-zinc-800"
       >
         <h2
-          class="sticky top-16 z-20 -mx-4 flex items-baseline gap-1.5 bg-white/90 px-4 py-2 backdrop-blur dark:bg-zinc-950/90"
+          class="sticky top-0 z-10 -mx-4 flex items-baseline gap-1.5 bg-white/90 px-4 py-2 backdrop-blur dark:bg-zinc-950/90"
         >
           <span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
             {{ group.year }}

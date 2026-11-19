@@ -12,10 +12,9 @@ const trackClick = useTrackClick();
 <template>
 	<section>
 		<h1
-			class="text-2xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center justify-between mb-4"
+			class="mb-4 text-2xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100"
 		>
-			<span>Hi👋🏿, I'm Blessed</span>
-			<ui-theme-toggle />
+			Hi👋🏿, I'm Blessed
 		</h1>
 
 		<div
