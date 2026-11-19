@@ -38,7 +38,7 @@
     </div>
     <!-- Below md the bottom bar floats over the page, so the footer keeps
          clear of it. -->
-    <div class="mx-auto w-full max-w-6xl shrink-0 px-4 pb-24 md:pb-2">
+    <div class="mx-auto w-full max-w-6xl shrink-0 px-4 pb-20 md:pb-2">
       <ui-footer />
     </div>
     <ui-bottom-nav />
