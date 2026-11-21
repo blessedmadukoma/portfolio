@@ -3,6 +3,20 @@
 // light and dark themes and stacks on small screens. Keep it in step with the tldraw frame.
 const arms = [
   {
+    title: "Meaning",
+    question:
+      "Does the answer use the right definitions, and do those definitions match the data?",
+    research: "Ontologies and data quality",
+    industry: "Semantic layers and ontologies",
+    work: [
+      "Semantic-layer pilot: with two definitions swapped, all 9 runs of one BIRD question gave the wrong count without a warning",
+      "Next: check the definitions against the data in both directions, and let the owner approve each fix",
+    ],
+    card: "border-indigo-500 bg-indigo-50 dark:border-indigo-400 dark:bg-indigo-950/40",
+    label: "text-indigo-700 dark:text-indigo-300",
+    order: ["md:order-1", "md:order-5", "md:order-9"],
+  },
+  {
     title: "Scope",
     question:
       "Does the answer say what data it covered, including rows the user may not read?",
@@ -14,7 +28,7 @@ const arms = [
     ],
     card: "border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950/40",
     label: "text-blue-700 dark:text-blue-300",
-    order: ["sm:order-1", "sm:order-4", "sm:order-7"],
+    order: ["md:order-2", "md:order-6", "md:order-10"],
   },
   {
     title: "Evidence",
@@ -23,12 +37,12 @@ const arms = [
     research: "Data provenance",
     industry: "Agent observability and audit logs",
     work: [
-      "DataAgentBench: 21.6% of Python steps failed because of the harness, logged as the model’s",
+      "DataAgentBench: the harness caused 37% of the failed steps (16,293 of 44,277), logged as the model’s",
       "smolagents: all 11 versions tested silently swap a missing variable for a similar one",
     ],
     card: "border-emerald-600 bg-emerald-50 dark:border-emerald-400 dark:bg-emerald-950/40",
     label: "text-emerald-700 dark:text-emerald-300",
-    order: ["sm:order-2", "sm:order-5", "sm:order-8"],
+    order: ["md:order-3", "md:order-7", "md:order-11"],
   },
   {
     title: "Change (planned)",
@@ -41,7 +55,7 @@ const arms = [
     ],
     card: "border-orange-500 bg-orange-50 dark:border-orange-400 dark:bg-orange-950/40",
     label: "text-orange-700 dark:text-orange-300",
-    order: ["sm:order-3", "sm:order-6", "sm:order-9"],
+    order: ["md:order-4", "md:order-8", "md:order-12"],
   },
 ];
 
@@ -53,7 +67,7 @@ const spine = (i: number, k: number) => {
   if (last && k > 0) return "hidden";
   const top = k > 0 ? "-top-2.5" : i === 0 ? "-top-3" : "-top-[22px]";
   const end = last ? "h-[47px]" : "bottom-0";
-  return `absolute left-[9px] w-0.5 bg-zinc-500 dark:bg-zinc-400 sm:hidden ${top} ${end}`;
+  return `absolute left-[9px] w-0.5 bg-zinc-500 dark:bg-zinc-400 md:hidden ${top} ${end}`;
 };
 
 const eras = [
@@ -84,11 +98,11 @@ const eras = [
       to the system make that true more often, at a cost they can afford?
     </p>
 
-    <!-- Elbow connectors from the question to the three parts (wider screens only). -->
-    <div class="relative hidden h-7 sm:block" aria-hidden="true">
+    <!-- Elbow connectors from the question to the four parts (wider screens only). -->
+    <div class="relative hidden h-7 md:block" aria-hidden="true">
       <div class="absolute left-1/2 top-0 h-3 w-0.5 -translate-x-1/2 bg-zinc-500 dark:bg-zinc-400"></div>
-      <div class="absolute left-[16.667%] right-[16.667%] top-3 h-0.5 bg-zinc-500 dark:bg-zinc-400"></div>
-      <div class="absolute inset-x-0 top-3 grid grid-cols-3">
+      <div class="absolute left-[12.5%] right-[12.5%] top-3 h-0.5 bg-zinc-500 dark:bg-zinc-400"></div>
+      <div class="absolute inset-x-0 top-3 grid grid-cols-4">
         <div v-for="arm in arms" :key="arm.title" class="flex flex-col items-center">
           <div class="h-2.5 w-0.5 bg-zinc-500 dark:bg-zinc-400"></div>
           <div class="h-0 w-0 border-x-[5px] border-t-[6px] border-x-transparent border-t-zinc-500 dark:border-t-zinc-400"></div>
@@ -97,16 +111,16 @@ const eras = [
     </div>
 
     <!-- On small screens, a line runs down from the question with a branch to each arm. -->
-    <div class="grid gap-2.5 sm:grid-cols-3">
+    <div class="grid gap-2.5 md:grid-cols-4">
       <template v-for="(arm, i) in arms" :key="arm.title">
-        <div :class="['relative flex flex-col max-sm:pl-6', arm.order[0]]">
+        <div :class="['relative flex flex-col max-md:pl-6', arm.order[0]]">
           <span :class="spine(i, 0)" aria-hidden="true"></span>
           <span
-            class="absolute left-[9px] top-[23px] h-0.5 w-[9px] bg-zinc-500 dark:bg-zinc-400 sm:hidden"
+            class="absolute left-[9px] top-[23px] h-0.5 w-[9px] bg-zinc-500 dark:bg-zinc-400 md:hidden"
             aria-hidden="true"
           ></span>
           <span
-            class="absolute left-[18px] top-[19px] h-0 w-0 border-y-[5px] border-l-[6px] border-y-transparent border-l-zinc-500 dark:border-l-zinc-400 sm:hidden"
+            class="absolute left-[18px] top-[19px] h-0 w-0 border-y-[5px] border-l-[6px] border-y-transparent border-l-zinc-500 dark:border-l-zinc-400 md:hidden"
             aria-hidden="true"
           ></span>
           <div :class="['flex-1 rounded-md border-2 p-3', arm.card]">
@@ -116,7 +130,7 @@ const eras = [
             <p class="mt-1 text-zinc-800 dark:text-zinc-200">{{ arm.question }}</p>
           </div>
         </div>
-        <div :class="['relative flex flex-col max-sm:pl-6', arm.order[1]]">
+        <div :class="['relative flex flex-col max-md:pl-6', arm.order[1]]">
           <span :class="spine(i, 1)" aria-hidden="true"></span>
           <div
             class="flex-1 rounded-md border border-dotted border-zinc-300 p-2.5 text-xs leading-5 dark:border-zinc-700"
@@ -131,7 +145,7 @@ const eras = [
             </p>
           </div>
         </div>
-        <div :class="['relative mb-3 flex flex-col max-sm:pl-6 sm:mb-0', arm.order[2]]">
+        <div :class="['relative mb-3 flex flex-col max-md:pl-6 md:mb-0', arm.order[2]]">
           <span :class="spine(i, 2)" aria-hidden="true"></span>
           <div
             class="flex-1 rounded-md border border-dashed border-zinc-300 p-2.5 text-xs leading-5 dark:border-zinc-700"

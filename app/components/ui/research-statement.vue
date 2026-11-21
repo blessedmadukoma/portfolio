@@ -145,8 +145,9 @@
                 <li>
                   <span class="font-semibold text-zinc-900 dark:text-zinc-100">A log may not show what ran.</span>
                   The harness is the software that runs the model’s code. In
-                  DataAgentBench’s public logs, it made 21.6% of Python steps
-                  fail, and the logs show those failures as the model’s (<a
+                  DataAgentBench’s public logs, it caused 37% of the failed
+                  steps (16,293 of 44,277), and the logs show those failures as
+                  the model’s (<a
                     href="https://github.com/blessedmadukoma/data-agent-traces"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -200,6 +201,13 @@
               </p>
               <ul class="mt-2 list-disc space-y-1.5 pl-5 text-zinc-800 dark:text-zinc-300">
                 <li>
+                  <span class="font-semibold text-zinc-900 dark:text-zinc-100">Meaning.</span>
+                  Does the answer use the right definitions, and do those
+                  definitions match the data?
+                  <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">Research: ontologies and data quality. Industry:
+                    semantic layers and ontologies.</span>
+                </li>
+                <li>
                   <span class="font-semibold text-zinc-900 dark:text-zinc-100">Scope.</span>
                   Does the answer say what data it covered, including rows the
                   user may not read?
@@ -222,10 +230,9 @@
                 </li>
               </ul>
               <p class="mt-2 text-zinc-800 dark:text-zinc-300">
-                The semantic-layer pilot adds a question about meaning: can a
-                system detect a wrong definition even when the query runs
-                successfully? My earlier hidden-rows study asks whether the
-                answer makes its data scope clear. Both inform my work on
+                The semantic-layer pilot is the Meaning part: can a system detect
+                a wrong definition even when the query runs successfully? My
+                earlier hidden-rows study is the Scope part. Both inform my work on
                 <a
                   href="https://sedge.app"
                   target="_blank"
