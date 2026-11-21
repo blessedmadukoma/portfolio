@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     title: "Sedge",
     briefText: "Safe AI queries over company data",
     description:
-      "A data operating system (MVP) that catalogues what a company’s data means and lets AI answer questions over it in SQL. I built the Go backend, and I am adding the checks every AI-written query must pass before it runs (in code review).",
+      "A data operating system (MVP) that catalogues what a company’s data means and lets AI answer questions over it in SQL. I built the Go backend and the checks every AI-written query must pass before it runs; they block all 61 attack queries written to test them.",
     live: "https://sedge.app",
     apiDoc: "",
     github: "",

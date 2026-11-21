@@ -143,7 +143,7 @@ export const EDUCATION = [
     startDate: "Aug 2024",
     endDate: "May 2026",
     description: [
-      "Completed a 2-year MS program specializing in Software Engineering, Big Data, and Applied Machine Learning at CMU Africa's campus in Rwanda.",
+      "Completed a 2-year MS programme specialising in Software Engineering, Big Data, and Applied Machine Learning at CMU Africa's campus in Rwanda.",
       "Notable courses: Machine Learning in Production (MLiP), Engineering Data-Intensive Scalable Systems (EDISS), Data Structures & Algorithms (DSA), Programming for Data Analytics (PDA), Data, Inference, and Applied Machine Learning (DIAML).",
       "Served as Chairman of the Academic Innovation Sub-Committee within the student Research Committee, contributing to academic and research initiatives across the cohort.",
       "Conducted graduate research under Prof. Prasenjit Mitra, building an anomaly-detection platform with eight detection methods over 1.6 million athletics performances. The full paper was published at IEEE SDS 2026.",
@@ -161,7 +161,7 @@ export const EDUCATION = [
     startDate: "Aug 2018",
     endDate: "Jun 2022",
     description: [
-      "Completed a 4-year Software Engineering program focused on software design, algorithms, systems engineering, cloud computing, and artificial intelligence.",
+      "Completed a 4-year Software Engineering programme focused on software design, algorithms, systems engineering, cloud computing, and artificial intelligence.",
       "Served as Executive President of the Babcock University Computer Club (BUCC), a student tech community of 2,000+ members; contributed to peer tutoring initiatives, and participated in the university volleyball team as team setter.",
       "Gained practical industry experience through a compulsory 6-month internship and built a strong foundation in backend engineering, system architecture, and collaborative software development.",
     ],

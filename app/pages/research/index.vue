@@ -3,7 +3,7 @@
 
   useHead({
     title: "Research | Blessed Madukoma",
-    meta: [{ name: "description", content: "Research by Blessed Madukoma: publications and records on reliable answers from changing data." }],
+    meta: [{ name: "description", content: "Research by Blessed Madukoma: publications and records on data agents, semantic layers and reliable answers from changing data." }],
   });
 </script>
 
