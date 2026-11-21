@@ -28,7 +28,7 @@
       >
         <div
           ref="panel"
-          class="relative w-[calc(100vw-2rem)] max-w-3xl lg:max-w-4xl max-h-[90dvh] overflow-y-auto overscroll-contain rounded-lg bg-white px-4 py-4 text-[13px] leading-5 shadow-lg dark:bg-zinc-900 sm:px-6 sm:py-5 [&_strong]:font-medium"
+          class="relative w-[calc(100vw-2rem)] max-w-3xl lg:max-w-[60rem] max-h-[90dvh] overflow-y-auto overscroll-contain rounded-lg bg-white px-4 py-4 text-[13px] leading-5 shadow-lg dark:bg-zinc-900 sm:px-6 sm:py-5 [&_strong]:font-medium"
           role="dialog"
           aria-modal="true"
           aria-labelledby="research-statement-title"
