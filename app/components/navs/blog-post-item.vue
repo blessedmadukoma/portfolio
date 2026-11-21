@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import {
     CONTENT_TYPE_LABELS,
+    isEarlierDirection,
     type NormalizedPost,
     type PostType,
   } from "~/composables/useBlogPosts";
@@ -234,6 +235,12 @@
 
         <!-- Read-time + views + tags -->
         <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+          <span
+            v-if="isEarlierDirection(post.status)"
+            class="px-2 py-[2px] rounded-full text-[11px] font-medium text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800"
+          >
+            Earlier direction
+          </span>
           <span
             v-if="post.readTimeInMinutes"
             class="flex items-center gap-1 px-2 py-[2px] rounded-full text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-white/70 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700"

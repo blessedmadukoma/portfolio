@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   import {
+    isEarlierDirection,
     normalizeObsidianPost,
     useNativePosts,
   } from "~/composables/useBlogPosts";
@@ -27,15 +28,18 @@
       .filter((post) => post.research === true)
       .map((post) => ({ ...normalizeObsidianPost(post), status: post.status })),
   ]);
-  const projectGroups = computed(() =>
-    [
+  const projectGroups = computed(() => {
+    // Records from an earlier research direction go in their own group, last.
+    const current = projects.value.filter((project) => !isEarlierDirection(project.status));
+    const earlier = projects.value.filter((project) => isEarlierDirection(project.status));
+    return [
       { title: "Research experiments", types: ["experiment"] },
       { title: "Research notes", types: [] },
       { title: "Learning records", types: ["learning-log"] },
     ]
       .map((group) => ({
         title: group.title,
-        projects: projects.value.filter((project) =>
+        projects: current.filter((project) =>
           group.types.length
             ? group.types.includes(project.contentType ?? "")
             : !["learning-log", "experiment"].includes(
@@ -43,8 +47,9 @@
               ),
         ),
       }))
-      .filter((group) => group.projects.length > 0),
-  );
+      .concat([{ title: "Earlier directions", projects: earlier }])
+      .filter((group) => group.projects.length > 0);
+  });
   const activeSection = ref<"projects" | "publications">("publications");
   const certificateModal = ref<string | null>(null);
 
@@ -80,7 +85,11 @@
         <NuxtLink
           to="/blog/semantic-layer-errors"
           class="underline text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
-        >Read the first pilot</NuxtLink>.
+        >Read the first pilot</NuxtLink>. For background, read
+        <NuxtLink
+          to="/blog/inside-an-llm-based-data-agent"
+          class="underline text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
+        >how a data agent works</NuxtLink>.
       </p>
       <div
         class="inline-flex rounded-lg border border-zinc-200 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-900/50"

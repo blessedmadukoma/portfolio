@@ -68,6 +68,13 @@ export interface NormalizedPost {
   series?: string;
   part?: number;
   category: ThoughtCategory;
+  status?: string;
+}
+
+// A post from a research direction I no longer follow. Set in the note's
+// front matter, for example "status: earlier direction, proposal".
+export function isEarlierDirection(status?: string): boolean {
+  return (status ?? "").toLowerCase().startsWith("earlier direction");
 }
 
 const MONTH_NAMES = [
@@ -91,7 +98,7 @@ export function formatDate(dateString: string): string {
   const date = new Date(
     /^\d{4}-\d{2}-\d{2}$/.test(dateString) ? `${dateString}T00:00:00` : dateString,
   );
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("en-GB", {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -194,6 +201,7 @@ export function normalizeObsidianPost(post: NativePost): NormalizedPost {
     series: post.series,
     part: post.part,
     category: classifyThought(post),
+    status: post.status,
   };
 }
 
